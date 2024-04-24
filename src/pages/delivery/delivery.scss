@@ -1,0 +1,11 @@
+.delivery{
+    display: flex;
+
+    .deliveryContainer{
+        flex: 6;
+
+        .table{
+            padding: 10px;
+        }
+    }
+}

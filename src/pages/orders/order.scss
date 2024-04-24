@@ -1,0 +1,12 @@
+.orderList{
+    display: flex;
+    width: 100%;
+
+    .orderContainer{
+        flex: 6;
+
+        .tableOrders{
+            padding: 10px;
+        }
+    }
+}

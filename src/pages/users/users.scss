@@ -1,0 +1,46 @@
+.users{
+    display: flex;
+    .usersContainer{
+        flex: 6;
+
+        .top{
+            display: flex;
+            align-items: center;
+            margin: 10px;
+            padding: 10px;
+            color: grey;
+            .title{
+                margin: 10px;
+            }
+            .featuredChart{
+                width: 70px;
+                height: 70px;
+                margin: 10px;
+            }
+            .left{
+                margin: 10px;
+                flex: 3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
+                border-radius: 10px;
+                
+            }
+            .right{
+                margin: 10px;
+                flex: 3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
+                border-radius: 10px;
+            }
+        }
+        .table{
+            border-radius: 10px;
+        }
+    }
+}
