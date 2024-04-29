@@ -1,0 +1,35 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .loginContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px solid crimson;
+        .title{
+            font-size: 35px;
+            margin: 10px;
+        }
+        input{
+            height: 40px;
+            width: 300px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 2px solid crimson;
+        }
+        .btnSubmit{
+            width: 308px;
+        }
+        .register{
+            font-size: 14px;
+            text-decoration: none;
+            margin: 10px;
+        }
+    }
+}

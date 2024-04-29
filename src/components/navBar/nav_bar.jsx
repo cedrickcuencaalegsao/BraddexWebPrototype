@@ -6,40 +6,56 @@ import FullscreenExitOutlinedIcon from '@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../App";
 
 const NavBar = () => {
-    return(
+    const {userData, setUserData} = useContext(AppContext);
+    const history = useHistory();
+
+    const handleLogout = ()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        localStorage.removeItem('isAdmin');
+        setUserData({});
+        history.push("/");
+    }
+    return (
         <div className="navbar">
             <div className="wrapper">
                 <div className="search">
-                    <input type="text" placeholder="Search..."/>
+                    <input type="text" placeholder="Search..." />
                     <SearchOutlinedIcon />
                 </div>
                 <div className="items">
                     <div className="item">
-                        <LanguageOutlinedIcon className="icons"/>
+                        <LanguageOutlinedIcon className="icons" />
                         English
                     </div>
                     <div className="item">
-                        <DarkModeOutlinedIcon className="icons"/>
+                        <DarkModeOutlinedIcon className="icons" />
                     </div>
                     <div className="item">
-                        <FullscreenExitOutlinedIcon className="icons"/>
+                        <FullscreenExitOutlinedIcon className="icons" />
                     </div>
                     <div className="item">
-                        <NotificationsNoneOutlinedIcon className="icons"/>
+                        <NotificationsNoneOutlinedIcon className="icons" />
                         <div className="counter">5</div>
                     </div>
                     <div className="item">
-                        <ChatBubbleOutlineOutlinedIcon className="icons"/>
+                        <ChatBubbleOutlineOutlinedIcon className="icons" />
                         <div className="counter">2</div>
                     </div>
                     <div className="item">
-                        <ListOutlinedIcon className="icons"/>
+                        <ListOutlinedIcon className="icons" />
                     </div>
                     <div className="item">
-                        <img src={require("../../Ocean-Blue-Color-Palette-with-Hex-Codes.webp")} alt="image" className="avatar" />
+                        <img src="#" alt="image" className="avatar" />
+                    </div>
+                    <div className="item" onClick={handleLogout}>
+                        <LogoutOutlinedIcon />
                     </div>
                 </div>
             </div>

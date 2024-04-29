@@ -12,7 +12,6 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const SideBar = () => {
 
@@ -32,7 +31,7 @@ const SideBar = () => {
                     <li>
                         <div className="sidebarLink">
                                 <Dashboard className="icon"/>
-                            <a href="/">
+                            <a href="/home">
                                 <span>DashBoard</span>
                             </a>
                         </div>
@@ -78,7 +77,7 @@ const SideBar = () => {
                     <li>
                         <div className="sidebarLink">
                             <QueryStatsOutlinedIcon className="icon"/>
-                            <a href="/stat">
+                            <a href="/statistics">
                                 <span>Stats</span>
                             </a>
                         </div>

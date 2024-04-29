@@ -4,7 +4,9 @@ import { DataGrid } from '@mui/x-data-grid';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
-const columns = [
+
+
+  const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'firstName', headerName: 'First name', width: 130 },
     { field: 'lastName', headerName: 'Last name', width: 130 },
@@ -54,6 +56,8 @@ const columns = [
   ];
 
 const dataTable = () => {
+
+
     const actionColomn = [
       {
         field: 'Action',
