@@ -20,7 +20,7 @@ class braddexdb_controller extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Invalid Email and password'], 422);
+            return response()->json(['message' => 'Invalid Email and password'], 422);
         }
 
         $credentials = $request->only('email', 'password');
@@ -34,14 +34,14 @@ class braddexdb_controller extends Controller
             } else {
                 $isAdmin = false;
             }
-            $userData = ([
+            $data = ([
                 "token" => $token,
                 "id" => Auth::user()->id,
                 "isAdmin" => $isAdmin,
             ]);
-            return response()->json(['user' => $userData], 200);
+            return response()->json(compact('data'));
         }
-        return response()->json(['error' => 'Login Failed'], 401);
+        return response()->json(['message' => 'Login Failed'], 401);
 
     }
     public function authRegister(Request $request)

@@ -2,35 +2,30 @@ import "./login.scss";
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
-import { AppContext } from "../../App";
 
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { userData, setUserData } = useContext(AppContext);
-  const [response, setResponse] = useState("");
-  const history = useHistory();
+  const [email, setEmail] = useState(""); // Email Variables
+  const [password, setPassword] = useState(""); // Password variables
+  const [response, setResponse] = useState(""); // Responce variables
+  const history = useHistory(); // for page navigation
 
   const LoginApi = async (data) => {
     try {
       // sending data to server.
       const response = await axios.post('http://127.0.0.1:8000/api/login', data);
-      // passing auth data to userData
-      setUserData(response.data);
-      // creating tokens.
-      const token = response.data.user.token;
-      const isAdmin = response.data.user.isAdmin;
-      const id = response.data.user.id;
-      // storing token on browser local storage
+      // Getting token from the response.
+      const token = response.data.data.token;
+      const isAdmin = response.data.data.isAdmin;
+      const id = response.data.data.id;
+      // storing token, isAdmin, and user ID on browser local storage
       localStorage.setItem('token', token);
       localStorage.setItem('isAdmin', isAdmin);
-      localStorage.setItem('id', id);
+      localStorage.setItem('id', id);//
       return true;
     } catch (err) {
-      setResponse(err.response.data); //mao ning ang message nga gikan sa API
-      // alert(err.response.data);
-      console.log(err);
+      // Error Response from the server.
+      setResponse(err.response.data.message); 
       return;
     }
   }
@@ -38,13 +33,14 @@ const Login = () => {
   const handleLogin = async (ev) => {
     // preventing the page from reloading after submiting data
     ev.preventDefault();
-
     // data to send into server
     const data = {
       "email": email,
       "password": password
     }
+    // getting the status of the response
     const status = await LoginApi(data);
+    // If status is true navigate to home page
     status && history.push('/home');
   }
 
@@ -52,6 +48,7 @@ const Login = () => {
     <div className="login">
       <div className="loginContainer">
         <div className="title"><h1>Login</h1></div>
+        <span style={{ fontSize: "15px", color: "red" }}>{response}</span>
         <form onSubmit={handleLogin}>
           <input
             type="text"

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, createContext, useMemo } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
-import AuthRoute from "./AuthRoutes";
+} from "react-router-dom";
+import AuthRoutes from "./AuthRoutes";
 
-// Components
-import Home from "./pages/home/home";
+// Components Admin.
+import Home from "./pages/home/admin/home";
 import Users from "./pages/users/users";
 import Product from "./pages/product/product";
 import OrderList from "./pages/orders/order";
@@ -16,52 +16,44 @@ import StatList from "./pages/stat/stat";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 
-export const AppContext = createContext();
+// Components Cleint.
+import ClientHome from "./pages/home/client/c_home";
+import ClientMenu from "./pages/Menu/menu";
+import Cart from "./pages/cart/cart";
+import ClientDelivery from "./pages/delivery/client/delivery";
+import ClientHistory from "./pages/history/history";
+import ClientSupport from "./pages/Support/support";
+import ClientAnnouncement from "./pages/announcement/announcement";
+import ClientSettings from "./pages/settings/settings";
+import ClientPrivacy from "./pages/privacy/privacy";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
-  // const [isAdmin, setIsAdmin] = useState(()=>{
-  //   return localStorage.getItem("isAdmin") === 'true';
-  // });
-
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
-
-  const contextValue = useMemo(() => (
-    {
-      userData,
-      setUserData,
-      isLoggedIn
-    }
-  ), [
-    userData,
-    isLoggedIn
-  ]
-  );
-
   return (
     <div className="App">
-      <AppContext.Provider value={contextValue}>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route path="/register" component={Register} />
-            <AuthRoute path="/home" component={Home} />
-            <AuthRoute path="/users" component={Users} />
-            <AuthRoute path="/products" component={Product} />
-            <AuthRoute path="/orders" component={OrderList} />
-            <AuthRoute path="/delivery" component={Delivery} />
-            <AuthRoute path="/statistics" component={StatList} />
-          </Switch>
-        </Router>
-      </AppContext.Provider>
+      <Router>
+        <Switch>
+          {/* Guest Routes */}
+          <Route exact path="/" component={Login} />
+          <Route path="/register" component={Register} />
+          {/* Admin Routes */}
+          <AuthRoutes path="/home" component={Home} isAdminRoute />
+          <AuthRoutes path="/users" component={Users} isAdminRoute />
+          <AuthRoutes path="/products" component={Product} isAdminRoute />
+          <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
+          <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
+          <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
+          {/* Client Routes */}
+          <AuthRoutes path="/client-home" component={ClientHome} />
+          <AuthRoutes path="/client-Menu" component={ClientMenu}/>
+          <AuthRoutes path="/client-cart" component={Cart}/>
+          <AuthRoutes path="/client-delivery" component={ClientDelivery}/>
+          <AuthRoutes path="/client-history" component={ClientHistory}/>
+          <AuthRoutes path="/client-support" component={ClientSupport}/>
+          <AuthRoutes path="/client-announcement" component={ClientAnnouncement}/>
+          <AuthRoutes path="/client-settings" component={ClientSettings}/>
+          <AuthRoutes path="/client-privacy" component={ClientPrivacy}/>
+        </Switch>
+      </Router>
     </div>
   );
 };

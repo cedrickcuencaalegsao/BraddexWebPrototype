@@ -11,9 +11,17 @@ import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const SideBar = () => {
+    const history = useHistory();
+    
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        localStorage.removeItem('isAdmin');
+        history.push("/");
+    }
 
     return(
         <div className="sidebar">
@@ -119,7 +127,7 @@ const SideBar = () => {
                         </div>
                     </li>
                     <li>
-                        <div className="sidebarLink">
+                        <div className="sidebarLink" onClick={handleLogout}>
                             <LogoutOutlinedIcon className="icon"/>
                             <span>Logout</span>
                         </div>
