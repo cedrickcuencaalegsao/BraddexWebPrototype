@@ -1,3 +1,20 @@
-.deliveryList{
+.deliveryList {
+  width: 100%;
+  .tableDelivery {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 10px;
     
+    .title {
+      color: grey;
+      font-size: 15px;
+      padding: 10px;
+    }
+
+    .table {
+      margin: 10px;
+    }
+  }
 }

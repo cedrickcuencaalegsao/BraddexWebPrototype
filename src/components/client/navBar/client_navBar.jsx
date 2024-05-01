@@ -35,7 +35,7 @@ const ClientNavBar = () => {
                         <LogoutOutlinedIcon />
                     </div>
                     <div className="item">
-                        <img src="#" alt="image" className="avatar" />
+                        <img src="#" alt="image" className="avatar"/>
                     </div>
                 </div>
 
