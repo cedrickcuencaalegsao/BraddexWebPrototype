@@ -26,6 +26,7 @@ import ClientSupport from "./pages/Support/support";
 import ClientAnnouncement from "./pages/announcement/announcement";
 import ClientSettings from "./pages/settings/settings";
 import ClientPrivacy from "./pages/privacy/privacy";
+import ClientUserProfile from "./pages/profile/client/profile";
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
           <AuthRoutes path="/client-announcement" component={ClientAnnouncement}/>
           <AuthRoutes path="/client-settings" component={ClientSettings}/>
           <AuthRoutes path="/client-privacy" component={ClientPrivacy}/>
+          <AuthRoutes path="/client-profile" component={ClientUserProfile} />
         </Switch>
       </Router>
     </div>

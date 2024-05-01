@@ -75,4 +75,12 @@ class braddexdb_controller extends Controller
     public function updateIsAdmin(){
         return response()->json(['message' => 'Update is Admin']);
     }
+    public function getUserProfile($id){
+        if ($id != null) {
+            $data = User::where('id', $id)->first();
+            return response()->json(compact('data'));
+        } else {
+            return response()->json(['message' => 'Invalid user id']);
+        }
+    }
 }

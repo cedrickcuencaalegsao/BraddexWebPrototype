@@ -15,6 +15,9 @@ const ClientNavBar = () => {
         //setUserData({});
         history.push("/");
     }
+    const handleProfile = () => {
+        history.push("/client-profile")
+    }
     return (
         <div className="clientNavbar">
             <div className="clientNabarContainer">
@@ -34,8 +37,8 @@ const ClientNavBar = () => {
                     <div className="item" onClick={handleLogout}>
                         <LogoutOutlinedIcon />
                     </div>
-                    <div className="item">
-                        <img src="#" alt="image" className="avatar"/>
+                    <div className="item" onClick={handleProfile}>
+                        <img src="#" alt="image" className="avatar" />
                     </div>
                 </div>
 

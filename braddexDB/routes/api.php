@@ -10,3 +10,4 @@ Route::post('logout', [braddexdb_controller::class, 'authLogout']);
 Route::post('updateIsAdmin', [braddexdb_controller::class, 'updateIsAdmin']);
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
+Route::get('profile/{id}', [braddexdb_controller::class, 'getUserProfile']);
