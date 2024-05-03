@@ -1,6 +1,6 @@
 import './settings.scss';
-import ClientNavBar from "../../components/client/navBar/client_navBar";
-import ClientSideBar from "../../components/client/sideBar/client_sidebar";
+import ClientNavBar from "../../../components/client/navBar/client_navBar";
+import ClientSideBar from "../../../components/client/sideBar/client_sidebar";
 
 const ClientSettings = () => {
     return(
