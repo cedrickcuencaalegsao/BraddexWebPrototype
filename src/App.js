@@ -13,6 +13,11 @@ import Product from "./pages/product/product";
 import OrderList from "./pages/orders/order";
 import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
+import Notification from "./pages/notification/admin/notif";
+import NewMenu from "./pages/new_menu/newMenu";
+import UpdateMenu from "./pages/update/update";
+
+// guest View.
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 
@@ -43,6 +48,9 @@ const App = () => {
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
+          <AuthRoutes path="/notification" component={Notification} isAdminRoute />
+          <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute/>
+          <AuthRoutes path="/updatemenu" component={UpdateMenu} isAdminRoute/>
           {/* Client Routes */}
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu}/>

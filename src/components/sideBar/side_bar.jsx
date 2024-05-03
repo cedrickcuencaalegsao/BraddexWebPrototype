@@ -41,6 +41,15 @@ const SideBar = () => {
     const viewStats = () => {
         history.push("/statistics");
     }
+    const viewNotif = () => {
+        history.push("/notification")
+    }
+    const viewNewMenu = () => {
+        history.push("/newmenu");
+    }
+    const viewUpdateMenu = () => {
+        history.push("/updatemenu");
+    }
 
 
     return (
@@ -99,19 +108,19 @@ const SideBar = () => {
                         </div>
                     </li>
                     <li>
-                        <div className="sidebarLink">
+                        <div className="sidebarLink" onClick={viewNotif}>
                             <NotificationsActiveOutlinedIcon className="icon" />
                             <span>Notification</span>
                         </div>
                     </li>
                     <li>
-                        <div className="sidebarLink">
+                        <div className="sidebarLink" onClick={viewNewMenu}>
                             <AppRegistrationOutlinedIcon className="icon" />
                             <span>New Menu</span>
                         </div>
                     </li>
                     <li>
-                        <div className="sidebarLink">
+                        <div className="sidebarLink" onClick={viewUpdateMenu}>
                             <UpdateOutlinedIcon className="icon" />
                             <span>Update Menu</span>
                         </div>
