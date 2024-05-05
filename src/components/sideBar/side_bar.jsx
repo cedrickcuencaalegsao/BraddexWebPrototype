@@ -13,14 +13,23 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
 import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
+import axios from "axios";
 const SideBar = () => {
   const history = useHistory();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("isAdmin");
-    history.push("/");
+  const handleLogout = async () => {
+    const id = localStorage.getItem("id");
+    try {
+      await axios.post(
+        `http://127.0.0.1:8000/api/logout/${id}`
+      );
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
+      localStorage.removeItem("isAdmin");
+      history.push("/");
+    } catch (error) {
+      alert(error);
+    }
   };
   const viewHome = () => {
     history.push("/home");
