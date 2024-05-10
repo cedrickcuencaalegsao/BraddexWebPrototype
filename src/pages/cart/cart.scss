@@ -1,6 +1,33 @@
+// Define variables
+$grid-size: 220px; // Change this to adjust the size of each grid item
+$grid-gap: auto; // Change this to adjust the gap between grid items.
+
 .cart {
   display: flex;
-  .cartContainer{
+  .cartContainer {
     flex: 6;
+    .top {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+    .bottom {
+      background-color: none;
+      .table-carts {
+        background-color: none;
+        display: grid;
+        grid-template-columns: repeat(5, $grid-size);
+        justify-content: center;
+        .cart-cards {
+          padding: 10px;
+          margin: 10px;
+          border-radius: 10px;
+          -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+          box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        }
+      }
+    }
   }
 }

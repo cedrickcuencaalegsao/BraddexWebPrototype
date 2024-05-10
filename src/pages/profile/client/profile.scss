@@ -1,0 +1,98 @@
+.profile {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .profileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    height: 75%;
+    width: 80%;
+    .title {
+      color: grey;
+      margin: 10px;
+    }
+    .leftContainers {
+      flex: 2;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      background-color: white;
+      .titleContainer {
+        display: flex;
+        justify-content: space-between;
+      }
+      .details {
+        margin: 10px;
+        .left-items {
+          display: flex;
+          margin: 10px;
+          .profilePic {
+            background-color: rgba(128, 128, 128, 0.253);
+            border: 5px solid grey;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+          }
+          .updateProfile {
+            position: absolute;
+          }
+          .indicator {
+            color: grey;
+            font-size: 12px;
+          }
+          span {
+            color: crimson;
+            margin-left: 5px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .rightContainers {
+      flex: 5;
+      height: 100%;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      background-color: white;
+      margin: 50px;
+      .center-right{
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        .center-right-item{
+          margin: 10px;
+          label{
+            color: crimson;
+            font-weight: 400;
+            font-size: 20px;
+          }
+          input{
+            height: 25px;
+            border: none;
+            border-bottom: 2px solid crimson;
+          }
+        }
+      }
+      .bottom-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .actions {
+          color: grey;
+          margin: 10px;
+        }
+      }
+    }
+  }
+}

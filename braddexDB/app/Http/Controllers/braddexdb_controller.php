@@ -84,9 +84,20 @@ class braddexdb_controller extends Controller
         $data = User::all();
         return response()->json(['users' => $data]);
     }
-    public function updateIsAdmin()
+    public function updateIsAdmin(Request $request, $id)
     {
-        return response()->json(['message' => 'Update is Admin']);
+        $data = $request->all();
+        if ($data['isAdmin'] == 'true') {
+            User::find($id)->update([
+                'isAdmin' => true,
+            ]);
+            return response()->json(['message' => 'Updated account type to admin']);
+        } else {
+            User::find($id)->update([
+                'isAdmin' => false,
+            ]);
+            return response()->json(['message' => 'Updated account type to Client']);
+        }
     }
     public function getUserProfile($id)
     {
@@ -138,5 +149,11 @@ class braddexdb_controller extends Controller
     {
         $data = tbl_menu::where('bestselling', true)->get();
         return response()->json(compact('data'));
+    }
+    public function onlineUsers(){
+        $users = count(User::all());
+        $offline = count(User::where('isOnline', false)->get());
+        $online = count(User::where('isOnline', true)->get());
+        return response()->json(compact('users', 'offline', 'online'));
     }
 }

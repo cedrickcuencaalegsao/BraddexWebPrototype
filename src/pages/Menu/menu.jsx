@@ -28,10 +28,29 @@ const ClientMenu = () => {
       <ClientSideBar />
       <div className="menuContianer">
         <ClientNavBar />
-        <h1>Menu</h1>
-        {data.map((item) => (
-          <p key={item.id}>{item.id}</p>
-        ))}
+        <div className="top">
+          <h1 className="title">Menu</h1>
+        </div>
+        <div className="bottom">
+          <div className="menuTable">
+            {data.map((item) => (
+              //<p key={item.id}>{item.id}</p>
+              <div className="card" key={item.id}>
+                <img src={`http://127.0.0.1:8000/images/menu/${item.image}`} alt="image" className="image"/>
+                <p>{item.menu_name}</p>
+                <p>{item.price}</p>
+                <div className="card-buttons">
+                  <div className="add-to-cart">
+                    <p>Add to cart</p>
+                  </div>
+                  <div className="order-now">
+                    <p>Order Now</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

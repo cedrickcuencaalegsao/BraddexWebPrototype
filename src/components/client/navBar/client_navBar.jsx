@@ -10,6 +10,10 @@ import axios from "axios";
 const ClientNavBar = () => {
   const history = useHistory();
 
+  const handleNotificaiton = () =>{
+    history.push("/client-notification");
+  }
+
   const handleLogout = async () => {
     const id = localStorage.getItem("id");
     try {
@@ -33,8 +37,8 @@ const ClientNavBar = () => {
           <SearchOutlinedIcon />
         </div>
         <div className="clientItems">
-          <div className="item">
-            <NotificationsNoneOutlinedIcon className="icons" />
+          <div className="item" onClick={handleNotificaiton}>
+            <NotificationsNoneOutlinedIcon className="icons"/>
             <div className="counter">5</div>
           </div>
           <div className="item">
