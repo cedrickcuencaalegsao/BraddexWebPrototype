@@ -5,9 +5,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import PermPhoneMsgOutlinedIcon from "@mui/icons-material/PermPhoneMsgOutlined";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
+  const history = useHistory();
+  const id = localStorage.getItem("id");
 
   useEffect(() => {
     const MenuAPI = async () => {
@@ -25,12 +28,24 @@ const ClientMenu = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleAddToCart = (id) => {
-    console.log("Add to cart.", id);
+  const addToCartAPI = async (data) => {
+    try {
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const handleAddToCart = async (menu_id) => {
+    const data = {
+      menu_id: menu_id,
+      user_id: id,
+    }
+    const status = await addToCartAPI(data);
+    status && history.push("/client-cart");
   };
 
-  const handleOrderNow = (id) => {
-    console.log("Order now.", id);
+  const handleOrderNow = (menu_id) => {
+    console.log("Order now.", menu_id);
   };
 
   return (
