@@ -9,6 +9,8 @@ Route::post('register', [braddexdb_controller::class, 'authRegister']);
 Route::post('logout/{id}', [braddexdb_controller::class, 'authLogout']);
 Route::post('updateIsAdmin/{id}', [braddexdb_controller::class, 'updateIsAdmin']);
 Route::post('uploadmenu', [braddexdb_controller::class, 'uploadMenu']);
+Route::post('updateprofiledetails', [braddexdb_controller::class, 'updateProfileDetails']);
+Route::post('updateprofilepicture', [braddexdb_controller::class,'updateProfilePicture']);
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('profile/{id}', [braddexdb_controller::class, 'getUserProfile']);
@@ -20,4 +22,7 @@ Route::get('onlineusers', [braddexdb_controller::class, 'onlineUsers']);
 // images routes for menu.
 Route::get('/images/menu/{filename}', function ($filename) {
     return response()->file(public_path('images/menu/' . $filename));
+});
+Route::get('/images/profile/{filename}', function ($filename) {
+    return response()->file(public_path('images/profile/' . $filename));
 });

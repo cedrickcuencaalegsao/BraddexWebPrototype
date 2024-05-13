@@ -1,17 +1,16 @@
 import "./profile.scss";
+import ClientSideBar from "../../../components/client/sideBar/client_sidebar";
+import ClientNavBar from "../../../components/client/navBar/client_navBar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import PhotoCameraRoundedIcon from "@mui/icons-material/PhotoCameraRounded";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ClientUserProfile = () => {
   const [data, setData] = useState({});
-  const [fname, setFname] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const history = useHistory();
   const id = localStorage.getItem("id");
+  const history = useHistory();
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -28,14 +27,50 @@ const ClientUserProfile = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(data);
 
-  const handleBack = () => {
-    history.push("/client-home");
+  // Allowing frontend data to be updated at realtime
+  const setFname = (value) => {
+    setData({ ...data, f_name: value });
+  };
+  const setLname = (value) => {
+    setData({ ...data, l_name: value });
+  };
+  const setEmail = (value) => {
+    setData({ ...data, email: value });
+  };
+  const setBirthday = (value) => {
+    setData({ ...data, birthday: value });
+  };
+  const setPhone = (value) => {
+    setData({ ...data, phone_no: value });
+  };
+  const setAddress = (value) => {
+    setData({ ...data, address: value });
   };
 
-  const isEditable = () => {
-    return true; // Always return true
+  const updateAPI = async (data) => {
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/updateprofiledetails",
+        data
+      );
+      console.log(API.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      setError(error);
+    }
+  };
+
+  const handleUpadate = async (ev) => {
+    ev.preventDefault();
+    const status = await updateAPI(data);
+    status && history.push("/client-profile");
+  };
+
+  const handleSaveProfile = () => {
+    console.log("handleSaveProfile");
   };
 
   if (loading) return <div>Loading...</div>;
@@ -43,81 +78,112 @@ const ClientUserProfile = () => {
 
   return (
     <div className="profile">
+      <ClientSideBar />
       <div className="profileContainer">
-        <div className="leftContainers">
-          <div className="titleContainer">
-            <h1 className="title">Details</h1>
-          </div>
-          <div className="details">
-            <div className="left-items">
-              <div className="profilePic">
-                <img src="#" alt="image" />
+        <ClientNavBar />
+        <div className="details-container">
+          <div className="leftContainers">
+            <div className="titleContainer">
+              <h1 className="title">Profile</h1>
+            </div>
+            <div className="details">
+              <div className="details-top">
+                <div className="profilePic">
+                  <img
+                    src={`http://127.0.0.1:8000/images/profile/${data.prof_pic}`}
+                    alt="image"
+                  />
+                </div>
+              </div>
+              <div className="details-bottom">
+                <div className="indicator">
+                  <p>First Name: </p>
+                  <p>Last Name:</p>
+                  <p>Birthday: </p>
+                  <p>Email: </p>
+                  <p>Address: </p>
+                  <p>Contact No.: </p>
+                </div>
+                <div className="value">
+                  {data.f_name !== null ? <p>{data.f_name}</p> : <p>null</p>}
+                  {data.l_name !== null ? <p>{data.l_name}</p> : <p>null</p>}
+                  {data.birthday !== null ? (
+                    <p>{data.birthday}</p>
+                  ) : (
+                    <p>null</p>
+                  )}
+                  {data.email !== null ? <p>{data.email}</p> : <p>null</p>}
+                  {data.address !== null ? <p>{data.address}</p> : <p>null</p>}
+                  {data.phone_no !== null ? (
+                    <p>{data.phone_no}</p>
+                  ) : (
+                    <p>null</p>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="left-items">
-              <p className="indicator">First Name: </p>
-              <span>{data.f_name}</span>
-            </div>
-            <div className="left-items">
-              <p className="indicator">Last Name:</p>
-              <span>{data.l_name}</span>
-            </div>
-            <div className="left-items">
-              <p className="indicator">Birthday: </p>
-              <span>{data.birthday}</span>
-            </div>
-            <div className="left-items">
-              <p className="indicator">Email: </p>
-              <span>{data.email}</span>
-            </div>
-            <div className="left-items">
-              <p className="indicator">Address: </p>
-              <span>{data.address}</span>
-            </div>
-            <div className="left-items">
-              <p className="indicator">Contact No.: </p>
-              <span>{data.phone}</span>
-            </div>
           </div>
-        </div>
-        <div className="rightContainers">
-          <h1 className="title">Profile</h1>
-          <div className="center-right">
-            <div className="left">
-              <div className="center-right-item">
+          <div className="rightContainers">
+            <div className="titleContainer">
+              <h1 className="title">Details</h1>
+            </div>
+            <div className="update-details">
+              <div className="left">
                 <label htmlFor="fname">First Name </label>
-                <input type="text" onChange={(e) => setFname(e.target.value)} />
+                <label htmlFor="lname">Last Name </label>
+                <label htmlFor="email">Email </label>
+                <label htmlFor="birthday">Birthday </label>
+                <label htmlFor="phone">Phone </label>
+                <label htmlFor="address">Address </label>
               </div>
-              <div className="center-right-item">
-                <label htmlFor="fname">Last Name </label>
-                <input type="text" placeholder={data.l_name} />
-              </div>
-              <div className="center-right-item">
-                <label htmlFor="fname">Birthday </label>
-                <input type="date" placeholder={data.birthday} />
+              <div className="right">
+                <input
+                  type="text"
+                  id="fname"
+                  value={data.f_name}
+                  onChange={(e) => setFname(e.target.value)}
+                />
+                <input
+                  type="text"
+                  id="lname"
+                  onChange={(e) => setLname(e.target.value)}
+                  value={data.l_name}
+                />
+                <input
+                  type="date"
+                  id="birthday"
+                  value={data.birthday}
+                  onChange={(e) => setBirthday(e.target.value)}
+                />
+                <input
+                  type="text"
+                  id="email"
+                  value={data.email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="text"
+                  id="phone"
+                  value={data.phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                  type="text"
+                  id="address"
+                  value={data.address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </div>
             </div>
-            <div className="right">
-            <div className="center-right-item">
-                <label htmlFor="fname">Email </label>
-                <input type="text" onChange={(e) => setFname(e.target.value)} />
-              </div>
-              <div className="center-right-item">
-                <label htmlFor="fname">Phone </label>
-                <input type="text" onChange={(e) => setFname(e.target.value)} />
-              </div>
-              <div className="center-right-item">
-                <label htmlFor="fname">Address </label>
-                <input type="text" onChange={(e) => setFname(e.target.value)} />
+            <div className="action-button-container">
+              <div className="btn-update">
+                <button onClick={handleUpadate}>Update</button>
               </div>
             </div>
-          </div>
-          <div className="bottom-right">
-            <div className="actions" onClick={handleBack}>
-              <HomeRoundedIcon />
-            </div>
-            <div className="actions">
-              <PhotoCameraRoundedIcon />
+            <div className="update-profile-picture">
+              <input type="file" />
+              <br />
+              <button onClick={handleSaveProfile}>Save Profile</button>
             </div>
           </div>
         </div>

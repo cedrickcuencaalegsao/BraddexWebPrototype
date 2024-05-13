@@ -150,10 +150,23 @@ class braddexdb_controller extends Controller
         $data = tbl_menu::where('bestselling', true)->get();
         return response()->json(compact('data'));
     }
-    public function onlineUsers(){
+    public function onlineUsers()
+    {
         $users = count(User::all());
         $offline = count(User::where('isOnline', false)->get());
         $online = count(User::where('isOnline', true)->get());
         return response()->json(compact('users', 'offline', 'online'));
+    }
+    public function updateProfileDetails(Request $request)
+    {
+        $id = $request->id;
+        User::find($id)->update([
+            ''
+        ]);
+        return response()->json($id);
+    }
+    public function updateProfilePicture(Request $request)
+    {
+        return response()->json($request);
     }
 }
