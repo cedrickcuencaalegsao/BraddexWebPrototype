@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('created_by', 10)->nullable();
             $table->string('menu_id', 10)->nullable();
             $table->boolean('isDeleted')->nullable();
-            $table->boolean('isDelivered')->nullable();
             $table->string('created_at', 20)->nullable();
             $table->string('updated_at', 20)->nullable();
         });
