@@ -19,29 +19,58 @@
         .details {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
           padding: 10px;
           .details-top {
-            padding: 10px;
             .profilePic {
-              height: 300px;
-              width: 300px;
+              height: 250px;
+              width: 250px;
               border-radius: 50%;
               background: rgba(128, 128, 128, 0.226);
               border: 3px solid grey;
               overflow: hidden;
               img {
-                height: 300px;
-                width: 300px;
+                height: 250px;
+                width: 250px;
               }
             }
           }
           .details-bottom {
-            display: flex;
-            .indicator {
-              margin: 5px;
-            }
-            .value {
-              margin: 5px;
+            padding: 10px;
+            .profile-details {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              .name {
+                margin: 5px;
+                span {
+                  text-transform: capitalize;
+                  font-size: 30px;
+                }
+              }
+              .email {
+                margin: 2px;
+                span {
+                  color: grey;
+                  font-size: 15px;
+                }
+              }
+              .address {
+                margin: 2px;
+                span {
+                  color: grey;
+                  font-size: 15px;
+                }
+              }
+              .phone {
+                margin: 2px;
+                span {
+                  color: grey;
+                  font-size: 15px;
+                }
+              }
             }
           }
         }
@@ -55,13 +84,124 @@
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         .update-details {
           display: flex;
+          justify-content: space-around;
           .left {
             display: flex;
             flex-direction: column;
+            .items {
+              padding: 10px;
+              label {
+                color: grey;
+                font-weight: 300;
+                font-size: 20px;
+                margin: 5px;
+              }
+            }
           }
           .right {
             display: flex;
             flex-direction: column;
+            .items {
+              padding: 10px;
+              input {
+                border: none;
+                margin-top: -2px;
+                font-size: 20px;
+              }
+            }
+          }
+        }
+        .action-button-container {
+          width: 100%;
+          display: flex;
+          justify-content: left;
+          align-items: center;
+          .btn-update {
+            padding: 10px;
+            margin-left: 58px;
+            button {
+              display: inline-block;
+              padding: 15px 25px;
+              background-color: #4caf50;
+              color: #fff;
+              cursor: pointer;
+              border-radius: 5px;
+              border: 1px solid #4caf50;
+              font-weight: bold;
+            }
+            button:hover {
+              border: 1px solid rgba(0, 207, 17, 0.815);
+              background: rgba(0, 207, 17, 0.815);
+            }
+          }
+        }
+        .update-profile-picture {
+          display: flex;
+          justify-content: space-around;
+          width: auto;
+          height: 180px;
+          .file-input-container {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            .items {
+              margin: 5px;
+              input[type="file"] {
+                position: absolute;
+                font-size: 100px;
+                opacity: 0;
+                right: 0;
+                top: 0;
+              }
+              span {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #4caf50;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 5px;
+                font-weight: bold;
+              }
+              .btn-save {
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                button {
+                  display: inline-block;
+                  padding: 15px 25px;
+                  background-color: #4caf50;
+                  color: #fff;
+                  cursor: pointer;
+                  border-radius: 5px;
+                  border: 1px solid #4caf50;
+                  font-weight: bold;
+                }
+                button:hover {
+                  border: 1px solid rgba(0, 207, 17, 0.815);
+                  background: rgba(0, 207, 17, 0.815);
+                }
+              }
+            }
+          }
+          .preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            border: 2px solid grey;
+            width: 250px;
+            height: 150px;
+            overflow: hidden;
+            img {
+              width: 250px;
+              height: 150px;
+            }
           }
         }
       }

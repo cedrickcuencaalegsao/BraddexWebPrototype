@@ -6,13 +6,30 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const ClientNavBar = () => {
   const history = useHistory();
+  const id = localStorage.getItem("id");
+  const [data, setData] = useState({});
 
-  const handleNotificaiton = () =>{
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/profile/${id}`
+      );
+      setData(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleNotificaiton = () => {
     history.push("/client-notification");
-  }
+  };
 
   const handleLogout = async () => {
     const id = localStorage.getItem("id");
@@ -38,7 +55,7 @@ const ClientNavBar = () => {
         </div>
         <div className="clientItems">
           <div className="item" onClick={handleNotificaiton}>
-            <NotificationsNoneOutlinedIcon className="icons"/>
+            <NotificationsNoneOutlinedIcon className="icons" />
             <div className="counter">5</div>
           </div>
           <div className="item">
@@ -49,7 +66,11 @@ const ClientNavBar = () => {
             <LogoutOutlinedIcon />
           </div>
           <div className="item" onClick={handleProfile}>
-            <img src="#" alt="image" className="avatar" />
+            <img
+              src={`http://127.0.0.1:8000/images/profile/${data.prof_pic}`}
+              alt="image"
+              className="avatar"
+            />
           </div>
         </div>
       </div>

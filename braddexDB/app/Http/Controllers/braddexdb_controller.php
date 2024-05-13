@@ -7,6 +7,7 @@ use App\Models\tbl_menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -160,13 +161,77 @@ class braddexdb_controller extends Controller
     public function updateProfileDetails(Request $request)
     {
         $id = $request->id;
-        User::find($id)->update([
-            ''
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email'
         ]);
-        return response()->json($id);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        User::find($id)->update([
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone_no' => $request->phone_no,
+            'birthday' => $request->birthday,
+        ]);
+        return response()->json(['message' => 'Updated successfully'], 201);
     }
     public function updateProfilePicture(Request $request)
     {
-        return response()->json($request);
+        // putting all the request in to one variable.
+        $data = $request->all();
+        // getting the user if from the request.
+        $id = $data['id'];
+        // Checking if the user have a recent profile.
+        // if we have then were going to delete that image in out system permanently.
+        $userData = User::where('id', $id)->first(); // getting the user data from database.
+        $recentImage = $userData['prof_pic']; // here we get the image from the user data
+        // now we need to condition it.
+        // if recent image is null so we upload the image directly, else we need to delete the upload the file from the request.
+        if ($recentImage != null) {
+            // deleting the file.
+            File::delete(public_path('images/profile/' . $recentImage));
+            // validate if the request file is an image.
+            if ($request->file('image')) {
+                // Renaming and Moving the image.
+                $image = $request->file('image'); // getting image from the request.
+                // directory where we are going to save the file.
+                $destinationPath = 'images/profile';
+                // renaming the file.
+                $profileImage = time() . "." . $image->getClientOriginalExtension();
+                // moving the image to our distanation path
+                $image->move($destinationPath, $profileImage);
+                // the image name we are going to save on the database.
+                $data['image'] = $profileImage;
+                // update the database.
+                User::find($id)->update([
+                    'prof_pic' => $data['image'],
+                ]);
+            }
+        } else {
+            // here we don't need any file to be deleted so we proceed to validating if the request file is and image.
+            if ($request->file('image')) {
+                // Renaming and Moving the image.
+                $image = $request->file('image'); // getting image from the request.
+                // directory where we are going to save the file.
+                $destinationPath = 'images/profile';
+                // renaming the file.
+                $profileImage = time() . "." . $image->getClientOriginalExtension();
+                // moving the image to our distanation path
+                $image->move($destinationPath, $profileImage);
+                // the image name we are going to save on the database.
+                $data['image'] = $profileImage;
+                // update the database.
+                User::find($id)->update([
+                    'prof_pic' => $data['image'],
+                ]);
+            }
+        }
+        // response that will message the user if the action has been done successfully.
+        return response()->json(['message' => 'Successfully updated, please reload the page to see changes']);
     }
 }

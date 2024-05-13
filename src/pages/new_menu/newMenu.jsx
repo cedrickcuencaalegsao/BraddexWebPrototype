@@ -18,8 +18,7 @@ const NewMenu = () => {
       formData.append("name", menuname);
       formData.append("price", newprice);
       formData.append("image", image);
-
-      const respose = await axios.post(
+      const response = await axios.post(
         "http://127.0.0.1:8000/api/uploadmenu",
         formData,
         {
@@ -28,7 +27,7 @@ const NewMenu = () => {
           },
         }
       );
-      setMessage(respose.data.message);
+      setMessage(response.data.message);
     } catch (err) {
       alert(err);
     }
