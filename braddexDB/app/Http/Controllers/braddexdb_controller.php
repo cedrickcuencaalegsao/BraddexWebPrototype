@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\tbl_menu;
+use App\Models\tbl_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -233,5 +234,39 @@ class braddexdb_controller extends Controller
         }
         // response that will message the user if the action has been done successfully.
         return response()->json(['message' => 'Successfully updated, please reload the page to see changes']);
+    }
+    public function addToCart(Request $request)
+    {
+        $created_at = Carbon::now()->toDateTimeString();
+        $data = $request->all();
+        $menu_id = $data['menu_id'];
+        $val_count = count(tbl_cart::where('menu_id', $menu_id)->get());
+
+        if ($val_count === 0) {
+            tbl_cart::insert([
+                'created_by' => $data['user_id'],
+                'menu_id' => $data['menu_id'],
+                'isDeleted' => false,
+                'created_at' => $created_at,
+            ]);
+            return response()->json(['message' => 'Successfully added to cart.'], 201);
+        } else {
+            return response()->json(['message' => 'Menu already added to cart.']);
+        }
+    }
+    public function getCart($id)
+    {
+        $data = tbl_cart::where('created_by', $id)->get();
+        return response()->json(compact('data'));
+    }
+    public function getCartMenu(Request $request)
+    {
+        $ids = $request->all();
+        $data = tbl_menu::whereIn('id', $ids)->get();
+        return response()->json(compact('data'));
+    }
+    public function orderNow(Request $request)
+    {
+        return response()->json("order now");
     }
 }

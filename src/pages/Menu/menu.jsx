@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
+  const [response, setResponse] = useState("");
   const history = useHistory();
   const id = localStorage.getItem("id");
 
@@ -30,24 +31,36 @@ const ClientMenu = () => {
 
   const addToCartAPI = async (data) => {
     try {
-      
+      const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
+      setResponse(API.data);
+      console.log(API.data);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   const handleAddToCart = async (menu_id) => {
     const data = {
       menu_id: menu_id,
       user_id: id,
-    }
+    };
+    console.log(data);
     const status = await addToCartAPI(data);
     status && history.push("/client-cart");
   };
 
-  const handleOrderNow = (menu_id) => {
-    console.log("Order now.", menu_id);
+  const orderNowAPI = async (data) => {
+    console.log(data);
   };
 
+  const handleOrderNow = async (menu_id) => {
+    const data = {
+      menu_id: menu_id,
+      user_id: id,
+    };
+    const status = await orderNowAPI(data);
+    status && history.push("/client-delivery");
+  };
+  console.log(data);
   return (
     <div className="menu">
       <ClientSideBar />
