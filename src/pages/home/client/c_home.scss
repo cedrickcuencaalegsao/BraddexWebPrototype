@@ -13,14 +13,22 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
       .top {
         padding: 10px;
         margin: 10px;
-        height: 200px;
         border-radius: 10px;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
-        .pagetitle{
-            color: gray;
-            margin: 10px;
+        .pagetitle {
+          color: gray;
+          margin: 10px;
+        }
+        .page-title-item-container {
+          display: flex;
+          .title-image-container {
+            .image {
+              height: 200px;
+              width: 200px;
+            }
+          }
         }
       }
 
@@ -43,7 +51,6 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
           display: grid;
           grid-template-columns: repeat(5, $grid-size);
           justify-content: center;
-
           .cards {
             width: 200px;
             margin: auto;

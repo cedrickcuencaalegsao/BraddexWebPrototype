@@ -6,10 +6,12 @@ import axios from "axios";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import PermPhoneMsgOutlinedIcon from "@mui/icons-material/PermPhoneMsgOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
   const id = localStorage.getItem("id");
 
@@ -18,6 +20,7 @@ const ClientMenu = () => {
       try {
         const API = await axios.get("http://127.0.0.1:8000/api/menu");
         setData(API.data.data);
+        setLoading(false);
       } catch (error) {
         alert(error);
       }
@@ -32,8 +35,8 @@ const ClientMenu = () => {
   const addToCartAPI = async (data) => {
     try {
       const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
-      setResponse(API.data);
-      console.log(API.data);
+      setResponse(API.data.message);
+      console.log(API.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +72,25 @@ const ClientMenu = () => {
         <div className="top">
           <h1 className="title">Menu</h1>
         </div>
+        <div className="response">
+          <div className="messages">
+            <span style={{ fontSize: "15px", color: "green" }}>{response}</span>
+          </div>
+          <div className="progress">
+            {loading ? (
+              <div className="loading">
+                <LinearProgress
+                  sx={{
+                    bgcolor: "lightgray",
+                    "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="loading"></div>
+            )}
+          </div>
+        </div>
         <div className="bottom">
           <div className="menuTable">
             {data.map((item) => (
@@ -78,8 +100,10 @@ const ClientMenu = () => {
                   alt="image"
                   className="image"
                 />
-                <p>{item.menu_name}</p>
-                <p>{item.price}</p>
+                <div className="menu-details">
+                  <span className="menu-name">{item.menu_name}</span>
+                  <span className="price">{`₱ ${item.price}`}</span>
+                </div>
                 <div className="card-buttons">
                   <div
                     className="add-to-cart"

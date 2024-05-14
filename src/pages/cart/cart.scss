@@ -15,17 +15,29 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
     }
     .bottom {
       background-color: none;
+      width: 100%;
+      .loading {
+        width: 100%;
+      }
       .table-carts {
         background-color: none;
         display: grid;
         grid-template-columns: repeat(5, $grid-size);
         justify-content: center;
         .cart-cards {
-          padding: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          overflow: hidden;
           margin: 10px;
           border-radius: 10px;
           -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
           box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+          .image {
+            width: 230px;
+            height: 200px;
+          }
         }
       }
     }

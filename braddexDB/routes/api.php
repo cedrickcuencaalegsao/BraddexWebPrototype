@@ -21,6 +21,7 @@ Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
 Route::get('onlineusers', [braddexdb_controller::class, 'onlineUsers']);
 Route::get('getcart/{id}', [braddexdb_controller::class, 'getCart']);
+Route::get('titleimages', [braddexdb_controller::class, 'getTitleImgaes']);
 
 
 // images routes for menu.

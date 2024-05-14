@@ -269,4 +269,10 @@ class braddexdb_controller extends Controller
     {
         return response()->json("order now");
     }
+    public function getTitleImgaes()
+    {
+        $data = tbl_menu::where('bestselling', true)->get();
+        $image = $data->pluck('image');
+        return response()->json($image);
+    }
 }

@@ -1,4 +1,4 @@
-$grid-size: 230px;
+$grid-size: 300px;
 $grid-gap: auto;
 
 .menu {
@@ -19,7 +19,7 @@ $grid-gap: auto;
       justify-content: center;
       .menuTable {
         display: grid;
-        grid-template-columns: repeat(5, $grid-size);
+        grid-template-columns: repeat(4, $grid-size);
       }
       .card {
         display: flex;
@@ -32,8 +32,64 @@ $grid-gap: auto;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         .image {
-          width: 230px;
-          height: 200px;
+          width: 300px;
+          height: 250px;
+        }
+        .menu-details {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin: 10px;
+          width: 100%;
+          span {
+            margin: 3px;
+          }
+          .menu-name {
+            text-transform: capitalize;
+            font-weight: bold;
+            color: black;
+            font-size: 20px;
+          }
+          .price{
+            color: rgb(36, 35, 35);
+            font-size: 18px;
+          }
+        }
+        .card-buttons {
+          margin-bottom: 10px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+          .add-to-cart {
+            padding: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 5px;
+            background-color: rgba(255, 174, 0, 0.993);
+            border-radius: 5px;
+            color: whitesmoke;
+            font-weight: bold;
+            span {
+              text-transform: capitalize;
+            }
+          }
+          .order-now {
+            padding: 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 5px;
+            background-color: rgb(236, 30, 30);
+            border-radius: 5px;
+            color: whitesmoke;
+            font-weight: bold;
+            span {
+              text-transform: capitalize;
+            }
+          }
         }
       }
     }
