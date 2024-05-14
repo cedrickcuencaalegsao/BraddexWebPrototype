@@ -271,7 +271,7 @@ class braddexdb_controller extends Controller
     }
     public function getTitleImgaes()
     {
-        $data = tbl_menu::where('bestselling', true)->get();
+        $data = tbl_menu::all();
         $image = $data->pluck('image');
         return response()->json($image);
     }

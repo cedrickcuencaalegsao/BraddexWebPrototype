@@ -4,9 +4,12 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
 
 .clientHome {
   display: flex;
+  
   .clientHomeContianer {
     flex: 6;
-
+    .navbar {
+      position: fixed;
+    }
     .content {
       padding: 10px;
 
@@ -17,16 +20,74 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
 
-        .pagetitle {
-          color: gray;
-          margin: 10px;
-        }
-        .page-title-item-container {
-          display: flex;
-          .title-image-container {
+        .title-container {
+          .page-title {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .toggleButton {
+              font-size: 20px;
+              color: grey;
+            }
+            .text-title {
+              .pagetitle {
+                color: grey;
+              }
+            }
+          }
+          @keyframes slideLeftRight {
+            0%,
+            100% {
+              transform: translateX(0); // Start at initial position
+            }
+            25% {
+              transform: translateX(-250px); // Slide to the left
+            }
+            50% {
+              transform: translateX(-250px); // Continue sliding to the left
+            }
+            75% {
+              transform: translateX(0px); // Slide back to the right
+            }
+          }
+          .background-image-collapsed {
+            transition: height 0.5s ease;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            height: 0px;
+            width: 1100px;
+            border-radius: 5px;
+            align-items: center;
+            justify-content: center;
             .image {
-              height: 200px;
-              width: 200px;
+              height: 250px;
+              width: 250px;
+              opacity: 0.7;
+              display: block;
+              margin: auto;
+              animation: slideLeftRight 7s infinite;
+            }
+          }
+          .background-image-not-colapsed {
+            transition: height 0.5s ease;
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            height: 150px;
+            width: 1100px;
+            border-radius: 5px;
+            align-items: center;
+            justify-content: center;
+
+            .image {
+              height: 250px;
+              width: 250px;
+              opacity: 0.7;
+              display: block;
+              margin: auto;
+              animation: slideLeftRight 7s infinite;
             }
           }
         }
