@@ -18,72 +18,95 @@ class braddexdb_controller extends Controller
 {
     public function authLogin(Request $request)
     {
-
+        // this function is use to validate login and authenticate the session.
+        // step 1. here we validate the input from the request.
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|email',
             'password' => 'required|string|min:6',
         ]);
-
+        // step 2. let's have the condition that if the validator fails.
+        // we resturn message such as invalid email and password
         if ($validator->fails()) {
             return response()->json(['message' => 'Invalid Email and password'], 422);
         }
-
+        // step 3. here we make sure that the request is only email and password.
+        // otherwise the login request should be a failed request.
         $credentials = $request->only('email', 'password');
-
+        // step 4. if credentials if okay then we attemp to authenticate the session.
         if (Auth::attempt($credentials)) {
+            // get user data from our table users.
             $user = Auth::user();
+            // create token and get id to be store on out browser local storage..
             $token = $user->createToken('AuthToken')->accessToken;
             $id = Auth::user()->id;
-
+            // identify if the logging in user is and administrator or regular user only.
             if (Auth::user()->isAdmin === 1) {
                 $isAdmin = true;
             } else {
                 $isAdmin = false;
             }
+            // update the table to make the user online.
             User::find($id)->update(['isOnline' => true]);
+            // now we create an object called data to be return on our frontend.
             $data = ([
                 "token" => $token,
                 "id" => $id,
                 "isAdmin" => $isAdmin,
                 "isOnline" => Auth::user()->isOnline,
             ]);
+            // returning the object in json format
             return response()->json(compact('data'));
         }
+        // if and only if the login authentication failed.
         return response()->json(['message' => 'Login Failed'], 401);
 
     }
     public function authRegister(Request $request)
     {
+        // this fucntion uses POST to add new user on our table users.
+        // step 1. always validate the input if neccessary.
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
         ]);
+        // step 2. return error validator messages to our frontend.
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
+        // step 3. if the validator don't have any error response.
+        // we insert all data to our table users.
+        // with a default value on the following columns: isActive, isOnline and isAdmin
+        // note that was boolean data types so we can use 0 and 1 or True or False as a default.
         User::create([
             'f_name' => $request->first_name,
             'l_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'isActive' => 1,
-            'isOnine' => 0,
+            'isOnline' => 0,
             'isAdmin' => 0,
         ]);
+        // step 4. return message to our frontend to tell the user that they have successfully registered.
         return response()->json(['message' => 'User registered successfully'], 201);
     }
     public function authLogout($id)
     {
+        // we flush the seasion.
         Session::flush();
+        // invalidate the authentication or logout.
         Auth::logout();
+        // update the isOnline into false.
         User::find($id)->update(['isOnline' => false]);
+        // return response that we are logout.
         return response()->json(['message' => 'Successfully logout.']);
     }
     public function allUsers()
     {
+        // get all data from the table users.
         $data = User::all();
+        // return the data in json format.
         return response()->json(['users' => $data]);
     }
     public function updateIsAdmin(Request $request, $id)
