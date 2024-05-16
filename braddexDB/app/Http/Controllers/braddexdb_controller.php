@@ -16,6 +16,9 @@ use League\Config\Exception\ValidationException;
 
 class braddexdb_controller extends Controller
 {
+    #
+    # https://github.com/SEVENthNotes7/braddexWebPrototype.git
+    #
     public function authLogin(Request $request)
     {
         // this function is use to validate login and authenticate the session.

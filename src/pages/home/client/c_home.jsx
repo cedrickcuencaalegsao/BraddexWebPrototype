@@ -7,6 +7,8 @@ import LinearProgress from "@mui/material/LinearProgress";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 
+import ClientWidgets from "../../../components/client/page_title_widgets/client_widgets";
+
 const ClientHome = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,51 +62,7 @@ const ClientHome = () => {
         <ClientNavbar />
         <div className="content">
           <div className="top">
-            <div className="title-container">
-              <div className="page-title">
-                <div className="text-title">
-                  <h1 className="pagetitle">Home</h1>
-                </div>
-                <div className="toggleButton" onClick={toggleCollapse}>
-                  {collapsed ? (
-                    <ExpandMoreOutlinedIcon />
-                  ) : (
-                    <ExpandLessOutlinedIcon />
-                  )}
-                </div>
-              </div>
-              <div className="progress">
-                <div className="page-title-item-container">
-                  {progTitle ? (
-                    <div className="loading">
-                      <LinearProgress
-                        sx={{
-                          bgcolor: "lightgray",
-                          "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="loading"></div>
-                  )}
-                </div>
-              </div>
-              <div
-                className={`background-image-${
-                  collapsed ? "collapsed" : "not-colapsed"
-                }`}
-              >
-                {titleImage.map((item) => (
-                  <div className="title-image-container">
-                    <img
-                      src={`http://127.0.0.1:8000/images/menu/${item}`}
-                      alt="image"
-                      className="image"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <ClientWidgets type="home" />
           </div>
           <div className="bottom">
             <h1 className="containerTitle">Best Selling</h1>

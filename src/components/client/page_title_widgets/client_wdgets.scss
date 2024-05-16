@@ -1,0 +1,78 @@
+.widget-container {
+  .top-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title-container {
+      padding: 7px;
+      .title {
+        color: grey;
+      }
+    }
+    .toggleButton {
+      color: grey;
+    }
+  }
+  @keyframes slideLeftRight {
+    0%,
+    100% {
+      transform: translateX(0); // Start at initial position
+    }
+    25% {
+      transform: translateX(-250px); // Slide to the left
+    }
+    50% {
+      transform: translateX(-250px); // Continue sliding to the left
+    }
+    75% {
+      transform: translateX(0px); // Slide back to the right
+    }
+  }
+  .widgets-image-container-collapsed {
+    transition: height 0.5s ease;
+    height: 0px;
+    overflow: hidden;
+    .image-wrapper {
+      transition: height 0.5s ease;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 0px;
+      width: 1120px;
+      border-radius: 10px;
+      overflow: hidden;
+      .image {
+        height: 250px;
+        width: 250px;
+        opacity: 0.7;
+        display: block;
+        margin: auto;
+        animation: slideLeftRight 7s infinite;
+      }
+    }
+  }
+  .widgets-image-container-not-colapsed {
+    transition: height 0.5s ease;
+    height: 180px;
+    .image-wrapper {
+      transition: height 0.5s ease;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 180px;
+      width: 1120px;
+      border-radius: 10px;
+      overflow: hidden;
+      .image {
+        height: 250px;
+        width: 250px;
+        opacity: 0.7;
+        display: block;
+        margin: auto;
+        animation: slideLeftRight 7s infinite;
+      }
+    }
+  }
+}

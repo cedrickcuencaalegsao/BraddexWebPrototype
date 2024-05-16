@@ -4,6 +4,7 @@ import ClientNavBar from "../../components/client/navBar/client_navBar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
+import ClientWidgets from "../../components/client/page_title_widgets/client_widgets";
 
 const Cart = () => {
   const [data, setData] = useState([]);
@@ -61,14 +62,14 @@ const Cart = () => {
       <div className="cartContainer">
         <ClientNavBar />
         <div className="top">
-          <div className="title">
-            <h1>Cart</h1>
-          </div>
+          <ClientWidgets type="cart" />
         </div>
         <div className="response">
           <div className="messages">
             <span style={{ fontSize: "15px", color: "green" }}>{response}</span>
           </div>
+        </div>
+        <div className="bottom">
           <div className="progress">
             {loading ? (
               <div className="loading">
@@ -83,8 +84,6 @@ const Cart = () => {
               <div className="loading"></div>
             )}
           </div>
-        </div>
-        <div className="bottom">
           <div className="table-carts">
             {menuArray.map((item) => (
               <div className="cart-cards" key={item.id}>

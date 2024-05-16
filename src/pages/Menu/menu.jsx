@@ -8,6 +8,8 @@ import PermPhoneMsgOutlinedIcon from "@mui/icons-material/PermPhoneMsgOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LinearProgress from "@mui/material/LinearProgress";
 
+import ClientWidgets from "../../components/client/page_title_widgets/client_widgets";
+
 const ClientMenu = () => {
   const [data, setData] = useState([]);
   const [response, setResponse] = useState("");
@@ -70,12 +72,14 @@ const ClientMenu = () => {
       <div className="menuContianer">
         <ClientNavBar />
         <div className="top">
-          <h1 className="title">Menu</h1>
+          <ClientWidgets type="menu" />
         </div>
         <div className="response">
           <div className="messages">
             <span style={{ fontSize: "15px", color: "green" }}>{response}</span>
           </div>
+        </div>
+        <div className="bottom">
           <div className="progress">
             {loading ? (
               <div className="loading">
@@ -90,8 +94,6 @@ const ClientMenu = () => {
               <div className="loading"></div>
             )}
           </div>
-        </div>
-        <div className="bottom">
           <div className="menuTable">
             {data.map((item) => (
               <div className="card" key={item.id}>
