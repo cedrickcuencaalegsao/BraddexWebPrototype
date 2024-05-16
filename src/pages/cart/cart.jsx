@@ -13,12 +13,12 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   // converting object into array so we can use .map() when we return data.
   const menuArray = Object.values(menu);
-  const id = localStorage.getItem("id");
+  const uuid = localStorage.getItem("uuid");
 
   useEffect(() => {
     const getCartAPI = async () => {
       try {
-        const API = await axios.get(`http://127.0.0.1:8000/api/getcart/${id}`);
+        const API = await axios.get(`http://127.0.0.1:8000/api/getcart/${uuid}`);
         console.log(API.data.data);
 
         setData(API.data.data);

@@ -19,11 +19,11 @@ const Login = () => {
       // Getting token from the response.
       const token = response.data.data.token;
       const isAdmin = response.data.data.isAdmin;
-      const id = response.data.data.id;
+      const uuid = response.data.data.uuid;
       // storing token, isAdmin, and user ID on browser local storage
       localStorage.setItem("token", token);
       localStorage.setItem("isAdmin", isAdmin);
-      localStorage.setItem("id", id);
+      localStorage.setItem("uuid", uuid);
       return true;
     } catch (err) {
       // Error Response from the server.

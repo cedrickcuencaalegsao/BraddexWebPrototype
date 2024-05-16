@@ -3,18 +3,21 @@ import NavBar from "../../components/navBar/nav_bar";
 import SideBar from "../../components/sideBar/side_bar";
 import { useState } from "react";
 import axios from "axios";
+import { generateRandomID } from "../../idgenerator";
 
 const NewMenu = () => {
   const [menuname, setMenuname] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [message, setMessage] = useState("");
+  const menuID = generateRandomID();
 
   let newprice = parseFloat(price);
   
   const UploadMenu = async () => {
     try {
       const formData = new FormData();
+      formData.append("menuID", menuID);
       formData.append("name", menuname);
       formData.append("price", newprice);
       formData.append("image", image);

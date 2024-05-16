@@ -105,8 +105,13 @@
               padding: 10px;
               input {
                 border: none;
+                border-bottom: 1px solid orangered;
                 margin-top: -2px;
                 font-size: 20px;
+              }
+              input:focus{
+                border: none;
+                border-bottom: 3px solid orangered;
               }
             }
           }

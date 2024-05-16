@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [braddexdb_controller::class, 'authLogin']);
 Route::post('register', [braddexdb_controller::class, 'authRegister']);
-Route::post('logout/{id}', [braddexdb_controller::class, 'authLogout']);
+Route::post('logout/{uuid}', [braddexdb_controller::class, 'authLogout']);
 Route::post('updateIsAdmin/{id}', [braddexdb_controller::class, 'updateIsAdmin']);
 Route::post('uploadmenu', [braddexdb_controller::class, 'uploadMenu']);
 Route::post('updateprofiledetails', [braddexdb_controller::class, 'updateProfileDetails']);
@@ -16,7 +16,7 @@ Route::post('ordernow', [braddexdb_controller::class, 'orderNow']);
 Route::post('getcartmenu',[braddexdb_controller::class, 'getCartMenu']);
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
-Route::get('profile/{id}', [braddexdb_controller::class, 'getUserProfile']);
+Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
 Route::get('onlineusers', [braddexdb_controller::class, 'onlineUsers']);

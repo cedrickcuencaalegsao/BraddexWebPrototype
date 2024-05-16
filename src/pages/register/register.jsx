@@ -1,6 +1,7 @@
 import "./register.scss";
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import { generateRandomID } from "../../idgenerator";
 import axios from "axios";
 
 const Register = () => {
@@ -8,26 +9,32 @@ const Register = () => {
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const generatedUid = generateRandomID();
   const history = useHistory();
+
+  const registerAPI = async (data) => {
+    try {
+      await axios.post("http://127.0.0.1:8000/api/register", data);
+      history.push("/");
+    } catch (err) {
+      console.log(err.response.data.error);
+    }
+  };
 
   const handleRegister = async (ev) => {
     // preventing the page from reloading after submiting data
     ev.preventDefault();
-    // data to send into server 
+    // data to send into server
     const data = {
-        "first_name": firstname,
-        "last_name": lastname,
-        "email": email,
-        "password": password
-    }
-    try {
-        const response = await axios.post('http://127.0.0.1:8000/api/register', data);
-        console.log(response.data);
-        history.push('/')
-    } catch (err) {
-        console.log(err.response.data.error)
-    }
-  }
+      uuid: generatedUid,
+      first_name: firstname,
+      last_name: lastname,
+      email: email,
+      password: password,
+    };
+    console.log(data);
+    await registerAPI(data);
+  };
 
   return (
     <div className="formRegister">

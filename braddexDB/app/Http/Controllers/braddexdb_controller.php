@@ -41,7 +41,7 @@ class braddexdb_controller extends Controller
             $user = Auth::user();
             // create token and get id to be store on out browser local storage..
             $token = $user->createToken('AuthToken')->accessToken;
-            $id = Auth::user()->id;
+            $uuid = Auth::user()->userID;
             // identify if the logging in user is and administrator or regular user only.
             if (Auth::user()->isAdmin === 1) {
                 $isAdmin = true;
@@ -49,11 +49,12 @@ class braddexdb_controller extends Controller
                 $isAdmin = false;
             }
             // update the table to make the user online.
+            $id = Auth::user()->id;
             User::find($id)->update(['isOnline' => true]);
             // now we create an object called data to be return on our frontend.
             $data = ([
                 "token" => $token,
-                "id" => $id,
+                "uuid" => $uuid,
                 "isAdmin" => $isAdmin,
                 "isOnline" => Auth::user()->isOnline,
             ]);
@@ -64,44 +65,53 @@ class braddexdb_controller extends Controller
         return response()->json(['message' => 'Login Failed'], 401);
 
     }
+
     public function authRegister(Request $request)
     {
         // this fucntion uses POST to add new user on our table users.
         // step 1. always validate the input if neccessary.
         $validator = Validator::make($request->all(), [
+            'uuid' => 'required',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
         ]);
+
         // step 2. return error validator messages to our frontend.
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
+
+
         // step 3. if the validator don't have any error response.
         // we insert all data to our table users.
         // with a default value on the following columns: isActive, isOnline and isAdmin
         // note that was boolean data types so we can use 0 and 1 or True or False as a default.
-        User::create([
+        $created_at = Carbon::now()->toDateTimeString(); // getting the current date.
+        $user = User::insert([
+            'userID' => $request->uuid,
             'f_name' => $request->first_name,
             'l_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'isActive' => 1,
-            'isOnline' => 0,
-            'isAdmin' => 0,
+            'isActive' => true,
+            'isOnline' => false,
+            'isAdmin' => false,
+            'created_at' => $created_at,
         ]);
+
         // step 4. return message to our frontend to tell the user that they have successfully registered.
-        return response()->json(['message' => 'User registered successfully'], 201);
+        return response()->json([$user, 'message' => 'Account successfully registered.']);
     }
-    public function authLogout($id)
+    public function authLogout($uuid)
     {
         // we flush the seasion.
         Session::flush();
         // invalidate the authentication or logout.
         Auth::logout();
         // update the isOnline into false.
-        User::find($id)->update(['isOnline' => false]);
+        User::where('userID', $uuid)->update(['isOnline' => false]);
         // return response that we are logout.
         return response()->json(['message' => 'Successfully logout.']);
     }
@@ -127,10 +137,10 @@ class braddexdb_controller extends Controller
             return response()->json(['message' => 'Updated account type to Client']);
         }
     }
-    public function getUserProfile($id)
+    public function getUserProfile($uuid)
     {
-        if ($id != null) {
-            $data = User::where('id', $id)->first();
+        if ($uuid != null) {
+            $data = User::where('userID', $uuid)->first();
             return response()->json(compact('data'));
         } else {
             return response()->json(['message' => 'Invalid user id']);
@@ -145,6 +155,7 @@ class braddexdb_controller extends Controller
     {
         $created_at = Carbon::now()->toDateTimeString();
         $validator = Validator::make($request->all(), [
+            'menuID' => 'required',
             'name' => 'required',
             'price' => 'required',
             'image' => 'required',
@@ -162,7 +173,8 @@ class braddexdb_controller extends Controller
             $data['image'] = $profileImage;
 
             // Uploading the Menu to our database.
-            tbl_menu::create([
+            tbl_menu::insert([
+                'menuID' => $data['menuID'],
                 'menu_name' => $data['name'],
                 'price' => $data['price'],
                 'image' => $data['image'],
@@ -212,10 +224,10 @@ class braddexdb_controller extends Controller
         // putting all the request in to one variable.
         $data = $request->all();
         // getting the user if from the request.
-        $id = $data['id'];
+        $uuid = $data['uuid'];
         // Checking if the user have a recent profile.
         // if we have then were going to delete that image in out system permanently.
-        $userData = User::where('id', $id)->first(); // getting the user data from database.
+        $userData = User::where('userID', $uuid)->first(); // getting the user data from database.
         $recentImage = $userData['prof_pic']; // here we get the image from the user data
         // now we need to condition it.
         // if recent image is null so we upload the image directly, else we need to delete the upload the file from the request.
@@ -235,7 +247,7 @@ class braddexdb_controller extends Controller
                 // the image name we are going to save on the database.
                 $data['image'] = $profileImage;
                 // update the database.
-                User::find($id)->update([
+                User::where('userID', $uuid)->update([
                     'prof_pic' => $data['image'],
                 ]);
             }
@@ -253,7 +265,7 @@ class braddexdb_controller extends Controller
                 // the image name we are going to save on the database.
                 $data['image'] = $profileImage;
                 // update the database.
-                User::find($id)->update([
+                User::where('userID', $uuid)->update([
                     'prof_pic' => $data['image'],
                 ]);
             }

@@ -13,13 +13,13 @@ const ClientUserProfile = () => {
   const [response, setResponse] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [preview, setPreview] = useState(null);
-  const id = localStorage.getItem("id");
+  const uuid = localStorage.getItem("uuid");
   const history = useHistory();
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/profile/${id}`
+        `http://127.0.0.1:8000/api/profile/${uuid}`
       );
       setData(response.data.data);
       setLoading(false);
@@ -90,7 +90,7 @@ const ClientUserProfile = () => {
   const saveProfileAPI = async () => {
     try {
       const formData = new FormData();
-      formData.append("id", id);
+      formData.append("uuid", uuid);
       formData.append("image", profilePicture);
       const API = await axios.post(
         "http://127.0.0.1:8000/api/updateprofilepicture",
@@ -111,6 +111,7 @@ const ClientUserProfile = () => {
 
   const handleSaveProfile = async (ev) => {
     ev.preventDefault();
+    console.log(uuid);
     try {
       const response = await saveProfileAPI();
       response && history.push("/client-profile");
@@ -282,10 +283,7 @@ const ClientUserProfile = () => {
               </div>
               <div className="preview">
                 {preview ? (
-                  <img
-                    src={preview}
-                    alt="preview"
-                  />
+                  <img src={preview} alt="preview" />
                 ) : (
                   <span>No preview available</span>
                 )}

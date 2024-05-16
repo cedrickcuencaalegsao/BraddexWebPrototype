@@ -10,13 +10,13 @@ import { useState, useEffect } from "react";
 
 const ClientNavBar = () => {
   const history = useHistory();
-  const id = localStorage.getItem("id");
+  const uuid = localStorage.getItem("uuid");
   const [data, setData] = useState({});
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/profile/${id}`
+        `http://127.0.0.1:8000/api/profile/${uuid}`
       );
       setData(response.data.data);
     } catch (error) {
@@ -36,7 +36,7 @@ const ClientNavBar = () => {
     try {
       await axios.post(`http://127.0.0.1:8000/api/logout/${id}`);
       localStorage.removeItem("token");
-      localStorage.removeItem("id");
+      localStorage.removeItem("uuid");
       localStorage.removeItem("isAdmin");
       history.push("/");
     } catch (error) {

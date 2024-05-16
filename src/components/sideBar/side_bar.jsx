@@ -20,11 +20,10 @@ const SideBar = () => {
   const handleLogout = async () => {
     const id = localStorage.getItem("id");
     try {
-      await axios.post(
-        `http://127.0.0.1:8000/api/logout/${id}`
-      );
+      const resp = await axios.post(`http://127.0.0.1:8000/api/logout/${id}`);
+      console.log(resp);
       localStorage.removeItem("token");
-      localStorage.removeItem("id");
+      localStorage.removeItem("uuid");
       localStorage.removeItem("isAdmin");
       history.push("/");
     } catch (error) {

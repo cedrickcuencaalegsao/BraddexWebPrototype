@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('tbl_notif', function (Blueprint $table) {
             $table->id();
-            $table->string('onwed_by', 10)->nullable();
+            $table->string('notifID', 20)->nullable();
+            $table->string('onwed_by', 20)->nullable();
             $table->string('from', 50)->nullable();
             $table->string('title', 15)->nullable();
             $table->string('act_details', 255)->nullable();

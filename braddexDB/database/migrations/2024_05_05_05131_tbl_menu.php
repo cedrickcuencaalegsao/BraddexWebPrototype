@@ -6,16 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('tbl_cart', function (Blueprint $table) {
+        Schema::create('tbl_menu', function (Blueprint $table) {
             $table->id();
-            $table->string('created_by', 10)->nullable();
-            $table->string('menu_id', 10)->nullable();
-            $table->boolean('isDeleted')->nullable();
+            $table->string('menuID', 25)->nullable();
+            $table->string('menu_name', 25)->nullable();
+            $table->float('price', 5)->nullable();
+            $table->string('image', 25)->nullable();
+            $table->boolean('bestselling')->nullable();
             $table->string('created_at', 20)->nullable();
             $table->string('updated_at', 20)->nullable();
         });
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_cart');
+        Schema::dropIfExists('tbl_menu');
     }
 };

@@ -24,7 +24,7 @@ const ClientMenu = () => {
         setData(API.data.data);
         setLoading(false);
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     };
     MenuAPI();
