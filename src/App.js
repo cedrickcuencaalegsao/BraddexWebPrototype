@@ -54,7 +54,7 @@ const App = () => {
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
           <AuthRoutes path="/notification" component={Notification} isAdminRoute />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
-          <AuthRoutes path="/updatemenu" component={UpdateMenu} isAdminRoute />
+          <AuthRoutes path="/updatemenu/:menuID" component={UpdateMenu} isAdminRoute />
           <AuthRoutes path="/logs" component={Logs} isAdminRoute />
           <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
           <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />

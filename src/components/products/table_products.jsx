@@ -1,20 +1,16 @@
 import "./table_products.scss";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { DataGrid } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const TableProducts = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const MenuAPI = async () => {
@@ -33,14 +29,110 @@ const TableProducts = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleUpdateMenu = (menuID) => {
+    console.log(menuID);
+    history.push(`/updatemenu/${menuID}`);
+  };
+  const handleDeleteMenu = (menuID) => {
+    console.log(menuID);
+  };
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 70 },
+    { field: "menuID", headerName: "Menu ID", width: 170 },
+    { field: "menu_name", headerName: "Menu Name", width: 150 },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 110,
+      renderCell: (price) => {
+        return (
+          <div className="price-value">
+            <span>{`₱.${price.formattedValue}`}</span>
+          </div>
+        );
+      },
+    },
+    {
+      field: "image",
+      headerName: "Image",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 160,
+      renderCell: (image) => {
+        return (
+          <div className="container">
+            <img
+              src={`http://127.0.0.1:8000/images/menu/${image.formattedValue}`}
+              alt="image"
+              className="image"
+            />
+          </div>
+        );
+      },
+    },
+    {
+      field: "bestselling",
+      headerName: "Best Selling",
+      width: 110,
+      renderCell: (bestselling) => {
+        return (
+          <div className="bestselling">
+            {bestselling.formattedValue == 1 ? (
+              <span style={{ color: "green" }}>Yes</span>
+            ) : (
+              <span style={{ color: "red" }}>No</span>
+            )}
+          </div>
+        );
+      },
+    },
+    {
+      field: "isAvialable",
+      headerName: "Status",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 100,
+      // valueGetter: (value, row) => `${row.status}`,
+      renderCell: (isAvialable) => {
+        return (
+          <div className={`status ${isAvialable.formattedValue}`}>
+            <span>{isAvialable.formattedValue}</span>
+          </div>
+        );
+      },
+    },
+    {
+      field: "action",
+      headerName: "Action",
+      sortable: false,
+      width: 100,
+      renderCell: (data) => {
+        return (
+          <div className="cellAction">
+            <div
+              className="viewButton"
+              onClick={() => handleUpdateMenu(data.row.menuID)}
+            >
+              <EditOutlinedIcon />
+            </div>
+            <div
+              className="deleteButton"
+              onClick={() => handleDeleteMenu(data.row.menuID)}
+            >
+              <DeleteOutlineOutlinedIcon />
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
+
   return (
     <div className="table">
       <div className="top">
         <div className="left">
           <div className="title">PRODUCTS AVAILABLE</div>
-        </div>
-        <div className="center">
-          <div className="title">PRODUCT LIMITED</div>
         </div>
         <div className="right">
           <div className="title">PRODUCT NOT-AVAILABLE</div>
@@ -61,72 +153,17 @@ const TableProducts = () => {
             <div className="loading"></div>
           )}
         </div>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Menu Id No.</TableCell>
-                <TableCell align="right">Menu Name</TableCell>
-                <TableCell align="right">Price</TableCell>
-                <TableCell align="right">Image</TableCell>
-                <TableCell align="right">Date Added</TableCell>
-                <TableCell align="right"> Best Selling</TableCell>
-                <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((row) => (
-                <TableRow
-                  key={row.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.menuID}
-                  </TableCell>
-                  <TableCell align="right">{row.menu_name}</TableCell>
-                  <TableCell align="right">{`₱ ${row.price}`}</TableCell>
-                  <TableCell align="right">
-                    <div className="cellWrapper">
-                      <img
-                        src={`http://127.0.0.1:8000/images/menu/${row.image}`}
-                        alt="image"
-                        className="image"
-                      />
-                    </div>
-                  </TableCell>
-                  <TableCell align="right">{row.created_at}</TableCell>
-                  <TableCell align="right">
-                    {row.bestselling === 1 ? (
-                      <div className={`beselling${row.bestselling}`}>
-                        <span style={{ color: "green" }}>Yes</span>
-                      </div>
-                    ) : (
-                      <div className={`beselling${row.bestselling}`}>
-                        <span style={{ color: "red" }}>No</span>
-                      </div>
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    <span className={`status ${row.isAvialable}`}>
-                      {row.isAvialable}
-                    </span>
-                  </TableCell>
-                  <TableCell align="right">
-                    <div className="menu-action-button">
-                      <div className="edit-menu">
-                        <ModeEditOutlineOutlinedIcon />
-                      </div>
-                      <div className="delete-menu">
-                        <DeleteRoundedIcon />
-                      </div>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <DataGrid
+          rows={data}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 10 },
+            },
+          }}
+          pageSizeOptions={[5, 11]}
+          checkboxSelection
+        />
       </div>
     </div>
   );

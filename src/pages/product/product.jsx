@@ -9,7 +9,6 @@ const List = () => {
       <div className="listContainer">
         <Navbar />
         <div className="table">
-            
           <TableProducts />
         </div>
       </div>

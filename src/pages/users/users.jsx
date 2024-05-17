@@ -15,7 +15,6 @@ import {
 } from "recharts";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Api } from "@mui/icons-material";
 
 const Users = () => {
   const [data, setData] = useState([]);

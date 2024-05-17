@@ -46,9 +46,46 @@
       align-items: center;
     }
   }
-
+  .cellAction {
+    margin-top: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    .viewButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgba(0, 0, 139, 0.563);
+      cursor: pointer;
+    }
+    .viewButton:hover {
+      background-color: rgba(0, 0, 139, 0.356);
+    }
+    .deleteButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgba(220, 20, 60, 0.62);
+      cursor: pointer;
+    }
+    .deleteButton:hover {
+      background-color: rgba(220, 20, 60, 0.363);
+    }
+  }
   .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &.Available {
+      margin-top: 10px;
+      height: 20px;
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
     }

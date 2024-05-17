@@ -54,9 +54,6 @@ const SideBar = () => {
   const viewNewMenu = () => {
     history.push("/newmenu");
   };
-  const viewUpdateMenu = () => {
-    history.push("/updatemenu");
-  };
   const viewLogs = () => {
     history.push("/logs");
   };
@@ -127,10 +124,6 @@ const SideBar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewUpdateMenu}>
-              <UpdateOutlinedIcon className="icon" />
-              <span>Update Menu</span>
-            </div>
           </li>
           <p className="title">SERVICE</p>
           <li>
