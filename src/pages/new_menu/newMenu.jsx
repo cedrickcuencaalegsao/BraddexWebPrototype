@@ -4,8 +4,10 @@ import SideBar from "../../components/sideBar/side_bar";
 import { useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const NewMenu = () => {
+  const history = useHistory();
   const [menuname, setMenuname] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
@@ -13,7 +15,7 @@ const NewMenu = () => {
   const menuID = generateRandomID();
 
   let newprice = parseFloat(price);
-  
+
   const UploadMenu = async () => {
     try {
       const formData = new FormData();
@@ -31,6 +33,7 @@ const NewMenu = () => {
         }
       );
       setMessage(response.data.message);
+      response && history.push("/products");
     } catch (err) {
       alert(err);
     }

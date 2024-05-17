@@ -55,9 +55,9 @@ const App = () => {
           <AuthRoutes path="/notification" component={Notification} isAdminRoute />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
           <AuthRoutes path="/updatemenu" component={UpdateMenu} isAdminRoute />
-          <AuthRoutes path="/logs" component={Logs} isAdminRoute/>
-          <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute/>
-          <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute/>
+          <AuthRoutes path="/logs" component={Logs} isAdminRoute />
+          <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
+          <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />
           {/* Client Routes */}
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu} />
@@ -69,7 +69,7 @@ const App = () => {
           <AuthRoutes path="/client-settings" component={ClientSettings} />
           <AuthRoutes path="/client-privacy" component={ClientPrivacy} />
           <AuthRoutes path="/client-profile" component={ClientUserProfile} />
-          <AuthRoutes path="/client-notification" component={ClientNotification}/>
+          <AuthRoutes path="/client-notification" component={ClientNotification} />
         </Switch>
       </Router>
     </div>

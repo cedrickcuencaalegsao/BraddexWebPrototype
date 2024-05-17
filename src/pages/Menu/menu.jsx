@@ -7,15 +7,18 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import PermPhoneMsgOutlinedIcon from "@mui/icons-material/PermPhoneMsgOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LinearProgress from "@mui/material/LinearProgress";
-
+import { generateRandomID } from "../../idgenerator";
 import ClientWidgets from "../../components/client/page_title_widgets/client_widgets";
+
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
-  const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(true);
   const history = useHistory();
-  const id = localStorage.getItem("id");
+  const userID = localStorage.getItem("uuid");
+  const cartID = generateRandomID();
 
   useEffect(() => {
     const MenuAPI = async () => {
@@ -37,18 +40,17 @@ const ClientMenu = () => {
   const addToCartAPI = async (data) => {
     try {
       const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
-      setResponse(API.data.message);
-      console.log(API.data.message);
+      history.push("/client-cart");
     } catch (error) {
       console.log(error);
     }
   };
-  const handleAddToCart = async (menu_id) => {
+  const handleAddToCart = async (menuID) => {
     const data = {
-      menu_id: menu_id,
-      user_id: id,
+      cartID: cartID,
+      menuID: menuID,
+      userID: userID,
     };
-    console.log(data);
     const status = await addToCartAPI(data);
     status && history.push("/client-cart");
   };
@@ -57,15 +59,17 @@ const ClientMenu = () => {
     console.log(data);
   };
 
-  const handleOrderNow = async (menu_id) => {
+  const handleOrderNow = async (menuID) => {
     const data = {
-      menu_id: menu_id,
-      user_id: id,
+      cartID: cartID,
+      menuID: menuID,
+      userID: userID,
     };
+    console.log(data);
     const status = await orderNowAPI(data);
     status && history.push("/client-delivery");
   };
-  console.log(data);
+
   return (
     <div className="menu">
       <ClientSideBar />
@@ -74,11 +78,7 @@ const ClientMenu = () => {
         <div className="top">
           <ClientWidgets type="menu" />
         </div>
-        <div className="response">
-          <div className="messages">
-            <span style={{ fontSize: "15px", color: "green" }}>{response}</span>
-          </div>
-        </div>
+
         <div className="bottom">
           <div className="progress">
             {loading ? (
@@ -109,17 +109,21 @@ const ClientMenu = () => {
                 <div className="card-buttons">
                   <div
                     className="add-to-cart"
-                    onClick={() => handleAddToCart(item.id)}
+                    onClick={() => handleAddToCart(item.menuID)}
                   >
-                    <AddShoppingCartOutlinedIcon />
-                    <span>Add to cart</span>
+                    <span>
+                      <AddShoppingCartOutlinedIcon />
+                      Add to cart
+                    </span>
                   </div>
                   <div
                     className="order-now"
-                    onClick={() => handleOrderNow(item.id)}
+                    onClick={() => handleOrderNow(item.menuID)}
                   >
-                    <PermPhoneMsgOutlinedIcon />
-                    <span>Order Now</span>
+                    <span>
+                      <PermPhoneMsgOutlinedIcon />
+                      Order Now
+                    </span>
                   </div>
                 </div>
               </div>

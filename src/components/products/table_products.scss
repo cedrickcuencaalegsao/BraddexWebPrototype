@@ -1,55 +1,64 @@
-.table{
+.table {
+  .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .title {
+      font-size: 14px;
+      font-weight: 400;
+      color: grey;
+    }
+    .left {
+      flex: 2;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+    .center {
+      flex: 2;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+    .right {
+      flex: 2;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+  }
+  .bottom {
+    padding: 10px;
+    .image {
+      border-radius: 10%;
+      height: 50px;
+      width: 50px;
+    }
+    .menu-action-button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
 
-    .top{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        .title{
-            font-size: 14px;
-            font-weight: 400;
-            color: grey;
-        }
-        .left{
-            flex: 2;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            -webkit-box-shadow: 2px 4px 10px 1px rgba( 0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba( 201, 201, 201, 0.47);
-        }
-        .center{
-            flex: 2;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            -webkit-box-shadow: 2px 4px 10px 1px rgba( 0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba( 201, 201, 201, 0.47);
-        }
-        .right{
-            flex: 2;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            -webkit-box-shadow: 2px 4px 10px 1px rgba( 0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba( 201, 201, 201, 0.47);
-        }
+  .status {
+    &.Available {
+      color: green;
+      background-color: rgba(0, 128, 0, 0.151);
     }
-    .bottom{
-        padding: 10px;
+    &.Not-Available {
+      color: red;
+      background-color: rgba(255, 1, 1, 0.103);
     }
-
-    .status{
-        &.Available{
-            color: green;
-            background-color: rgba(0,128,0,0.151);      
-        }
-        &.Not-Available{
-            color: red;
-            background-color: rgba(255, 1, 1, 0.103);
-        }
-        &.Limited{
-            color: goldenrod;
-            background-color: rgba(189,189,3,0.103);
-        }
+    &.Limited {
+      color: goldenrod;
+      background-color: rgba(189, 189, 3, 0.103);
     }
+  }
 }

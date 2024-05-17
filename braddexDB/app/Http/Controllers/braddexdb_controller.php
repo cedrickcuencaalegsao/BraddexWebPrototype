@@ -164,31 +164,42 @@ class braddexdb_controller extends Controller
             return response()->json(['message' => 'Invalid empty parameter.']);
         }
         $data = $request->all();
-        if ($request->file('image')) {
-            // Renaming and Moving the image.
-            $image = $request->file('image');
-            $destinationPath = 'images/menu';
-            $profileImage = time() . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $data['image'] = $profileImage;
+        $name = $data['name'];
+        $val_count = count(tbl_menu::where('menu_name', $name)->get());
 
-            // Uploading the Menu to our database.
-            tbl_menu::insert([
-                'menuID' => $data['menuID'],
-                'menu_name' => $data['name'],
-                'price' => $data['price'],
-                'image' => $data['image'],
-                'bestselling' => true,
-                'created_at' => $created_at,
-            ]);
+        if ($val_count == 0) {
+            if ($request->file('image')) {
+                // Renaming and Moving the image.
+                $image = $request->file('image');
+                $destinationPath = 'images/menu';
+                $profileImage = time() . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $data['image'] = $profileImage;
+
+                // Uploading the Menu to our database.
+                tbl_menu::insert([
+                    'menuID' => $data['menuID'],
+                    'menu_name' => $data['name'],
+                    'price' => $data['price'],
+                    'image' => $data['image'],
+                    'isAvialable' => "Available", // available, not-available, limited.
+                    'bestselling' => true,
+                    'created_at' => $created_at,
+                ]);
+            }
+
+            return response()->json(['message' => 'Successfully uploaded.']);
+        } else {
+            return response()->json(['message' => 'Menu already uploaded.']);
         }
-
-        return response()->json(['message' => 'Successfully uploaded...']);
     }
     public function bestSelling()
     {
         $data = tbl_menu::where('bestselling', true)->get();
         return response()->json(compact('data'));
+    }
+    public function updateBestselling(Request $request){
+        return response()->json($request);
     }
     public function onlineUsers()
     {
@@ -277,13 +288,14 @@ class braddexdb_controller extends Controller
     {
         $created_at = Carbon::now()->toDateTimeString();
         $data = $request->all();
-        $menu_id = $data['menu_id'];
-        $val_count = count(tbl_cart::where('menu_id', $menu_id)->get());
+        $menuID = $data['menuID'];
+        $val_count = count(tbl_cart::where('menuID', $menuID)->get());
 
         if ($val_count === 0) {
             tbl_cart::insert([
-                'created_by' => $data['user_id'],
-                'menu_id' => $data['menu_id'],
+                'cartID' => $data['cartID'],
+                'userID' => $data['userID'],
+                'menuID' => $data['menuID'],
                 'isDeleted' => false,
                 'created_at' => $created_at,
             ]);
@@ -292,9 +304,9 @@ class braddexdb_controller extends Controller
             return response()->json(['message' => 'Menu already added to cart.']);
         }
     }
-    public function getCart($id)
+    public function getCart($uuid)
     {
-        $data = tbl_cart::where('created_by', $id)->get();
+        $data = tbl_cart::where('userID', $uuid)->get();
         return response()->json(compact('data'));
     }
     public function getCartMenu(Request $request)

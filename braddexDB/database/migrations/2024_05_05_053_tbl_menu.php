@@ -10,13 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('tbl_order', function (Blueprint $table) {
+        Schema::create('tbl_menu', function (Blueprint $table) {
             $table->id();
-            $table->string('orderID', 20)->nullable();
-            $table->string('ordered_by', 20)->nullable();
-            $table->string('menu_id', 20)->nullable();
-            $table->boolean('status')->nullable();
-            $table->boolean('isDeleted')->nullable();
+            $table->string('menuID', 25)->nullable();
+            $table->string('menu_name', 25)->nullable();
+            $table->float('price', 5)->nullable();
+            $table->string('image', 25)->nullable();
+            $table->string('isAvialable')->nullable();
+            $table->boolean('bestselling')->nullable();
             $table->string('created_at', 20)->nullable();
             $table->string('updated_at', 20)->nullable();
         });
@@ -27,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_order');
+        Schema::dropIfExists('tbl_menu');
     }
 };

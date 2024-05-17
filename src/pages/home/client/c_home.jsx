@@ -41,7 +41,6 @@ const ClientHome = () => {
     const getTitleImageAPI = async () => {
       try {
         const API = await axios.get("http://127.0.0.1:8000/api/titleimages");
-        console.log(API.data);
         setTitleImage(API.data);
         setProgTitle(false);
       } catch (error) {

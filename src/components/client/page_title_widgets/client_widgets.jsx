@@ -34,7 +34,6 @@ const ClientWidgets = ({ type }) => {
     const getData = async () => {
       try {
         const API = await axios.get("http://127.0.0.1:8000/api/titleimages");
-        console.log(API.data);
         setData(API.data);
         setLoading(false);
       } catch (error) {
