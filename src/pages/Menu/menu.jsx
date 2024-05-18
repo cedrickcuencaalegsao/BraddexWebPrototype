@@ -4,14 +4,13 @@ import ClientSideBar from "../../components/client/sideBar/client_sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import PermPhoneMsgOutlinedIcon from "@mui/icons-material/PermPhoneMsgOutlined";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LinearProgress from "@mui/material/LinearProgress";
 import { generateRandomID } from "../../idgenerator";
 import ClientWidgets from "../../components/client/page_title_widgets/client_widgets";
-
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
@@ -20,22 +19,19 @@ const ClientMenu = () => {
   const userID = localStorage.getItem("uuid");
   const cartID = generateRandomID();
 
-  useEffect(() => {
-    const MenuAPI = async () => {
-      try {
-        const API = await axios.get("http://127.0.0.1:8000/api/menu");
-        setData(API.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    MenuAPI();
-    const interval = setInterval(() => {
-      MenuAPI();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  let itemsAddToCart = [];
+  let selectedMenuList = [];
+
+  const MenuAPI = async () => {
+    try {
+      const API = await axios.get("http://127.0.0.1:8000/api/menu");
+      setData(API.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  MenuAPI();
 
   const addToCartAPI = async (data) => {
     try {
@@ -45,14 +41,21 @@ const ClientMenu = () => {
       console.log(error);
     }
   };
+
+  const selectedMenu = (id) => {
+    console.log(id);
+  };
+
   const handleAddToCart = async (menuID) => {
     const data = {
       cartID: cartID,
       menuID: menuID,
       userID: userID,
     };
-    const status = await addToCartAPI(data);
-    status && history.push("/client-cart");
+    itemsAddToCart.push(data);
+    console.log(itemsAddToCart);
+    // const status = await addToCartAPI(data);
+    // status && history.push("/client-cart");
   };
 
   const orderNowAPI = async (data) => {
@@ -78,7 +81,6 @@ const ClientMenu = () => {
         <div className="top">
           <ClientWidgets type="menu" />
         </div>
-
         <div className="bottom">
           <div className="progress">
             {loading ? (
@@ -96,7 +98,11 @@ const ClientMenu = () => {
           </div>
           <div className="menuTable">
             {data.map((item) => (
-              <div className="card" key={item.id}>
+              <div
+                className="card"
+                key={item.id}
+                onClick={() => selectedMenu(item.menuID)}
+              >
                 <img
                   src={`http://127.0.0.1:8000/images/menu/${item.image}`}
                   alt="image"
@@ -106,30 +112,39 @@ const ClientMenu = () => {
                   <span className="menu-name">{item.menu_name}</span>
                   <span className="price">{`₱ ${item.price}`}</span>
                 </div>
-                <div className="card-buttons">
-                  <div
-                    className="add-to-cart"
-                    onClick={() => handleAddToCart(item.menuID)}
-                  >
-                    <span>
-                      <AddShoppingCartOutlinedIcon />
-                      Add to cart
-                    </span>
-                  </div>
-                  <div
-                    className="order-now"
-                    onClick={() => handleOrderNow(item.menuID)}
-                  >
-                    <span>
-                      <PermPhoneMsgOutlinedIcon />
-                      Order Now
-                    </span>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
         </div>
+        <Box sx={{ "& > :not(style)": { m: 1 } }} className="floating-box">
+          <Fab
+            aria-label="addtocart"
+            sx={{
+              bgcolor: "orange",
+              "&:hover": { bgcolor: "orangered", scale: "1.2" },
+            }}
+            onClick={() => handleAddToCart()}
+          >
+            <AddShoppingCartOutlinedIcon
+              sx={{
+                color: "white",
+              }}
+            />
+          </Fab>
+          <Fab
+            aria-label="ordernow"
+            sx={{
+              bgcolor: "orange",
+              "&:hover": { bgcolor: "orangered", scale: "1.2" },
+            }}
+          >
+            <DeliveryDiningIcon
+              sx={{
+                color: "white",
+              }}
+            />
+          </Fab>
+        </Box>
       </div>
     </div>
   );

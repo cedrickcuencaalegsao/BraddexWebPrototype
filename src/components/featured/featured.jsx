@@ -37,7 +37,7 @@ const Featured = () => {
                 <div className="summary">
                     <div className="items">
                         <div className="item_title">
-                            Target
+                            Avarage
                         </div>
                         <div className="item_result positive">
                             <KeyboardArrowUpOutlined fontSize="small" />

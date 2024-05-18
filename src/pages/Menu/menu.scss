@@ -105,5 +105,17 @@ $grid-gap: auto;
         scale: 1.02;
       }
     }
+    .floating-box {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 1000; // Ensure it stays on top of other elements
+      display: flex;
+      flex-direction: column;
+
+      & > :not(style) {
+        margin: 0.5rem;
+      }
+    }
   }
 }

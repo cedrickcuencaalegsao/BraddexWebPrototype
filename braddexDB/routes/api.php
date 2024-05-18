@@ -27,6 +27,8 @@ Route::get('titleimages', [braddexdb_controller::class, 'getTitleImgaes']);
 Route::get('get-admin-users-widgets', [braddexdb_controller::class, 'getAdminUsersWidgets']);
 Route::get('get-admin-products-widgets', [braddexdb_controller::class, 'getAdminProductsWidgets']);
 Route::get('get-admin-cart-widgets', [braddexdb_controller::class, 'getAdminCartWidget']);
+Route::get('get-admin-order-widgets', [braddexdb_controller::class, 'getAdminOrderWidget']);
+
 
 
 // images routes for menu.

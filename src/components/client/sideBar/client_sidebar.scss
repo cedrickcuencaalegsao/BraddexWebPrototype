@@ -44,12 +44,14 @@
           text-decoration: none;
         }
         &:hover {
-          background-color: #ff3031;
+          background-color: #8f000067;
+          border-radius: 7px;
+          scale: 1.02;
         }
         .icon {
-          font-size: 30px;
+          font-size: 25px;
           color: white;
-          margin-right: 2px;
+          margin: 3px;
         }
         span {
           font-size: 15px;

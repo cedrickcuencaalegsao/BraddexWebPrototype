@@ -1,120 +1,125 @@
 import "./client_sidebar.scss";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined';
-import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
-import AnnouncementOutlinedIcon from '@mui/icons-material/AnnouncementOutlined';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import ShieldRoundedIcon from '@mui/icons-material/ShieldRounded';
-import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import ShieldRoundedIcon from "@mui/icons-material/ShieldRounded";
+import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const ClientSideBar = () => {
-    return (
-        <div className="clientSideBar">
-            <div className="top">
-                <span className="logo">
-                    Braddex-logo
-                </span>
+  const history = useHistory();
+  const navLink = (link) => {
+    history.push(link);
+  };
+  return (
+    <div className="clientSideBar">
+      <div className="top">
+        <span className="logo">Braddex-logo</span>
+      </div>
+      <hr />
+      <div className="center">
+        <ul>
+          <p className="title">MAIN</p>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-home")}
+            >
+              <HomeOutlinedIcon className="icon" />
+              <span>Home</span>
             </div>
-            <hr />
-            <div className="center">
-                <ul>
-                    <p className="title">
-                        MAIN
-                    </p>
-                    <li>
-                        <div className="sidebarLink">
-                            <HomeOutlinedIcon className="icon" />
-                            <a href="/client-home">
-                                <span>Home</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <MenuBookOutlinedIcon className="icon" />
-                            <a href="/client-Menu">
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <ShoppingCartOutlinedIcon className="icon" />
-                            <a href="/client-cart">
-                                <span>Cart</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <DeliveryDiningOutlinedIcon className="icon" />
-                            <a href="/client-delivery">
-                                <span>Delivery</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <ListOutlinedIcon className="icon" />
-                            <a href="/client-history">
-                                <span>History</span>
-                            </a>
-                        </div>
-                    </li>
-                    <p className="title">
-                        SERVICES
-                    </p>
-                    <li>
-                        <div className="sidebarLink">
-                            <SupportAgentOutlinedIcon className="icon" />
-                            <a href="/client-support">
-                                <span>Support</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <AnnouncementOutlinedIcon className="icon" />
-                            <a href="/client-announcement">
-                                <span>Announcement</span>
-                            </a>
-                        </div>
-                    </li>
-                    <p className="title">
-                        SETTINGS
-                    </p>
-                    <li>
-                        <div className="sidebarLink">
-                            <SettingsRoundedIcon className="icon" />
-                            <a href="/client-settings">
-                                <span>Settings</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="sidebarLink">
-                            <ShieldRoundedIcon className="icon" />
-                            <a href="/client-privacy">
-                                <span>Privacy</span>
-                            </a>
-                        </div>
-                    </li>
-                    <p className="title">
-                        OTHERS
-                    </p>
-                    <li>
-                        <div className="sidebarLink">
-                            <InfoRoundedIcon className="icon" />
-                            <a href="/client-privacy">
-                                <span>About</span>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-Menu")}
+            >
+              <MenuBookOutlinedIcon className="icon" />
+              <span>Menu</span>
             </div>
-        </div>
-    )
-}
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-cart")}
+            >
+              <ShoppingCartOutlinedIcon className="icon" />
+              <span>Cart</span>
+            </div>
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-delivery")}
+            >
+              <DeliveryDiningOutlinedIcon className="icon" />
+              <span>Delivery</span>
+            </div>
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-history")}
+            >
+              <ListOutlinedIcon className="icon" />
+              <span>History</span>
+            </div>
+          </li>
+          <p className="title">SERVICES</p>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-support")}
+            >
+              <SupportAgentOutlinedIcon className="icon" />
+              <span>Support</span>
+            </div>
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-announcement")}
+            >
+              <AnnouncementOutlinedIcon className="icon" />
+              <span>Announcement</span>
+            </div>
+          </li>
+          <p className="title">SETTINGS</p>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-settings")}
+            >
+              <SettingsRoundedIcon className="icon" />
+              <span>Settings</span>
+            </div>
+          </li>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-privacy")}
+            >
+              <ShieldRoundedIcon className="icon" />
+              <span>Privacy</span>
+            </div>
+          </li>
+          <p className="title">OTHERS</p>
+          <li>
+            <div
+              className="sidebarLink"
+              onClick={() => navLink("/client-privacy")}
+            >
+              <InfoRoundedIcon className="icon" />
+              <span>About</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
 export default ClientSideBar;

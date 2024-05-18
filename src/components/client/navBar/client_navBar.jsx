@@ -11,11 +11,11 @@ import { useState, useEffect } from "react";
 const ClientNavBar = () => {
   const history = useHistory();
   const uuid = localStorage.getItem("uuid");
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `http://127.0.0.1:8000/api/profile/${uuid}`
       );
       setData(response.data.data);
@@ -32,7 +32,6 @@ const ClientNavBar = () => {
   };
 
   const handleLogout = async () => {
-    const uuid = localStorage.getItem("uuid");
     try {
       await axios.post(`http://127.0.0.1:8000/api/logout/${uuid}`);
       localStorage.removeItem("token");
@@ -40,7 +39,7 @@ const ClientNavBar = () => {
       localStorage.removeItem("isAdmin");
       history.push("/");
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
   const handleProfile = () => {

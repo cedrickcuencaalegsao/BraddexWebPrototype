@@ -15,6 +15,7 @@ const Widgets = ({ type }) => {
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [order, setOrder] = useState([]);
   const history = useHistory();
 
   let new_data; // setting new array.
@@ -23,17 +24,27 @@ const Widgets = ({ type }) => {
   let total_users = data.users; // get total number of user.
   let userPercentageOnline = (data.online / total_users) * 100;
   let userPercentageOffline = (data.offline / total_users) * 100;
+
   // products widgets calculations.
   let total_products = products.menu;
   let available = (products.available / total_products) * 100;
   let notavailable = (products.notAvailable / total_products) * 100;
   let limited = (products.limited / total_products) * 100;
+
   // cart widgets calculation.
-  let total_cart = 0;
+  let total_cart = cart.cart;
+  let deleted = (cart.deleted / total_cart) * 100;
+  let notDeleted = (cart.notDeleted / total_cart) * 100;
+
   // order widgets calculation.
-  let total_order = 0;
+  let total_order = order.order;
+  let active = (order.deleted / total_order) * 100;
+  let inActive = (order.notDeleted / total_order) * 100;
+
   // delivery widgets calculation.
-  let total_delivery = 0;
+  let total_delivery = order.order;
+  let pending = (order.pending / total_order) * 100;
+  let delivered = (order.pending / total_order) * 100;
 
   useEffect(() => {
     const getAdminUsersWidgetsAPI = async () => {
@@ -46,14 +57,6 @@ const Widgets = ({ type }) => {
         console.log(error);
       }
     };
-    getAdminUsersWidgetsAPI();
-    const interval = setInterval(() => {
-      getAdminUsersWidgetsAPI();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
     const getAdminPoductsAPI = async () => {
       try {
         const API = await axios.get(
@@ -64,26 +67,39 @@ const Widgets = ({ type }) => {
         console.log(error);
       }
     };
-    getAdminPoductsAPI();
-    const interval = setInterval(() => {
-      getAdminPoductsAPI();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
     const getAdminCartAPI = async () => {
       try {
-        const API = await axios.get("http://127.0.0.1:8000/api/get-admin-cart-widgets");
+        const API = await axios.get(
+          "http://127.0.0.1:8000/api/get-admin-cart-widgets"
+        );
         setCart(API.data);
       } catch (error) {
         console.log(error);
       }
     };
-    getAdminCartAPI();
-    const interval = setInterval(() => {
+    const getAdminOrderAPI = async () => {
+      try {
+        const API = await axios.get(
+          "http://127.0.0.1:8000/api/get-admin-order-widgets"
+        );
+        setOrder(API.data);
+      } catch (error) {
+        console.log(console.error());
+      }
+    };
+
+    const dataToFetch = () => {
+      getAdminUsersWidgetsAPI();
+      getAdminPoductsAPI();
       getAdminCartAPI();
-    }, 5000);
+      getAdminOrderAPI();
+    };
+
+    dataToFetch();
+
+    const interval = setInterval(() => {
+      dataToFetch();
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
@@ -150,9 +166,9 @@ const Widgets = ({ type }) => {
       new_data = {
         title: "CART",
         number: total_cart,
-        percentagePositive: userPercentageOnline.toFixed(2) + "%",
+        percentagePositive: notDeleted.toFixed(2) + "%",
         percentagePositiveIcon: <KeyboardArrowUpOutlinedIcon />,
-        percentageNegative: userPercentageOffline.toFixed(2) + "%",
+        percentageNegative: deleted.toFixed(2) + "%",
         percentageNegativeIcon: <ExpandMoreOutlinedIcon />,
         percentage: 0,
         navLink: "/cart",
@@ -176,9 +192,9 @@ const Widgets = ({ type }) => {
       new_data = {
         title: "ORDER",
         number: total_order,
-        percentagePositive: userPercentageOnline.toFixed(2) + "%",
+        percentagePositive: active.toFixed(2) + "%",
         percentagePositiveIcon: <KeyboardArrowUpOutlinedIcon />,
-        percentageNegative: userPercentageOffline.toFixed(2) + "%",
+        percentageNegative: inActive.toFixed(2) + "%",
         percentageNegativeIcon: <ExpandMoreOutlinedIcon />,
         percentage: 0,
         navLink: "/orders",
@@ -202,9 +218,9 @@ const Widgets = ({ type }) => {
       new_data = {
         title: "DELIVERY",
         number: total_delivery,
-        percentagePositive: userPercentageOnline.toFixed(2) + "%",
+        percentagePositive: delivered.toFixed(2) + "%",
         percentagePositiveIcon: <KeyboardArrowUpOutlinedIcon />,
-        percentageNegative: userPercentageOffline.toFixed(2) + "%",
+        percentageNegative: pending.toFixed(2) + "%",
         percentageNegativeIcon: <ExpandMoreOutlinedIcon />,
         percentage: 0,
         navLink: "/delivery",

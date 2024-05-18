@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_order;
 use App\Models\User;
 use App\Models\tbl_cart;
 use App\Models\tbl_menu;
@@ -226,6 +227,15 @@ class braddexdb_controller extends Controller
         $deleted = count(tbl_cart::where('isDeleted', true)->get());
         $notDeleted = count(tbl_cart::where('isDeleted', false)->get());
         return response()->json(compact('cart', 'deleted', 'notDeleted'));
+    }
+    public function getAdminOrderWidget()
+    {
+        $order = count(tbl_order::all());
+        $deleted = count(tbl_order::where('isDeleted', true)->get());
+        $notDeleted = count(tbl_order::where('isDeleted', false)->get());
+        $pending = count(tbl_order::where('isDelivered', false)->get());
+        $delivered = count(tbl_order::where('isDelivered', true)->get());
+        return response()->json(compact('order', 'deleted', 'notDeleted', 'pending', 'delivered'));
     }
     public function updateProfileDetails(Request $request)
     {
