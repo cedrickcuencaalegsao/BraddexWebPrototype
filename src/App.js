@@ -10,6 +10,7 @@ import AuthRoutes from "./AuthRoutes";
 import Home from "./pages/home/admin/home";
 import Users from "./pages/users/users";
 import Product from "./pages/product/product";
+import AdminCart from "./pages/cart/admin/cart";
 import OrderList from "./pages/orders/order";
 import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
@@ -48,6 +49,7 @@ const App = () => {
           {/* Admin Routes */}
           <AuthRoutes path="/home" component={Home} isAdminRoute />
           <AuthRoutes path="/users" component={Users} isAdminRoute />
+          <AuthRoutes path="/cart" component={AdminCart} isAdminRoute />
           <AuthRoutes path="/products" component={Product} isAdminRoute />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />

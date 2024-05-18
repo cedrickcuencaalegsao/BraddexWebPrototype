@@ -33,7 +33,7 @@ const Users = () => {
         setOnline(API.data.online);
         console.log(API.data.online);
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     };
     isOnline();

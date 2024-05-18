@@ -15,7 +15,7 @@ const ClientNavBar = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `http://127.0.0.1:8000/api/profile/${uuid}`
       );
       setData(response.data.data);
@@ -32,9 +32,9 @@ const ClientNavBar = () => {
   };
 
   const handleLogout = async () => {
-    const id = localStorage.getItem("id");
+    const uuid = localStorage.getItem("uuid");
     try {
-      await axios.post(`http://127.0.0.1:8000/api/logout/${id}`);
+      await axios.post(`http://127.0.0.1:8000/api/logout/${uuid}`);
       localStorage.removeItem("token");
       localStorage.removeItem("uuid");
       localStorage.removeItem("isAdmin");

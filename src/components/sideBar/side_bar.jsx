@@ -12,22 +12,22 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
-import UpdateOutlinedIcon from "@mui/icons-material/UpdateOutlined";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import axios from "axios";
 const SideBar = () => {
   const history = useHistory();
 
   const handleLogout = async () => {
-    const id = localStorage.getItem("id");
+    const uuid = localStorage.getItem("uuid");
     try {
-      const resp = await axios.post(`http://127.0.0.1:8000/api/logout/${id}`);
+      const resp = await axios.post(`http://127.0.0.1:8000/api/logout/${uuid}`);
       console.log(resp);
       localStorage.removeItem("token");
       localStorage.removeItem("uuid");
       localStorage.removeItem("isAdmin");
       history.push("/");
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
   const viewHome = () => {
@@ -36,6 +36,9 @@ const SideBar = () => {
   const viewUsers = () => {
     history.push("/users");
   };
+  const viewCart = () =>{
+    history.push("/cart");
+  }
   const viewProducts = () => {
     history.push("/products");
   };
@@ -87,6 +90,12 @@ const SideBar = () => {
             </div>
           </li>
           <li>
+            <div className="sidebarLink" onClick={viewCart}>
+              <ShoppingCartOutlinedIcon className="icon" />
+              <span>Cart</span>
+            </div>
+          </li>
+          <li>
             <div className="sidebarLink" onClick={viewProducts}>
               <Inventory2OutlinedIcon className="icon" />
               <span>Products</span>
@@ -123,8 +132,7 @@ const SideBar = () => {
               <span>New Menu</span>
             </div>
           </li>
-          <li>
-          </li>
+          <li></li>
           <p className="title">SERVICE</p>
           <li>
             <div className="sidebarLink" onClick={viewLogs}>

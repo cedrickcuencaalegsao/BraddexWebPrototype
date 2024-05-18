@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\tbl_menu;
 use App\Models\tbl_cart;
+use App\Models\tbl_menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
@@ -106,14 +107,16 @@ class braddexdb_controller extends Controller
     }
     public function authLogout($uuid)
     {
-        // we flush the seasion.
         Session::flush();
-        // invalidate the authentication or logout.
         Auth::logout();
         // update the isOnline into false.
-        User::where('userID', $uuid)->update(['isOnline' => false]);
-        // return response that we are logout.
-        return response()->json(['message' => 'Successfully logout.']);
+        $user = User::where('userID', $uuid)->first();
+        $id = $user->id;
+        if ($id != null) {
+            User::find($id)->update(['isOnline' => false]);
+            return response()->json(['message' => 'Updated']);
+        }
+        return response()->json($id);
     }
     public function allUsers()
     {
@@ -182,7 +185,7 @@ class braddexdb_controller extends Controller
                     'menu_name' => $data['name'],
                     'price' => $data['price'],
                     'image' => $data['image'],
-                    'isAvialable' => "Available", // available, not-available, limited.
+                    'isAvialable' => "Available", // available, notAvailable, limited.
                     'bestselling' => true,
                     'created_at' => $created_at,
                 ]);
@@ -198,15 +201,31 @@ class braddexdb_controller extends Controller
         $data = tbl_menu::where('bestselling', true)->get();
         return response()->json(compact('data'));
     }
-    public function updateBestselling(Request $request){
+    public function updateBestselling(Request $request)
+    {
         return response()->json($request);
     }
-    public function onlineUsers()
+    public function getAdminUsersWidgets()
     {
         $users = count(User::all());
         $offline = count(User::where('isOnline', false)->get());
         $online = count(User::where('isOnline', true)->get());
         return response()->json(compact('users', 'offline', 'online'));
+    }
+    public function getAdminProductsWidgets()
+    {
+        $menu = count(tbl_menu::all());
+        $available = count(tbl_menu::where('isAvialable', 'Available')->get());
+        $notAvailable = count(tbl_menu::where('isAvialable', 'notAvailable')->get());
+        $limited = count(tbl_menu::where('isAvialable', 'limited')->get());
+        return response()->json(compact('menu', 'available', 'notAvailable', 'limited'));
+    }
+    public function getAdminCartWidget()
+    {
+        $cart = count(tbl_cart::all());
+        $deleted = count(tbl_cart::where('isDeleted', true)->get());
+        $notDeleted = count(tbl_cart::where('isDeleted', false)->get());
+        return response()->json(compact('cart', 'deleted', 'notDeleted'));
     }
     public function updateProfileDetails(Request $request)
     {

@@ -13,17 +13,20 @@ Route::post('updateprofiledetails', [braddexdb_controller::class, 'updateProfile
 Route::post('updateprofilepicture', [braddexdb_controller::class, 'updateProfilePicture']);
 Route::post('addtocart', [braddexdb_controller::class, 'addToCart']);
 Route::post('ordernow', [braddexdb_controller::class, 'orderNow']);
-Route::post('getcartmenu',[braddexdb_controller::class, 'getCartMenu']);
-Route::post('updatebestselling',[braddexdb_controller::class, 'updateBestselling']);
+Route::post('getcartmenu', [braddexdb_controller::class, 'getCartMenu']);
+Route::post('updatebestselling', [braddexdb_controller::class, 'updateBestselling']);
 
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
-Route::get('onlineusers', [braddexdb_controller::class, 'onlineUsers']);
 Route::get('getcart/{uuid}', [braddexdb_controller::class, 'getCart']);
 Route::get('titleimages', [braddexdb_controller::class, 'getTitleImgaes']);
+// admin dashboard widgets data.
+Route::get('get-admin-users-widgets', [braddexdb_controller::class, 'getAdminUsersWidgets']);
+Route::get('get-admin-products-widgets', [braddexdb_controller::class, 'getAdminProductsWidgets']);
+Route::get('get-admin-cart-widgets', [braddexdb_controller::class, 'getAdminCartWidget']);
 
 
 // images routes for menu.
