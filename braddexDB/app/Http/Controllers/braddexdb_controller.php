@@ -348,6 +348,11 @@ class braddexdb_controller extends Controller
     {
         return response()->json("order now");
     }
+    public function getOrderNowMenu($menuID)
+    {
+        $menu = tbl_menu::where('menuID', $menuID)->first();
+        return response()->json(compact('menu'));
+    }
     public function getTitleImgaes()
     {
         $data = tbl_menu::all();

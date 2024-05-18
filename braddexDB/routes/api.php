@@ -23,6 +23,7 @@ Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
 Route::get('getcart/{uuid}', [braddexdb_controller::class, 'getCart']);
 Route::get('titleimages', [braddexdb_controller::class, 'getTitleImgaes']);
+Route::get('get-order-now-menu/{menuID}', [braddexdb_controller::class, 'getOrderNowMenu']);
 // admin dashboard widgets data.
 Route::get('get-admin-users-widgets', [braddexdb_controller::class, 'getAdminUsersWidgets']);
 Route::get('get-admin-products-widgets', [braddexdb_controller::class, 'getAdminProductsWidgets']);

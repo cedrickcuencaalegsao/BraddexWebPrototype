@@ -30,91 +30,96 @@ $grid-gap: auto;
         overflow: hidden;
         margin: 10px;
         border-radius: 10px;
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-        .image {
-          width: 300px;
-          height: 250px;
-        }
-        .menu-details {
+        background-color: white;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.527);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.658);
+        .menu-name-container {
+          width: 90%;
+          margin-top: 10px;
           display: flex;
-          flex-direction: row;
-          justify-content: center;
           align-items: center;
-          margin: 10px;
-          width: 100%;
-          span {
-            margin: 3px;
+          justify-content: space-between;
+          .menunamecontainer {
+            display: flex;
+            justify-self: start;
+            flex-direction: column;
+            .menuname {
+              color: black;
+              text-transform: capitalize;
+              font-size: 23px;
+            }
+            .menu-name-indicator{
+              color: darkslategray;
+              font-size: 12px;
+            }
           }
-          .menu-name {
-            text-transform: capitalize;
-            font-weight: bold;
-            color: black;
-            font-size: 20px;
-          }
-          .price {
-            color: rgb(36, 35, 35);
-            font-size: 18px;
-          }
-        }
-        .card-buttons {
-          margin-bottom: 10px;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-around;
           .add-to-cart {
-            padding: 5px;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            margin: 5px;
-            background-color: rgba(255, 174, 0, 0.993);
             border-radius: 5px;
-            color: whitesmoke;
-            font-size: 15px;
-            font-weight: bold;
-            span {
-              display: flex;
-              align-items: center;
-              justify-content: space-around;
-              text-transform: capitalize;
+            background-color: rgb(255, 68, 0);
+            .icon-add-to-cart {
+              font-size: 18px;
+              margin: 5px;
+              color: white;
             }
-          }
-          .order-now {
-            padding: 5px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 5px;
-            background-color: rgb(236, 30, 30);
-            border-radius: 5px;
-            color: whitesmoke;
-            font-size: 15px;
-            font-weight: bold;
-            span {
-              display: flex;
-              align-items: center;
-              justify-content: space-around;
-              text-transform: capitalize;
+            &:hover {
+              scale: 1.1;
             }
           }
         }
-      }
-      .card:hover {
-        scale: 1.02;
-      }
-    }
-    .floating-box {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 1000; // Ensure it stays on top of other elements
-      display: flex;
-      flex-direction: column;
-
-      & > :not(style) {
-        margin: 0.5rem;
+        .image-wrapper {
+          width: 235px;
+          height: 180px;
+          border-radius: 3px;
+          overflow: hidden;
+          margin: 10px;
+          .image {
+            width: 235px;
+            height: 180px;
+          }
+        }
+        .price-order-container {
+          display: flex;
+          width: 90%;
+          align-items: center;
+          justify-content: space-between;
+          .price-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+            margin-bottom: 10px;
+            .price-indicator {
+              font-size: 13px;
+              color: darkslategray;
+            }
+            .menu-price {
+              font-size: 20px;
+              font-weight: bold;
+            }
+          }
+          .order-button-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .btn-order-now {
+              background-color: red;
+              color: white;
+              font-size: large;
+              border: none;
+              height: 40px;
+              width: 100px;
+              border-radius: 10px;
+              margin-bottom: 5px;
+            }
+            &:hover {
+              scale: 1.1;
+            }
+          }
+        }
       }
     }
   }

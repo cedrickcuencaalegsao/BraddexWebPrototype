@@ -4,13 +4,10 @@ import ClientSideBar from "../../components/client/sideBar/client_sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import LinearProgress from "@mui/material/LinearProgress";
 import { generateRandomID } from "../../idgenerator";
 import ClientWidgets from "../../components/client/page_title_widgets/client_widgets";
-import Box from "@mui/material/Box";
-import Fab from "@mui/material/Fab";
 
 const ClientMenu = () => {
   const [data, setData] = useState([]);
@@ -19,58 +16,45 @@ const ClientMenu = () => {
   const userID = localStorage.getItem("uuid");
   const cartID = generateRandomID();
 
-  let itemsAddToCart = [];
-  let selectedMenuList = [];
-
-  const MenuAPI = async () => {
-    try {
-      const API = await axios.get("http://127.0.0.1:8000/api/menu");
-      setData(API.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  MenuAPI();
+  useEffect(() => {
+    const MenuAPI = async () => {
+      try {
+        const API = await axios.get("http://127.0.0.1:8000/api/menu");
+        setData(API.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    MenuAPI();
+    const interval = setInterval(() => {
+      MenuAPI();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const addToCartAPI = async (data) => {
+    console.log(data);
     try {
-      const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
+      await axios.post("http://127.0.0.1:8000/api/addtocart", data);
       history.push("/client-cart");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const selectedMenu = (id) => {
-    console.log(id);
-  };
-
   const handleAddToCart = async (menuID) => {
-    const data = {
+    let data = {
       cartID: cartID,
-      menuID: menuID,
       userID: userID,
+      menuID: menuID,
     };
-    itemsAddToCart.push(data);
-    console.log(itemsAddToCart);
-    // const status = await addToCartAPI(data);
-    // status && history.push("/client-cart");
+    await addToCartAPI(data);
   };
 
-  const orderNowAPI = async (data) => {
-    console.log(data);
-  };
-
-  const handleOrderNow = async (menuID) => {
-    const data = {
-      cartID: cartID,
-      menuID: menuID,
-      userID: userID,
-    };
-    console.log(data);
-    const status = await orderNowAPI(data);
-    status && history.push("/client-delivery");
+  const handleOderNow = (menuID) => {
+    let menu_ID = menuID;
+    history.push(`/client-order-now/${menu_ID}`);
   };
 
   return (
@@ -98,53 +82,42 @@ const ClientMenu = () => {
           </div>
           <div className="menuTable">
             {data.map((item) => (
-              <div
-                className="card"
-                key={item.id}
-                onClick={() => selectedMenu(item.menuID)}
-              >
-                <img
-                  src={`http://127.0.0.1:8000/images/menu/${item.image}`}
-                  alt="image"
-                  className="image"
-                />
-                <div className="menu-details">
-                  <span className="menu-name">{item.menu_name}</span>
-                  <span className="price">{`₱ ${item.price}`}</span>
+              <div className="card" key={item.id}>
+                <div className="menu-name-container">
+                  <div className="menunamecontainer">
+                    <h1 className="menuname">{item.menu_name}</h1>
+                    <span className="menu-name-indicator">Menu Name</span>
+                  </div>
+                  <div
+                    className="add-to-cart"
+                    onClick={() => handleAddToCart(item.menuID)}
+                  >
+                    <AddShoppingCartOutlinedIcon className="icon-add-to-cart" />
+                  </div>
+                </div>
+                <div className="image-wrapper">
+                  <img
+                    src={`http://127.0.0.1:8000/images/menu/${item.image}`}
+                    alt="image"
+                    className="image"
+                  />
+                </div>
+                <div className="price-order-container">
+                  <div className="price-container">
+                    <span className="price-indicator">Total Price:</span>
+                    <span className="menu-price">{`₱.${item.price}`}</span>
+                  </div>
+                  <div
+                    className="order-button-container"
+                    onClick={() => handleOderNow(item.menuID)}
+                  >
+                    <button className="btn-order-now">Oder Now</button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <Box sx={{ "& > :not(style)": { m: 1 } }} className="floating-box">
-          <Fab
-            aria-label="addtocart"
-            sx={{
-              bgcolor: "orange",
-              "&:hover": { bgcolor: "orangered", scale: "1.2" },
-            }}
-            onClick={() => handleAddToCart()}
-          >
-            <AddShoppingCartOutlinedIcon
-              sx={{
-                color: "white",
-              }}
-            />
-          </Fab>
-          <Fab
-            aria-label="ordernow"
-            sx={{
-              bgcolor: "orange",
-              "&:hover": { bgcolor: "orangered", scale: "1.2" },
-            }}
-          >
-            <DeliveryDiningIcon
-              sx={{
-                color: "white",
-              }}
-            />
-          </Fab>
-        </Box>
       </div>
     </div>
   );

@@ -28,6 +28,7 @@ import Register from "./pages/register/register";
 // Components Cleint.
 import ClientHome from "./pages/home/client/c_home";
 import ClientMenu from "./pages/Menu/menu";
+import ClientOrderNow from "./pages/orderNow/orderNow";
 import Cart from "./pages/cart/cart";
 import ClientDelivery from "./pages/delivery/client/delivery";
 import ClientHistory from "./pages/history/history";
@@ -64,6 +65,7 @@ const App = () => {
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu} />
           <AuthRoutes path="/client-cart" component={Cart} />
+          <AuthRoutes path="/client-order-now/:menuID" component={ClientOrderNow} />
           <AuthRoutes path="/client-delivery" component={ClientDelivery} />
           <AuthRoutes path="/client-history" component={ClientHistory} />
           <AuthRoutes path="/client-support" component={ClientSupport} />
