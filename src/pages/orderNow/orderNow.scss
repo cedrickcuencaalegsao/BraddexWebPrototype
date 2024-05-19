@@ -77,17 +77,47 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            
           }
-          .order-details-container{
+          .order-summary-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .order-summary-details-container{
+              display: flex;
+              flex-direction: row;
+            }
+            .order-summary-indicator-wrapper{
+              display: flex;
+              flex-direction: column;
+            }
+            .order-summary-value-wrapper{
+              display: flex;
+              flex-direction: column;
+            }
+          }
+          .order-details-container {
             width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-around;
-            .details-cotainer{
+            .details-cotainer {
               display: flex;
-              flex-direction: column;
+              width: 90%;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-between;
+              .quantity-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: start;
+              }
+              .payment-type-container{
+                display: flex;
+                flex-direction: column;
+              }
             }
           }
         }
