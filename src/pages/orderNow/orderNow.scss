@@ -183,6 +183,12 @@
                       font-size: 20px;
                       font-weight: bold;
                       color: white;
+                      &:hover {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        scale: 2;
+                      }
                     }
                   }
                   .quantity-count {
@@ -209,6 +215,12 @@
                       font-size: 20px;
                       font-weight: bold;
                       color: white;
+                      &:hover {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        scale: 2;
+                      }
                     }
                   }
                 }
@@ -261,23 +273,45 @@
               }
             }
           }
-          .click-to-order-container {
-            width: 90%;
+          .bottom-part-cotainer {
             display: flex;
             align-items: center;
-            justify-content: end;
-            margin: 10px;
-            .btn-place-order {
-              height: auto;
-              width: auto;
-              font-size: 20px;
-              padding: 10px;
-              color: white;
-              background-color: red;
-              border: 1px solid red;
-              border-radius: 10px;
-              &:hover {
-                scale: 1.02;
+            justify-content: space-between;
+            width: 90%;
+            margin-top: 10px;
+            .address-container {
+              flex: 2;
+              display: flex;
+              flex-direction: column;
+              .address-indicator {
+                margin-bottom: 5px;
+                text-transform: capitalize;
+                color: darkslategray;
+                font-size: 15px;
+              }
+              .address {
+                height: 30px;
+                border: 2px solid red;
+                border-radius: 10px;
+              }
+            }
+            .click-to-order-container {
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: end;
+              .btn-place-order {
+                height: auto;
+                width: auto;
+                font-size: 25px;
+                padding: 10px;
+                color: white;
+                background-color: red;
+                border: 1px solid red;
+                border-radius: 10px;
+                &:hover {
+                  scale: 1.02;
+                }
               }
             }
           }

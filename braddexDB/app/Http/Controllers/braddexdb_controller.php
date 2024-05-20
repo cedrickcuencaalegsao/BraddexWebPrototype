@@ -356,6 +356,7 @@ class braddexdb_controller extends Controller
             'paymentType' => 'required',
             'quantity' => 'required|integer|not_in:0',
             'totalAmmount' => 'required|numeric|not_in:0',
+            'userAddress' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['response' => $validator->errors()], 422);
@@ -366,6 +367,7 @@ class braddexdb_controller extends Controller
             'userID' => $data['uuID'],
             'menuID' => $data['menuID'],
             'paymentType' => $data['paymentType'],
+            'userAddress' => $data['userAddress'],
             'totalAmmount' => $data['totalAmmount'],
             'quantity' => $data['quantity'],
             'isPaid' => false,
@@ -379,9 +381,20 @@ class braddexdb_controller extends Controller
             return response()->json(['response' => 'Order failed.'], 422);
         }
     }
+    public function getOrders($uuid)
+    {
+        $data = tbl_order::where('userID', $uuid)->get();
+        return response()->json(compact('data'));
+    }
     public function getOrderNowMenu($menuID)
     {
         $menu = tbl_menu::where('menuID', $menuID)->first();
+        return response()->json(compact('menu'));
+    }
+    public function getDeliveryMenu(Request $request)
+    {
+        $data = $request->all();
+        $menu = tbl_menu::whereIn('menuID', $data)->get();
         return response()->json(compact('menu'));
     }
     public function getTitleImgaes()

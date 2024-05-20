@@ -2,12 +2,14 @@ import "./login.scss";
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Login = () => {
   const [email, setEmail] = useState(""); // Email Variables
   const [password, setPassword] = useState(""); // Password variables
   const [response, setResponse] = useState(""); // Responce variables
-  const history = useHistory(); // for page navigation
+  const history = useHistory(); // for page navigation.
+  const [loading, setLoading] = useState(false);
 
   const LoginApi = async (data) => {
     try {
@@ -24,11 +26,11 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("isAdmin", isAdmin);
       localStorage.setItem("uuid", uuid);
-      return true;
+      return true; // returning data for the status as true.
     } catch (err) {
       // Error Response from the server.
       setResponse(err.response.data.message);
-      return;
+      return false; // returning data for the status as false.
     }
   };
 
@@ -42,6 +44,7 @@ const Login = () => {
     };
     // getting the status of the response
     const status = await LoginApi(data);
+    setLoading(true);
     // If status is true navigate to home page
     status && history.push("/home");
   };
@@ -51,6 +54,20 @@ const Login = () => {
       <div className="loginContainer">
         <div className="title">
           <h1>Login</h1>
+          <div className="progress">
+            {loading ? (
+              <div className="loading">
+                <LinearProgress
+                  sx={{
+                    bgcolor: "lightgray",
+                    "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="loading"></div>
+            )}
+          </div>
         </div>
         <span style={{ fontSize: "15px", color: "red" }}>{response}</span>
         <form onSubmit={handleLogin}>

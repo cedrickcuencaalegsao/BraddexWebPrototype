@@ -15,13 +15,14 @@ Route::post('addtocart', [braddexdb_controller::class, 'addToCart']);
 Route::post('ordernow', [braddexdb_controller::class, 'orderNow']);
 Route::post('getcartmenu', [braddexdb_controller::class, 'getCartMenu']);
 Route::post('updatebestselling', [braddexdb_controller::class, 'updateBestselling']);
-
+Route::post('get-delivery-menu', [braddexdb_controller::class, 'getDeliveryMenu']);
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
 Route::get('getcart/{uuid}', [braddexdb_controller::class, 'getCart']);
+Route::get('getorder/{uuid}', [braddexdb_controller::class, 'getOrders']);
 Route::get('titleimages', [braddexdb_controller::class, 'getTitleImgaes']);
 Route::get('get-order-now-menu/{menuID}', [braddexdb_controller::class, 'getOrderNowMenu']);
 // admin dashboard widgets data.

@@ -4,8 +4,6 @@ import ClientSideBar from "../../../components/client/sideBar/client_sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
-import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 
 import ClientWidgets from "../../../components/client/page_title_widgets/client_widgets";
 
@@ -15,10 +13,6 @@ const ClientHome = () => {
   const [titleImage, setTitleImage] = useState([]);
   const [progTitle, setProgTitle] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
-
-  const toggleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
 
   useEffect(() => {
     const bestSelling = async () => {

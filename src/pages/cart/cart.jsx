@@ -19,8 +19,6 @@ const Cart = () => {
     const getCartAPI = async () => {
       try {
         const API = await axios.get(`http://127.0.0.1:8000/api/getcart/${uuid}`);
-        console.log(API.data.data);
-
         setData(API.data.data);
       } catch (error) {
         console.log(error);

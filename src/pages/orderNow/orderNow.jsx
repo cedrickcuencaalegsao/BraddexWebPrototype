@@ -19,6 +19,7 @@ const ClientOrderNow = () => {
   const history = useHistory();
   const uuID = localStorage.getItem("uuid");
   const [response, setResponse] = useState([]);
+  const [address, setAddress] = useState("");
 
   let data = {
     uuID: uuID,
@@ -29,6 +30,7 @@ const ClientOrderNow = () => {
     quantity: quantity,
     totalAmmount: totalAmmount,
     paymentType: paymentType,
+    userAddress: address,
   };
 
   const getOrderNowMenuAPI = async () => {
@@ -166,6 +168,7 @@ const ClientOrderNow = () => {
                     <span className="order-summary-indicator">
                       Payment Type
                     </span>
+                    <span className="order-summary-indicator">Address</span>
                     <span className="order-summary-indicator">
                       Total Ammount
                     </span>
@@ -177,6 +180,11 @@ const ClientOrderNow = () => {
                     <span className="order-summary-value">{data.quantity}</span>
                     <span className="order-summary-value">
                       {data.paymentType == "" ? "Select" : data.paymentType}
+                    </span>
+                    <span className="order-summary-value">
+                      {data.userAddress == ""
+                        ? "Set Address"
+                        : data.userAddress}
                     </span>
                     <span className="order-summary-value">{`₱${data.totalAmmount}.00`}</span>
                   </div>
@@ -239,11 +247,21 @@ const ClientOrderNow = () => {
                   </div>
                 </div>
               </div>
-              <div
-                className="click-to-order-container"
-                onClick={() => handlePlaceOrder()}
-              >
-                <button className="btn-place-order">Place Order</button>
+              <div className="bottom-part-cotainer">
+                <div className="address-container">
+                  <span className="address-indicator">Where to deliver</span>
+                  <input
+                    type="text"
+                    className="address"
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                </div>
+                <div
+                  className="click-to-order-container"
+                  onClick={() => handlePlaceOrder()}
+                >
+                  <button className="btn-place-order">Place Order</button>
+                </div>
               </div>
             </div>
           </div>

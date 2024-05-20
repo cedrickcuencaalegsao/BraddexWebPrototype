@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('userID', 20)->nullable();
             $table->string('menuID', 20)->nullable();
             $table->string('paymentType', 25)->nullable();
+            $table->string('userAddress', 255)->nullable();
             $table->float('totalAmmount', 25)->nullable();
             $table->string('quantity', 10)->nullable();
             $table->boolean('isPaid')->nullable();
