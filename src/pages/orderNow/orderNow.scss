@@ -34,7 +34,6 @@
           align-items: center;
           justify-content: center;
           flex-direction: column;
-          border-right: 2px solid grey;
           .image-wrapper {
             height: 280px;
             width: 400px;
@@ -72,28 +71,73 @@
           justify-content: center;
           flex-direction: column;
           margin: 10px;
+          border-left: 2px solid darkslategray;
           .right-title-container {
             width: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
+            .right-title {
+              color: darkslategray;
+              font-size: 25px;
+              font-weight: bold;
+              text-transform: capitalize;
+              word-spacing: 30px;
+              letter-spacing: 5px;
+              margin-bottom: 20px;
+            }
           }
-          .order-summary-container{
+          .order-summary-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            .order-summary-details-container{
+            width: 90%;
+            .order-title-container {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 5px;
+              padding: 10px;
+              .order-title {
+                color: darkslategray;
+              }
+            }
+            .order-summary-details-container {
               display: flex;
               flex-direction: row;
-            }
-            .order-summary-indicator-wrapper{
-              display: flex;
-              flex-direction: column;
-            }
-            .order-summary-value-wrapper{
-              display: flex;
-              flex-direction: column;
+              width: 100%;
+              margin: 5px;
+              border-radius: 10px;
+              overflow: hidden;
+              .order-summary-indicator-wrapper {
+                flex: 2;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                background-color: rgb(255, 68, 0);
+                border-right: 2px solid white;
+                .order-summary-indicator {
+                  margin: 5px;
+                  color: whitesmoke;
+                  font-size: 20px;
+                  font-weight: bold;
+                }
+              }
+              .order-summary-value-wrapper {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                background-color: rgb(255, 166, 0);
+                .order-summary-value {
+                  margin: 5px;
+                  color: whitesmoke;
+                  font-size: 20px;
+                  font-weight: bold;
+                }
+              }
             }
           }
           .order-details-container {
@@ -109,14 +153,131 @@
               align-items: center;
               justify-content: space-between;
               .quantity-container {
+                flex: 1;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: start;
+                .quantity-indicator-wrapper {
+                  margin: 10px;
+                  .quantity-indicator {
+                    text-transform: capitalize;
+                    color: darkslategray;
+                    font-size: 15px;
+                  }
+                }
+                .quantity-button-wrapper {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  .quantity-add {
+                    display: flex;
+                    padding: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: red;
+                    border-radius: 10px 0px 0px 10px;
+                    width: 20px;
+                    cursor: pointer;
+                    .symbol {
+                      font-size: 20px;
+                      font-weight: bold;
+                      color: white;
+                    }
+                  }
+                  .quantity-count {
+                    display: flex;
+                    padding: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid red;
+                    .quantity-count-value {
+                      font-size: 18px;
+                      font-weight: bold;
+                    }
+                  }
+                  .quantity-subtract {
+                    display: flex;
+                    padding: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: red;
+                    border-radius: 0px 10px 10px 0px;
+                    width: 20px;
+                    cursor: pointer;
+                    .symbol {
+                      font-size: 20px;
+                      font-weight: bold;
+                      color: white;
+                    }
+                  }
+                }
               }
-              .payment-type-container{
+              .total-ammount-container {
+                flex: 2;
+                margin-left: 10px;
                 display: flex;
                 flex-direction: column;
+                justify-content: start;
+                .total-ammount-indicator {
+                  margin-bottom: 10px;
+                  text-transform: capitalize;
+                  color: darkslategray;
+                  font-size: 15px;
+                }
+                .total-ammout-wrapper {
+                  display: flex;
+                  align-items: center;
+                  justify-content: start;
+                  .total-ammount {
+                    font-size: 27px;
+                    font-weight: bold;
+                  }
+                }
+              }
+              .payment-type-container {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                .payment-type-indicator {
+                  margin-bottom: 5px;
+                  text-transform: capitalize;
+                  color: darkslategray;
+                  font-size: 15px;
+                }
+                .option-container {
+                  width: 100%;
+                  .payment-type {
+                    margin-top: 3px;
+                    width: 100%;
+                    padding: 7px;
+                    border-radius: 10px;
+                    background-color: red;
+                    border: none;
+                    font-size: 18px;
+                    color: white;
+                  }
+                }
+              }
+            }
+          }
+          .click-to-order-container {
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            margin: 10px;
+            .btn-place-order {
+              height: auto;
+              width: auto;
+              font-size: 20px;
+              padding: 10px;
+              color: white;
+              background-color: red;
+              border: 1px solid red;
+              border-radius: 10px;
+              &:hover {
+                scale: 1.02;
               }
             }
           }

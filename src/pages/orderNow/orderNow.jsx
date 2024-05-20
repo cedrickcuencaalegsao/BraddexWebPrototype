@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import { generateRandomID } from "../../idgenerator";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ClientOrderNow = () => {
   const menuID = useParams();
@@ -15,10 +16,12 @@ const ClientOrderNow = () => {
   const [quantity, setQuantity] = useState(0);
   const [totalAmmount, setTotalAmmount] = useState(0);
   const [paymentType, setPaymentType] = useState("");
-
-  
+  const history = useHistory();
+  const uuID = localStorage.getItem("uuid");
+  const [response, setResponse] = useState([]);
 
   let data = {
+    uuID: uuID,
     orderID: orderID,
     menuID: menu.menuID,
     menuName: menu.menu_name,
@@ -66,9 +69,30 @@ const ClientOrderNow = () => {
       return newQantity;
     });
   };
+  const handleErrors = (errorResponse) => {
+    const formattedErrors = Object.entries(errorResponse).map(
+      ([key, messages]) => {
+        return { field: key, messages };
+      }
+    );
+    setResponse(formattedErrors);
+  };
+
+  const placeOrderAPI = async (data) => {
+    try {
+      const API = await axios.post("http://127.0.0.1:8000/api/ordernow", data);
+      console.log(API.data);
+      return true;
+    } catch (error) {
+      console.log(error.response.data.response);
+      handleErrors(error.response.data.response);
+      return false;
+    }
+  };
 
   const handlePlaceOrder = async () => {
-    console.log(data);
+    const status = await placeOrderAPI(data);
+    status && history.push("/client-delivery");
   };
 
   return (
@@ -118,28 +142,43 @@ const ClientOrderNow = () => {
               <div className="right-title-container">
                 <h1 className="right-title">Order Details</h1>
               </div>
+              <div>
+                {response.map((error, index) => (
+                  <div key={index}>
+                    <ul>
+                      {error.messages.map((message, msgIndex) => (
+                        <p style={{ color: "red" }} key={msgIndex}>
+                          {message}
+                        </p>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div className="resoponse"></div>
               <div className="order-summary-container">
-                <div className="order-title-container">
-                  <h3 className="order-title">Order Summary</h3>
-                </div>
                 <div className="order-summary-details-container">
                   <div className="order-summary-indicator-wrapper">
-                    <span className="order-summary-indicator">Order ID:</span>
-                    <span className="order-summary-indicator">Menu Name:</span>
-                    <span className="order-summary-indicator"></span>
-                    <span className="order-summary-indicator"></span>
-                    <span className="order-summary-indicator"></span>
-                    <span className="order-summary-indicator"></span>
-                    <span className="order-summary-indicator"></span>
+                    <span className="order-summary-indicator">Order ID</span>
+                    <span className="order-summary-indicator">Menu Name</span>
+                    <span className="order-summary-indicator">Price</span>
+                    <span className="order-summary-indicator">Quantity</span>
+                    <span className="order-summary-indicator">
+                      Payment Type
+                    </span>
+                    <span className="order-summary-indicator">
+                      Total Ammount
+                    </span>
                   </div>
                   <div className="order-summary-value-wrapper">
                     <span className="order-summary-value">{data.orderID}</span>
                     <span className="order-summary-value">{data.menuName}</span>
-                    <span className="order-summary-value"></span>
-                    <span className="order-summary-value"></span>
-                    <span className="order-summary-value"></span>
-                    <span className="order-summary-value"></span>
-                    <span className="order-summary-value"></span>
+                    <span className="order-summary-value">{`₱ ${data.menuPrice}.00`}</span>
+                    <span className="order-summary-value">{data.quantity}</span>
+                    <span className="order-summary-value">
+                      {data.paymentType == "" ? "Select" : data.paymentType}
+                    </span>
+                    <span className="order-summary-value">{`₱${data.totalAmmount}.00`}</span>
                   </div>
                 </div>
               </div>
@@ -150,45 +189,53 @@ const ClientOrderNow = () => {
                       <div className="quantity-indicator">Quantity</div>
                     </div>
                     <div className="quantity-button-wrapper">
-                      <button
+                      <div
                         className="quantity-add"
                         onClick={() => increment(menu.price)}
                       >
-                        +
-                      </button>
-                      <span className="qantity-count">{quantity}</span>
-                      <button
+                        <span className="symbol">+</span>
+                      </div>
+                      <div className="quantity-count">
+                        <span className="quantity-count-value">{quantity}</span>
+                      </div>
+                      <div
                         className="quantity-subtract"
                         onClick={() => decrement(menu.price)}
                       >
-                        -
-                      </button>
+                        <span className="symbol">-</span>
+                      </div>
                     </div>
                   </div>
                   <div className="total-ammount-container">
                     <span className="total-ammount-indicator">
                       total ammount:
                     </span>
-                    <div className="total-ammount">
-                      {`₱ ${totalAmmount.toFixed(2)}`}
+                    <div className="total-ammout-wrapper">
+                      <div className="total-ammount">
+                        {`₱ ${totalAmmount.toFixed(2)}`}
+                      </div>
                     </div>
                   </div>
                   <div className="payment-type-container">
                     <span className="payment-type-indicator">
                       Payment Type:
                     </span>
-                    <select
-                      name="paymenttype"
-                      id="paymenttype"
-                      className="payment-type"
-                      onChange={(e) => setPaymentType(e.target.value)}
-                    >
-                      <option value="Select">Select</option>
-                      <option value="Pay On Casher Area">
-                        Pay On Casher Area
-                      </option>
-                      <option value="Cash On Delivery">Cash On Delivery</option>
-                    </select>
+                    <div className="option-container">
+                      <select
+                        name="paymenttype"
+                        id="paymenttype"
+                        className="payment-type"
+                        onChange={(e) => setPaymentType(e.target.value)}
+                      >
+                        <option value="Select">Select</option>
+                        <option value="Pay On Casher Area">
+                          Pay On Casher Area
+                        </option>
+                        <option value="Cash On Delivery">
+                          Cash On Delivery
+                        </option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -346,7 +346,38 @@ class braddexdb_controller extends Controller
     }
     public function orderNow(Request $request)
     {
-        return response()->json("order now");
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'uuID' => 'required',
+            'menuID' => 'required',
+            'menuName' => 'required',
+            'menuPrice' => 'required|numeric|not_in:0',
+            'orderID' => 'required',
+            'paymentType' => 'required',
+            'quantity' => 'required|integer|not_in:0',
+            'totalAmmount' => 'required|numeric|not_in:0',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['response' => $validator->errors()], 422);
+        }
+        $created_at = Carbon::now()->toDateTimeString();
+        $creatOrder = tbl_order::insert([
+            'orderID' => $data['orderID'],
+            'userID' => $data['uuID'],
+            'menuID' => $data['menuID'],
+            'paymentType' => $data['paymentType'],
+            'totalAmmount' => $data['totalAmmount'],
+            'quantity' => $data['quantity'],
+            'isPaid' => false,
+            'isDelivered' => false,
+            'isDeleted' => false,
+            'created_at' => $created_at,
+        ]);
+        if ($creatOrder) {
+            return response()->json(['response' => 'Order Created.'], 201);
+        } else {
+            return response()->json(['response' => 'Order failed.'], 422);
+        }
     }
     public function getOrderNowMenu($menuID)
     {
