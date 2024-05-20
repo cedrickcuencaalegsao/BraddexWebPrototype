@@ -1,15 +1,19 @@
 import "./login.scss";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
-import LinearProgress from "@mui/material/LinearProgress";
+import LockIcon from "@mui/icons-material/Lock";
+import EmailIcon from "@mui/icons-material/Email";
+
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const Login = () => {
   const [email, setEmail] = useState(""); // Email Variables
   const [password, setPassword] = useState(""); // Password variables
   const [response, setResponse] = useState(""); // Responce variables
   const history = useHistory(); // for page navigation.
-  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const LoginApi = async (data) => {
     try {
@@ -44,50 +48,74 @@ const Login = () => {
     };
     // getting the status of the response
     const status = await LoginApi(data);
-    setLoading(true);
     // If status is true navigate to home page
     status && history.push("/home");
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
     <div className="login">
       <div className="loginContainer">
-        <div className="title">
-          <h1>Login</h1>
-          <div className="progress">
-            {loading ? (
-              <div className="loading">
-                <LinearProgress
-                  sx={{
-                    bgcolor: "lightgray",
-                    "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
-                  }}
-                />
-              </div>
-            ) : (
-              <div className="loading"></div>
-            )}
+        <div className="left-container">
+          <div className="left-messages-container">
+            <h3 className="title-top">Nice to see you again.</h3>
+            <h1 className="title-center">Welcome Back</h1>
+            <p className="title-buttom">This is only a test.</p>
           </div>
         </div>
-        <span style={{ fontSize: "15px", color: "red" }}>{response}</span>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <input type="submit" value="Login" className="btnSubmit" />
-        </form>
-        <Link to="/register" className="register">
-          Register
-        </Link>
+        <div className="right-container">
+          <div className="right-title-container">
+            <h3 className="right-title">Login Account</h3>
+          </div>
+          <div className="response-container">
+            <span style={{ fontSize: "15px", color: "white" }}>{response}</span>
+          </div>
+          <div className="form-container">
+            <form onSubmit={handleLogin} className="form-login">
+              <div className="email-container">
+                <div className="icon-container">
+                  <EmailIcon className="email-icon" />
+                </div>
+                <input
+                  className="email-input"
+                  type="text"
+                  placeholder="example@email.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="password-container">
+                <div className="icon-container">
+                  {showPassword ? (
+                    <VisibilityIcon
+                      className="password-icon"
+                      onClick={handleShowPassword}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="password-icon"
+                      onClick={handleShowPassword}
+                    />
+                  )}
+                </div>
+                <input
+                  className="password-input"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="login-btn-container">
+                <input type="submit" value="Login" className="btnSubmit" />
+              </div>
+              <Link to="/register" className="register">
+                Register new account.
+              </Link>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

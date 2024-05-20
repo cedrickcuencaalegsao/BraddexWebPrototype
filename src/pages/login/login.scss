@@ -1,35 +1,144 @@
-.login{
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .loginContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-
-    .loginContainer{
+    flex-direction: row;
+    border-radius: 20px;
+    overflow: hidden;
+    -webkit-box-shadow: 5px 7px 13px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 5px 7px 13px 4px rgba(201, 201, 201, 0.6);
+    .left-messages-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: red;
+      height: 400px;
+      padding: 15px;
+      .title-top {
+        color: white;
+        text-transform: capitalize;
+        font-size: 18px;
+        font-weight: normal;
+      }
+      .title-center {
+        color: white;
+        margin: 10px;
+        text-transform: uppercase;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .title-buttom {
+        color: white;
+        text-transform: capitalize;
+        font-size: 15px;
+        font-weight: normal;
+      }
+    }
+    .right-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      padding: 10px;
+      .right-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .right-title {
+          color: orangered;
+          margin-top: 25px;
+          font-size: 25px;
+        }
+      }
+      .form-container {
+        margin-top: 25px;
+        padding: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        padding: 10px;
-        border-radius: 10px;
-        border: 2px solid crimson;
-        .title{
-            font-size: 35px;
-            margin: 10px;
+        justify-content: center;
+        .form-login {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
         }
-        input{
-            height: 40px;
-            width: 300px;
-            margin: 10px;
-            border-radius: 5px;
-            border: 2px solid crimson;
+        .email-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 10px;
+          padding: 7px;
+          .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: orangered;
+            margin-right: 5px;
+            border-radius: 10px 0px 0px 10px;
+            .email-icon {
+              color: white;
+              margin: 10px;
+            }
+          }
+          .email-input {
+            padding: 10px;
+            width: 250px;
+            margin-right: 7px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 2px solid orangered;
+            color: orangered;
+            font-size: 18px;
+            &::placeholder {
+              color: orangered;
+              font-style: italic;
+            }
+          }
         }
-        .btnSubmit{
-            width: 308px;
+        .password-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 10px;
+          padding: 7px;
+          .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: orangered;
+            margin-right: 5px;
+            border-radius: 10px 0px 0px 10px;
+            .password-icon {
+              color: white;
+              margin: 10px;
+            }
+          }
+          .password-input {
+            padding: 10px;
+            width: 250px;
+            margin-right: 7px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            border-bottom: 2px solid orangered;
+            color: orangered;
+            font-size: 18px;
+            &::placeholder {
+              color: orangered;
+              font-style: italic;
+            }
+          }
         }
-        .register{
-            font-size: 14px;
-            text-decoration: none;
-            margin: 10px;
-        }
+      }
     }
+  }
 }

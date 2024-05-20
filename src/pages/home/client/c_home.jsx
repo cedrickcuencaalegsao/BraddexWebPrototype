@@ -12,7 +12,6 @@ const ClientHome = () => {
   const [loading, setLoading] = useState(true);
   const [titleImage, setTitleImage] = useState([]);
   const [progTitle, setProgTitle] = useState(true);
-  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     const bestSelling = async () => {
