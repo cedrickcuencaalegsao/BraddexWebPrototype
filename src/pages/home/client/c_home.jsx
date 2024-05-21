@@ -6,10 +6,15 @@ import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ClientWidgets from "../../../components/client/page_title_widgets/client_widgets";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { generateRandomID } from "../../../idgenerator";
 
 const ClientHome = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
+  const cartID = generateRandomID();
+  const userID = localStorage.getItem("uuid");
 
   useEffect(() => {
     const bestSelling = async () => {
@@ -27,6 +32,27 @@ const ClientHome = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+  const handleOderNow = (menuID) => {
+    let menu_ID = menuID;
+    history.push(`/client-order-now/${menu_ID}`);
+  };
+  const handleAddToCart = async (menuID) => {
+    let data = {
+      cartID: cartID,
+      userID: userID,
+      menuID: menuID,
+    };
+    await addToCartAPI(data);
+  };
+  const addToCartAPI = async (data) => {
+    console.log(data);
+    try {
+      await axios.post("http://127.0.0.1:8000/api/addtocart", data);
+      history.push("/client-cart");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="clientHome">
@@ -67,7 +93,10 @@ const ClientHome = () => {
                         <span className="menu-name-indicator">Menu Name</span>
                       </div>
                     </div>
-                    <div className="add-to-cart-container">
+                    <div
+                      className="add-to-cart-container"
+                      onClick={() => handleAddToCart(item.menuID)}
+                    >
                       <AddShoppingCartOutlinedIcon className="icon-add-to-cart" />
                     </div>
                   </div>
@@ -84,10 +113,13 @@ const ClientHome = () => {
                         <span className="menu-price-indicator">Menu Price</span>
                       </div>
                       <div className="menu-price-container">
-                        <h3 className="meni-price">{item.price}</h3>
+                        <h3 className="meni-price">{`₱ ${item.price}.00`}</h3>
                       </div>
                     </div>
-                    <div className="btn-order-container">
+                    <div
+                      className="btn-order-container"
+                      onClick={() => handleOderNow(item.menuID)}
+                    >
                       <button className="btn-order-now">Order Now</button>
                     </div>
                   </div>

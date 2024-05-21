@@ -117,6 +117,22 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
                   }
                 }
               }
+              .btn-order-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .btn-order-now {
+                  padding: 7px;
+                  border-radius: 7px;
+                  border: none;
+                  color: white;
+                  background-color: red;
+                  font-size: 20px;
+                  &:hover{
+                    scale: 1.05;
+                  }
+                }
+              }
             }
           }
         }

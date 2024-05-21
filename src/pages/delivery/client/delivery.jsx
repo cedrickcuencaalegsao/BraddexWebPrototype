@@ -7,11 +7,9 @@ import axios from "axios";
 
 const ClientDelivery = () => {
   const uuid = localStorage.getItem("uuid");
+  const [loading, setLaoding] = useState(true);
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
-  const [loading, setLaoding] = useState(true);
-
-  let delivery;
 
   useEffect(() => {
     const getOrderAPI = async () => {
@@ -39,7 +37,6 @@ const ClientDelivery = () => {
           "http://127.0.0.1:8000/api/get-delivery-menu",
           menuIDArray
         );
-        console.log(API.data.menu);
         setMenu(API.data.menu);
       } catch (error) {
         console.log(error);
@@ -51,6 +48,8 @@ const ClientDelivery = () => {
     }
   }, [data]);
 
+  console.log(menu, data);
+
   return (
     <div className="clientDeliver">
       <ClientSideBar />
@@ -61,6 +60,15 @@ const ClientDelivery = () => {
         </div>
         <div className="bottom">
           <div className="table-container">
+            <div className="card-delivery">
+              <div className="card-top-container">name and delete button</div>
+              <div className="card-center-container">
+                <div className="image-container">
+                  <img src="#" alt="image" />
+                </div>
+              </div>
+              <div className="card-bottom-container">total ammount</div>
+            </div>
           </div>
         </div>
       </div>
