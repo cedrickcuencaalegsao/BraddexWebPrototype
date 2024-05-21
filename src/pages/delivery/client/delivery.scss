@@ -48,13 +48,52 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
             align-items: center;
             justify-content: space-between;
             margin: 10px;
-            .card-title-container{
+            .card-title-container {
               flex: 6;
+              .menu-name-container {
+                margin-top: 7px;
+                .menu-name {
+                  text-transform: capitalize;
+                  font-size: 25px;
+                }
+              }
+              .menu-name-indicator-container {
+                .menu-name-indicator {
+                  text-transform: capitalize;
+                  font-size: 13px;
+                  color: darkslategray;
+                }
+              }
             }
-            .card-icon-container{
-              flex: 1;
+            .card-icon-container {
               display: flex;
               flex-direction: row;
+              .cancel-icon-container {
+                margin: 3px;
+                border-radius: 7px;
+                background-color: orangered;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 3px;
+                color: white;
+                &:hover {
+                  scale: 1.05;
+                }
+              }
+              .delete-icon-conatiner {
+                margin: 3px;
+                border-radius: 7px;
+                background-color: orangered;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 3px;
+                color: white;
+                &:hover {
+                  scale: 1.05;
+                }
+              }
             }
           }
           .card-center-container {
@@ -67,6 +106,33 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
               .image {
                 width: 230px;
                 height: 180px;
+              }
+            }
+          }
+          .card-bottom-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            .total-ammount-container {
+              .total-ammount-indicator-container{
+                .total-ammount-indicator{
+                  color: darkslategray;
+                  font-size: 13px;
+                }
+              }
+            }
+            .botton-container {
+              .botton-mark {
+                padding: 10px;
+                border-radius: 7px;
+                color: white;
+                background-color: red;
+                border: none;
+                outline: none;
+                font-size: 18px;
               }
             }
           }

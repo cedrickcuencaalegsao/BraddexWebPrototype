@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const ClientDelivery = () => {
   const uuid = localStorage.getItem("uuid");
@@ -112,7 +112,19 @@ const ClientDelivery = () => {
                       />
                     </div>
                   </div>
-                  <div className="card-bottom-container">total ammount</div>
+                  <div className="card-bottom-container">
+                    <div className="total-ammount-container">
+                      <div className="total-ammount-indicator-container">
+                        <span className="total-ammount-indicator">Total Ammount</span>
+                      </div>
+                      <div className="total-ammount-container">
+                        <h2 className="total-ammount">{`₱ ${item.totalAmmount}.00`}</h2>
+                      </div>
+                    </div>
+                    <div className="botton-container">
+                      <button className="botton-mark">Delivered</button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
