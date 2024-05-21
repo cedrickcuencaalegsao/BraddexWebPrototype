@@ -1,5 +1,5 @@
 // Define variables
-$grid-size: 220px; // Change this to adjust the size of each grid item
+$grid-size: 280px; // Change this to adjust the size of each grid item
 $grid-gap: auto; // Change this to adjust the gap between grid items
 
 .clientHome {
@@ -36,11 +36,11 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
 
         .bottomContainer {
           display: grid;
-          grid-template-columns: repeat(5, $grid-size);
+          grid-template-columns: repeat(4, $grid-size);
           justify-content: center;
           .cards {
-            width: 200px;
-            margin: auto;
+            width: 250px;
+            margin: 10px;
             margin-bottom: 10px;
             margin-top: 10px;
             display: flex;
@@ -51,9 +51,72 @@ $grid-gap: auto; // Change this to adjust the gap between grid items
             border-radius: 10px;
             -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
             box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-            .image {
-              width: 200px;
-              height: 200px;
+            .card-top-container {
+              width: 90%;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-between;
+              margin: 10px;
+              .item-detail-container {
+                display: flex;
+                flex-direction: column;
+                .menu-name-container {
+                  .menu-name {
+                    text-transform: capitalize;
+                    font-size: 25px;
+                  }
+                }
+                .menu-name-indicator-container {
+                  .menu-name-indicator {
+                    text-transform: capitalize;
+                    font-size: 13px;
+                    color: darkslategray;
+                  }
+                }
+              }
+              .add-to-cart-container {
+                padding: 7px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: orangered;
+                border-radius: 7px;
+                .icon-add-to-cart {
+                  font-size: 18px;
+                  color: white;
+                }
+                &:hover {
+                  scale: 1.1;
+                }
+              }
+            }
+            .cards-center-container {
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              .image {
+                width: 230px;
+                height: 180px;
+              }
+            }
+            .card-bottom-container {
+              width: 90%;
+              margin: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              .menu-price-wrapper {
+                .menu-price-indicator-container {
+                  .menu-price-indicator {
+                    text-transform: capitalize;
+                    font-size: 13 px;
+                    color: darkslategray;
+                  }
+                }
+              }
             }
           }
         }

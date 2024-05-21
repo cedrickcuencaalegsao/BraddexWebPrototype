@@ -1,8 +1,7 @@
 import "./login.scss";
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
-import LockIcon from "@mui/icons-material/Lock";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import EmailIcon from "@mui/icons-material/Email";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -56,6 +55,10 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const navigateToRegister = (link) => {
+    history.push(link);
+  };
+
   return (
     <div className="login">
       <div className="loginContainer">
@@ -70,9 +73,7 @@ const Login = () => {
           <div className="right-title-container">
             <h3 className="right-title">Login Account</h3>
           </div>
-          <div className="response-container">
-            <span style={{ fontSize: "15px", color: "white" }}>{response}</span>
-          </div>
+
           <div className="form-container">
             <form onSubmit={handleLogin} className="form-login">
               <div className="email-container">
@@ -107,13 +108,23 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div className="login-btn-container">
-                <input type="submit" value="Login" className="btnSubmit" />
+              <div className="response-container">
+                <span style={{ fontSize: "15px", color: "red" }}>
+                  {response}
+                </span>
               </div>
-              <Link to="/register" className="register">
-                Register new account.
-              </Link>
+              <div className="login-btn-container">
+                <input type="submit" value="Login" className="btn-Submit" />
+              </div>
             </form>
+            <div className="btn-create-account-container">
+              <input
+                type="submit"
+                value="Create Account"
+                className="btn-create-account"
+                onClick={() => navigateToRegister("/register")}
+              />
+            </div>
           </div>
         </div>
       </div>

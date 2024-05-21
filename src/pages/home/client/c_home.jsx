@@ -4,14 +4,12 @@ import ClientSideBar from "../../../components/client/sideBar/client_sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
-
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import ClientWidgets from "../../../components/client/page_title_widgets/client_widgets";
 
 const ClientHome = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [titleImage, setTitleImage] = useState([]);
-  const [progTitle, setProgTitle] = useState(true);
 
   useEffect(() => {
     const bestSelling = async () => {
@@ -26,23 +24,6 @@ const ClientHome = () => {
     bestSelling();
     const interval = setInterval(() => {
       bestSelling();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const getTitleImageAPI = async () => {
-      try {
-        const API = await axios.get("http://127.0.0.1:8000/api/titleimages");
-        setTitleImage(API.data);
-        setProgTitle(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getTitleImageAPI();
-    const interval = setInterval(() => {
-      getTitleImageAPI();
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -77,13 +58,39 @@ const ClientHome = () => {
             <div className="bottomContainer">
               {data.map((item) => (
                 <div className="cards" key={item.id}>
-                  <img
-                    src={`http://127.0.0.1:8000/images/menu/${item.image}`}
-                    alt={item.menu_name}
-                    className="image"
-                  />
-                  <p className="itemName">{item.menu_name}</p>
-                  <p className="itemPice">{item.price}</p>
+                  <div className="card-top-container">
+                    <div className="item-detail-container">
+                      <div className="menu-name-container">
+                        <h3 className="menu-name">{item.menu_name}</h3>
+                      </div>
+                      <div className="menu-name-indicator-container">
+                        <span className="menu-name-indicator">Menu Name</span>
+                      </div>
+                    </div>
+                    <div className="add-to-cart-container">
+                      <AddShoppingCartOutlinedIcon className="icon-add-to-cart" />
+                    </div>
+                  </div>
+                  <div className="cards-center-container">
+                    <img
+                      src={`http://127.0.0.1:8000/images/menu/${item.image}`}
+                      alt={item.menu_name}
+                      className="image"
+                    />
+                  </div>
+                  <div className="card-bottom-container">
+                    <div className="menu-price-wrapper">
+                      <div className="menu-price-indicator-container">
+                        <span className="menu-price-indicator">Menu Price</span>
+                      </div>
+                      <div className="menu-price-container">
+                        <h3 className="meni-price">{item.price}</h3>
+                      </div>
+                    </div>
+                    <div className="btn-order-container">
+                      <button className="btn-order-now">Order Now</button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
