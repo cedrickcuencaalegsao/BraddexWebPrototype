@@ -383,7 +383,7 @@ class braddexdb_controller extends Controller
     }
     public function getOrders($uuid)
     {
-        $data = tbl_order::where('userID', $uuid)->get();
+        $data = tbl_order::where('userID', $uuid)->where('isDeleted', false)->where('isPaid', false)->get();
         return response()->json(compact('data'));
     }
     public function getOrderNowMenu($menuID)

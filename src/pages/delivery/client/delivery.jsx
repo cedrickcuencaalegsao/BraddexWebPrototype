@@ -4,6 +4,9 @@ import ClientNavBar from "../../../components/client/navBar/client_navBar";
 import ClientWidgets from "../../../components/client/page_title_widgets/client_widgets";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LinearProgress from "@mui/material/LinearProgress";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 const ClientDelivery = () => {
   const uuid = localStorage.getItem("uuid");
@@ -42,13 +45,20 @@ const ClientDelivery = () => {
         console.log(error);
       }
     };
+
     if (data.length > 0) {
       const menuIDArray = data.map((item) => item.menuID);
       getDeliveryMenuAPI(menuIDArray);
     }
   }, [data]);
 
-  console.log(menu, data);
+  // Flattening the nested data array
+  const flatData = data.flat();
+
+  let cardData = flatData.map((dataItem) => {
+    let newMenu = menu.find((menuItem) => dataItem.menuID === menuItem.menuID);
+    return { ...dataItem, ...newMenu };
+  });
 
   return (
     <div className="clientDeliver">
@@ -59,17 +69,54 @@ const ClientDelivery = () => {
           <ClientWidgets type="delivery" />
         </div>
         <div className="bottom">
-          <div className="table-container">
-            <div className="card-delivery">
-              <div className="card-top-container">name and delete button</div>
-              <div className="card-center-container">
-                <div className="image-container">
-                  <img src="#" alt="image" />
-                </div>
-              </div>
-              <div className="card-bottom-container">total ammount</div>
-            </div>
+          <div className="bottom-title-container">
+            <h3 className="bottom-title">Delivery</h3>
           </div>
+          {loading ? (
+            <div className="loading">
+              <LinearProgress
+                sx={{
+                  bgcolor: "lightgray",
+                  "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
+                }}
+              />
+            </div>
+          ) : (
+            <div className="table-container">
+              {cardData.map((item, index) => (
+                <div className="card-delivery" key={index}>
+                  <div className="card-top-container">
+                    <div className="card-title-container">
+                      <div className="menu-name-container">
+                        <h3 className="menu-name">{item.menu_name}</h3>
+                      </div>
+                      <div className="menu-name-indicator-container">
+                        <span className="menu-name-indicator">Menu Name</span>
+                      </div>
+                    </div>
+                    <div className="card-icon-container">
+                      <div className="cancel-icon-container">
+                        <CancelOutlinedIcon className="cancel-icon" />
+                      </div>
+                      <div className="delete-icon-conatiner">
+                        <DeleteOutlineRoundedIcon className="delete-icon" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-center-container">
+                    <div className="image-container">
+                      <img
+                        src={`http://127.0.0.1:8000/images/menu/${item.image}`}
+                        alt="image"
+                        className="image"
+                      />
+                    </div>
+                  </div>
+                  <div className="card-bottom-container">total ammount</div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

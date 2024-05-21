@@ -1,3 +1,6 @@
+$grid-size: 280px; // Change this to adjust the size of each grid item
+$grid-gap: auto; // Change this to adjust the gap between grid items
+
 .clientDeliver {
   display: flex;
   .clientDeliveryContainer {
@@ -10,7 +13,65 @@
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     }
     .bottom {
-      
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      .bottom-title-container {
+        padding: 10px;
+        .bottom-title {
+          color: darkslategray;
+        }
+      }
+      .table-container {
+        display: grid;
+        grid-template-columns: repeat(4, $grid-size);
+        justify-content: center;
+        .card-delivery {
+          width: 250px;
+          margin: 10px;
+          margin-bottom: 10px;
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          overflow: hidden;
+          border-radius: 10px;
+          -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+          box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+          .card-top-container {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px;
+            .card-title-container{
+              flex: 6;
+            }
+            .card-icon-container{
+              flex: 1;
+              display: flex;
+              flex-direction: row;
+            }
+          }
+          .card-center-container {
+            .image-container {
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              .image {
+                width: 230px;
+                height: 180px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
