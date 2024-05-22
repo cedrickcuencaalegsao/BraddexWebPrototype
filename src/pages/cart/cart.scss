@@ -22,6 +22,20 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
       .loading {
         width: 100%;
       }
+      .floating-botton-continer {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000; /* Ensure it appears above other elements */
+        background-color: rgba(
+          128,
+          128,
+          128,
+          0.5
+        ); /* Grey background with 50% opacity */
+        padding: 10px; /* Optional: Add some padding */
+        border-radius: 8px; /* Optional: Add rounded corners */
+      }
       .table-carts {
         background-color: none;
         display: grid;
@@ -37,9 +51,86 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
           border-radius: 10px;
           -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
           box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-          .image {
-            width: 300px;
-            height: 290px;
+          .card-cart-top-container {
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px;
+            .card-card-details {
+              padding: 7px;
+              .menu-name-container {
+                .menu-name {
+                  text-transform: capitalize;
+                }
+              }
+              .menu-name-indicator-container {
+                .menu-name-indicator {
+                  color: darkslategray;
+                  font-size: 13px;
+                }
+              }
+            }
+            .card-cart-icon-container {
+              padding: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: orangered;
+              border-radius: 7px;
+              .card-cart-icon {
+                font-size: 20px;
+                color: white;
+              }
+              &:hover {
+                scale: 1.1;
+              }
+            }
+          }
+          .car-cart-center-container {
+            .image-wrapper {
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              .image {
+                width: 233px;
+                height: 180px;
+              }
+            }
+          }
+          .card-bottom-container {
+            width: 90%;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .menu-price-wrapper {
+              .menu-price-indicator-container {
+                .menu-price-indicator {
+                  text-transform: capitalize;
+                  font-size: 13px;
+                  color: darkslategray;
+                }
+              }
+            }
+            .btn-order-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .btn-order-now {
+                padding: 7px;
+                border-radius: 7px;
+                border: none;
+                color: white;
+                background-color: red;
+                font-size: 20px;
+                &:hover {
+                  scale: 1.05;
+                }
+              }
+            }
           }
         }
       }
