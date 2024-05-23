@@ -38,6 +38,7 @@ import ClientSettings from "./pages/settings/client/settings";
 import ClientPrivacy from "./pages/privacy/privacy";
 import ClientUserProfile from "./pages/profile/client/profile";
 import ClientNotification from "./pages/notification/client/notif";
+import ClientOrderMultiple from "./pages/orderMultiple/orderMultiple";
 
 const App = () => {
   return (
@@ -66,6 +67,7 @@ const App = () => {
           <AuthRoutes path="/client-Menu" component={ClientMenu} />
           <AuthRoutes path="/client-cart" component={Cart} />
           <AuthRoutes path="/client-order-now/:menuID" component={ClientOrderNow} />
+          <AuthRoutes path="/client-order-multiple/:data" component={ClientOrderMultiple} />
           <AuthRoutes path="/client-delivery" component={ClientDelivery} />
           <AuthRoutes path="/client-history" component={ClientHistory} />
           <AuthRoutes path="/client-support" component={ClientSupport} />

@@ -318,7 +318,8 @@ class braddexdb_controller extends Controller
         $created_at = Carbon::now()->toDateTimeString();
         $data = $request->all();
         $menuID = $data['menuID'];
-        $val_count = count(tbl_cart::where('menuID', $menuID)->get());
+        $userID = $data['userID'];
+        $val_count = count(tbl_cart::where('menuID', $menuID)->where('userID', $userID)->get());
 
         if ($val_count === 0) {
             tbl_cart::insert([
@@ -335,13 +336,13 @@ class braddexdb_controller extends Controller
     }
     public function getCart($uuid)
     {
-        $data = tbl_cart::where('userID', $uuid)->get();
+        $data = tbl_cart::where('userID', $uuid)->where('isDeleted', false)->get();
         return response()->json(compact('data'));
     }
     public function getCartMenu(Request $request)
     {
         $ids = $request->all();
-        $data = tbl_menu::whereIn('id', $ids)->get();
+        $data = tbl_menu::whereIn('menuId', $ids)->get();
         return response()->json(compact('data'));
     }
     public function orderNow(Request $request)
@@ -392,6 +393,12 @@ class braddexdb_controller extends Controller
         return response()->json(compact('menu'));
     }
     public function getDeliveryMenu(Request $request)
+    {
+        $data = $request->all();
+        $menu = tbl_menu::whereIn('menuID', $data)->get();
+        return response()->json(compact('menu'));
+    }
+    public function multipleDelivery(Request $request)
     {
         $data = $request->all();
         $menu = tbl_menu::whereIn('menuID', $data)->get();

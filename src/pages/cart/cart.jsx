@@ -12,16 +12,20 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const Cart = () => {
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedAll, setSelectedAll] = useState(false);
   const history = useHistory();
   // converting object into array so we can use .map() when we return data.
   const menuArray = Object.values(menu);
   const uuid = localStorage.getItem("uuid");
-  const [selectedItems, setSelectedItems] = useState([]);
+
   useEffect(() => {
     const getCartAPI = async () => {
       try {
@@ -33,18 +37,6 @@ const Cart = () => {
         console.log(error);
       }
     };
-    const fetchData = async () => {
-      await getCartAPI();
-    };
-    fetchData();
-
-    const interval = setInterval(() => {
-      fetchData();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
     const getCartMenuAPI = async (menuIDArray) => {
       try {
         const API = await axios.post(
@@ -58,10 +50,18 @@ const Cart = () => {
       }
     };
     if (data.length > 0) {
-      const menuIDArray = data.map((item) => item.id);
+      const menuIDArray = data.map((item) => item.menuID);
+      console.log(menuIDArray);
       getCartMenuAPI(menuIDArray);
     }
+    getCartAPI();
+    const interval = setInterval(() => {
+      getCartAPI();
+    }, 1000);
+    return () => clearInterval(interval);
   }, [data]);
+
+  // console.log(data, menuArray);
 
   const handleOderNow = (menuID) => {
     let menu_ID = menuID;
@@ -76,8 +76,10 @@ const Cart = () => {
     );
   };
 
-  const orderNowAPI = async () => {
-    console.log(selectedItems);
+  const orderNowAPI = () => {
+    let dataToPass = selectedItems;
+
+    history.push(`/client-order-multiple/${dataToPass}`);
   };
 
   const removeFromMyCartAPI = async () => {
@@ -88,6 +90,19 @@ const Cart = () => {
     console.log(selectedItems);
   };
 
+  const showOption = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const handleSelectAll = () => {
+    setSelectedItems(menuArray.map((item) => item.menuID));
+    setSelectedAll(true);
+  };
+
+  const handleDeselectAll = () => {
+    setSelectedItems([]);
+    setSelectedAll(false);
+  };
   return (
     <div className="cart">
       <ClientSideBar />
@@ -97,6 +112,21 @@ const Cart = () => {
           <ClientWidgets type="cart" />
         </div>
         <div className="bottom">
+          <div className="bottom-top-container">
+            <div className="bottom-title-container">
+              <h1 className="bottom-title">Cart List</h1>
+            </div>
+
+            <div className="bottom-icon-continer" onClick={() => showOption()}>
+              <MoreVertIcon className="bottom-icon" />
+              {showDropdown && (
+                <div className="table-option">
+                  <span onClick={() => handleSelectAll()}>Select All</span>
+                  <span onClick={() => handleDeselectAll()}>Deselect All</span>
+                </div>
+              )}
+            </div>
+          </div>
           <div className="progress">
             {loading ? (
               <div className="loading">
@@ -112,23 +142,68 @@ const Cart = () => {
             )}
           </div>
           <div className="floating-botton-continer">
-            <Box sx={{ "& > :not(style)": { m: 1 } }}>
-              <Fab color="primary" onClick={() => orderNowAPI()}>
-                <DeliveryDiningIcon />
+            <Box sx={{ "& > :not(style)": { m: 1 } }} className="box-container">
+              <Fab
+                color="primary"
+                onClick={() => orderNowAPI()}
+                sx={{
+                  backgroundColor: "white",
+                  "&:hover": {
+                    backgroundColor: "orangered",
+                    "& .MuiSvgIcon-root": {
+                      color: "white",
+                      scale: "1.2",
+                    },
+                  },
+                }}
+              >
+                <DeliveryDiningIcon
+                  sx={{
+                    color: "orangered",
+                  }}
+                />
               </Fab>
               <Fab
                 color="secondary"
                 aria-label="edit"
                 onClick={() => removeFromMyCartAPI()}
+                sx={{
+                  backgroundColor: "white",
+                  "&:hover": {
+                    backgroundColor: "red",
+                    "& .MuiSvgIcon-root": {
+                      color: "white",
+                      scale: "1.2",
+                    },
+                  },
+                }}
               >
-                <DeleteOutlineRoundedIcon />
+                <DeleteOutlineRoundedIcon
+                  sx={{
+                    color: "red",
+                  }}
+                />
               </Fab>
 
               <Fab
                 aria-label="like"
                 onClick={() => addToMyFavorites()}
+                sx={{
+                  backgroundColor: "white",
+                  "&:hover": {
+                    backgroundColor: "crimson",
+                    "& .MuiSvgIcon-root": {
+                      color: "white",
+                      scale: "1.2",
+                    },
+                  },
+                }}
               >
-                <FavoriteIcon />
+                <FavoriteIcon
+                  sx={{
+                    color: "crimson",
+                  }}
+                />
               </Fab>
             </Box>
           </div>
@@ -170,6 +245,7 @@ const Cart = () => {
                   </div>
                   <div className="select-cart-item-container">
                     <Checkbox
+                      checked={selectedItems.includes(item.menuID)}
                       onChange={() => handleSelectCardItem(item.menuID)}
                     />
                   </div>

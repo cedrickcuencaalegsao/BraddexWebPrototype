@@ -19,13 +19,56 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
       border-radius: 10px;
       -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      .bottom-top-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        .bottom-title-container {
+          .bottom-title {
+            color: grey;
+            font-size: 20px;
+            text-transform: capitalize;
+          }
+        }
+        .bottom-icon-continer {
+          position: relative;
+          .table-option {
+            position: absolute;
+            z-index: 1000;
+            top: 100%;
+            right: 45%;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            span {
+              padding: 10px;
+              cursor: pointer;
+              &:hover {
+                background-color: #f0f0f0;
+              }
+            }
+          }
+          .bottom-icon {
+            color: grey;
+            margin: 10px;
+            cursor: pointer;
+          }
+        }
+      }
       .loading {
         width: 100%;
       }
       .floating-botton-continer {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
+        bottom: 10px;
+        right: 10px;
         z-index: 1000; /* Ensure it appears above other elements */
         background-color: rgba(
           128,
@@ -33,8 +76,14 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
           128,
           0.5
         ); /* Grey background with 50% opacity */
-        padding: 10px; /* Optional: Add some padding */
+        padding: 7px; /* Optional: Add some padding */
         border-radius: 8px; /* Optional: Add rounded corners */
+        .box-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
       }
       .table-carts {
         background-color: none;

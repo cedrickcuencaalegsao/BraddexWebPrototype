@@ -34,12 +34,12 @@ const ClientMenu = () => {
   }, []);
 
   const addToCartAPI = async (data) => {
-    console.log(data);
     try {
-      await axios.post("http://127.0.0.1:8000/api/addtocart", data);
-      history.push("/client-cart");
+      const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   };
 
@@ -49,7 +49,8 @@ const ClientMenu = () => {
       userID: userID,
       menuID: menuID,
     };
-    await addToCartAPI(data);
+    const status = await addToCartAPI(data);
+    status && history.push("/client-cart");
   };
 
   const handleOderNow = (menuID) => {
