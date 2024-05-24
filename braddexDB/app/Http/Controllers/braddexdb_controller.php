@@ -319,7 +319,7 @@ class braddexdb_controller extends Controller
         $data = $request->all();
         $menuID = $data['menuID'];
         $userID = $data['userID'];
-        $val_count = count(tbl_cart::where('menuID', $menuID)->where('userID', $userID)->get());
+        $val_count = count(tbl_cart::where('menuID', $menuID)->where('userID', $userID)->where('isDeleted', false)->get());
 
         if ($val_count === 0) {
             tbl_cart::insert([
@@ -342,8 +342,21 @@ class braddexdb_controller extends Controller
     public function getCartMenu(Request $request)
     {
         $ids = $request->all();
-        $data = tbl_menu::whereIn('menuId', $ids)->get();
+        $data = tbl_menu::whereIn('menuId', $ids)
+            ->get();
         return response()->json(compact('data'));
+    }
+    public function updateIsDeleteCartMenu(Request $request)
+    {
+        $data = $request->all();
+        $uuID = $data['uuID'];
+        $menuID = $data['menuID'];
+        $response = tbl_cart::where('menuID', $menuID)->where('userID', $uuID)->update(['isDeleted' => true]);
+        if ($response !== false) {
+            return response()->json(['message' => 'Cart sucessfully deleted.']);
+        } else {
+            return response()->json(['message' => 'Request Failed.']);
+        }
     }
     public function orderNow(Request $request)
     {

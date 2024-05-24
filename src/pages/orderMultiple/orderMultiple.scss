@@ -2,5 +2,74 @@
   display: flex;
   .order-multiple-container {
     flex: 6;
+    .top {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    }
+    .bottom {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      .menu-continer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .left-menu-continer {
+          padding: 15px;
+          display: flex;
+          flex-direction: column;
+          border-right: 2px solid darkslategray;
+          .top-left-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .center-left-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .image-wrapper {
+              height: 150px;
+              width: 180px;
+              border-radius: 10px;
+              overflow: hidden;
+              .image {
+                height: 150px;
+                width: 180px;
+              }
+            }
+          }
+          .bottom-left-container {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            .menu-name-container {
+              .menu-name-wrapper {
+                .menu-name {
+                  text-transform: capitalize;
+                }
+              }
+            }
+          }
+        }
+        .right-menu-continer {
+          flex: 6;
+        }
+      }
+    }
   }
 }

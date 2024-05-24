@@ -51,7 +51,6 @@ const Cart = () => {
     };
     if (data.length > 0) {
       const menuIDArray = data.map((item) => item.menuID);
-      console.log(menuIDArray);
       getCartMenuAPI(menuIDArray);
     }
     getCartAPI();
@@ -82,8 +81,26 @@ const Cart = () => {
     history.push(`/client-order-multiple/${dataToPass}`);
   };
 
-  const removeFromMyCartAPI = async () => {
+  const removeMultipleFromMyCartAPI = async () => {
     console.log(selectedItems);
+  };
+
+  const removeFromMyCartAPI = async (menuID) => {
+    setLoading(true);
+    let data = {
+      uuID: uuid,
+      menuID: menuID,
+    };
+    console.log(menuID);
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/update-IsDelete-Cart-Menu/",
+        data
+      );
+      API && setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const addToMyFavorites = async () => {
@@ -103,6 +120,7 @@ const Cart = () => {
     setSelectedItems([]);
     setSelectedAll(false);
   };
+
   return (
     <div className="cart">
       <ClientSideBar />
@@ -220,7 +238,10 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="card-cart-icon-container">
-                    <div className="delete-cart-item-container">
+                    <div
+                      className="delete-cart-item-container"
+                      onClick={() => removeFromMyCartAPI(item.menuID)}
+                    >
                       <DeleteOutlineRoundedIcon className="card-cart-icon" />
                     </div>
                   </div>

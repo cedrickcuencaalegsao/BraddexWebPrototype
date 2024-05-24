@@ -2,40 +2,76 @@ import "./orderMultiple.scss";
 import ClientSideBar from "../../components/client/sideBar/client_sidebar";
 import ClientNavBar from "../../components/client/navBar/client_navBar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const ClientOrderMultiple = () => {
   const selectedItems = useParams();
+  const [menu, setMenu] = useState([]);
   let data = selectedItems.data;
   const dataArray = data.split(",");
-  console.log(dataArray);
 
-  useEffect(() => {
-    const getMultipleOrderApi = async () => {
-      try {
-        const API = await axios.post(
-          "http://127.0.0.1:8000/api/get-multiple-order/",
-          dataArray
-        );
-        console.log(API.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getMultipleOrderApi();
-    const interval = setInterval(() => {
-      getMultipleOrderApi();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const getMultipleOrderApi = async () => {
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/get-multiple-order/",
+        dataArray
+      );
+      setMenu(API.data.menu);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(menu);
 
   return (
-    <div className="order-multiple">
+    <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
       <ClientSideBar />
       <div className="order-multiple-container">
         <ClientNavBar />
         <div className="top">Order Multiple</div>
+        <div className="bottom">
+          {menu.map((item) => (
+            <div className="menu-continer" key={item.id}>
+              <div className="left-menu-continer">
+                <div className="left-title-container">
+                  <div className="top-left-container">
+                    <h3 className="left-title">Menu</h3>
+                  </div>
+                </div>
+                <div className="center-left-container">
+                  <div className="image-wrapper">
+                    <img
+                      src={`http://127.0.0.1:8000/images/menu/${item.image}`}
+                      alt="menuPicture"
+                      className="image"
+                    />
+                  </div>
+                </div>
+                <div className="bottom-left-container">
+                  <div className="menu-name-container">
+                    <div className="menu-name-wrapper">
+                      <h3 className="menu-name">{item.menu_name}</h3>
+                    </div>
+                    <div className="menu-name-indicator-wrapper">
+                      <span className="menu-name-indicator">Menu Name:</span>
+                    </div>
+                  </div>
+                  <div className="menu-price-container">
+                    <div className="menu-price-wrapper">
+                      <h3 className="menu-price">{`₱ ${item.price}.00`}</h3>
+                    </div>
+                    <div className="menu-price-indicator-wrapper">
+                      <span className="menu-price-indicator">Menu Price</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="right-menu-continer">right</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

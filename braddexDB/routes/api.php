@@ -17,6 +17,7 @@ Route::post('getcartmenu', [braddexdb_controller::class, 'getCartMenu']);
 Route::post('updatebestselling', [braddexdb_controller::class, 'updateBestselling']);
 Route::post('get-delivery-menu', [braddexdb_controller::class, 'getDeliveryMenu']);
 Route::post('get-multiple-order', [braddexdb_controller::class, 'multipleDelivery']);
+Route::post('update-IsDelete-Cart-Menu', [braddexdb_controller::class, 'updateIsDeleteCartMenu']);
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);

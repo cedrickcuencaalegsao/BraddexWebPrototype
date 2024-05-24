@@ -38,14 +38,13 @@ const Widgets = ({ type }) => {
 
   // order widgets calculation.
   let total_order = order.order;
-  let active = (order.deleted / total_order) * 100;
-  let inActive = (order.notDeleted / total_order) * 100;
+  let active = (order.notDeleted / total_order) * 100;
+  let inActive = (order.deleted / total_order) * 100;
 
   // delivery widgets calculation.
   let total_delivery = order.order;
   let pending = (order.pending / total_order) * 100;
-  let delivered = (order.pending / total_order) * 100;
-
+  let delivered = (order.delivered / total_order) * 100;
   useEffect(() => {
     const getAdminUsersWidgetsAPI = async () => {
       try {
