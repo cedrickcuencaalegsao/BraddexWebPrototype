@@ -11,6 +11,7 @@ const ClientOrderMultiple = () => {
   const [dataToSend, setDataToSend] = useState([]);
   let data = selectedItems.data;
   const dataArray = data.split(",");
+  const uuID = localStorage.getItem("uuid");
 
   const getMultipleOrderApi = async () => {
     try {
@@ -23,9 +24,32 @@ const ClientOrderMultiple = () => {
       console.log(error);
     }
   };
-  const addQuantity = (e, menuID) => {
-    console.log(e, menuID);
+  const handleQuantity = (menuID, action) => {
+    // check if menu was in our array to be sent to the server.
+    const menuIndex = dataToSend.findIndex((item) => item.menuID == menuID);
+    // if menu exists, update its quantity, else add new menu as an objects.
+    if (menuIndex !== -1) {
+      // update the quantity added by 1.
+      const newDataToSend = [...dataToSend];
+      if (action == "increment") {
+        newDataToSend[menuIndex].Quantity += 1;
+      } else {
+        if (newDataToSend[menuIndex].Quantity == 0) {
+          return 0;
+        } else {
+          newDataToSend[menuIndex].Quantity -= 1;
+        }
+      }
+      setDataToSend(newDataToSend);
+    } else {
+      // if menu !exists.
+      setDataToSend((prevDataToSend) => [
+        ...prevDataToSend,
+        { menuID: menuID, uuID: uuID, Quantity: 1 },
+      ]);
+    }
   };
+  console.log(dataToSend);
   return (
     <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
       <ClientSideBar />
@@ -44,7 +68,7 @@ const ClientOrderMultiple = () => {
           </div>
           <div className="bottom">
             {menu.map((item) => (
-              <div className="menu-continer" key={item.id}>
+              <div className="menu-continer" key={item.menuID}>
                 <div className="menu-title-container">
                   <div className="title-menu-container">
                     <h3 className="menu-title">Menu</h3>
@@ -52,14 +76,17 @@ const ClientOrderMultiple = () => {
                   <div className="quantity-container">
                     <div
                       className="add-wrapper"
-                      onClick={(e) => addQuantity(e, item.menuID)}
+                      onClick={() => handleQuantity(item.menuID, "increment")}
                     >
                       <button className="btn-add">+</button>
                     </div>
                     <div className="qantity-wrapper">
                       <span className="quantity">0</span>
                     </div>
-                    <div className="diff-wrapper">
+                    <div
+                      className="diff-wrapper"
+                      onClick={() => handleQuantity(item.menuID, "decrement")}
+                    >
                       <button className="btn-diff">-</button>
                     </div>
                   </div>
