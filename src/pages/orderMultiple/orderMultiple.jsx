@@ -8,6 +8,7 @@ import axios from "axios";
 const ClientOrderMultiple = () => {
   const selectedItems = useParams();
   const [menu, setMenu] = useState([]);
+  const [dataToSend, setDataToSend] = useState([]);
   let data = selectedItems.data;
   const dataArray = data.split(",");
 
@@ -22,25 +23,48 @@ const ClientOrderMultiple = () => {
       console.log(error);
     }
   };
-
-  console.log(menu);
-
+  const addQuantity = (e, menuID) => {
+    console.log(e, menuID);
+  };
   return (
     <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
       <ClientSideBar />
       <div className="order-multiple-container">
         <ClientNavBar />
-        <div className="top">Order Multiple</div>
-        <div className="bottom">
-          {menu.map((item) => (
-            <div className="menu-continer" key={item.id}>
-              <div className="left-menu-continer">
-                <div className="left-title-container">
-                  <div className="top-left-container">
-                    <h3 className="left-title">Menu</h3>
+        <div className="order-data-main-contaner">
+          <div className="top">
+            <div className="upper-container">
+              <div className="upper-title-wrapper">
+                <h3 className="upper-title">Order Receipt</h3>
+              </div>
+              <div className="btn-place-order-wrapper">
+                <button className="btn-place-order">Place Order</button>
+              </div>
+            </div>
+          </div>
+          <div className="bottom">
+            {menu.map((item) => (
+              <div className="menu-continer" key={item.id}>
+                <div className="menu-title-container">
+                  <div className="title-menu-container">
+                    <h3 className="menu-title">Menu</h3>
+                  </div>
+                  <div className="quantity-container">
+                    <div
+                      className="add-wrapper"
+                      onClick={(e) => addQuantity(e, item.menuID)}
+                    >
+                      <button className="btn-add">+</button>
+                    </div>
+                    <div className="qantity-wrapper">
+                      <span className="quantity">0</span>
+                    </div>
+                    <div className="diff-wrapper">
+                      <button className="btn-diff">-</button>
+                    </div>
                   </div>
                 </div>
-                <div className="center-left-container">
+                <div className="center-menu-container">
                   <div className="image-wrapper">
                     <img
                       src={`http://127.0.0.1:8000/images/menu/${item.image}`}
@@ -49,13 +73,13 @@ const ClientOrderMultiple = () => {
                     />
                   </div>
                 </div>
-                <div className="bottom-left-container">
+                <div className="bottom-menu-container">
                   <div className="menu-name-container">
                     <div className="menu-name-wrapper">
                       <h3 className="menu-name">{item.menu_name}</h3>
                     </div>
                     <div className="menu-name-indicator-wrapper">
-                      <span className="menu-name-indicator">Menu Name:</span>
+                      <span className="menu-name-indicator">Menu Name</span>
                     </div>
                   </div>
                   <div className="menu-price-container">
@@ -68,9 +92,8 @@ const ClientOrderMultiple = () => {
                   </div>
                 </div>
               </div>
-              <div className="right-menu-continer">right</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

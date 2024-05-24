@@ -77,8 +77,11 @@ const Cart = () => {
 
   const orderNowAPI = () => {
     let dataToPass = selectedItems;
-
-    history.push(`/client-order-multiple/${dataToPass}`);
+    if (dataToPass.length > 0) {
+      history.push(`/client-order-multiple/${dataToPass}`);
+    } else {
+      alert("Please choose and item.");
+    }
   };
 
   const removeMultipleFromMyCartAPI = async () => {

@@ -1,73 +1,178 @@
+$grid-size: 220px;
+$grid-gap: auto;
+
 .order-multiple {
   display: flex;
   .order-multiple-container {
     flex: 6;
-    .top {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-    }
-    .bottom {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-      .menu-continer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
+    .order-data-main-contaner {
+      display: flex;
+      flex-direction: row-reverse;
+      .top {
+        flex: 4;
         padding: 10px;
         margin: 10px;
         border-radius: 10px;
         -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-        .left-menu-continer {
-          padding: 15px;
+        .upper-container {
+          width: 95%;
+          margin: 10px;
           display: flex;
-          flex-direction: column;
-          border-right: 2px solid darkslategray;
-          .top-left-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          .upper-title-wrapper {
+            .upper-title {
+              color: darkslategray;
+              text-transform: capitalize;
+            }
           }
-          .center-left-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            .image-wrapper {
-              height: 150px;
-              width: 180px;
-              border-radius: 10px;
-              overflow: hidden;
-              .image {
-                height: 150px;
-                width: 180px;
+          .btn-place-order-wrapper{
+            .btn-place-order{
+              padding: 10px;
+              border-radius: 7px;
+              border: none;
+              background-color: red;
+              color: white;
+              font-weight: bold;
+              font-size: 18px;
+              &:hover{
+                scale: 1.05;
               }
             }
           }
-          .bottom-left-container {
-            padding: 10px;
+        }
+      }
+      .bottom {
+        flex: 6;
+        background-color: none;
+        display: grid;
+        grid-template-columns: repeat(3, $grid-size);
+        justify-content: center;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .menu-continer {
+          padding: 10px;
+          margin: 10px;
+          border-radius: 10px;
+          -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+          box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+          .menu-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            .title-menu-container {
+              width: 90%;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin: 5px;
+              .menu-title {
+                color: darkslategray;
+              }
+            }
+            .quantity-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .add-wrapper {
+                .btn-add {
+                  padding: 3px;
+                  width: 20px;
+                  color: white;
+                  font-size: 15px;
+                  font-weight: bold;
+                  background-color: red;
+                  border: none;
+                  border-radius: 5px 0px 0px 5px;
+                }
+              }
+              .qantity-wrapper {
+                padding: 1.5px;
+                border: 1px solid red;
+                .quantity {
+                  padding: 3px;
+                  font-size: 15px;
+                }
+              }
+              .diff-wrapper {
+                .btn-diff {
+                  padding: 3px;
+                  width: 20px;
+                  color: white;
+                  font-size: 15px;
+                  font-weight: bold;
+                  background-color: red;
+                  border: none;
+                  border-radius: 0px 5px 5px 0px;
+                }
+              }
+            }
+          }
+          .center-menu-container {
+            .image-wrapper {
+              border-radius: 5px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              .image {
+                width: 233px;
+                height: 150px;
+              }
+            }
+          }
+          .bottom-menu-container {
+            margin-top: 10px;
+            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             .menu-name-container {
+              display: flex;
+              flex-direction: column;
+              align-items: start;
               .menu-name-wrapper {
                 .menu-name {
                   text-transform: capitalize;
+                  font-size: 18px;
+                  color: darkslategray;
+                }
+              }
+              .menu-name-indicator-wrapper {
+                .menu-name-indicator {
+                  text-transform: capitalize;
+                  font-size: 12px;
+                  color: grey;
+                }
+              }
+            }
+            .menu-price-container {
+              display: flex;
+              flex-direction: column;
+              align-items: end;
+              .menu-price-wrapper {
+                .menu-price {
+                  text-transform: capitalize;
+                  font-size: 18px;
+                  color: darkslategray;
+                }
+              }
+              .menu-price-indicator-wrapper {
+                .menu-price-indicator {
+                  text-transform: capitalize;
+                  font-size: 12px;
+                  color: grey;
                 }
               }
             }
           }
-        }
-        .right-menu-continer {
-          flex: 6;
         }
       }
     }
