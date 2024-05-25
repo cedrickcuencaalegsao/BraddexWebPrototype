@@ -179,10 +179,10 @@ const ClientOrderNow = () => {
                     <span className="order-summary-value">{`₱ ${data.menuPrice}.00`}</span>
                     <span className="order-summary-value">{data.quantity}</span>
                     <span className="order-summary-value">
-                      {data.paymentType == "" ? "Select" : data.paymentType}
+                      {data.paymentType === "" ? "Select" : data.paymentType}
                     </span>
                     <span className="order-summary-value">
-                      {data.userAddress == ""
+                      {data.userAddress === ""
                         ? "Set Address"
                         : data.userAddress}
                     </span>

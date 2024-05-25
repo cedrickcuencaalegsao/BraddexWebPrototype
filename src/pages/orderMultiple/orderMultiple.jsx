@@ -4,6 +4,7 @@ import ClientNavBar from "../../components/client/navBar/client_navBar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useState } from "react";
 import axios from "axios";
+import { generateRandomID } from "../../idgenerator";
 
 const ClientOrderMultiple = () => {
   const selectedItems = useParams();
@@ -12,6 +13,7 @@ const ClientOrderMultiple = () => {
   let data = selectedItems.data;
   const dataArray = data.split(",");
   const uuID = localStorage.getItem("uuid");
+  const orderID = generateRandomID();
 
   const getMultipleOrderApi = async () => {
     try {
@@ -24,32 +26,58 @@ const ClientOrderMultiple = () => {
       console.log(error);
     }
   };
-  const handleQuantity = (menuID, action) => {
+  const handleQuantity = (menuID, action, price) => {
     // check if menu was in our array to be sent to the server.
     const menuIndex = dataToSend.findIndex((item) => item.menuID == menuID);
     // if menu exists, update its quantity, else add new menu as an objects.
+
+    // update the quantity added by 1.
+    const newDataToSend = [...dataToSend];
+
+    // calculate the item price multiply buy the number of quantity to get the total price.
+    const newPrice = () => {
+      let newPrice =
+        newDataToSend[menuIndex].totalPrice * newDataToSend[menuIndex].Quantity;
+      return newPrice;
+    };
+
     if (menuIndex !== -1) {
-      // update the quantity added by 1.
-      const newDataToSend = [...dataToSend];
       if (action == "increment") {
         newDataToSend[menuIndex].Quantity += 1;
+        newDataToSend[menuIndex].totalPrice = newPrice();
+      } else if (newDataToSend[menuIndex].Quantity == 0) {
+        return 0;
       } else {
-        if (newDataToSend[menuIndex].Quantity == 0) {
-          return 0;
-        } else {
-          newDataToSend[menuIndex].Quantity -= 1;
-        }
+        newDataToSend[menuIndex].Quantity -= 1;
+        newDataToSend[menuIndex].totalPrice = newPrice();
       }
       setDataToSend(newDataToSend);
     } else {
-      // if menu !exists.
+      // if menu not exists.
       setDataToSend((prevDataToSend) => [
         ...prevDataToSend,
-        { menuID: menuID, uuID: uuID, Quantity: 1 },
+        {
+          orderID: orderID,
+          menuID: menuID,
+          uuID: uuID,
+          Quantity: 1,
+          totalPrice: price,
+        },
       ]);
     }
   };
+  const displayQuantity = (menuID) => {
+    let menuArray = dataToSend.findIndex((item) => item.menuID === menuID);
+    console.log(dataToSend);
+    if (menuArray !== -1) {
+      return dataToSend[menuArray].Quantity;
+    } else {
+      return 0;
+    }
+  };
+
   console.log(dataToSend);
+
   return (
     <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
       <ClientSideBar />
@@ -65,6 +93,18 @@ const ClientOrderMultiple = () => {
                 <button className="btn-place-order">Place Order</button>
               </div>
             </div>
+            <div className="lower-container">
+
+              {dataToSend.map((item) => (
+                <div className="menu-receipt-container" key={item.menuID}>
+                  <span className="menu-receipt-value">{item.menuID}</span>
+                  <span className="menu-receipt-value">{item.Quantity}</span>
+                  <span className="menu-receipt-value">{item.Quantity}</span>
+                  <span className="menu-receipt-value">{item.Quantity}</span>
+                  <span className="menu-receipt-value">{item.Quantity}</span>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="bottom">
             {menu.map((item) => (
@@ -74,20 +114,30 @@ const ClientOrderMultiple = () => {
                     <h3 className="menu-title">Menu</h3>
                   </div>
                   <div className="quantity-container">
-                    <div
-                      className="add-wrapper"
-                      onClick={() => handleQuantity(item.menuID, "increment")}
-                    >
-                      <button className="btn-add">+</button>
+                    <div className="add-wrapper">
+                      <button
+                        className="btn-add"
+                        onClick={() =>
+                          handleQuantity(item.menuID, "increment", item.price)
+                        }
+                      >
+                        +
+                      </button>
                     </div>
                     <div className="qantity-wrapper">
-                      <span className="quantity">0</span>
+                      <span className="quantity">
+                        {displayQuantity(item.menuID)}
+                      </span>
                     </div>
-                    <div
-                      className="diff-wrapper"
-                      onClick={() => handleQuantity(item.menuID, "decrement")}
-                    >
-                      <button className="btn-diff">-</button>
+                    <div className="diff-wrapper">
+                      <button
+                        className="btn-diff"
+                        onClick={() =>
+                          handleQuantity(item.menuID, "decrement", item.price)
+                        }
+                      >
+                        -
+                      </button>
                     </div>
                   </div>
                 </div>
