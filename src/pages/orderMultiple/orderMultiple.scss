@@ -28,8 +28,8 @@ $grid-gap: auto;
               text-transform: capitalize;
             }
           }
-          .btn-place-order-wrapper{
-            .btn-place-order{
+          .btn-place-order-wrapper {
+            .btn-place-order {
               padding: 10px;
               border-radius: 7px;
               border: none;
@@ -37,10 +37,22 @@ $grid-gap: auto;
               color: white;
               font-weight: bold;
               font-size: 18px;
-              &:hover{
+              &:hover {
                 scale: 1.05;
               }
             }
+          }
+        }
+        .menu-receipt-container {
+          display: flex;
+          flex-direction: row;
+          .left-menu-receipt-wrapper {
+            display: flex;
+            flex-direction: column;
+          }
+          .right-menu-receipt-wrapper {
+            display: flex;
+            flex-direction: column;
           }
         }
       }

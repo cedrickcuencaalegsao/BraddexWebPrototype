@@ -26,7 +26,8 @@ const ClientOrderMultiple = () => {
       console.log(error);
     }
   };
-  const handleQuantity = (menuID, action, price) => {
+  const handleQuantity = (menuID, action, price, menuName) => {
+    console.log(menuName);
     // check if menu was in our array to be sent to the server.
     const menuIndex = dataToSend.findIndex((item) => item.menuID == menuID);
     // if menu exists, update its quantity, else add new menu as an objects.
@@ -35,48 +36,53 @@ const ClientOrderMultiple = () => {
     const newDataToSend = [...dataToSend];
 
     // calculate the item price multiply buy the number of quantity to get the total price.
-    const newPrice = () => {
-      let newPrice =
-        newDataToSend[menuIndex].totalPrice * newDataToSend[menuIndex].Quantity;
+    const newPrice = (price) => {
+      let newPrice = price * newDataToSend[menuIndex].Quantity;
       return newPrice;
     };
 
     if (menuIndex !== -1) {
       if (action == "increment") {
         newDataToSend[menuIndex].Quantity += 1;
-        newDataToSend[menuIndex].totalPrice = newPrice();
-      } else if (newDataToSend[menuIndex].Quantity == 0) {
-        return 0;
-      } else {
-        newDataToSend[menuIndex].Quantity -= 1;
-        newDataToSend[menuIndex].totalPrice = newPrice();
+        let totalPrice = newPrice(price);
+        newDataToSend[menuIndex].totalPrice = totalPrice;
+      } else if (action == "decrement") {
+        if (newDataToSend[menuIndex].Quantity !== 0) {
+          newDataToSend[menuIndex].Quantity -= 1;
+          let totalPrice = newPrice(price);
+          newDataToSend[menuIndex].totalPrice = totalPrice;
+        } else {
+          return 0;
+        }
       }
       setDataToSend(newDataToSend);
     } else {
       // if menu not exists.
-      setDataToSend((prevDataToSend) => [
-        ...prevDataToSend,
-        {
-          orderID: orderID,
-          menuID: menuID,
-          uuID: uuID,
-          Quantity: 1,
-          totalPrice: price,
-        },
-      ]);
+      if (action == "increment") {
+        setDataToSend((prevDataToSend) => [
+          ...prevDataToSend,
+          {
+            orderID: orderID,
+            menuID: menuID,
+            menuName: menuName,
+            uuID: uuID,
+            Quantity: 1,
+            totalPrice: price,
+          },
+        ]);
+      } else {
+        return 0;
+      }
     }
   };
   const displayQuantity = (menuID) => {
     let menuArray = dataToSend.findIndex((item) => item.menuID === menuID);
-    console.log(dataToSend);
     if (menuArray !== -1) {
       return dataToSend[menuArray].Quantity;
     } else {
       return 0;
     }
   };
-
-  console.log(dataToSend);
 
   return (
     <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
@@ -94,16 +100,34 @@ const ClientOrderMultiple = () => {
               </div>
             </div>
             <div className="lower-container">
-
-              {dataToSend.map((item) => (
-                <div className="menu-receipt-container" key={item.menuID}>
-                  <span className="menu-receipt-value">{item.menuID}</span>
-                  <span className="menu-receipt-value">{item.Quantity}</span>
-                  <span className="menu-receipt-value">{item.Quantity}</span>
-                  <span className="menu-receipt-value">{item.Quantity}</span>
-                  <span className="menu-receipt-value">{item.Quantity}</span>
-                </div>
-              ))}
+              {dataToSend.map((item) =>
+                item.Quantity !== 0 ? (
+                  <div className="menu-receipt-container" key={item.menuID}>
+                    <div className="left-menu-receipt-wrapper">
+                      <span className="menu-receipt-value">Order ID</span>
+                      <span className="menu-receipt-value">Menu ID</span>
+                      <span className="menu-receipt-value">Menu Name</span>
+                      <span className="menu-receipt-value">Quantity</span>
+                      <span className="menu-receipt-value">Total Price</span>
+                    </div>
+                    <div className="right-menu-receipt-wrapper">
+                      <span className="menu-receipt-value">{item.orderID}</span>
+                      <span className="menu-receipt-value">{item.menuID}</span>
+                      <span className="menu-receipt-value">
+                        {item.menuName}
+                      </span>
+                      <span className="menu-receipt-value">
+                        {item.Quantity}
+                      </span>
+                      <span className="menu-receipt-value">
+                        {item.totalPrice}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div key={item.id}></div>
+                )
+              )}
             </div>
           </div>
           <div className="bottom">
@@ -118,7 +142,12 @@ const ClientOrderMultiple = () => {
                       <button
                         className="btn-add"
                         onClick={() =>
-                          handleQuantity(item.menuID, "increment", item.price)
+                          handleQuantity(
+                            item.menuID,
+                            "increment",
+                            item.price,
+                            item.menu_name
+                          )
                         }
                       >
                         +
@@ -133,7 +162,12 @@ const ClientOrderMultiple = () => {
                       <button
                         className="btn-diff"
                         onClick={() =>
-                          handleQuantity(item.menuID, "decrement", item.price)
+                          handleQuantity(
+                            item.menuID,
+                            "decrement",
+                            item.price,
+                            item.menu_name
+                          )
                         }
                       >
                         -
