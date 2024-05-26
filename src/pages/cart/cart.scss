@@ -47,11 +47,13 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
             width: 150px;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-            span {
-              padding: 10px;
+            button {
+              padding: 7px;
               cursor: pointer;
+              border: none;
+              outline: none;
               &:hover {
-                background-color: #f0f0f0;
+                scale: 1.05;
               }
             }
           }

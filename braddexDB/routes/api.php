@@ -19,6 +19,7 @@ Route::post('get-delivery-menu', [braddexdb_controller::class, 'getDeliveryMenu'
 Route::post('get-multiple-order', [braddexdb_controller::class, 'multipleDelivery']);
 Route::post('multi-order', [braddexdb_controller::class, 'multiOrder']);
 Route::post('update-IsDelete-Cart-Menu', [braddexdb_controller::class, 'updateIsDeleteCartMenu']);
+Route::post('multi-isDelete-cart-menu', [braddexdb_controller::class, 'multiIsDeleteCartMenu']);
 
 
 Route::get('users', [braddexdb_controller::class, 'allUsers']);

@@ -20,11 +20,23 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedAll, setSelectedAll] = useState(false);
   const history = useHistory();
   // converting object into array so we can use .map() when we return data.
   const menuArray = Object.values(menu);
   const uuid = localStorage.getItem("uuid");
+
+  const getCartMenuAPI = async (menuIDArray) => {
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/getcartmenu/",
+        menuIDArray
+      );
+      setMenu(API.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getCartAPI = async () => {
@@ -33,34 +45,27 @@ const Cart = () => {
           `http://127.0.0.1:8000/api/getcart/${uuid}`
         );
         setData(API.data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const getCartMenuAPI = async (menuIDArray) => {
-      try {
-        const API = await axios.post(
-          "http://127.0.0.1:8000/api/getcartmenu/",
-          menuIDArray
-        );
-        setMenu(API.data.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
+
+    getCartAPI();
+
+    const interval = setInterval(() => {
+      getCartAPI();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [uuid]);
+
+  useEffect(() => {
     if (data.length > 0) {
       const menuIDArray = data.map((item) => item.menuID);
       getCartMenuAPI(menuIDArray);
     }
-    getCartAPI();
-    const interval = setInterval(() => {
-      getCartAPI();
-    }, 1000);
-    return () => clearInterval(interval);
   }, [data]);
-
-  // console.log(data, menuArray);
 
   const handleOderNow = (menuID) => {
     let menu_ID = menuID;
@@ -85,7 +90,20 @@ const Cart = () => {
   };
 
   const removeMultipleFromMyCartAPI = async () => {
-    console.log(selectedItems);
+    const data = selectedItems.map((item) => ({
+      uuID: uuid,
+      menuID: item,
+    }));
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/multi-isDelete-cart-menu/",
+        data
+      );
+      console.log(API.data);
+      API && history.push("/client-history");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const removeFromMyCartAPI = async (menuID) => {
@@ -106,9 +124,9 @@ const Cart = () => {
     }
   };
 
-  // const addToMyFavorites = async () => {
-  //   console.log(selectedItems);
-  // };
+  const addToMyFavorites = async () => {
+    console.log(selectedItems);
+  };
 
   const showOption = () => {
     setShowDropdown(!showDropdown);
@@ -116,12 +134,10 @@ const Cart = () => {
 
   const handleSelectAll = () => {
     setSelectedItems(menuArray.map((item) => item.menuID));
-    setSelectedAll(true);
   };
 
   const handleDeselectAll = () => {
     setSelectedItems([]);
-    setSelectedAll(false);
   };
 
   return (
@@ -138,12 +154,17 @@ const Cart = () => {
               <h1 className="bottom-title">Cart List</h1>
             </div>
 
-            <div className="bottom-icon-continer" onClick={() => showOption()}>
-              <MoreVertIcon className="bottom-icon" />
+            <div className="bottom-icon-continer">
+              <MoreVertIcon
+                className="bottom-icon"
+                onClick={() => showOption()}
+              />
               {showDropdown && (
                 <div className="table-option">
-                  <span onClick={() => handleSelectAll()}>Select All</span>
-                  <span onClick={() => handleDeselectAll()}>Deselect All</span>
+                  <button onClick={() => handleSelectAll()}>Select All</button>
+                  <button onClick={() => handleDeselectAll()}>
+                    Deselect All
+                  </button>
                 </div>
               )}
             </div>
@@ -187,7 +208,7 @@ const Cart = () => {
               <Fab
                 color="secondary"
                 aria-label="edit"
-                onClick={() => removeFromMyCartAPI()}
+                onClick={() => removeMultipleFromMyCartAPI()}
                 sx={{
                   backgroundColor: "white",
                   "&:hover": {
@@ -206,7 +227,7 @@ const Cart = () => {
                 />
               </Fab>
 
-              {/* <Fab
+              <Fab
                 aria-label="like"
                 onClick={() => addToMyFavorites()}
                 sx={{
@@ -225,7 +246,7 @@ const Cart = () => {
                     color: "crimson",
                   }}
                 />
-              </Fab> */}
+              </Fab>
             </Box>
           </div>
           <div className="table-carts">
@@ -241,11 +262,11 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="card-cart-icon-container">
-                    <div
-                      className="delete-cart-item-container"
-                      onClick={() => removeFromMyCartAPI(item.menuID)}
-                    >
-                      <DeleteOutlineRoundedIcon className="card-cart-icon" />
+                    <div className="delete-cart-item-container">
+                      <DeleteOutlineRoundedIcon
+                        className="card-cart-icon"
+                        onClick={() => removeFromMyCartAPI(item.menuID)}
+                      />
                     </div>
                   </div>
                 </div>
@@ -253,7 +274,7 @@ const Cart = () => {
                   <div className="image-wrapper">
                     <img
                       src={`http://127.0.0.1:8000/images/menu/${item.image}`}
-                      alt="image"
+                      alt="menu"
                       className="image"
                     />
                   </div>
@@ -273,11 +294,13 @@ const Cart = () => {
                       onChange={() => handleSelectCardItem(item.menuID)}
                     />
                   </div>
-                  <div
-                    className="btn-order-container"
-                    onClick={() => handleOderNow(item.menuID)}
-                  >
-                    <button className="btn-order-now">Order Now</button>
+                  <div className="btn-order-container">
+                    <button
+                      className="btn-order-now"
+                      onClick={() => handleOderNow(item.menuID)}
+                    >
+                      Order Now
+                    </button>
                   </div>
                 </div>
               </div>

@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const ClientOrderMultiple = () => {
   const selectedItems = useParams();
@@ -17,13 +18,14 @@ const ClientOrderMultiple = () => {
   const [address, setAddress] = useState("");
   const [orderCount, setOrderCount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
   const uuID = localStorage.getItem("uuid");
   const orderID = generateRandomID();
 
   let data = selectedItems.data;
   const dataArray = data.split(",");
-
+  console.log(dataArray);
   const multiOrderAPI = async (data) => {
     try {
       const resp = await axios.post(
@@ -36,7 +38,22 @@ const ClientOrderMultiple = () => {
       return false;
     }
   };
-
+  useEffect(() => {
+    const getMultipleOrderApi = async () => {
+      console.log("ok");
+      try {
+        const API = await axios.post(
+          "http://127.0.0.1:8000/api/get-multiple-order/",
+          dataArray
+        );
+        setMenu(API.data.menu);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMultipleOrderApi();
+  }, [dataArray]);
   useEffect(() => {
     let count_order = dataToSend.filter((item) => item.Quantity !== 0).length;
     let totalAmount = dataToSend.reduce(
@@ -45,26 +62,16 @@ const ClientOrderMultiple = () => {
     );
     setTotalAmount(totalAmount);
     setOrderCount(count_order);
-  });
+  }, [dataToSend]);
+
   const handlePlaceOrderAPI = async () => {
     const data = dataToSend.filter((item) => item.Quantity !== 0);
     const status = await multiOrderAPI(data);
     status && history.push("/client-delivery");
   };
-  const getMultipleOrderApi = async () => {
-    try {
-      const API = await axios.post(
-        "http://127.0.0.1:8000/api/get-multiple-order/",
-        dataArray
-      );
-      setMenu(API.data.menu);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const handleQuantity = (menuID, action, price, menuName) => {
     // check if menu was in our array to be sent to the server.
-    const menuIndex = dataToSend.findIndex((item) => item.menuID == menuID);
+    const menuIndex = dataToSend.findIndex((item) => item.menuID === menuID);
     // if menu exists, update its quantity, else add new menu as an objects.
 
     // update the quantity added by 1.
@@ -77,11 +84,11 @@ const ClientOrderMultiple = () => {
     };
 
     if (menuIndex !== -1) {
-      if (action == "increment") {
+      if (action === "increment") {
         newDataToSend[menuIndex].Quantity += 1;
         let totalPrice = newPrice(price);
         newDataToSend[menuIndex].totalPrice = totalPrice;
-      } else if (action == "decrement") {
+      } else if (action === "decrement") {
         if (newDataToSend[menuIndex].Quantity !== 0) {
           newDataToSend[menuIndex].Quantity -= 1;
           let totalPrice = newPrice(price);
@@ -91,7 +98,7 @@ const ClientOrderMultiple = () => {
       setDataToSend(newDataToSend);
     } else {
       // if menu not exists.
-      if (action == "increment") {
+      if (action === "increment") {
         if (paymentType !== "" && address !== "") {
           setDataToSend((prevDataToSend) => [
             ...prevDataToSend,
@@ -126,12 +133,26 @@ const ClientOrderMultiple = () => {
   };
 
   return (
-    <div className="order-multiple" onLoad={() => getMultipleOrderApi()}>
+    <div className="order-multiple">
       <ClientSideBar />
       <div className="order-multiple-container">
         <ClientNavBar />
         <div className="order-data-main-contaner">
           <div className="right-container">
+            <div className="progress">
+              {loading ? (
+                <div className="loading">
+                  <LinearProgress
+                    sx={{
+                      bgcolor: "lightgray",
+                      "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="loading"></div>
+              )}
+            </div>
             <div className="upper-container">
               <div className="upper-title-wrapper">
                 <h3 className="upper-title">Order Receipt</h3>

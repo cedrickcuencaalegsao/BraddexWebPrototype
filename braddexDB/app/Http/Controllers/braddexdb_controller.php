@@ -358,6 +358,16 @@ class braddexdb_controller extends Controller
             return response()->json(['message' => 'Request Failed.']);
         }
     }
+    public function multiIsDeleteCartMenu(Request $request)
+    {
+        $req = $request->all();
+        foreach ($req as $item) {
+            tbl_cart::where('userID', $item['uuID'])->where('menuID', $item['menuID'])->update([
+                'isDeleted' => true,
+            ]);
+        }
+        return response()->json(compact('req'));
+    }
     public function orderNow(Request $request)
     {
         $data = $request->all();
