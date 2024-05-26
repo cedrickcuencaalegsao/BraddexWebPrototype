@@ -106,9 +106,9 @@ const Cart = () => {
     }
   };
 
-  const addToMyFavorites = async () => {
-    console.log(selectedItems);
-  };
+  // const addToMyFavorites = async () => {
+  //   console.log(selectedItems);
+  // };
 
   const showOption = () => {
     setShowDropdown(!showDropdown);
@@ -206,7 +206,7 @@ const Cart = () => {
                 />
               </Fab>
 
-              <Fab
+              {/* <Fab
                 aria-label="like"
                 onClick={() => addToMyFavorites()}
                 sx={{
@@ -225,7 +225,7 @@ const Cart = () => {
                     color: "crimson",
                   }}
                 />
-              </Fab>
+              </Fab> */}
             </Box>
           </div>
           <div className="table-carts">

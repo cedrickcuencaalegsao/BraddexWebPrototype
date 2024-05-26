@@ -1,8 +1,11 @@
 import "./orderMultiple.scss";
 import ClientSideBar from "../../components/client/sideBar/client_sidebar";
 import ClientNavBar from "../../components/client/navBar/client_navBar";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { useState } from "react";
+import {
+  useParams,
+  useHistory,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
 
@@ -10,11 +13,44 @@ const ClientOrderMultiple = () => {
   const selectedItems = useParams();
   const [menu, setMenu] = useState([]);
   const [dataToSend, setDataToSend] = useState([]);
-  let data = selectedItems.data;
-  const dataArray = data.split(",");
+  const [paymentType, setPaymentType] = useState("");
+  const [address, setAddress] = useState("");
+  const [orderCount, setOrderCount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const history = useHistory();
   const uuID = localStorage.getItem("uuid");
   const orderID = generateRandomID();
 
+  let data = selectedItems.data;
+  const dataArray = data.split(",");
+
+  const multiOrderAPI = async (data) => {
+    try {
+      const resp = await axios.post(
+        "http://127.0.0.1:8000/api/multi-order/",
+        data
+      );
+      console.log(resp.data);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    let count_order = dataToSend.filter((item) => item.Quantity !== 0).length;
+    let totalAmount = dataToSend.reduce(
+      (accumulator, item) => accumulator + item.totalPrice,
+      0
+    );
+    setTotalAmount(totalAmount);
+    setOrderCount(count_order);
+  });
+  const handlePlaceOrderAPI = async () => {
+    const data = dataToSend.filter((item) => item.Quantity !== 0);
+    const status = await multiOrderAPI(data);
+    status && history.push("/client-delivery");
+  };
   const getMultipleOrderApi = async () => {
     try {
       const API = await axios.post(
@@ -27,7 +63,6 @@ const ClientOrderMultiple = () => {
     }
   };
   const handleQuantity = (menuID, action, price, menuName) => {
-    console.log(menuName);
     // check if menu was in our array to be sent to the server.
     const menuIndex = dataToSend.findIndex((item) => item.menuID == menuID);
     // if menu exists, update its quantity, else add new menu as an objects.
@@ -51,25 +86,31 @@ const ClientOrderMultiple = () => {
           newDataToSend[menuIndex].Quantity -= 1;
           let totalPrice = newPrice(price);
           newDataToSend[menuIndex].totalPrice = totalPrice;
-        } else {
-          return 0;
         }
       }
       setDataToSend(newDataToSend);
     } else {
       // if menu not exists.
       if (action == "increment") {
-        setDataToSend((prevDataToSend) => [
-          ...prevDataToSend,
-          {
-            orderID: orderID,
-            menuID: menuID,
-            menuName: menuName,
-            uuID: uuID,
-            Quantity: 1,
-            totalPrice: price,
-          },
-        ]);
+        if (paymentType !== "" && address !== "") {
+          setDataToSend((prevDataToSend) => [
+            ...prevDataToSend,
+            {
+              orderID: orderID,
+              menuID: menuID,
+              menuName: menuName,
+              uuID: uuID,
+              Quantity: 1,
+              totalPrice: price,
+              paymentType: paymentType,
+              address: address,
+            },
+          ]);
+        } else {
+          alert(
+            "Please fill up the payment type and delivery address first before adding items. If payment type and address is unintentionally made you can repeat the process by simply reloading the page."
+          );
+        }
       } else {
         return 0;
       }
@@ -90,13 +131,47 @@ const ClientOrderMultiple = () => {
       <div className="order-multiple-container">
         <ClientNavBar />
         <div className="order-data-main-contaner">
-          <div className="top">
+          <div className="right-container">
             <div className="upper-container">
               <div className="upper-title-wrapper">
                 <h3 className="upper-title">Order Receipt</h3>
               </div>
+              <div className="total-ammount-receipt">
+                <span className="total-indicator">Total</span>
+                <h3 className="total-value">{`₱ ${totalAmount}.00`}</h3>
+              </div>
               <div className="btn-place-order-wrapper">
-                <button className="btn-place-order">Place Order</button>
+                <button
+                  className="btn-place-order"
+                  onClick={() => handlePlaceOrderAPI()}
+                >
+                  Place Order ({orderCount})
+                </button>
+              </div>
+            </div>
+            <div className="center-container">
+              <div className="payment-type-wrapper">
+                <span className="payment-type-indicator">Payment Type</span>
+                <select
+                  name="paymentType"
+                  id="paymentType"
+                  className="payment-type"
+                  onChange={(e) => setPaymentType(e.target.value)}
+                  disabled={dataToSend.length > 0}
+                >
+                  <option value="Select">Select</option>
+                  <option value="Cash on delivery">Cash on delivery</option>
+                  <option value="Pay On Casher Area">Pay On Casher Area</option>
+                </select>
+              </div>
+              <div className="address-wrapper">
+                <span className="address-indicator">Delivery Address</span>
+                <input
+                  type="text"
+                  className="address"
+                  onChange={(e) => setAddress(e.target.value)}
+                  disabled={dataToSend.length > 0}
+                />
               </div>
             </div>
             <div className="lower-container">
@@ -104,15 +179,13 @@ const ClientOrderMultiple = () => {
                 item.Quantity !== 0 ? (
                   <div className="menu-receipt-container" key={item.menuID}>
                     <div className="left-menu-receipt-wrapper">
-                      <span className="menu-receipt-value">Order ID</span>
-                      <span className="menu-receipt-value">Menu ID</span>
-                      <span className="menu-receipt-value">Menu Name</span>
-                      <span className="menu-receipt-value">Quantity</span>
-                      <span className="menu-receipt-value">Total Price</span>
+                      <span className="menu-receipt-indicator">Menu Name</span>
+                      <span className="menu-receipt-indicator">Quantity</span>
+                      <span className="menu-receipt-indicator">
+                        Total Price
+                      </span>
                     </div>
                     <div className="right-menu-receipt-wrapper">
-                      <span className="menu-receipt-value">{item.orderID}</span>
-                      <span className="menu-receipt-value">{item.menuID}</span>
                       <span className="menu-receipt-value">
                         {item.menuName}
                       </span>
@@ -120,7 +193,7 @@ const ClientOrderMultiple = () => {
                         {item.Quantity}
                       </span>
                       <span className="menu-receipt-value">
-                        {item.totalPrice}
+                        {`₱ ${item.totalPrice}.00`}
                       </span>
                     </div>
                   </div>
@@ -130,7 +203,7 @@ const ClientOrderMultiple = () => {
               )}
             </div>
           </div>
-          <div className="bottom">
+          <div className="left-container">
             {menu.map((item) => (
               <div className="menu-continer" key={item.menuID}>
                 <div className="menu-title-container">

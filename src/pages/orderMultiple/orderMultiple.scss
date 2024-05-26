@@ -8,7 +8,7 @@ $grid-gap: auto;
     .order-data-main-contaner {
       display: flex;
       flex-direction: row-reverse;
-      .top {
+      .right-container {
         flex: 4;
         padding: 10px;
         margin: 10px;
@@ -28,6 +28,19 @@ $grid-gap: auto;
               text-transform: capitalize;
             }
           }
+          .total-ammount-receipt {
+            display: flex;
+            flex-direction: column;
+            .total-indicator {
+              color: darkslategray;
+              font-size: 13px;
+              margin-bottom: 3px;
+            }
+            .total-value{
+              color: darkslategray;
+              font-size: 20px;
+            }
+          }
           .btn-place-order-wrapper {
             .btn-place-order {
               padding: 10px;
@@ -43,20 +56,78 @@ $grid-gap: auto;
             }
           }
         }
+        .center-container {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+          margin-bottom: 5px;
+          .payment-type-wrapper,
+          .address-wrapper {
+            display: flex;
+            flex-direction: column;
+            .payment-type-indicator,
+            .address-indicator {
+              color: darkslategray;
+              font-size: 13px;
+              margin-bottom: 3px;
+            }
+            .payment-type {
+              height: 30px;
+              width: 190px;
+              border: 2px solid red;
+              background-color: none;
+              outline: none;
+              border-radius: 3px;
+              font-weight: bold;
+              font-size: 18px;
+            }
+            .address {
+              height: 24px;
+              width: 190px;
+              border: 2px solid red;
+              background-color: none;
+              outline: none;
+              border-radius: 3px;
+              font-weight: bold;
+              font-size: 18px;
+            }
+          }
+        }
         .menu-receipt-container {
           display: flex;
           flex-direction: row;
+          justify-content: center;
+          border-top: 1px solid darkslategray;
+          width: 100%;
           .left-menu-receipt-wrapper {
+            flex: 2;
             display: flex;
             flex-direction: column;
+            align-items: start;
+            .menu-receipt-indicator {
+              text-transform: capitalize;
+              font-size: 13px;
+              color: darkslategray;
+              margin: 2px;
+            }
           }
           .right-menu-receipt-wrapper {
+            flex: 2;
             display: flex;
             flex-direction: column;
+            align-items: start;
+            .menu-receipt-value {
+              text-transform: capitalize;
+              font-size: 13px;
+              color: darkslategray;
+              margin: 2px;
+            }
           }
         }
       }
-      .bottom {
+      .left-container {
         flex: 6;
         background-color: none;
         display: grid;
@@ -70,6 +141,7 @@ $grid-gap: auto;
         .menu-continer {
           padding: 10px;
           margin: 10px;
+          height: 240px;
           border-radius: 10px;
           -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
           box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);

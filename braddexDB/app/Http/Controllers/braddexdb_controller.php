@@ -405,6 +405,25 @@ class braddexdb_controller extends Controller
         $menu = tbl_menu::where('menuID', $menuID)->first();
         return response()->json(compact('menu'));
     }
+    public function multiOrder(Request $request)
+    {
+        $req = $request->all();
+        foreach ($req as $item) {
+            tbl_order::insert([
+                'orderID' => $item['orderID'],
+                'userID' => $item['uuID'],
+                'menuID' => $item['menuID'],
+                'paymentType' => $item['paymentType'],
+                'userAddress' => $item['address'],
+                'totalAmmount' => $item['totalPrice'],
+                'quantity' => $item['Quantity'],
+                'isPaid' => false,
+                'isDelivered' => false,
+                'isDeleted' => false,
+            ]);
+        }
+        return response()->json(compact('req'));
+    }
     public function getDeliveryMenu(Request $request)
     {
         $data = $request->all();
@@ -413,8 +432,8 @@ class braddexdb_controller extends Controller
     }
     public function multipleDelivery(Request $request)
     {
-        $data = $request->all();
-        $menu = tbl_menu::whereIn('menuID', $data)->get();
+        $req = $request->all();
+        $menu = tbl_menu::whereIn('menuID', $req)->get();
         return response()->json(compact('menu'));
     }
     public function getTitleImgaes()
