@@ -3,6 +3,8 @@ import ClientNavBar from "../../components/client/navBar/client_navBar";
 import ClientSideBar from "../../components/client/sideBar/client_sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 const ClientHistory = () => {
   const [userHistory, setUserHistory] = useState({});
@@ -47,15 +49,26 @@ const ClientHistory = () => {
     }
   }, [userHistory]);
 
+  const formattedDate = (data) => {
+    if (data !== null) {
+      return moment(data).format("YYYY-MM-DD");
+    }
+    return "Not Updated";
+  };
+
+  const formatIdDeleted = (data) => {
+    if (data === 1) {
+      return "Deleted";
+    }
+    return "Not Deleted";
+  };
+
   return (
     <div className="history">
       <ClientSideBar />
       <div className="historyContianer">
         <ClientNavBar />
         <div className="content-container">
-          <div className="page-title-wrapper">
-            <h1 className="page-title">History</h1>
-          </div>
           <div className="display-data-container">
             <div className="cart-container">
               <div className="cart-title-wrapper">
@@ -70,6 +83,27 @@ const ClientHistory = () => {
                   <div className="items">
                     <span className="item-indicator">Menu ID:</span>
                     <span className="item-value">{item.menuID}</span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Date Added:</span>
+                    <span className="item-value">
+                      {formattedDate(item.created_at)}
+                    </span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Date Updated:</span>
+                    <span className="item-value">
+                      {formattedDate(item.updated_at)}
+                    </span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Deleted:</span>
+                    <span className="item-value">
+                      {formatIdDeleted(item.isDeleted)}
+                    </span>
+                  </div>
+                  <div className="action-icon">
+                    <DeleteOutlinedIcon className="icon" />
                   </div>
                 </div>
               ))}
