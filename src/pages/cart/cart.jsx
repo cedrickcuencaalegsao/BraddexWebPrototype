@@ -11,7 +11,6 @@ import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const Cart = () => {
@@ -124,10 +123,6 @@ const Cart = () => {
     }
   };
 
-  const addToMyFavorites = async () => {
-    console.log(selectedItems);
-  };
-
   const showOption = () => {
     setShowDropdown(!showDropdown);
   };
@@ -223,27 +218,6 @@ const Cart = () => {
                 <DeleteOutlineRoundedIcon
                   sx={{
                     color: "red",
-                  }}
-                />
-              </Fab>
-
-              <Fab
-                aria-label="like"
-                onClick={() => addToMyFavorites()}
-                sx={{
-                  backgroundColor: "white",
-                  "&:hover": {
-                    backgroundColor: "crimson",
-                    "& .MuiSvgIcon-root": {
-                      color: "white",
-                      scale: "1.2",
-                    },
-                  },
-                }}
-              >
-                <FavoriteIcon
-                  sx={{
-                    color: "crimson",
                   }}
                 />
               </Fab>

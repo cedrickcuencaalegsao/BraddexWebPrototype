@@ -9,10 +9,10 @@ import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const ClientDelivery = () => {
-  const uuid = localStorage.getItem("uuid");
-  const [loading, setLaoding] = useState(true);
   const [data, setData] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [loading, setLaoding] = useState(true);
+  const uuid = localStorage.getItem("uuid");
 
   useEffect(() => {
     const getOrderAPI = async () => {
@@ -60,6 +60,30 @@ const ClientDelivery = () => {
     return { ...dataItem, ...newMenu };
   });
 
+  const handleCancelOrder = async (menuID) => {
+    let data = {
+      uuID: uuid,
+      menuID: menuID,
+    };
+    try {
+      await axios.post("http://127.0.0.1:8000/api/cancel-order", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleMarkAsDelivered = async (menuID) => {
+    let data = {
+      uuID: uuid,
+      menuID: menuID,
+    };
+    try {
+      await axios.post("http://127.0.0.1:8000/api/user-mark-delivered", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="clientDeliver">
       <ClientSideBar />
@@ -84,7 +108,7 @@ const ClientDelivery = () => {
           ) : (
             <div className="table-container">
               {cardData.map((item, index) => (
-                <div className="card-delivery" key={index}>
+                <div className="card-delivery" key={index.id}>
                   <div className="card-top-container">
                     <div className="card-title-container">
                       <div className="menu-name-container">
@@ -96,10 +120,10 @@ const ClientDelivery = () => {
                     </div>
                     <div className="card-icon-container">
                       <div className="cancel-icon-container">
-                        <CancelOutlinedIcon className="cancel-icon" />
-                      </div>
-                      <div className="delete-icon-conatiner">
-                        <DeleteOutlineRoundedIcon className="delete-icon" />
+                        <CancelOutlinedIcon
+                          className="cancel-icon"
+                          onClick={() => handleCancelOrder(item.menuID)}
+                        />
                       </div>
                     </div>
                   </div>
@@ -107,7 +131,7 @@ const ClientDelivery = () => {
                     <div className="image-container">
                       <img
                         src={`http://127.0.0.1:8000/images/menu/${item.image}`}
-                        alt="image"
+                        alt="menu"
                         className="image"
                       />
                     </div>
@@ -115,14 +139,21 @@ const ClientDelivery = () => {
                   <div className="card-bottom-container">
                     <div className="total-ammount-container">
                       <div className="total-ammount-indicator-container">
-                        <span className="total-ammount-indicator">Total Ammount</span>
+                        <span className="total-ammount-indicator">
+                          Total Ammount
+                        </span>
                       </div>
                       <div className="total-ammount-container">
                         <h2 className="total-ammount">{`₱ ${item.totalAmmount}.00`}</h2>
                       </div>
                     </div>
                     <div className="botton-container">
-                      <button className="botton-mark">Delivered</button>
+                      <button
+                        className="botton-mark"
+                        onClick={() => handleMarkAsDelivered(item.menuID)}
+                      >
+                        Delivered
+                      </button>
                     </div>
                   </div>
                 </div>

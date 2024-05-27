@@ -397,6 +397,7 @@ class braddexdb_controller extends Controller
             'isPaid' => false,
             'isDelivered' => false,
             'isDeleted' => false,
+            'isCancelled' => false,
             'created_at' => $created_at,
         ]);
         if ($creatOrder) {
@@ -407,7 +408,7 @@ class braddexdb_controller extends Controller
     }
     public function getOrders($uuid)
     {
-        $data = tbl_order::where('userID', $uuid)->where('isDeleted', false)->where('isPaid', false)->get();
+        $data = tbl_order::where('userID', $uuid)->where('isDeleted', false)->where('isPaid', false)->where('isCancelled', false)->where('isDelivered', false)->get();
         return response()->json(compact('data'));
     }
     public function getOrderNowMenu($menuID)
@@ -417,6 +418,7 @@ class braddexdb_controller extends Controller
     }
     public function multiOrder(Request $request)
     {
+        $created_at = Carbon::now()->toDateTimeString();
         $req = $request->all();
         foreach ($req as $item) {
             tbl_order::insert([
@@ -429,7 +431,9 @@ class braddexdb_controller extends Controller
                 'quantity' => $item['Quantity'],
                 'isPaid' => false,
                 'isDelivered' => false,
+                'isCancelled' => false,
                 'isDeleted' => false,
+                'created_at' => $created_at,
             ]);
         }
         return response()->json(compact('req'));
@@ -445,6 +449,36 @@ class braddexdb_controller extends Controller
         $req = $request->all();
         $menu = tbl_menu::whereIn('menuID', $req)->get();
         return response()->json(compact('menu'));
+    }
+    public function cancelOrder(Request $request)
+    {
+        $req = $request->all();
+        $uuID = $req['uuID'];
+        $menuID = $req['menuID'];
+        $updated_at = Carbon::now()->toDateTimeString();
+        tbl_order::where('userID', $uuID)->where('menuID', $menuID)->update([
+            'isCancelled' => true,
+            'updated_at' => $updated_at,
+        ]);
+        return response()->json(['message' => 'Order canceled successfully. ']);
+    }
+    public function userMarkDeliverd(Request $request)
+    {
+        $req = $request->all();
+        $uuID = $req['uuID'];
+        $menuID = $req['menuID'];
+        $updated_at = Carbon::now()->toDateTimeString();
+        tbl_order::where('userID', $uuID)->where('menuID', $menuID)->update([
+            'isDelivered' => true,
+            'updated_at' => $updated_at,
+        ]);
+        return response()->json(['message' => 'Mark as delivered.']);
+    }
+    public function getHistory($uuID)
+    {
+        $cart = tbl_cart::where('userID', $uuID)->get();
+        $order = tbl_order::where('userID', $uuID)->get();
+        return response()->json(compact('cart', 'order'));
     }
     public function getTitleImgaes()
     {
