@@ -1,50 +1,47 @@
-.dataTable{
-    padding: 15px;
-    height: 100vh;
+.dataTable {
+  padding: 15px;
+  height: 100vh;
 
-    .table{
-        border-radius: 10px;
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
-        
+  .table {
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    .cellAction {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
 
-        .cellAction{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-
-            .viewButton{
-                padding: 2px 5px;
-                border-radius: 5px;
-                color: rgba(0, 0, 139, 0.563);
-                cursor: pointer;
-            }
-            .deleteButton{
-                padding: 2px 5px;
-                border-radius: 5px;
-                color: rgba(220, 20, 60, 0.62);
-                cursor: pointer;
-            }
-        }
-    }
-    .cellWithStatus{
-        margin-top: 10px;
-        padding: 5px;
+      .viewButton {
+        padding: 2px 5px;
         border-radius: 5px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &.Online{
-            color: green;
-            background-color: rgba(0, 128, 0, 0.186);
-        }
-        &.Offline{
-            color: crimson;
-            background-color: rgba(220, 20, 60, 0.226);
-        }
+        color: rgba(0, 0, 139, 0.563);
+        cursor: pointer;
+      }
+      .deleteButton {
+        padding: 2px 5px;
+        border-radius: 5px;
+        color: rgba(220, 20, 60, 0.62);
+        cursor: pointer;
+      }
     }
-    
+  }
+  .cellWithStatus {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.Online {
+      color: green;
+      background-color: rgba(0, 128, 0, 0.186);
+    }
+    &.Offline {
+      color: crimson;
+      background-color: rgba(220, 20, 60, 0.226);
+    }
+  }
 }

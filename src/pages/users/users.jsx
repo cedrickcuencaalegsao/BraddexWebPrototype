@@ -1,18 +1,11 @@
 import "./users.scss";
 import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";
+import OnlineUser from "../../components/online_User/online_User";
+import OfflineUser from "../../components/offline_User/offline_User";
 import DataTable from "../../components/datatable/data_table";
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import {
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Bar,
-} from "recharts";
+import MonthlyUser from "../../components/monthly_User/monthly_user";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -20,28 +13,44 @@ const Users = () => {
   const [data, setData] = useState([]);
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
-  const [usercount, setUserCount] = useState(0);
-  let online_percentage = parseInt(online)/parseInt(usercount);
-  let offline_percentage = parseInt(offline)/parseInt(usercount);
+  const [userCount, setUserCount] = useState(0);
+  let online_data = { count: userCount, onln: online };
+  let offline_data = { count: userCount, ofln: offline };
+
+  const isOnline = async () => {
+    try {
+      const API = await axios.get(
+        "http://127.0.0.1:8000/api/get-admin-users-widgets"
+      );
+      setOnline(API.data.online);
+      setOffline(API.data.offline);
+      setUserCount(API.data.users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const isOnline = async () => {
+    const getAllUsersData = async () => {
       try {
-        const API = await axios.get("http://127.0.0.1:8000/api/onlineusers");
-        setUserCount(API.data.user);
-        setOffline(API.data.offline);
-        setOnline(API.data.online);
-        console.log(API.data.online);
+        const API = await axios.get("http://127.0.0.1:8000/api/users");
+        setData(API.data);
       } catch (error) {
         console.log(error);
       }
     };
-    isOnline();
+    getAllUsersData();
     const interval = setInterval(() => {
-      isOnline();
-    }, 1000);
+      getAllUsersData();
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (data.length !== 0) {
+      isOnline();
+    }
+  }, [data]);
 
   return (
     <div className="users">
@@ -50,61 +59,13 @@ const Users = () => {
         <NavBar />
         <div className="top">
           <div className="left">
-            <h1 className="title">Online Users</h1>
-            <div className="featuredChart">
-              <CircularProgressbar
-                value={online_percentage}
-                text={`${online_percentage}%`}
-                strokeWidth={10}
-                styles={buildStyles({
-                  rotation: 1,
-                  strokeLinecap: "butt",
-                  textSize: "20px",
-                  textColor: "#008000",
-                  pathTransitionDuration: 0.5,
-                  pathColor: `rgb(0, 128, 0)`,
-                  trailColor: "#d6d6d6",
-                  backgroundColor: "#3e98c7",
-                })}
-              />
-            </div>
-            <div className="link">
-              <a href="#">View details</a>
-            </div>
+            <OnlineUser data={online_data} />
           </div>
           <div className="center">
-            <h1 className="title">Offline Users</h1>
-            <div className="featuredChart">
-              <CircularProgressbar
-                value={offline_percentage}
-                text={`${offline_percentage}%`}
-                strokeWidth={10}
-                styles={buildStyles({
-                  rotation: 1,
-                  strokeLinecap: "butt",
-                  textSize: "20px",
-                  textColor: "#FF0000",
-                  pathTransitionDuration: 0.5,
-                  pathColor: `#FF0000`,
-                  backgroundColor: "#3e98c7",
-                })}
-              />
-            </div>
-            <div className="link">
-              <a href="#">View details</a>
-            </div>
+            <OfflineUser data={offline_data} />
           </div>
           <div className="right">
-            <h1 className="title">Monthly User</h1>
-            <BarChart width={730} height={205} data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="Online" fill="#008000" />
-              <Bar dataKey="Offline" fill="#FF0000" />
-            </BarChart>
+            <MonthlyUser data={data} />
           </div>
         </div>
         <div className="table">
