@@ -19,24 +19,40 @@ const Users = () => {
   let online_data = { count: userCount, onln: online };
   let offline_data = { count: userCount, ofln: offline };
 
-  let monthly_users = [
-    {
-      month: "2024-04-23",
-      Active: 2,
-      Inactive: 2,
-    },
-  ];
+  let monthly_users = [];
+
+  let dataTable = [];
 
   const formattedDate = (filteredUsers) => {
-    let userCreatedAt;
-    if (filteredUsers.length !== 0) {
+    let date;
+    if (filteredUsers !== null) {
       filteredUsers.map((item) => {
         if (item.created_at) {
-          userCreatedAt = moment(item.created_at).format("YYYY-MM-DD");
+          date = moment(item.created_at).format("YYYY-MM-DD");
         }
       });
+      return date;
     }
-    return userCreatedAt;
+    return "No Date";
+  };
+
+  const createRow = (users) => {
+    users.map((item) => {
+      let data = {
+        id: item.id,
+        userID: item.userID,
+        firstName: item.f_name,
+        lastName: item.l_name,
+        email: item.email,
+        phone: item.phone_no !== null ? item.phone_no : "No Phone number.",
+        birthday: formattedDate(item.birthday),
+        address: item.address !== null ? item.address : "No Address.",
+        age: 35,
+        status: item.isOnline === 1 ? "Online" : "Offline",
+        isAdmin: item.isAdmin,
+      };
+      dataTable.push(data);
+    });
   };
 
   if (data.length !== 0) {
@@ -52,9 +68,9 @@ const Users = () => {
       Active: ActiveUsers,
       Inactive: InActiveUser,
     };
+    createRow(users);
     monthly_users.push(dataToPush);
   }
-
   const isOnline = async () => {
     try {
       const API = await axios.get(
@@ -107,7 +123,7 @@ const Users = () => {
           </div>
         </div>
         <div className="table">
-          <DataTable />
+          <DataTable data={dataTable} />
         </div>
       </div>
     </div>
