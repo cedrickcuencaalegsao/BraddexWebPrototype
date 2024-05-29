@@ -8,14 +8,52 @@ import "react-circular-progressbar/dist/styles.css";
 import MonthlyUser from "../../components/monthly_User/monthly_user";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import moment, { months } from "moment";
 
 const Users = () => {
   const [data, setData] = useState([]);
   const [online, setOnline] = useState(0);
   const [offline, setOffline] = useState(0);
   const [userCount, setUserCount] = useState(0);
+
   let online_data = { count: userCount, onln: online };
   let offline_data = { count: userCount, ofln: offline };
+
+  let monthly_users = [
+    {
+      month: "2024-04-23",
+      Active: 2,
+      Inactive: 2,
+    },
+  ];
+
+  const formattedDate = (filteredUsers) => {
+    let userCreatedAt;
+    if (filteredUsers.length !== 0) {
+      filteredUsers.map((item) => {
+        if (item.created_at) {
+          userCreatedAt = moment(item.created_at).format("YYYY-MM-DD");
+        }
+      });
+    }
+    return userCreatedAt;
+  };
+
+  if (data.length !== 0) {
+    let users = data.users;
+    let filteredUsers = users.filter((item) => item.isActive === 1);
+    let totalUsers = users.length;
+    let ActiveUsers = filteredUsers.length;
+    let InActiveUser = totalUsers - ActiveUsers;
+    let date = formattedDate(filteredUsers);
+    // let
+    let dataToPush = {
+      month: date,
+      Active: ActiveUsers,
+      Inactive: InActiveUser,
+    };
+    monthly_users.push(dataToPush);
+  }
 
   const isOnline = async () => {
     try {
@@ -65,7 +103,7 @@ const Users = () => {
             <OfflineUser data={offline_data} />
           </div>
           <div className="right">
-            <MonthlyUser data={data} />
+            <MonthlyUser data={monthly_users} />
           </div>
         </div>
         <div className="table">
