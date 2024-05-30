@@ -1,33 +1,11 @@
 import "./table_products.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import LinearProgress from "@mui/material/LinearProgress";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-const TableProducts = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+const TableProducts = (data) => {
   const history = useHistory();
-
-  useEffect(() => {
-    const MenuAPI = async () => {
-      try {
-        const API = await axios.get("http://127.0.0.1:8000/api/menu");
-        setData(API.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    MenuAPI();
-    const interval = setInterval(() => {
-      MenuAPI();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleUpdateMenu = (menuID) => {
     console.log(menuID);
@@ -127,44 +105,20 @@ const TableProducts = () => {
       },
     },
   ];
-
+  const rows = data.data;
   return (
-    <div className="table">
-      <div className="top">
-        <div className="left">
-          <div className="title">PRODUCTS AVAILABLE</div>
-        </div>
-        <div className="right">
-          <div className="title">PRODUCT NOT-AVAILABLE</div>
-        </div>
-      </div>
-      <div className="bottom">
-        <div className="progress">
-          {loading ? (
-            <div className="loading">
-              <LinearProgress
-                sx={{
-                  bgcolor: "lightgray",
-                  "& .MuiLinearProgress-bar": { bgcolor: "orangered" },
-                }}
-              />
-            </div>
-          ) : (
-            <div className="loading"></div>
-          )}
-        </div>
-        <DataGrid
-          rows={data}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 10 },
-            },
-          }}
-          pageSizeOptions={[5, 11]}
-          checkboxSelection
-        />
-      </div>
+    <div className="bottom">
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 10 },
+          },
+        }}
+        pageSizeOptions={[5, 11]}
+        checkboxSelection
+      />
     </div>
   );
 };

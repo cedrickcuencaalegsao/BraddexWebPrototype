@@ -154,6 +154,15 @@ class braddexdb_controller extends Controller
         $data = tbl_menu::all();
         return response()->json(compact('data'));
     }
+    public function getMenuData()
+    {
+        $menu = tbl_menu::all();
+        $countMenu = count(tbl_menu::all());
+        $avialable = count(tbl_menu::where('isAvialable', 'Available')->get());
+        $limited = count(tbl_menu::where('isAvialable', 'Limited')->get());
+        $notAvailable = count(tbl_menu::where('isAvialable', 'NotAvailable')->get());
+        return response()->json(compact('menu', 'countMenu', 'avialable', 'limited', 'notAvailable'));
+    }
     public function uploadMenu(Request $request)
     {
         $created_at = Carbon::now()->toDateTimeString();
@@ -185,7 +194,7 @@ class braddexdb_controller extends Controller
                     'menu_name' => $data['name'],
                     'price' => $data['price'],
                     'image' => $data['image'],
-                    'isAvialable' => "Available", // available, notAvailable, limited.
+                    'isAvialable' => "Available", // Available (default), NotAvailable, Limited.
                     'bestselling' => true,
                     'created_at' => $created_at,
                 ]);

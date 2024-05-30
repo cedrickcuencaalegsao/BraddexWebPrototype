@@ -41,6 +41,8 @@ Route::get('get-admin-order-widgets', [braddexdb_controller::class, 'getAdminOrd
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 // get all cart data.
 Route::get('cart', [braddexdb_controller::class, 'getAllCart']);
+// get all menu data.
+Route::get('get-menu-data', [braddexdb_controller::class, 'getMenuData']);
 
 
 
