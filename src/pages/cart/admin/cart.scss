@@ -2,5 +2,58 @@
   display: flex;
   .cart-table-container {
     flex: 6;
+    .top {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .left,
+      .right {
+        flex: 3;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .deleted-cart,
+        .not-deleted-cart {
+          .top-wrapper {
+            margin-bottom: 5px;
+            .title {
+              color: darkslategray;
+              font-size: 18px;
+              text-transform: capitalize;
+            }
+          }
+          .bottom-wrapper {
+            display: flex;
+            .desc-wrapper {
+              flex: 3;
+              .desc-title {
+                color: darkslategray;
+                font-size: 15px;
+                margin: 5px;
+              }
+              .desc {
+                color: darkslategray;
+                font-size: 13px;
+                padding: 10px;
+                margin: 10px;
+              }
+            }
+            .chart-wrapper {
+              flex: 1;
+              .featuredChart {
+                height: 150px;
+                width: 150px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .buttom {
+      padding: 10px;
+    }
   }
 }

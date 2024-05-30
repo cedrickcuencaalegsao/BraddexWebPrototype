@@ -67,7 +67,6 @@ class braddexdb_controller extends Controller
         return response()->json(['message' => 'Login Failed'], 401);
 
     }
-
     public function authRegister(Request $request)
     {
         // this fucntion uses POST to add new user on our table users.
@@ -312,6 +311,14 @@ class braddexdb_controller extends Controller
         }
         // response that will message the user if the action has been done successfully.
         return response()->json(['message' => 'Successfully updated, please reload the page to see changes']);
+    }
+    public function getAllCart()
+    {
+        $cart = tbl_cart::all();
+        $cartCount = count(tbl_cart::all());
+        $cartDeleted = count(tbl_cart::where('isDeleted', true)->get());
+        $cartNotDeleted = count(tbl_cart::where('isDeleted', false)->get());
+        return response()->json(compact('cart', 'cartCount', 'cartDeleted', 'cartNotDeleted'));
     }
     public function addToCart(Request $request)
     {

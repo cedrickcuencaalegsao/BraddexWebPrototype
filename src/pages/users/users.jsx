@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 import MonthlyUser from "../../components/monthly_User/monthly_user";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import moment, { months } from "moment";
+import moment from "moment";
 
 const Users = () => {
   const [data, setData] = useState([]);

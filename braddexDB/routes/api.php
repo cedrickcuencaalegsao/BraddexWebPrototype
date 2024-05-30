@@ -23,7 +23,7 @@ Route::post('multi-isDelete-cart-menu', [braddexdb_controller::class, 'multiIsDe
 Route::post('cancel-order', [braddexdb_controller::class, 'cancelOrder']);
 Route::post('user-mark-delivered', [braddexdb_controller::class, 'userMarkDeliverd']);
 
-Route::get('users', [braddexdb_controller::class, 'allUsers']);
+
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
 Route::get('bestselling', [braddexdb_controller::class, 'bestSelling']);
@@ -37,6 +37,11 @@ Route::get('get-admin-users-widgets', [braddexdb_controller::class, 'getAdminUse
 Route::get('get-admin-products-widgets', [braddexdb_controller::class, 'getAdminProductsWidgets']);
 Route::get('get-admin-cart-widgets', [braddexdb_controller::class, 'getAdminCartWidget']);
 Route::get('get-admin-order-widgets', [braddexdb_controller::class, 'getAdminOrderWidget']);
+// get all users data.
+Route::get('users', [braddexdb_controller::class, 'allUsers']);
+// get all cart data.
+Route::get('cart', [braddexdb_controller::class, 'getAllCart']);
+
 
 
 
