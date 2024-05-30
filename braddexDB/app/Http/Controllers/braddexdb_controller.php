@@ -427,6 +427,16 @@ class braddexdb_controller extends Controller
         $data = tbl_order::where('userID', $uuid)->where('isDeleted', false)->where('isPaid', false)->where('isCancelled', false)->where('isDelivered', false)->get();
         return response()->json(compact('data'));
     }
+    public function getOrderData()
+    {
+        $order = tbl_order::all();
+        $countOrder = count(tbl_order::all());
+        $paid = count(tbl_order::where('isPaid', true)->get());
+        $delivered = count(tbl_order::where('isDelivered', true)->get());
+        $cancelled = count(tbl_order::where('isCancelled', true)->get());
+        $deleted = count(tbl_order::where('isDeleted', true)->get());
+        return response()->json(compact('order', 'countOrder', 'paid', 'delivered', 'cancelled', 'deleted'));
+    }
     public function getOrderNowMenu($menuID)
     {
         $menu = tbl_menu::where('menuID', $menuID)->first();

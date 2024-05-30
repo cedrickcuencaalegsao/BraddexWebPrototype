@@ -1,12 +1,89 @@
-.orderList{
+.orderList {
+  display: flex;
+  width: 100%;
+  .cellAction {
     display: flex;
-    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 
-    .orderContainer{
-        flex: 6;
-
-        .tableOrders{
-            padding: 10px;
-        }
+    .viewButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgba(0, 0, 139, 0.563);
+      cursor: pointer;
     }
+    .deleteButton {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgba(220, 20, 60, 0.62);
+      cursor: pointer;
+    }
+  }
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    .widget-container {
+      flex: 3;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      .widget-paid-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .details-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          .title-wrapper {
+            padding: 2px;
+            .widget-title {
+              color: darkslategray;
+              font-size: 17px;
+              font-weight: 700;
+            }
+          }
+          .count-wrapper {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            .value-indicator {
+              margin: 3px;
+              font-size: 11px;
+              color: darkslategray;
+            }
+            .value {
+              font-size: 35px;
+              color: darkslategray;
+              font-weight: 700;
+            }
+          }
+        }
+        .chart-wrapper {
+          margin: 5px;
+          .featuredChart {
+            height: 100px;
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
+  .buttom {
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  }
+  .orderContainer {
+    flex: 6;
+    .order-data-wrapper {
+      padding: 10px;
+    }
+  }
 }

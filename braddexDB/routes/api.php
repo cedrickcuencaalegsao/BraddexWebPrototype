@@ -43,6 +43,8 @@ Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('cart', [braddexdb_controller::class, 'getAllCart']);
 // get all menu data.
 Route::get('get-menu-data', [braddexdb_controller::class, 'getMenuData']);
+// get all order Data
+Route::get('get-order-data', [braddexdb_controller::class, 'getOrderData']);
 
 
 
