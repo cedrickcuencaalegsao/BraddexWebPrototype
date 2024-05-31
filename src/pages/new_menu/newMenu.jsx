@@ -15,7 +15,7 @@ const NewMenu = () => {
   const menuID = generateRandomID();
 
   let newprice = parseFloat(price);
-
+  
   const UploadMenu = async () => {
     try {
       const formData = new FormData();

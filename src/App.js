@@ -20,6 +20,7 @@ import UpdateMenu from "./pages/update/update";
 import Logs from "./pages/logs/logs";
 import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";
+import EditUser from "./pages/EditUser/editUser";
 
 // guest View.
 import Login from "./pages/login/login";
@@ -51,6 +52,7 @@ const App = () => {
           {/* Admin Routes */}
           <AuthRoutes path="/home" component={Home} isAdminRoute />
           <AuthRoutes path="/users" component={Users} isAdminRoute />
+          <AuthRoutes path="/edit-user/:userUUID" component={EditUser} isAdminRoute />
           <AuthRoutes path="/cart" component={AdminCart} isAdminRoute />
           <AuthRoutes path="/products" component={Product} isAdminRoute />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />

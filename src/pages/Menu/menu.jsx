@@ -35,7 +35,7 @@ const ClientMenu = () => {
 
   const addToCartAPI = async (data) => {
     try {
-      const API = await axios.post("http://127.0.0.1:8000/api/addtocart", data);
+      await axios.post("http://127.0.0.1:8000/api/addtocart", data);
       return true;
     } catch (error) {
       console.log(error);

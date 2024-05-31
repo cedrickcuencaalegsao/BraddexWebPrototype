@@ -1,0 +1,18 @@
+.right-bottom-container {
+  margin: 20px 0px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.05);
+  .title-wrapper {
+    padding: 10px;
+    .title {
+      color: darkslategray;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+}

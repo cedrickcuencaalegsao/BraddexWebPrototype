@@ -1,0 +1,15 @@
+.edit-user-container {
+  display: flex;
+  .edit-user-wrapper {
+    flex: 6;
+    display: flex;
+    .left {
+      flex: 2;
+      margin: 10px;
+    }
+    .right {
+      flex: 5;
+      margin: 10px;
+    }
+  }
+}

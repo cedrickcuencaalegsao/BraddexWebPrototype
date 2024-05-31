@@ -2,9 +2,20 @@ import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
+const DataTable = (data) => {
+  const history = useHistory();
 
-const dataTable = (data) => {
+  const handleEditRow = (data) => {
+    history.push(`/edit-user/${data}`);
+    console.log(data);
+  };
+
+  const handleDeleteRow = (data) => {
+    console.log(data);
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 20 },
     { field: "userID", headerName: "User ID", width: 70 },
@@ -45,14 +56,23 @@ const dataTable = (data) => {
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 100,
-      renderCell: () => {
+      renderCell: (params) => {
+        console.log(params.row.isAdmin);
         return (
           <div className="cellAction">
             <div className="viewButton">
-              <EditOutlinedIcon />
+              <EditOutlinedIcon
+                onClick={() => handleEditRow(params.row.userID)}
+              />
             </div>
             <div className="deleteButton">
-              <DeleteOutlineOutlinedIcon />
+              {params.row.isAdmin !== 1 ? (
+                <DeleteOutlineOutlinedIcon
+                  onClick={() => handleDeleteRow(params.row.userID)}
+                />
+              ) : (
+                <div></div>
+              )}
             </div>
           </div>
         );
@@ -80,4 +100,4 @@ const dataTable = (data) => {
   );
 };
 
-export default dataTable;
+export default DataTable;
