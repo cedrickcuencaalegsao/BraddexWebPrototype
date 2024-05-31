@@ -9,7 +9,7 @@ const ProductAvailable = (data) => {
   return (
     <div className="left">
       <div className="title-wrapper">
-        <h1 className="title">PRODUCTS AVAILABLE</h1>
+        <h1 className="title">MENU AVAILABLE</h1>
         <div className="details">
           <div className="indicator-wrapper">
             <span className="indicator">Count</span>

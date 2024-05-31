@@ -84,7 +84,6 @@ const OrderList = () => {
       }
     });
   };
-
   // id the data was change a little bit the row will updated by using useEffect and order as a dependencies.
   useEffect(() => {
     if (order.length !== 0) {

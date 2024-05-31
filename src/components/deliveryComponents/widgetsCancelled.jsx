@@ -1,21 +1,21 @@
-import React from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-const ProductNotAvailable = (data) => {
+
+const WidgetsDeliveryCancelled = (data) => {
   let count = data.data.count;
-  let notAvailable = data.data.notAvailable;
-  let calc = (notAvailable / count) * 100;
+  let cancelled = data.data.cancelled;
+  let calc = (cancelled / count) * 100;
   let val = calc.toFixed(2);
   return (
-    <div className="right">
-      <div className="title-wrapper">
-        <h1 className="title">MENU NOT-AVAILABLE</h1>
-        <div className="details">
-          <div className="indicator-wrapper">
-            <span className="indicator">Count</span>
-          </div>
-          <div className="value-wrapper">
-            <span className="value">{notAvailable}</span>
-          </div>
+    <div className="widgets-delivery">
+      <div className="details-wrapper">
+        <div className="title-wrapper">
+          <h1 className="widget-title">Widgets Delivery Cancelled</h1>
+        </div>
+        <div className="count-wrapper">
+          <span className="value-indicator">
+            Widgets Delivery Cancelled Count
+          </span>
+          <span className="value">{`${cancelled}/${count}`}</span>
         </div>
       </div>
       <div className="chart-wrapper">
@@ -31,6 +31,7 @@ const ProductNotAvailable = (data) => {
               textColor: "red",
               pathTransitionDuration: 0.5,
               pathColor: `red`,
+              trailColor: "#d6d6d6",
               backgroundColor: "#3e98c7",
             })}
           />
@@ -39,4 +40,4 @@ const ProductNotAvailable = (data) => {
     </div>
   );
 };
-export default ProductNotAvailable;
+export default WidgetsDeliveryCancelled;

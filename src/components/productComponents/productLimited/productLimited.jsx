@@ -8,7 +8,7 @@ const ProductLimited = (data) => {
   return (
     <div className="center">
       <div className="title-wrapper">
-        <h1 className="title">PRODUCT LIMITED</h1>
+        <h1 className="title">MENU LIMITED</h1>
         <div className="details">
           <div className="indicator-wrapper">
             <span className="indicator">Count</span>

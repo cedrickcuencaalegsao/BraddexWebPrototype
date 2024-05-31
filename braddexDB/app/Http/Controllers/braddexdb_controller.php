@@ -470,6 +470,14 @@ class braddexdb_controller extends Controller
         $menu = tbl_menu::whereIn('menuID', $data)->get();
         return response()->json(compact('menu'));
     }
+    public function getDeliveryData()
+    {
+        $delivery = tbl_order::where('isDelivered', false)->get();
+        $countDelivery = count(tbl_order::where('isDelivered', false)->get());
+        $cancelled = count(tbl_order::where('isDelivered', false)->where('isCancelled', true)->get());
+        $notCancelled = count(tbl_order::where('isDelivered', false)->where('isCancelled', false)->get());
+        return response()->json(compact('delivery', 'countDelivery', 'cancelled', 'notCancelled'));
+    }
     public function multipleDelivery(Request $request)
     {
         $req = $request->all();

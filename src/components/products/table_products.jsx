@@ -18,7 +18,7 @@ const TableProducts = (data) => {
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "menuID", headerName: "Menu ID", width: 180 },
-    { field: "menu_name", headerName: "Menu Name", width: 300 },
+    { field: "menu_name", headerName: "Menu Name", width: 150 },
     {
       field: "price",
       headerName: "Price",

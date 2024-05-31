@@ -12,7 +12,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import axios from "axios";
 const SideBar = () => {
   const history = useHistory();
@@ -36,9 +36,9 @@ const SideBar = () => {
   const viewUsers = () => {
     history.push("/users");
   };
-  const viewCart = () =>{
+  const viewCart = () => {
     history.push("/cart");
-  }
+  };
   const viewProducts = () => {
     history.push("/products");
   };
@@ -98,7 +98,7 @@ const SideBar = () => {
           <li>
             <div className="sidebarLink" onClick={viewProducts}>
               <Inventory2OutlinedIcon className="icon" />
-              <span>Products</span>
+              <span>Menu</span>
             </div>
           </li>
           <li>
