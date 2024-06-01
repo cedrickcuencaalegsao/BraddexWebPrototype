@@ -1,10 +1,11 @@
 import "./leftBottom.scss";
 import { useEffect, useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
+import axios from "axios";
 
 const ProfileLeftBottom = (data) => {
   const [userData, setUserData] = useState({});
-
+  const [response, setResponse] = useState("");
   // this function is to make sure that the userdata must be change if the props is change in an instant.
   useEffect(() => {
     setUserData(data.data);
@@ -21,13 +22,35 @@ const ProfileLeftBottom = (data) => {
 
   // here we update the database if the userData is change instantly except the email(for user and account sercurity purpose).
 
+  const handleSaveChanges = async () => {
+    let data = {
+      userID: userData.userID,
+      f_name: userData.firstName,
+      l_name: userData.lastName,
+    };
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/personal-Info-Name-Update/",
+        data
+      );
+      setResponse(API.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="left-bottom">
       <div className="title-wrapper">
         <h1 className="title">Personal Infomation</h1>
         <div className="button-wrapper">
-          <SaveIcon className="btn-save" />
+          <SaveIcon className="btn-save" onClick={() => handleSaveChanges()} />
         </div>
+      </div>
+      <div className="response-container">
+        <span style={{ fontSize: "15px", color: "red", marginLeft: "10px" }}>
+          {response}
+        </span>
       </div>
       <div className="detail-container">
         <div className="details-wrapper">

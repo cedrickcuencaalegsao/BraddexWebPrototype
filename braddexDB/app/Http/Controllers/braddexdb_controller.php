@@ -52,7 +52,7 @@ class braddexdb_controller extends Controller
             }
             // update the table to make the user online.
             $id = Auth::user()->id;
-            User::find($id)->update(['isOnline' => true]);
+            User::find($id)->update(['isOnline' => true, 'isActive' => true]);
             // now we create an object called data to be return on our frontend.
             $data = ([
                 "token" => $token,
@@ -124,21 +124,6 @@ class braddexdb_controller extends Controller
         $data = User::all();
         // return the data in json format.
         return response()->json(['users' => $data]);
-    }
-    public function updateIsAdmin(Request $request, $id)
-    {
-        $data = $request->all();
-        if ($data['isAdmin'] == 'true') {
-            User::find($id)->update([
-                'isAdmin' => true,
-            ]);
-            return response()->json(['message' => 'Updated account type to admin']);
-        } else {
-            User::find($id)->update([
-                'isAdmin' => false,
-            ]);
-            return response()->json(['message' => 'Updated account type to Client']);
-        }
     }
     public function getUserProfile($uuid)
     {
@@ -522,6 +507,89 @@ class braddexdb_controller extends Controller
     }
     public function getUserDBData($uuid)
     {
-        return $uuid;
+        $id = $uuid;
+        $order = count(tbl_order::all());
+        $userOrder = count(tbl_order::where('userID', $id)->where('isDelivered', false)->get());
+        $cancelledOrder = count(tbl_order::where('userID', $id)->where('isCancelled', true)->get());
+        $delivered = count(tbl_order::where('userID', $id)->where('isDelivered', true)->get());
+        $cart = count(tbl_cart::all());
+        $userCart = count(tbl_cart::where('userID', $id)->where('isDeleted', false)->get());
+        $data = [
+            'order' => $order,
+            'userOder' => $userOrder,
+            'cancelledOrder' => $cancelledOrder,
+            'delivered' => $delivered,
+            'cart' => $cart,
+            'userCart' => $userCart,
+        ];
+        return response()->json(compact('data'));
+    }
+    public function personalInfoNameUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userID' => 'required',
+            'f_name' => 'required',
+            'l_name' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Please check the name.'], 422);
+        }
+        $data = $request->all();
+        $updated_at = Carbon::now()->toDateTimeString();
+        $user = User::where('userID', $data['userID'])->update([
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'updated_at' => $updated_at,
+        ]);
+        if ($user) {
+            return response()->json(['message' => 'Changes saved. Refresh the page']);
+        }
+        return response()->json(['message' => 'Changes Saved failed.']);
+    }
+    public function personalInfoOtherUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userID' => 'required',
+            'address' => 'required',
+            'birthDate' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Please check the name.'], 422);
+        }
+        $data = $request->all();
+        $updated_at = Carbon::now()->toDateTimeString();
+        $user = User::where('userID', $data['userID'])->update([
+            'address' => $data['address'],
+            'birthday' => $data['birthDate'],
+            'updated_at' => $updated_at,
+        ]);
+        if ($user) {
+            return response()->json(['message' => 'Changes saved. Refresh the page']);
+        }
+        return response()->json(['message' => 'Changes Saved failed.']);
+    }
+    public function personalInfoIsAdmin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userID' => 'required',
+            'isActive' => 'required',
+            'isAdmin' => 'required',
+            'isOnline' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Please check the name.'], 422);
+        }
+        $data = $request->all();
+        $updated_at = Carbon::now()->toDateTimeString();
+        $user = User::where('userID', $data['userID'])->update([
+            'isActive' => $data['isActive'],
+            'isAdmin' => $data['isAdmin'],
+            'isOnline' => $data['isOnline'],
+            'updated_at' => $updated_at,
+        ]);
+        if ($user) {
+            return response()->json(['message' => 'Changes saved. Refresh the page']);
+        }
+        return response()->json(['message' => 'Changes Saved failed.']);
     }
 }

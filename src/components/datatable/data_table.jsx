@@ -1,7 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 const DataTable = (data) => {
@@ -9,10 +8,6 @@ const DataTable = (data) => {
 
   const handleEditRow = (data) => {
     history.push(`/edit-user/${data}`);
-    console.log(data);
-  };
-
-  const handleDeleteRow = (data) => {
     console.log(data);
   };
 
@@ -57,18 +52,13 @@ const DataTable = (data) => {
       sortable: false,
       width: 100,
       renderCell: (params) => {
-        console.log(params.row.isAdmin);
+        console.log(params.row.email);
         return (
           <div className="cellAction">
             <div className="viewButton">
-              <EditOutlinedIcon
-                onClick={() => handleEditRow(params.row.userID)}
-              />
-            </div>
-            <div className="deleteButton">
-              {params.row.isAdmin !== 1 ? (
-                <DeleteOutlineOutlinedIcon
-                  onClick={() => handleDeleteRow(params.row.userID)}
+              {params.row.email !== "admin@braddex.com" ? (
+                <EditOutlinedIcon
+                  onClick={() => handleEditRow(params.row.userID)}
                 />
               ) : (
                 <div></div>

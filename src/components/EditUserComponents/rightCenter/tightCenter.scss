@@ -15,4 +15,35 @@
       font-weight: 700;
     }
   }
+  .details-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    .item-container {
+      display: flex;
+      flex-direction: row;
+      .item-title-wrapper {
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        .item-title {
+          color: darkslategray;
+          font-size: 11px;
+          font-weight: 700;
+        }
+        .count {
+          padding: 10px;
+          color: darkslategray;
+          font-size: 30px;
+          font-weight: 700;
+        }
+      }
+      .graph-wrapper {
+        height: 80px;
+        width: 80px;
+      }
+    }
+  }
 }

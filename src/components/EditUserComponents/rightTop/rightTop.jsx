@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import "./rightTop.scss";
+import axios from "axios";
+import moment from "moment";
 const ProfileRightTop = (data) => {
   const [userData, setUserData] = useState([]);
+  const [response, setResponse] = useState("");
 
   useEffect(() => {
     if (data !== null) {
@@ -18,15 +21,44 @@ const ProfileRightTop = (data) => {
       [name]: value,
     }));
   };
+  const handleSaveChanges = async () => {
+    let data = {
+      userID: userData.userID,
+      birthDate: userData.birthDate,
+      address: userData.address,
+    };
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/personal-Info-Other-Update/",
+        data
+      );
+      setResponse(API.data.message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  console.log(userData);
+  const formattedDate = (data) => {
+    let date;
+    if (data !== null) {
+      date = moment(data).format("YYYY-MM-DD");
+      return date;
+    }
+    return "No Date";
+  };
+
   return (
     <div className="right-top-container">
       <div className="title-wrapper">
         <h1 className="title">Other Personal Information</h1>
         <div className="button-wrapper">
-          <SaveIcon className="btn-save" />
+          <SaveIcon className="btn-save" onClick={() => handleSaveChanges()} />
         </div>
+      </div>
+      <div className="response-container">
+        <span style={{ fontSize: "15px", color: "red", marginLeft: "10px" }}>
+          {response}
+        </span>
       </div>
       <div className="details-wrapper">
         <div className="left">
@@ -62,11 +94,7 @@ const ProfileRightTop = (data) => {
               type="text"
               className="value"
               disabled="true"
-              value={`${
-                userData.created_at !== null
-                  ? userData.created_at
-                  : "No Date Added."
-              }`}
+              value={formattedDate(userData.created_at)}
             />
           </div>
           <div className="details">
@@ -75,11 +103,7 @@ const ProfileRightTop = (data) => {
               type="text"
               className="value"
               disabled="true"
-              value={`${
-                userData.updated_at !== null
-                  ? userData.updated_at
-                  : "No Date Added."
-              }`}
+              value={formattedDate(userData.updated_at)}
             />
           </div>
         </div>

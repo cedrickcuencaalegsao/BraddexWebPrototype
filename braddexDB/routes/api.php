@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [braddexdb_controller::class, 'authLogin']);
 Route::post('register', [braddexdb_controller::class, 'authRegister']);
 Route::post('logout/{uuid}', [braddexdb_controller::class, 'authLogout']);
-Route::post('updateIsAdmin/{id}', [braddexdb_controller::class, 'updateIsAdmin']);
 Route::post('uploadmenu', [braddexdb_controller::class, 'uploadMenu']);
 Route::post('updateprofiledetails', [braddexdb_controller::class, 'updateProfileDetails']);
 Route::post('updateprofilepicture', [braddexdb_controller::class, 'updateProfilePicture']);
@@ -22,7 +21,9 @@ Route::post('update-IsDelete-Cart-Menu', [braddexdb_controller::class, 'updateIs
 Route::post('multi-isDelete-cart-menu', [braddexdb_controller::class, 'multiIsDeleteCartMenu']);
 Route::post('cancel-order', [braddexdb_controller::class, 'cancelOrder']);
 Route::post('user-mark-delivered', [braddexdb_controller::class, 'userMarkDeliverd']);
-
+Route::post('personal-Info-Name-Update', [braddexdb_controller::class, 'personalInfoNameUpdate']);
+Route::post('personal-Info-Other-Update', [braddexdb_controller::class, 'personalInfoOtherUpdate']);
+Route::post('personal-Info-IsAdmin', [braddexdb_controller::class, 'personalInfoIsAdmin']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
