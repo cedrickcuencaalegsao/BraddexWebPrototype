@@ -12,6 +12,7 @@ const EditUser = () => {
   let userUUID = useParams();
   const [userData, setUserData] = useState([]);
 
+  // data on the left panel
   let data_left_top = {
     userID: userData.userID,
     firstName: userData.f_name,
@@ -21,12 +22,29 @@ const EditUser = () => {
     image: userData.prof_pic,
   };
   let data_left_bottom = {
+    userID: userData.userID,
     firstName: userData.f_name,
     lastName: userData.l_name,
     email: userData.email,
     phone: userData.phone_no,
   };
-
+  // data on the righth panel.
+  let data_right_top = {
+    userID: userData.userID,
+    birthDate: userData.birthday,
+    address: userData.address,
+    created_at: userData.created_at,
+    updated_at: userData.updated_at,
+  };
+  let data_right_center = {
+    userID: userData.userID,
+  };
+  let data_right_bottom = {
+    userID: userData.userID,
+    isAdmin: userData.isAdmin,
+    isActive: userData.isActive,
+    isOnline: userData.isOnline,
+  };
   useEffect(() => {
     const getUserDataAPI = async () => {
       let uuid = userUUID.userUUID;
@@ -51,9 +69,9 @@ const EditUser = () => {
           <ProfileLeftBottom data={data_left_bottom} />
         </div>
         <div className="right">
-          <ProfileRightTop />
-          <ProfileRightCenter />
-          <ProfileRightBottom />
+          <ProfileRightTop data={data_right_top} />
+          <ProfileRightCenter data={data_right_center} />
+          <ProfileRightBottom data={data_right_bottom} />
         </div>
       </div>
     </div>

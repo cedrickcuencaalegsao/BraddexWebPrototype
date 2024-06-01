@@ -1,5 +1,7 @@
 import "./leftBottom.scss";
 import { useEffect, useState } from "react";
+import SaveIcon from "@mui/icons-material/Save";
+
 const ProfileLeftBottom = (data) => {
   const [userData, setUserData] = useState({});
 
@@ -23,6 +25,9 @@ const ProfileLeftBottom = (data) => {
     <div className="left-bottom">
       <div className="title-wrapper">
         <h1 className="title">Personal Infomation</h1>
+        <div className="button-wrapper">
+          <SaveIcon className="btn-save" />
+        </div>
       </div>
       <div className="detail-container">
         <div className="details-wrapper">

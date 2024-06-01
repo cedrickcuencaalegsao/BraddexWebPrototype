@@ -47,6 +47,8 @@ Route::get('get-menu-data', [braddexdb_controller::class, 'getMenuData']);
 Route::get('get-order-data', [braddexdb_controller::class, 'getOrderData']);
 // get all delivery data.
 Route::get('get-delivery-data', [braddexdb_controller::class, 'getDeliveryData']);
+// get user DB data.
+Route::get('get-user-db-data/{uuid}', [braddexdb_controller::class, 'getUserDBData']);
 
 
 

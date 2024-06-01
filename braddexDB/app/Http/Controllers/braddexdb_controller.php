@@ -520,4 +520,8 @@ class braddexdb_controller extends Controller
         $image = $data->pluck('image');
         return response()->json($image);
     }
+    public function getUserDBData($uuid)
+    {
+        return $uuid;
+    }
 }

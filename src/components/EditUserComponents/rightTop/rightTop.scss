@@ -9,10 +9,58 @@
   background-color: rgba(128, 128, 128, 0.05);
   .title-wrapper {
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     .title {
+      flex: 6;
       color: darkslategray;
       font-size: 18px;
       font-weight: 700;
+    }
+    .button-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      .btn-save {
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid red;
+        background-color: red;
+        font-size: 15px;
+        color: white;
+        &:hover {
+          scale: 1.2;
+        }
+      }
+    }
+  }
+  .details-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .left,
+    .right {
+      flex: 2;
+      .details {
+        display: flex;
+        flex-direction: column;
+        .details-indicator {
+          color: darkslategray;
+          text-transform: capitalize;
+          font-size: 12px;
+          padding: 5px;
+        }
+        .value {
+          border: none;
+          outline: none;
+          color: darkslategray;
+          padding: 7px;
+          border-radius: 7px;
+        }
+      }
     }
   }
 }

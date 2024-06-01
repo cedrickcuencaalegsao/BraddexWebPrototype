@@ -9,9 +9,29 @@
   background-color: rgba(128, 128, 128, 0.05);
   .title-wrapper {
     padding: 10px;
+    display: flex;
+    flex-direction: row;
     .title {
+      flex: 6;
       color: darkslategray;
       font-size: 18px;
+    }
+    .button-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      .btn-save {
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid red;
+        background-color: red;
+        font-size: 15px;
+        color: white;
+        &:hover {
+          scale: 1.2;
+        }
+      }
     }
   }
   .detail-container {

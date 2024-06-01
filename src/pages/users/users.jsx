@@ -45,7 +45,7 @@ const Users = () => {
         lastName: item.l_name,
         email: item.email,
         phone: item.phone_no !== null ? item.phone_no : "No Phone number.",
-        birthday: formattedDate(item.birthday),
+        birthday: item.birthday,
         address: item.address !== null ? item.address : "No Address.",
         age: 35,
         status: item.isOnline === 1 ? "Online" : "Offline",
