@@ -12,10 +12,11 @@ const NewMenu = () => {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [message, setMessage] = useState("");
+  const [preview, setPreview] = useState(null);
   const menuID = generateRandomID();
 
   let newprice = parseFloat(price);
-  
+
   const UploadMenu = async () => {
     try {
       const formData = new FormData();
@@ -43,23 +44,65 @@ const NewMenu = () => {
     UploadMenu();
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
   return (
     <div className="newMenu">
       <SideBar />
       <div className="newMenuContainer">
         <NavBar />
-        <div className="formContainer">
-          <div className="messages">
-            <span style={{ fontSize: "15px", color: "red" }}>{message}</span>
+        <div className="data-container">
+          <div className="form-container">
+            <div className="title-wrapper">
+              <h1 className="title">upload menu</h1>
+              <div className="messages">
+                <span style={{ fontSize: "15px", color: "red" }}>
+                  {message}
+                </span>
+              </div>
+            </div>
+            <div className="input-container">
+              <div className="input-wrapper">
+                <span className="input-indicator">Menu Name</span>
+                <input
+                  type="text"
+                  className="input"
+                  onChange={(e) => setMenuname(e.target.value)}
+                />
+              </div>
+              <div className="input-wrapper">
+                <span className="input-indicator">Price</span>
+                <input
+                  type="text"
+                  className="input"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+              <div className="input-wrapper">
+                <span className="input-indicator">Image</span>
+                <input
+                  type="file"
+                  className="input-image"
+                  onChange={handleImageChange}
+                />
+              </div>
+              <div className="submit-wrapper">
+                <input type="submit" onClick={onSubmit} />
+              </div>
+            </div>
           </div>
-          <h1>uploadmenu</h1>
-          Menu Name:
-          <input type="text" onChange={(e) => setMenuname(e.target.value)} />
-          Price:
-          <input type="text" onChange={(e) => setPrice(e.target.value)} />
-          Image:
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-          <input type="submit" onClick={onSubmit} />
+          <div className="preview-details">
+            <img
+              src={preview}
+              alt="imagePreview"
+              className="image-preview"
+              style={{ width: "300px", height: "auto" }}
+            />
+          </div>
         </div>
       </div>
     </div>

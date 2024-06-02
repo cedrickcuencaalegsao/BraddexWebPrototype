@@ -138,7 +138,7 @@ const ClientUserProfile = () => {
                 <div className="profilePic">
                   <img
                     src={`http://127.0.0.1:8000/images/profile/${data.prof_pic}`}
-                    alt="image"
+                    alt="profilePicture"
                   />
                 </div>
               </div>

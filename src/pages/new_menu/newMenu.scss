@@ -1,6 +1,62 @@
-.newMenu{
-    display: flex;
-    .newMenuContainer{
-        flex: 6;
+.newMenu {
+  display: flex;
+  .newMenuContainer {
+    flex: 6;
+    .data-container {
+      display: flex;
+      flex-direction: column;
+      .form-container,
+      .preview-details {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .title-wrapper {
+          padding: 10px;
+          .title {
+            text-transform: capitalize;
+            color: darkslategray;
+            font-size: 20px;
+            font-weight: 700;
+          }
+        }
+        .input-container {
+          width: 100%;
+          padding: 10px;
+          display: flex;
+          align-items: start;
+          justify-content: space-between;
+          .input-wrapper {
+            flex: 4;
+            display: flex;
+            align-items: center;
+            .input-indicator {
+              color: darkslategray;
+              font-size: 18px;
+              font-weight: 700;
+              margin: 5px;
+            }
+            .input {
+              padding: 3px;
+              outline: none;
+              border: none;
+              border-bottom: 2px solid red;
+              width: 50%;
+            }
+          }
+          .submit-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+          }
+        }
+      }
     }
+  }
 }
