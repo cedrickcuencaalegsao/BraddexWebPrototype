@@ -5,24 +5,25 @@ import { useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 
 const NewMenu = () => {
   const history = useHistory();
-  const [menuname, setMenuname] = useState("");
+  const [menuName, setMenuName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [message, setMessage] = useState("");
   const [preview, setPreview] = useState(null);
   const menuID = generateRandomID();
 
-  let newprice = parseFloat(price);
+  let newPrice = parseFloat(price);
 
   const UploadMenu = async () => {
     try {
       const formData = new FormData();
       formData.append("menuID", menuID);
-      formData.append("name", menuname);
-      formData.append("price", newprice);
+      formData.append("name", menuName);
+      formData.append("price", newPrice);
       formData.append("image", image);
       const response = await axios.post(
         "http://127.0.0.1:8000/api/uploadmenu",
@@ -71,7 +72,7 @@ const NewMenu = () => {
                 <input
                   type="text"
                   className="input"
-                  onChange={(e) => setMenuname(e.target.value)}
+                  onChange={(e) => setMenuName(e.target.value)}
                 />
               </div>
               <div className="input-wrapper">
@@ -82,26 +83,29 @@ const NewMenu = () => {
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </div>
-              <div className="input-wrapper">
-                <span className="input-indicator">Image</span>
-                <input
-                  type="file"
-                  className="input-image"
-                  onChange={handleImageChange}
-                />
+              <div className="file-input-container">
+                <div className="items">
+                  <input type="file" onChange={handleImageChange} />
+                  <span>
+                    <AddAPhotoOutlinedIcon />
+                  </span>
+                </div>
               </div>
               <div className="submit-wrapper">
-                <input type="submit" onClick={onSubmit} />
+                <input type="submit" className="btn-add" onClick={onSubmit} />
               </div>
             </div>
           </div>
           <div className="preview-details">
-            <img
-              src={preview}
-              alt="imagePreview"
-              className="image-preview"
-              style={{ width: "300px", height: "auto" }}
-            />
+            <div className="preview-left-container">
+              <img
+                src={preview}
+                alt="imagePreview"
+                className="image-preview"
+                style={{ width: "300px", height: "auto" }}
+              />
+            </div>
+            <div className="preview-right-container">asdfafs</div>
           </div>
         </div>
       </div>

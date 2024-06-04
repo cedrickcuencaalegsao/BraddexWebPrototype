@@ -5,8 +5,7 @@
     .data-container {
       display: flex;
       flex-direction: column;
-      .form-container,
-      .preview-details {
+      .form-container {
         display: flex;
         flex-direction: column;
         align-items: start;
@@ -25,10 +24,10 @@
           }
         }
         .input-container {
-          width: 100%;
+          width: 60%;
           padding: 10px;
           display: flex;
-          align-items: start;
+          align-items: center;
           justify-content: space-between;
           .input-wrapper {
             flex: 4;
@@ -48,13 +47,73 @@
               width: 50%;
             }
           }
-          .submit-wrapper {
-            flex: 1;
+          .file-input-container {
+            position: relative;
             display: flex;
-            align-items: center;
+            flex-direction: row;
             justify-content: center;
-            border: 1px solid red;
+            align-items: center;
+            overflow: hidden;
+            .items {
+              margin: 5px;
+              input[type="file"] {
+                position: absolute;
+                font-size: 100px;
+                opacity: 0;
+                right: 0;
+                top: 0;
+              }
+              span {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: red;
+                color: #fff;
+                cursor: pointer;
+                border-radius: 5px;
+                font-weight: bold;
+              }
+            }
+            &:hover {
+              scale: 1.02;
+            }
           }
+          .submit-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            .btn-add {
+              display: inline-block;
+              padding: 15px 25px;
+              background-color: orangered;
+              color: #fff;
+              cursor: pointer;
+              border-radius: 5px;
+              border: 1px solid orangered;
+              font-weight: bold;
+            }
+            &:hover {
+              scale: 1.02;
+            }
+          }
+        }
+      }
+      .preview-details {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .preview-left-container {
+          flex: 6;
+        }
+        .preview-right-container {
+          flex: 2;
         }
       }
     }
