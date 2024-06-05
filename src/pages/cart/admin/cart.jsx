@@ -15,7 +15,7 @@ const AdminCart = () => {
   const [cartDeleted, setCartDeleted] = useState(0);
   const [cartNotDeleted, setCartNotDeleted] = useState(0);
   const [cartDeletedPercentage, setCartDeletedPercentage] = useState(0);
-  const [cartNotDeletedPercentege, setCartNotDeletedPercentage] = useState(0);
+  const [cartNotDeletedPercentage, setCartNotDeletedPercentage] = useState(0);
 
   const calcCartDeleted = (countCart, cartDeleted) => {
     let def_val = 0;
@@ -55,7 +55,7 @@ const AdminCart = () => {
         created_at: formattedDate(item.created_at),
         updated_at: formattedDate(item.updated_at),
       };
-      
+
       // check if data is already in the array if true then we update it base on the id as and index.
       const arrayIndex = rows.findIndex((rows) => rows.id === data.id);
 
@@ -111,13 +111,13 @@ const AdminCart = () => {
         <NavBar />
         <div className="top">
           <div className="left">
-            <NotDeletedCart data={cartNotDeletedPercentege} />
+            <NotDeletedCart data={cartNotDeletedPercentage} />
           </div>
           <div className="right">
             <DeletedCart data={cartDeletedPercentage} />
           </div>
         </div>
-        <div className="buttom">
+        <div className="bottom">
           <CartTable data={rows} />
         </div>
       </div>

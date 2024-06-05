@@ -98,14 +98,18 @@ const NewMenu = () => {
           </div>
           <div className="preview-details">
             <div className="preview-left-container">
-              <img
-                src={preview}
-                alt="imagePreview"
-                className="image-preview"
-                style={{ width: "300px", height: "auto" }}
-              />
+              <img src={preview} alt="imagePreview" className="image-preview" />
             </div>
-            <div className="preview-right-container">asdfafs</div>
+            <div className="preview-right-container">
+              <div className="preview-name-wrapper">
+                <span className="indicator">Name</span>
+                <span className="value">{menuName}</span>
+              </div>
+              <div className="preview-price-wrapper">
+                <span className="indicator">Price</span>
+                <span className="value">{price}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

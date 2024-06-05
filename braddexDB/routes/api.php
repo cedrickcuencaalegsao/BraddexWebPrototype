@@ -50,7 +50,10 @@ Route::get('get-order-data', [braddexdb_controller::class, 'getOrderData']);
 Route::get('get-delivery-data', [braddexdb_controller::class, 'getDeliveryData']);
 // get user DB data.
 Route::get('get-user-db-data/{uuid}', [braddexdb_controller::class, 'getUserDBData']);
-
+// get cart db data.
+Route::get('get-cart-data/{cartID}', [braddexdb_controller::class, 'getCartData']);
+// get cart menu data.
+Route::get('get-cart-data-menu/{menuID}', [braddexdb_controller::class, 'getCartDataMenu']);
 
 
 

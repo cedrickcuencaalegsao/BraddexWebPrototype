@@ -1,7 +1,12 @@
 import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const CartTable = (data) => {
+  const history = useHistory();
+
+  const editCart = (data) => {
+    history.push(`/edit-cart/${data}`);
+  };
   const columns = [
     { field: "id", headerName: "ID", width: 20 },
     { field: "cartID", headerName: "Cart ID", width: 180 },
@@ -16,14 +21,14 @@ const CartTable = (data) => {
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 100,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="viewButton">
+            <div
+              className="viewButton"
+              onClick={() => editCart(params.row.cartID)}
+            >
               <EditOutlinedIcon />
-            </div>
-            <div className="deleteButton">
-              <DeleteOutlineOutlinedIcon />
             </div>
           </div>
         );

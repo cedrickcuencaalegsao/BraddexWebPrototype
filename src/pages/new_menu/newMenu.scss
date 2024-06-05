@@ -111,9 +111,15 @@
         box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
         .preview-left-container {
           flex: 6;
+          height: 300px;
+          width: 400px;
+          img{
+            height: 300px;
+            width: 400px;
+          }
         }
         .preview-right-container {
-          flex: 2;
+          flex: 5;
         }
       }
     }

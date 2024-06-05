@@ -30,14 +30,14 @@ class braddexdb_controller extends Controller
             'password' => 'required|string|min:6',
         ]);
         // step 2. let's have the condition that if the validator fails.
-        // we resturn message such as invalid email and password
+        // we return message such as invalid email and password
         if ($validator->fails()) {
             return response()->json(['message' => 'Invalid Email and password'], 422);
         }
         // step 3. here we make sure that the request is only email and password.
         // otherwise the login request should be a failed request.
         $credentials = $request->only('email', 'password');
-        // step 4. if credentials if okay then we attemp to authenticate the session.
+        // step 4. if credentials if okay then we attempt to authenticate the session.
         if (Auth::attempt($credentials)) {
             // get user data from our table users.
             $user = Auth::user();
@@ -69,8 +69,8 @@ class braddexdb_controller extends Controller
     }
     public function authRegister(Request $request)
     {
-        // this fucntion uses POST to add new user on our table users.
-        // step 1. always validate the input if neccessary.
+        // this function uses POST to add new user on our table users.
+        // step 1. always validate the input if necessary.
         $validator = Validator::make($request->all(), [
             'uuid' => 'required',
             'first_name' => 'required|string|max:50',
@@ -275,7 +275,7 @@ class braddexdb_controller extends Controller
                 $destinationPath = 'images/profile';
                 // renaming the file.
                 $profileImage = time() . "." . $image->getClientOriginalExtension();
-                // moving the image to our distanation path
+                // moving the image to our target path
                 $image->move($destinationPath, $profileImage);
                 // the image name we are going to save on the database.
                 $data['image'] = $profileImage;
@@ -293,7 +293,7 @@ class braddexdb_controller extends Controller
                 $destinationPath = 'images/profile';
                 // renaming the file.
                 $profileImage = time() . "." . $image->getClientOriginalExtension();
-                // moving the image to our distanation path
+                // moving the image to our target path
                 $image->move($destinationPath, $profileImage);
                 // the image name we are going to save on the database.
                 $data['image'] = $profileImage;
@@ -354,7 +354,7 @@ class braddexdb_controller extends Controller
         $menuID = $data['menuID'];
         $response = tbl_cart::where('menuID', $menuID)->where('userID', $uuID)->update(['isDeleted' => true]);
         if ($response !== false) {
-            return response()->json(['message' => 'Cart sucessfully deleted.']);
+            return response()->json(['message' => 'Cart successfully deleted.']);
         } else {
             return response()->json(['message' => 'Request Failed.']);
         }
@@ -532,7 +532,7 @@ class braddexdb_controller extends Controller
             'l_name' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => 'Please check the name.'], 422);
+            return response()->json(['message' => 'Please check the all inputs.'], 422);
         }
         $data = $request->all();
         $updated_at = Carbon::now()->toDateTimeString();
@@ -542,9 +542,9 @@ class braddexdb_controller extends Controller
             'updated_at' => $updated_at,
         ]);
         if ($user) {
-            return response()->json(['message' => 'Changes saved. Refresh the page']);
+            return response()->json(['message' => 'Changes saved. Please refresh the page to see changes']);
         }
-        return response()->json(['message' => 'Changes Saved failed.']);
+        return response()->json(['message' => 'Attempt to save changes failed.']);
     }
     public function personalInfoOtherUpdate(Request $request)
     {
@@ -591,5 +591,14 @@ class braddexdb_controller extends Controller
             return response()->json(['message' => 'Changes saved. Refresh the page']);
         }
         return response()->json(['message' => 'Changes Saved failed.']);
+    }
+    public function getCartData($cartID)
+    {
+        $cart = tbl_cart::where('cartID', $cartID)->get();
+        return response()->json($cart);
+    }
+    public function getCartDataMenu($menuID)
+    {
+        return response()->json(compact('menuID'));
     }
 }

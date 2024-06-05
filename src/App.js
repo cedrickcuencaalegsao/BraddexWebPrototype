@@ -20,7 +20,9 @@ import UpdateMenu from "./pages/update/update";
 import Logs from "./pages/logs/logs";
 import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";
+// Admin Edit Pages.
 import EditUser from "./pages/EditUser/editUser";
+import EditCart from "./pages/EditCart/EditCart";
 
 // guest View.
 import Login from "./pages/login/login";
@@ -54,6 +56,7 @@ const App = () => {
           <AuthRoutes path="/users" component={Users} isAdminRoute />
           <AuthRoutes path="/edit-user/:userUUID" component={EditUser} isAdminRoute />
           <AuthRoutes path="/cart" component={AdminCart} isAdminRoute />
+          <AuthRoutes path="/edit-cart/:cartID" component={EditCart} isAdminRoute/>
           <AuthRoutes path="/products" component={Product} isAdminRoute />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />

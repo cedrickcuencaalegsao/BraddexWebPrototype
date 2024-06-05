@@ -1,0 +1,10 @@
+.edit-cart {
+  display: flex;
+  .container {
+    flex: 6;
+    .content-wrapper {
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+}
