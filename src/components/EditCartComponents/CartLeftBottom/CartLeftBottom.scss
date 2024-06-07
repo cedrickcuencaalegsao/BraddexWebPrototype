@@ -4,4 +4,33 @@
   border-radius: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  .title-wrapper {
+    margin: 0px 0px 10px 0px;
+    .title {
+      text-transform: capitalize;
+      color: darkslategray;
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+  .details-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    .item {
+      display: flex;
+      flex-direction: column;
+      .indicator {
+        color: grey;
+        font-weight: 400;
+        font-size: 12px;
+      }
+      .value {
+        color: darkslategray;
+        font-weight: 400;
+        font-size: 15px;
+      }
+    }
+  }
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EditCartLeftTop from "../../components/EditCartComponents/CartLeftTop/CartLeftTop";
 import EditCartLeftBottom from "../../components/EditCartComponents/CartLeftBottom/CartLeftBottom";
+import EditCartRightTop from "../../components/EditCartComponents/CartRightTop/CartRightTop";
 
 const EditCart = () => {
   const data = useParams();
@@ -22,7 +23,6 @@ const EditCart = () => {
         const API = await axios.get(
           `http://127.0.0.1:8000/api/get-cart-data/${cartID}`
         );
-        console.log(API.data);
         setCartData(API.data);
       } catch (error) {
         console.log(error);
@@ -77,15 +77,26 @@ const EditCart = () => {
 
   const LeftBottomData = () => {
     let data;
-    if (menuData.length !== 0) {
-      menuData.map((item) => (data = { menuID: item.menuID }));
+    if (cartData.length !== 0) {
+      cartData.map(
+        (item) =>
+          (data = {
+            menuID: item.menuID,
+            cartID: item.cartID,
+            userID: item.userID,
+          })
+      );
       return data;
     }
+    return {
+      menuID: "Loading...",
+      cartID: "Loading...",
+      userID: "Loading...",
+    };
   };
 
   let leftTopData = LeftTopData();
   let leftBottomData = LeftBottomData();
-  console.log(cartData, menuData, countInCart, cartCount);
   return (
     <div className="edit-cart">
       <SideBar />
@@ -97,9 +108,7 @@ const EditCart = () => {
             <EditCartLeftBottom data={leftBottomData} />
           </div>
           <div className="right">
-            <div className="title-wrapper">
-              <h1 className="title">Right</h1>
-            </div>
+            <EditCartRightTop data={cartData} />
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const EditUser = () => {
     email: userData.email,
     phone: userData.phone_no,
   };
-  // data on the righth panel.
+  // data on the right panel.
   let data_right_top = {
     userID: userData.userID,
     birthDate: userData.birthday,
