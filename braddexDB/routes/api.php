@@ -57,6 +57,7 @@ Route::get('get-cart-data-menu/{menuID}', [braddexdb_controller::class, 'getCart
 
 
 
+
 // images routes for menu.
 Route::get('/images/menu/{filename}', function ($filename) {
     return response()->file(public_path('images/menu/' . $filename));

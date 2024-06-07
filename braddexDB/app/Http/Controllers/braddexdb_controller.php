@@ -599,6 +599,9 @@ class braddexdb_controller extends Controller
     }
     public function getCartDataMenu($menuID)
     {
-        return response()->json(compact('menuID'));
+        $menu = tbl_menu::where('menuID', $menuID)->get();
+        $countInCart = count(tbl_cart::where('menuID', $menuID)->get());
+        $cartCount = count(tbl_cart::all());
+        return response()->json(compact('menu', 'countInCart', 'cartCount'));
     }
 }
