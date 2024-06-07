@@ -10,12 +10,12 @@ const EditCartLeftBottom = (data) => {
     }
   }, [data]);
 
-  console.log(cartData);
+  console.log(cartData.menuID);
   return (
     <div className="edit-cart-left-bottom">
       <div className="title-wrapper">
         <h1 className="title">Update Cart</h1>
-        <span>Update Image and its preview</span>
+        <span>{cartData.menuID}</span>
       </div>
     </div>
   );
