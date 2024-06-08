@@ -127,7 +127,7 @@ class braddexdb_controller extends Controller
     }
     public function getUserProfile($uuid)
     {
-        if ($uuid != null) {
+        if ($uuid !== null) {
             $data = User::where('userID', $uuid)->first();
             return response()->json(compact('data'));
         } else {

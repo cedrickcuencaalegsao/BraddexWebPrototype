@@ -15,6 +15,7 @@ const EditCart = () => {
   const [countInCart, setCountInCart] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
+
   // here we get the cart that was pass to this component.
   useEffect(() => {
     let cartID = data.cartID;
