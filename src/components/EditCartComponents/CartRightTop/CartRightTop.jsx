@@ -27,7 +27,7 @@ const EditCartRightTop = (data) => {
     }
   };
 
-  console.log(cartData);
+  // console.log(cartData);
 
   return (
     <div className="edit-cart-right-top">

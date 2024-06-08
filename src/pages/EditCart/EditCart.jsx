@@ -52,6 +52,11 @@ const EditCart = () => {
     }
   }, [data, cartData]);
 
+  const getCartId = () => {
+    let cartID = data.cartID;
+    return cartID;
+  };
+
   // create data for the left top widgets.
   const LeftTopData = () => {
     let data;
@@ -59,15 +64,18 @@ const EditCart = () => {
       menuData.map(
         (item) =>
           (data = {
+            cartID: getCartId(),
             menuID: item.menuID,
             menuName: item.menu_name,
             image: item.image,
             price: item.price,
           })
       );
+      console.log(data);
       return data;
     }
     return {
+      cartID: "Loading...",
       menuID: "Loading...",
       menuName: "Loading...",
       image: "Loading...",

@@ -6,17 +6,27 @@ const EditCartLeftTop = (data) => {
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
-    if (data.data !== null) {
+    let newData = data.data;
+    if (newData !== null) {
       setCartData(data.data);
     }
   }, [data]);
-  
+
+  const deleteCart = (data) => {
+    console.log(data);
+  };
+
+  console.log(cartData);
+
   return (
     <div className="edit-cart-left-top">
       <div className="title-wrapper">
         <h1 className="title">Menu Details</h1>
         <div className="icon-wrapper">
-          <DeleteOutlineRoundedIcon className="icon" />
+          <DeleteOutlineRoundedIcon
+            className="icon"
+            onClick={() => deleteCart(cartData.cartID)}
+          />
         </div>
       </div>
       <div className="details-wrapper">

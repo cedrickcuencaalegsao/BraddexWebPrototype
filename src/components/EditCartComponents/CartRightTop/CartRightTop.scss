@@ -34,11 +34,20 @@
           margin: 5px;
           display: flex;
           flex-direction: column;
-          .indicator{
+          .indicator {
             color: grey;
             font-weight: 300;
             font-size: 12px;
             margin-bottom: 5px;
+          }
+          .value {
+            padding: 7px;
+            border: none;
+            border-radius: 7px;
+            outline: none;
+            background-color: whitesmoke;
+            color: darkslategray;
+            font-weight: 700;
           }
         }
       }
