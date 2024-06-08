@@ -1,9 +1,12 @@
 import "./CartLeftTop.scss";
 import { useEffect, useState } from "react";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditCartLeftTop = (data) => {
   const [cartData, setCartData] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     let newData = data.data;
@@ -12,11 +15,24 @@ const EditCartLeftTop = (data) => {
     }
   }, [data]);
 
-  const deleteCart = (data) => {
-    console.log(data);
+  const deleteCartAPI = async (data) => {
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/cart-mark-as-deleted/",
+        data
+      );
+      return API.data;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 
-  console.log(cartData);
+  const deleteCart = async (data) => {
+    let id = { cartID: data };
+    const status = await deleteCartAPI(id);
+    status && history.push("/cart");
+  };
 
   return (
     <div className="edit-cart-left-top">

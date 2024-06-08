@@ -2,9 +2,11 @@ import "./CartRightTop.scss";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import Switch from "@mui/material/Switch";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditCartRightTop = (data) => {
   const [cartData, setCartData] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (data.data !== null) {
@@ -25,6 +27,17 @@ const EditCartRightTop = (data) => {
     if (data !== 0) {
       return true;
     }
+  };
+
+  const changeMarkAPI = async (data) => {
+    console.log(data);
+    return true;
+  };
+
+  const changeMark = async (data, cartID) => {
+    let cart_data = { isDeleted: data, cartID: cartID };
+    const status = await changeMarkAPI(cart_data);
+    status && history.push(`/edit-cart/${cartID}`);
   };
 
   // console.log(cartData);
@@ -97,6 +110,7 @@ const EditCartRightTop = (data) => {
                   <Switch
                     className="switch"
                     checked={checked(item.isDeleted)}
+                    onClick={() => changeMark(item.isDeleted, item.cartID)}
                   />
                 </div>
               </div>

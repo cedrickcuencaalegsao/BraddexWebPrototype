@@ -604,4 +604,13 @@ class braddexdb_controller extends Controller
         $cartCount = count(tbl_cart::all());
         return response()->json(compact('menu', 'countInCart', 'cartCount'));
     }
+    public function cartMarkAsDelete(Request $request){
+        $data = $request->all();
+        $cartID = $data['cartID'];
+        $cart = tbl_cart::where('cartID', $cartID)->update(['isDeleted'=>true]);
+        if ($cart) {
+            return response()->json(true);
+        }
+        return response()->json(false);
+    }
 }
