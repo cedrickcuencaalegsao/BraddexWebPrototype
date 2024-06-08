@@ -71,7 +71,6 @@ const EditCart = () => {
             price: item.price,
           })
       );
-      console.log(data);
       return data;
     }
     return {
