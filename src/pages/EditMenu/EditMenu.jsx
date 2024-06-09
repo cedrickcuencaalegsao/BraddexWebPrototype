@@ -35,12 +35,12 @@ const EditMenu = () => {
   }, [menuID]);
 
   const leftTopData = () => {
-    console.log(menuData);
     if (menuData.length !== 0) {
       return menuData.map((item) => ({
         image: item.image,
         menuName: item.menu_name,
         menuID: item.menuID,
+        price: item.price,
       }));
     }
     return [];
@@ -48,7 +48,7 @@ const EditMenu = () => {
   console.log(countCart, countOrder, menuInCart, menuInOrder);
 
   let left_top_data = leftTopData();
-  
+
   return (
     <div className="updateMenu">
       <SideBar />
@@ -57,7 +57,7 @@ const EditMenu = () => {
         <div className="details-container">
           <div className="left">
             <EditMenuLeftTop data={left_top_data} />
-            <EditMenuLeftBottom />
+            <EditMenuLeftBottom data={menuID} />
           </div>
           <div className="right">Right</div>
         </div>

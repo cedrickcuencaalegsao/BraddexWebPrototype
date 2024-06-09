@@ -1,6 +1,19 @@
-.updateMenu{
-    display: flex;
-    .updateMenuContainer{
-        flex: 6;
+.updateMenu {
+  display: flex;
+  .updateMenuContainer {
+    flex: 6;
+    .details-container {
+      padding: 10px;
+      margin: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      justify-content: space-between;
+      .left,
+      .right {
+        flex: 3;
+        margin: 10px;
+      }
     }
+  }
 }
