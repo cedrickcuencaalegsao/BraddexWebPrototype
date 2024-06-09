@@ -626,7 +626,6 @@ class braddexdb_controller extends Controller
         if ($cart) {
             return response()->json(true);
         }
-        
         return response()->json(false);
     }
 }

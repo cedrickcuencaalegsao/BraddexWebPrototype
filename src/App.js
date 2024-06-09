@@ -16,7 +16,7 @@ import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
 import Notification from "./pages/notification/admin/notif";
 import NewMenu from "./pages/new_menu/newMenu";
-import UpdateMenu from "./pages/update/update";
+import UpdateMenu from "./pages/EditMenu/update";
 import Logs from "./pages/logs/logs";
 import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";
@@ -58,12 +58,12 @@ const App = () => {
           <AuthRoutes path="/cart" component={AdminCart} isAdminRoute />
           <AuthRoutes path="/edit-cart/:cartID" component={EditCart} isAdminRoute/>
           <AuthRoutes path="/products" component={Product} isAdminRoute />
+          <AuthRoutes path="/updatemenu/:menuID" component={UpdateMenu} isAdminRoute />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
           <AuthRoutes path="/notification" component={Notification} isAdminRoute />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
-          <AuthRoutes path="/updatemenu/:menuID" component={UpdateMenu} isAdminRoute />
           <AuthRoutes path="/logs" component={Logs} isAdminRoute />
           <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
           <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />

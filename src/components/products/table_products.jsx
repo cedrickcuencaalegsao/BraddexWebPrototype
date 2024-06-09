@@ -42,7 +42,7 @@ const TableProducts = (data) => {
           <div className="container">
             <img
               src={`http://127.0.0.1:8000/images/menu/${image.formattedValue}`}
-              alt="image"
+              alt="menu"
               className="image"
             />
           </div>
@@ -56,7 +56,7 @@ const TableProducts = (data) => {
       renderCell: (bestselling) => {
         return (
           <div className="bestselling">
-            {bestselling.formattedValue == 1 ? (
+            {bestselling.formattedValue === 1 ? (
               <span style={{ color: "green" }}>Yes</span>
             ) : (
               <span style={{ color: "red" }}>No</span>
