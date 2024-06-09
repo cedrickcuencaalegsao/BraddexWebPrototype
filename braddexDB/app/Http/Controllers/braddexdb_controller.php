@@ -103,7 +103,7 @@ class braddexdb_controller extends Controller
         ]);
 
         // step 4. return message to our frontend to tell the user that they have successfully registered.
-        return response()->json([$user, 'message' => 'Account successfully registered.']);
+        return response()->json(['message' => 'Account successfully registered.']);
     }
     public function authLogout($uuid)
     {
@@ -116,7 +116,7 @@ class braddexdb_controller extends Controller
             User::find($id)->update(['isOnline' => false]);
             return response()->json(['message' => 'Updated']);
         }
-        return response()->json($id);
+        return response()->json(['message' => 'Signed out successfully.']);
     }
     public function allUsers()
     {
@@ -136,7 +136,7 @@ class braddexdb_controller extends Controller
     }
     public function getMenu()
     {
-        $data = tbl_menu::all();
+        $data = tbl_menu::all(); // get all data fro
         return response()->json(compact('data'));
     }
     public function getMenuData()
@@ -604,13 +604,29 @@ class braddexdb_controller extends Controller
         $cartCount = count(tbl_cart::all());
         return response()->json(compact('menu', 'countInCart', 'cartCount'));
     }
-    public function cartMarkAsDelete(Request $request){
+    public function cartMarkAsDelete(Request $request)
+    {
         $data = $request->all();
         $cartID = $data['cartID'];
-        $cart = tbl_cart::where('cartID', $cartID)->update(['isDeleted'=>true]);
+        $cart = tbl_cart::where('cartID', $cartID)->update(['isDeleted' => true]);
         if ($cart) {
             return response()->json(true);
         }
+        return response()->json(false);
+    }
+    public function changesCartMark(Request $request)
+    {
+        $data = $request->all();
+        $cartID = $data['cartID'];
+        $isDeleted = $data['isDeleted'];
+
+        $newStatus = $isDeleted === 0 ? true : false;
+
+        $cart = tbl_cart::where('cartID', $cartID)->update(['isDeleted' => $newStatus]);
+        if ($cart) {
+            return response()->json(true);
+        }
+        
         return response()->json(false);
     }
 }

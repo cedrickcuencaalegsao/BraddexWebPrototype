@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import Switch from "@mui/material/Switch";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 const EditCartRightTop = (data) => {
   const [cartData, setCartData] = useState([]);
@@ -30,8 +31,15 @@ const EditCartRightTop = (data) => {
   };
 
   const changeMarkAPI = async (data) => {
-    console.log(data);
-    return true;
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/change-cart-mark/",
+        data
+      );
+      return API.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const changeMark = async (data, cartID) => {
