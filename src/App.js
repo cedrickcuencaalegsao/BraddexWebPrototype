@@ -16,7 +16,7 @@ import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
 import Notification from "./pages/notification/admin/notif";
 import NewMenu from "./pages/new_menu/newMenu";
-import UpdateMenu from "./pages/EditMenu/update";
+import UpdateMenu from "./pages/EditMenu/EditMenu";
 import Logs from "./pages/logs/logs";
 import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";

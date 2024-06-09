@@ -12,8 +12,6 @@ const EditCart = () => {
   const data = useParams();
   const [cartData, setCartData] = useState([]);
   const [menuData, setMenuData] = useState([]);
-  const [countInCart, setCountInCart] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
 
 
   // here we get the cart that was pass to this component.
@@ -41,8 +39,6 @@ const EditCart = () => {
         const API = await axios.get(
           `http://127.0.0.1:8000/api/get-cart-data-menu/${data}`
         );
-        setCartCount(API.data.cartCount);
-        setCountInCart(API.data.countInCart);
         setMenuData(API.data.menu);
       } catch (error) {
         console.log(error);

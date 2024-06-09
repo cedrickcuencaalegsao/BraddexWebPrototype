@@ -24,7 +24,7 @@ Route::post('user-mark-delivered', [braddexdb_controller::class, 'userMarkDelive
 Route::post('personal-Info-Name-Update', [braddexdb_controller::class, 'personalInfoNameUpdate']);
 Route::post('personal-Info-Other-Update', [braddexdb_controller::class, 'personalInfoOtherUpdate']);
 Route::post('personal-Info-IsAdmin', [braddexdb_controller::class, 'personalInfoIsAdmin']);
-Route::post('cart-mark-as-deleted',[braddexdb_controller::class, 'cartMarkAsDelete']);
+Route::post('cart-mark-as-deleted', [braddexdb_controller::class, 'cartMarkAsDelete']);
 Route::post('change-cart-mark', [braddexdb_controller::class, 'changesCartMark']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
@@ -46,6 +46,8 @@ Route::get('users', [braddexdb_controller::class, 'allUsers']);
 Route::get('cart', [braddexdb_controller::class, 'getAllCart']);
 // get all menu data.
 Route::get('get-menu-data', [braddexdb_controller::class, 'getMenuData']);
+// get menu-Edit Menu.
+Route::get('get-menu-data/{menuID}', [braddexdb_controller::class, 'getUpdateMenu']);
 // get all order Data
 Route::get('get-order-data', [braddexdb_controller::class, 'getOrderData']);
 // get all delivery data.

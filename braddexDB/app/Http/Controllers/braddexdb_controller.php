@@ -600,9 +600,7 @@ class braddexdb_controller extends Controller
     public function getCartDataMenu($menuID)
     {
         $menu = tbl_menu::where('menuID', $menuID)->get();
-        $countInCart = count(tbl_cart::where('menuID', $menuID)->get());
-        $cartCount = count(tbl_cart::all());
-        return response()->json(compact('menu', 'countInCart', 'cartCount'));
+        return response()->json(compact('menu'));
     }
     public function cartMarkAsDelete(Request $request)
     {
@@ -630,6 +628,19 @@ class braddexdb_controller extends Controller
     }
     public function getUpdateMenu($menuID)
     {
-        return response()->json($menuID);
+        $menu = tbl_menu::where('menuID', $menuID)->get();
+        $cartCount = count(tbl_cart::all());
+        $menuInTbl_Cart = count(tbl_cart::where('menuID', $menuID)->where('isDeleted', false)->get());
+        $orderCount = count(tbl_order::all());
+        $menuInTbl_Order = count(tbl_order::where('menuID', $menuID)->where('isDeleted', false)->get());
+        return response()->json(
+            compact(
+                'menu',
+                'cartCount',
+                'menuInTbl_Cart',
+                'orderCount',
+                'menuInTbl_Order'
+            )
+        );
     }
 }
