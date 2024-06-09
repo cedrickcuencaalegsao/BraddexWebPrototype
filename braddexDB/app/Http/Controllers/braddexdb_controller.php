@@ -628,4 +628,8 @@ class braddexdb_controller extends Controller
         }
         return response()->json(false);
     }
+    public function getUpdateMenu($menuID)
+    {
+        return response()->json($menuID);
+    }
 }
