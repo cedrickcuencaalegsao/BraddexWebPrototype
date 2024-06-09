@@ -34,6 +34,8 @@ const EditCartLeftTop = (data) => {
     status && history.push("/cart");
   };
 
+  console.log(cartData);
+
   return (
     <div className="edit-cart-left-top">
       <div className="title-wrapper">

@@ -9,7 +9,7 @@ const TableProducts = (data) => {
 
   const handleUpdateMenu = (menuID) => {
     console.log(menuID);
-    history.push(`/updatemenu/${menuID}`);
+    history.push(`/update-menu/${menuID}`);
   };
   const handleDeleteMenu = (menuID) => {
     console.log(menuID);

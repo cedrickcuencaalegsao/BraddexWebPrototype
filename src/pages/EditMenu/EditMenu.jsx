@@ -4,11 +4,11 @@ import NavBar from "../../components/navBar/nav_bar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import EditCartLeftTop from "../../components/EditCartComponents/CartLeftTop/CartLeftTop";
-import EditCartLeftBottom from "../../components/EditCartComponents/CartLeftBottom/CartLeftBottom";
+import EditMenuLeftTop from "../../components/EditMenuComponents/EditMenuLeftTop/EditMenuLeftTop";
+import EditMenuLeftBottom from "../../components/EditMenuComponents/EditMenuLeftBottom/EditMenuLeftBottom";
 
-const UpdateMenu = () => {
-  const { menuID } = useParams();
+const EditMenu = () => {
+  const menuID = useParams();
   const [menuData, setMenuData] = useState([]);
   const [countCart, setCountCart] = useState(0);
   const [countOrder, setCountOrder] = useState(0);
@@ -34,18 +34,38 @@ const UpdateMenu = () => {
     getMenuDataAPI();
   }, [menuID]);
 
-  console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
+  const LeftTopData = () => {
+    let data;
+    if (menuData !== 0) {
+      menuData.map((item) => {
+        data = {
+          image: item.image,
+          menuName: item.menu_name,
+          menuID: item.menuID,
+        };
+        console.log(data);
+        return data;
+      });
+    }
+    return {
+      image: "Loading...",
+      menuName: "Loading...",
+      menuID: "Loading...",
+    };
+  };
 
+  console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
+  let left_top_data = LeftTopData();
+  console.log(left_top_data);
   return (
     <div className="updateMenu">
       <SideBar />
       <div className="updateMenuContainer">
         <NavBar />
         <div className="details-container">
-          <h1>{menuData.image}</h1>
           <div className="left">
-            <EditCartLeftTop />
-            <EditCartLeftBottom />
+            <EditMenuLeftTop data={left_top_data} />
+            <EditMenuLeftBottom />
           </div>
           <div className="right">Right</div>
         </div>
@@ -53,4 +73,4 @@ const UpdateMenu = () => {
     </div>
   );
 };
-export default UpdateMenu;
+export default EditMenu;
