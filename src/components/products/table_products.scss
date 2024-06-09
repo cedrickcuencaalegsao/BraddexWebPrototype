@@ -88,11 +88,15 @@
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
     }
-    &.Not-Available {
+    &.NotAvailable {
+      margin-top: 10px;
+      height: 20px;
       color: red;
       background-color: rgba(255, 1, 1, 0.103);
     }
     &.Limited {
+      margin-top: 10px;
+      height: 20px;
       color: goldenrod;
       background-color: rgba(189, 189, 3, 0.103);
     }

@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EditMenuLeftTop from "../../components/EditMenuComponents/EditMenuLeftTop/EditMenuLeftTop";
 import EditMenuLeftBottom from "../../components/EditMenuComponents/EditMenuLeftBottom/EditMenuLeftBottom";
+import EditMenuRightTop from "../../components/EditMenuComponents/EditMenuRightTop/EditMenuRightTop";
+import EditMenuRightCenter from "../../components/EditMenuComponents/EditMenuRightCenter/EditMenuRightCenter";
+import EditMenuRightBottom from "../../components/EditMenuComponents/EditMenuRightBottom/EditMenuRightBottom";
 
 const EditMenu = () => {
   const { menuID } = useParams();
@@ -45,9 +48,26 @@ const EditMenu = () => {
     }
     return [];
   };
-  console.log(countCart, countOrder, menuInCart, menuInOrder);
+  console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
+
+  const leftBottomData = () => {
+    if (menuData.length !== 0) {
+      return menuData.map((item) => ({
+        menuID: item.menuID,
+        isAvailable: item.isAvialable,
+      }));
+    }
+    return [];
+  };
 
   let left_top_data = leftTopData();
+  let left_bottom_data = leftBottomData();
+  let right_bottom_data = {
+    countCart: countCart,
+    countOrder: countOrder,
+    menuInCart: menuInCart,
+    menuInOrder: menuInOrder,
+  };
 
   return (
     <div className="updateMenu">
@@ -57,9 +77,13 @@ const EditMenu = () => {
         <div className="details-container">
           <div className="left">
             <EditMenuLeftTop data={left_top_data} />
-            <EditMenuLeftBottom data={menuID} />
+            <EditMenuLeftBottom data={left_bottom_data} />
           </div>
-          <div className="right">Right</div>
+          <div className="right">
+            <EditMenuRightTop data={menuData} />
+            <EditMenuRightCenter data={right_bottom_data} />
+            <EditMenuRightBottom data={menuID} />
+          </div>
         </div>
       </div>
     </div>

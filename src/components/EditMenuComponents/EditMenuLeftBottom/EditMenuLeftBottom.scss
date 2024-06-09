@@ -1,34 +1,62 @@
 .edit-menu-left-bottom {
   display: flex;
+  flex-direction: column;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-  .items {
-    flex: 2;
+  .top-container {
     display: flex;
     align-items: center;
-    .indicator {
-      font-weight: 400;
-      font-size: 12px;
-      &.Available {
-        padding: 10px;
-        color: green;
-        background-color: rgba(0, 128, 0, 0.2);
-        border-radius: 7px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    .title-wrapper {
+      .title {
+        color: darkslategray;
+        font-weight: 700;
       }
-      &.Limited {
-        padding: 10px;
-        color: goldenrod;
-        background-color: rgba(218, 165, 32, 0.2);
-        border-radius: 7px;
+    }
+    .btn-save-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: red;
+      .btn-save {
+        color: white;
+        font-size: 15px;
       }
-      &.Not-Available {
-        padding: 10px;
-        color: red;
-        background-color: rgba(255, 0, 0, 0.2);
-        border-radius: 7px;
+    }
+  }
+  .details {
+    display: flex;
+    .items {
+      flex: 2;
+      display: flex;
+      align-items: center;
+      .indicator {
+        font-weight: 400;
+        font-size: 12px;
+        &.Available {
+          padding: 10px;
+          color: green;
+          background-color: rgba(0, 128, 0, 0.2);
+          border-radius: 7px;
+        }
+        &.Limited {
+          padding: 10px;
+          color: goldenrod;
+          background-color: rgba(218, 165, 32, 0.2);
+          border-radius: 7px;
+        }
+        &.Not-Available {
+          padding: 10px;
+          color: red;
+          background-color: rgba(255, 0, 0, 0.2);
+          border-radius: 7px;
+        }
       }
     }
   }

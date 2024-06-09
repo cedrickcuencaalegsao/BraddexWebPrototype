@@ -26,6 +26,7 @@ Route::post('personal-Info-Other-Update', [braddexdb_controller::class, 'persona
 Route::post('personal-Info-IsAdmin', [braddexdb_controller::class, 'personalInfoIsAdmin']);
 Route::post('cart-mark-as-deleted', [braddexdb_controller::class, 'cartMarkAsDelete']);
 Route::post('change-cart-mark', [braddexdb_controller::class, 'changesCartMark']);
+Route::post('change-menu-status', [braddexdb_controller::class, 'changeMenuStatus']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);

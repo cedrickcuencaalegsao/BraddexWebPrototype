@@ -11,8 +11,6 @@ const EditMenuLeftTop = (data) => {
     }
   }, [dataReceive]);
 
-  console.log(menuData);
-
   return (
     <div className="edit-menu-left-top">
       {menuData.map((item) => (

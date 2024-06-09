@@ -635,4 +635,14 @@ class braddexdb_controller extends Controller
         $menuInTbl_Order = count(tbl_order::where('menuID', $menuID)->where('isDeleted', false)->get());
         return response()->json(compact('menu', 'cartCount', 'menuInTbl_Cart', 'orderCount', 'menuInTbl_Order'));
     }
+    public function changeMenuStatus(Request $request)
+    {
+        $data = $request->all();
+        $menuID = $data['menuID'];
+        $menu = tbl_menu::where('menuID', $menuID)->update(['isAvialable' => $data['isAvailable']]);
+        if ($menu) {
+            return response()->json(['message' => 'Updated successfully']);
+        }
+        return response()->json(['message' => 'Update Failed']);
+    }
 }
