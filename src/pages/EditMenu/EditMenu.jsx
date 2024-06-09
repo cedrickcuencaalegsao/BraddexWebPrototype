@@ -34,22 +34,21 @@ const EditMenu = () => {
     getMenuDataAPI();
   }, [menuID]);
 
-  const LeftTopData = (menuData) => {
-    let data;
-    if (menuData !== 0) {
-      menuData.map((item) => {
-        data = {
-          image: item.image,
-          menuName: item.menu_name,
-          menuID: item.menuID,
-        };
-        return data;
-      });
+  const leftTopData = () => {
+    console.log(menuData);
+    if (menuData.length !== 0) {
+      return menuData.map((item) => ({
+        image: item.image,
+        menuName: item.menu_name,
+        menuID: item.menuID,
+      }));
     }
+    return [];
   };
-  console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
+  console.log(countCart, countOrder, menuInCart, menuInOrder);
 
-  let left_top_data = LeftTopData(menuData);
+  let left_top_data = leftTopData();
+  
   return (
     <div className="updateMenu">
       <SideBar />
