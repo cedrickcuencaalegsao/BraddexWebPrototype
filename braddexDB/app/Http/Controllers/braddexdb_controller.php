@@ -554,7 +554,7 @@ class braddexdb_controller extends Controller
             'birthDate' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['message' => 'Please check the name.'], 422);
+            return response()->json(['message' => 'Birthday and Address should not be empty.']);
         }
         $data = $request->all();
         $updated_at = Carbon::now()->toDateTimeString();
