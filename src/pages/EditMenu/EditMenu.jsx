@@ -8,7 +8,7 @@ import EditMenuLeftTop from "../../components/EditMenuComponents/EditMenuLeftTop
 import EditMenuLeftBottom from "../../components/EditMenuComponents/EditMenuLeftBottom/EditMenuLeftBottom";
 
 const EditMenu = () => {
-  const menuID = useParams();
+  const { menuID } = useParams();
   const [menuData, setMenuData] = useState([]);
   const [countCart, setCountCart] = useState(0);
   const [countOrder, setCountOrder] = useState(0);
@@ -34,7 +34,7 @@ const EditMenu = () => {
     getMenuDataAPI();
   }, [menuID]);
 
-  const LeftTopData = () => {
+  const LeftTopData = (menuData) => {
     let data;
     if (menuData !== 0) {
       menuData.map((item) => {
@@ -43,20 +43,13 @@ const EditMenu = () => {
           menuName: item.menu_name,
           menuID: item.menuID,
         };
-        console.log(data);
         return data;
       });
     }
-    return {
-      image: "Loading...",
-      menuName: "Loading...",
-      menuID: "Loading...",
-    };
   };
-
   console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
-  let left_top_data = LeftTopData();
-  console.log(left_top_data);
+
+  let left_top_data = LeftTopData(menuData);
   return (
     <div className="updateMenu">
       <SideBar />

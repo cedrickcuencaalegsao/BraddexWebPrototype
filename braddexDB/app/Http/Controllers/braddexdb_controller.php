@@ -633,14 +633,6 @@ class braddexdb_controller extends Controller
         $menuInTbl_Cart = count(tbl_cart::where('menuID', $menuID)->where('isDeleted', false)->get());
         $orderCount = count(tbl_order::all());
         $menuInTbl_Order = count(tbl_order::where('menuID', $menuID)->where('isDeleted', false)->get());
-        return response()->json(
-            compact(
-                'menu',
-                'cartCount',
-                'menuInTbl_Cart',
-                'orderCount',
-                'menuInTbl_Order'
-            )
-        );
+        return response()->json(compact('menu', 'cartCount', 'menuInTbl_Cart', 'orderCount', 'menuInTbl_Order'));
     }
 }
