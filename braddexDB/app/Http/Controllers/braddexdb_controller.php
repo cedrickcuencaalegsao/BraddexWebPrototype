@@ -645,4 +645,22 @@ class braddexdb_controller extends Controller
         }
         return response()->json(['message' => 'Update Failed']);
     }
+    public function updateMenu(Request $request)
+    {
+        $data = $request->all();
+        $menuID = $data['menuID'];
+        $menu_name = $data['menu_name'];
+        $price = $data['price'];
+        $bestselling = $data['bestselling'];
+        $menu = tbl_menu::where('menuID', $menuID)->update([
+            'bestselling' => $bestselling,
+            'menu_name' => $menu_name,
+            'price' => $price,
+        ]);
+
+        if ($menu) {
+            return response()->json(true);
+        }
+        return response()->json(false);
+    }
 }
