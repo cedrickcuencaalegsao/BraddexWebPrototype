@@ -2,7 +2,6 @@ import "./table_products.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 const TableProducts = (data) => {
   const history = useHistory();
@@ -10,9 +9,6 @@ const TableProducts = (data) => {
   const handleUpdateMenu = (menuID) => {
     console.log(menuID);
     history.push(`/update-menu/${menuID}`);
-  };
-  const handleDeleteMenu = (menuID) => {
-    console.log(menuID);
   };
 
   const columns = [
@@ -93,12 +89,6 @@ const TableProducts = (data) => {
               onClick={() => handleUpdateMenu(data.row.menuID)}
             >
               <EditOutlinedIcon />
-            </div>
-            <div
-              className="deleteButton"
-              onClick={() => handleDeleteMenu(data.row.menuID)}
-            >
-              <DeleteOutlineOutlinedIcon />
             </div>
           </div>
         );
