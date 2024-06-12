@@ -13,10 +13,10 @@ import EditMenuRightBottom from "../../components/EditMenuComponents/EditMenuRig
 const EditMenu = () => {
   const { menuID } = useParams();
   const [menuData, setMenuData] = useState([]);
-  const [countCart, setCountCart] = useState(0);
-  const [countOrder, setCountOrder] = useState(0);
-  const [menuInCart, setMenuInCart] = useState(0);
-  const [menuInOrder, setMenuInOrder] = useState(0);
+  const [countCart, setCountCart] = useState(0); // all count on table cart.
+  const [countOrder, setCountOrder] = useState(0); // all count on table order.
+  const [menuInCart, setMenuInCart] = useState(0); // not deleted.
+  const [menuInOrder, setMenuInOrder] = useState(0); // not deleted.
 
   useEffect(() => {
     // function to get the data of the menu we want to edit
@@ -48,7 +48,6 @@ const EditMenu = () => {
     }
     return [];
   };
-  console.log(menuData, countCart, countOrder, menuInCart, menuInOrder);
 
   const leftBottomData = () => {
     if (menuData.length !== 0) {
