@@ -2,6 +2,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const TableOrder = (data) => {
+  const EditRow = (data) => {
+    console.log(data);
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 20 },
     { field: "orderID", headerName: "Order ID", width: 110 },
@@ -21,11 +25,11 @@ const TableOrder = (data) => {
       description: "This column has a value getter and is not sortable.",
       sortable: false,
       width: 50,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <div className="cellAction">
             <div className="viewButton">
-              <EditOutlinedIcon />
+              <EditOutlinedIcon onClick={() => EditRow(params.row.orderID)} />
             </div>
           </div>
         );

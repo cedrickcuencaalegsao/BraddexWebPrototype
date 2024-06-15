@@ -1,7 +1,6 @@
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 const WidgetDeleted = (data) => {
-  console.log(data.data);
   let count = data.data.count;
   let deleted = data.data.deleted;
   let calc = (deleted / count) * 100;
