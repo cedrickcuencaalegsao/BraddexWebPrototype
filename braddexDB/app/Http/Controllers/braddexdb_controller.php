@@ -663,4 +663,11 @@ class braddexdb_controller extends Controller
         }
         return response()->json(false);
     }
+    public function updateMenuImage(Request $request){
+        $data = $request->all();
+        $menuID = $data['menuID'];
+        $image = $data['image'];
+        // $menuData = tbl_menu::
+        return response()->json(compact('data'));
+    }
 }

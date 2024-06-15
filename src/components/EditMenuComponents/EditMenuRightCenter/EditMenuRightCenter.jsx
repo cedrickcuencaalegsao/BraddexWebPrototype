@@ -21,9 +21,6 @@ const EditMenuRightCenter = (data) => {
   let val_stat_cart = menu_stat_cart.toFixed(2);
   let val_stat_order = menu_stat_order.toFixed(2);
 
-  console.log(val_stat_cart, val_stat_order);
-  console.log(countCart, menuInCart, countOrder, menuInOrder);
-
   return (
     <div className="edit-menu-right-center">
       <div className="left">

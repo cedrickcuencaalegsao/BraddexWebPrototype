@@ -1,8 +1,82 @@
 .edit-menu-right-bottom {
   display: flex;
+  flex-direction: column;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  .top {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    .title {
+      text-transform: capitalize;
+      color: darkslategray;
+      font-weight: 700;
+    }
+    .btn-save-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: red;
+      .btn-save {
+        color: white;
+        font-size: 15px;
+      }
+      &:hover {
+        scale: 1.2;
+      }
+    }
+  }
+  .update-profile-picture {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    .file-input-container {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      .items {
+        margin: 5px;
+        input[type="file"] {
+          position: absolute;
+          font-size: 100px;
+          opacity: 0;
+          right: 0;
+          top: 0;
+        }
+        span {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: red;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+      }
+    }
+    .preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 20px;
+      border: 2px solid grey;
+      width: 150px;
+      height: 90px;
+      overflow: hidden;
+      img {
+        width: 250px;
+        height: 150px;
+      }
+    }
+  }
 }

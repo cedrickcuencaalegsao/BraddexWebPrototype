@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AuthRoutes from "./AuthRoutes";
 
 // Components Admin.
@@ -54,15 +50,31 @@ const App = () => {
           {/* Admin Routes */}
           <AuthRoutes path="/home" component={Home} isAdminRoute />
           <AuthRoutes path="/users" component={Users} isAdminRoute />
-          <AuthRoutes path="/edit-user/:userUUID" component={EditUser} isAdminRoute />
+          <AuthRoutes
+            path="/edit-user/:userUUID"
+            component={EditUser}
+            isAdminRoute
+          />
           <AuthRoutes path="/cart" component={AdminCart} isAdminRoute />
-          <AuthRoutes path="/edit-cart/:cartID" component={EditCart} isAdminRoute />
+          <AuthRoutes
+            path="/edit-cart/:cartID"
+            component={EditCart}
+            isAdminRoute
+          />
           <AuthRoutes path="/products" component={Product} isAdminRoute />
-          <AuthRoutes path="/update-menu/:menuID" component={EditMenu} isAdminRoute />
+          <AuthRoutes
+            path="/update-menu/:menuID"
+            component={EditMenu}
+            isAdminRoute
+          />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
-          <AuthRoutes path="/notification" component={Notification} isAdminRoute />
+          <AuthRoutes
+            path="/notification"
+            component={Notification}
+            isAdminRoute
+          />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
           <AuthRoutes path="/logs" component={Logs} isAdminRoute />
           <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
@@ -71,16 +83,28 @@ const App = () => {
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu} />
           <AuthRoutes path="/client-cart" component={Cart} />
-          <AuthRoutes path="/client-order-now/:menuID" component={ClientOrderNow} />
-          <AuthRoutes path="/client-order-multiple/:data" component={ClientOrderMultiple} />
+          <AuthRoutes
+            path="/client-order-now/:menuID"
+            component={ClientOrderNow}
+          />
+          <AuthRoutes
+            path="/client-order-multiple/:data"
+            component={ClientOrderMultiple}
+          />
           <AuthRoutes path="/client-delivery" component={ClientDelivery} />
           <AuthRoutes path="/client-history" component={ClientHistory} />
           <AuthRoutes path="/client-support" component={ClientSupport} />
-          <AuthRoutes path="/client-announcement" component={ClientAnnouncement} />
+          <AuthRoutes
+            path="/client-announcement"
+            component={ClientAnnouncement}
+          />
           <AuthRoutes path="/client-settings" component={ClientSettings} />
           <AuthRoutes path="/client-privacy" component={ClientPrivacy} />
           <AuthRoutes path="/client-profile" component={ClientUserProfile} />
-          <AuthRoutes path="/client-notification" component={ClientNotification} />
+          <AuthRoutes
+            path="/client-notification"
+            component={ClientNotification}
+          />
         </Switch>
       </Router>
     </div>

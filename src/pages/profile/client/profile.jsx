@@ -31,7 +31,7 @@ const ClientUserProfile = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   // Allowing frontend data to be updated at realtime
   const setFname = (value) => {
