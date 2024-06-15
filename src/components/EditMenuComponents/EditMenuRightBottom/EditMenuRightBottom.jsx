@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditMenuRightBottom = (data) => {
   const [menuData, setMenuData] = useState("");
   const [menuImage, setMenuImage] = useState("");
   const [preview, setPreview] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     setMenuData(data.data);
@@ -40,9 +42,10 @@ const EditMenuRightBottom = (data) => {
           },
         }
       );
-      console.log(API.data);
+      API.data && history.push("/products");
     } catch (error) {
       console.log(error);
+      // console.log(error.response.data);
     }
     // console.log(menuData, menuImage);
   };

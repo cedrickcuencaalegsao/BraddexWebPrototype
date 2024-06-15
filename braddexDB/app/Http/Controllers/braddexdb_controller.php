@@ -65,7 +65,6 @@ class braddexdb_controller extends Controller
         }
         // if and only if the login authentication failed.
         return response()->json(['message' => 'Login Failed'], 401);
-
     }
     public function authRegister(Request $request)
     {
@@ -663,11 +662,53 @@ class braddexdb_controller extends Controller
         }
         return response()->json(false);
     }
-    public function updateMenuImage(Request $request){
-        $data = $request->all();
-        $menuID = $data['menuID'];
-        $image = $data['image'];
-        // $menuData = tbl_menu::
-        return response()->json(compact('data'));
+    public function updateMenuImage(Request $request)
+    {
+        // validate the request
+        $validator = Validator::make($request->all(), [
+            'menuID' => 'required',
+            'image' => 'required',
+        ]);
+        // return the error if the validation fails.
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        $data = $request->all(); // making all request into one array
+
+        $menuID = $data['menuID']; // get the menu id from the request.
+
+        // get the existing menu data
+        $menuData = tbl_menu::where('menuID', $menuID)->first();
+        // if false then return the error.
+        if (!$menuData) {
+            return response()->json(['error' => 'Menu not found']);
+        }
+        // if true then we update the menu image.
+        $recentMenuImage = $menuData['image'];
+        // if the recent menu image varaible is not null then we should delete the existing menu image form the syste, this feature is only temporary.
+        if ($recentMenuImage != null) {
+            File::delete(public_path(
+                'images/menu/' . $recentMenuImage
+            ));
+        }
+        // if the file uploaded is an image then we update otherwise the return the error.
+        if ($request->file('image')) {
+            // renaming the image into the time it has been uploaded by the user.
+            $image = $request->file('image'); // get the image.
+            $destinationPath = 'images/menu'; // dir where we store the image.
+            // rename the image while keeping the orignal extension of the file uploaded.
+            $profileImage = time() . "." . $image->getClientOriginalExtension();
+            // now we move the file to our destination path.
+            $image->move($destinationPath, $profileImage);
+            // now we update the database.
+            $update = tbl_menu::where('menuID', $menuID)->update([
+                'image' => $profileImage,
+            ]);
+            if ($update) {
+                return response()->json(true); // we return true.
+            }
+        }
+        return response()->json(false); // if action files return false.
     }
 }
