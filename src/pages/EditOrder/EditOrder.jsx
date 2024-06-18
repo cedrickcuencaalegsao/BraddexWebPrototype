@@ -11,7 +11,6 @@ const EditOrder = () => {
   const data = useParams();
   const [orderData, setOrderData] = useState([]);
   const [menuData, setMenuData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const orderID = data.orderID;
@@ -29,7 +28,6 @@ const EditOrder = () => {
   }, [data]);
 
   const getMenuDataAPI = async (data) => {
-    console.log(data);
     try {
       const API = await axios.get(
         `http://127.0.0.1:8000/api/get-order-menu-data/${data}`
@@ -43,7 +41,6 @@ const EditOrder = () => {
   const validateMenuID = (data) => {
     if (data) {
       getMenuDataAPI(data);
-      setIsLoading(false);
     }
   };
 
@@ -55,7 +52,20 @@ const EditOrder = () => {
     validateMenuID(menu_id);
   }, [data, orderData]);
 
-  console.log(orderData, menuData);
+  const makeDataTop = () => {
+    let data_top;
+    menuData.map(
+      (item) =>
+        (data_top = {
+          menuID: item.menuID,
+          menuName: item.menu_name,
+          image: item.image,
+        })
+    );
+    return data_top;
+  };
+
+  let dataTop = makeDataTop();
 
   return (
     <div className="edit-order-container">
@@ -64,7 +74,7 @@ const EditOrder = () => {
         <NavBar />
         <div className="content-wrapper">
           <div className="left">
-            <EditOrderTopLeft />
+            <EditOrderTopLeft data={dataTop} />
             <EditOrderBottomLeft />
           </div>
           <div className="right">
