@@ -56,11 +56,14 @@ const EditOrder = () => {
     let data_top;
     menuData.map(
       (item) =>
-        (data_top = {
-          menuID: item.menuID,
-          menuName: item.menu_name,
-          image: item.image,
-        })
+        (data_top = [
+          {
+            menuID: item.menuID,
+            menuName: item.menu_name,
+            image: item.image,
+            price: item.price,
+          },
+        ])
     );
     return data_top;
   };
@@ -75,7 +78,7 @@ const EditOrder = () => {
         <div className="content-wrapper">
           <div className="left">
             <EditOrderTopLeft data={dataTop} />
-            <EditOrderBottomLeft />
+            <EditOrderBottomLeft data={orderData}/>
           </div>
           <div className="right">
             <div className="title-wrapper">

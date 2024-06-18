@@ -39,6 +39,7 @@ const TableOrder = (data) => {
     },
   ];
   let rows = data.data;
+  
   return (
     <div className="tableOrder">
       <DataGrid

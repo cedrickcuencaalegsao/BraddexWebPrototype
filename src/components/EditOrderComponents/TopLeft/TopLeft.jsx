@@ -1,3 +1,4 @@
+import "./TopLeft.scss";
 import { useEffect, useState } from "react";
 
 const EditOrderTopLeft = (data) => {
@@ -10,16 +11,31 @@ const EditOrderTopLeft = (data) => {
     }
   }, [data_top]);
 
-  if (dataTop.length !== 0) {
-    console.log(dataTop);
-  }
-
   return (
     <div className="edit-order-top-left">
-      <div className="title-wapper">
-        <span className="title">Ordered Menu</span>
-      </div>
+      {dataTop.map((item) => (
+        <div className="details-container" key={item.id}>
+          <div className="image-wrapper">
+            <img
+              src={`http://127.0.0.1:8000/images/menu/${item.image}`}
+              alt={item.image}
+              className="image"
+            />
+          </div>
+          <div className="details-wrapper">
+            <div className="menu-name-wrapper">
+              <span className="indicator">Menu Name</span>
+              <span className="value">{item.menuName}</span>
+            </div>
+            <div className="menu-price-wrapper">
+              <span className="indicator">original Price</span>
+              <span className="value">{`₱ ${item.price}.00`}</span>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
+
 export default EditOrderTopLeft;

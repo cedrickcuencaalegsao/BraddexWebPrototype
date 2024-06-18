@@ -48,6 +48,7 @@ const App = () => {
           {/* Guest Routes */}
           <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
+
           {/* Admin Routes */}
           <AuthRoutes path="/home" component={Home} isAdminRoute />
           <AuthRoutes path="/users" component={Users} isAdminRoute />
@@ -81,6 +82,7 @@ const App = () => {
           <AuthRoutes path="/logs" component={Logs} isAdminRoute />
           <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
           <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />
+          
           {/* Client Routes */}
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu} />

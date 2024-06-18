@@ -1,0 +1,40 @@
+.edit-order-top-left {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  .image-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 300px;
+    margin-bottom: 10px;
+    .image {
+      width: 100%;
+      height: 310px;
+    }
+  }
+  .details-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    .menu-name-wrapper,
+    .menu-price-wrapper {
+      display: flex;
+      flex-direction: column;
+      .indicator{
+        color: grey;
+        font-weight: 400;
+        font-size: 13px;
+        text-transform: capitalize;
+      }
+      .value{
+        color: darkslategray;
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 30px;
+      }
+    }
+  }
+}
