@@ -12,13 +12,14 @@ import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
 import Notification from "./pages/notification/admin/notif";
 import NewMenu from "./pages/new_menu/newMenu";
-import EditMenu from "./pages/EditMenu/EditMenu";
 import Logs from "./pages/logs/logs";
 import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";
 // Admin Edit Pages.
 import EditUser from "./pages/EditUser/editUser";
 import EditCart from "./pages/EditCart/EditCart";
+import EditMenu from "./pages/EditMenu/EditMenu";
+import EditOrder from "./pages/EditOrder/EditOrder";
 
 // guest View.
 import Login from "./pages/login/login";
@@ -68,6 +69,7 @@ const App = () => {
             isAdminRoute
           />
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
+          <AuthRoutes path="/edit-order/:orderID" component={EditOrder} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
           <AuthRoutes

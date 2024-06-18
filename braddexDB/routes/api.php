@@ -61,6 +61,10 @@ Route::get('get-user-db-data/{uuid}', [braddexdb_controller::class, 'getUserDBDa
 Route::get('get-cart-data/{cartID}', [braddexdb_controller::class, 'getCartData']);
 // get cart menu data.
 Route::get('get-cart-data-menu/{menuID}', [braddexdb_controller::class, 'getCartDataMenu']);
+// get edit order API.
+Route::get('edit-order-API/{orderID}', [braddexdb_controller::class, 'EditOrderAPI']);
+// get edit oder menu data.
+Route::get('get-order-menu-data/{menuID}', [braddexdb_controller::class, 'getOrderMenuData']);
 
 
 

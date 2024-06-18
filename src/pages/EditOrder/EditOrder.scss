@@ -1,0 +1,20 @@
+.edit-order-container {
+  display: flex;
+  .container {
+    flex: 6;
+    .content-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 10px;
+      .left {
+        flex: 6;
+      }
+      .right {
+        flex: 6;
+      }
+    }
+  }
+}

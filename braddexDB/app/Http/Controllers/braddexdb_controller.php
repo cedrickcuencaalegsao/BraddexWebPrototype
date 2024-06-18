@@ -711,4 +711,14 @@ class braddexdb_controller extends Controller
         }
         return response()->json(false); // if action files return false.
     }
+    public function EditOrderAPI($orderID)
+    {
+        $order = tbl_order::where('orderID', $orderID)->get();
+        return response()->json(compact('order'));
+    }
+    public function getOrderMenuData($menuID)
+    {
+        $menu = tbl_menu::where('menuID', $menuID)->get();
+        return response()->json(compact('menu'));
+    }
 }

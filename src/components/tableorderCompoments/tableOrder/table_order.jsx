@@ -1,9 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const TableOrder = (data) => {
+  const history = useHistory();
   const EditRow = (data) => {
-    console.log(data);
+    history.push(`/edit-order/${data}`);
   };
 
   const columns = [

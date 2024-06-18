@@ -1,6 +1,7 @@
 import { DataGrid } from "@mui/x-data-grid";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 const CartTable = (data) => {
   const history = useHistory();
 
