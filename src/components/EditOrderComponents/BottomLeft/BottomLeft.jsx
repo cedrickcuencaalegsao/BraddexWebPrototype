@@ -9,6 +9,7 @@ const EditOrderBottomLeft = (data) => {
     setDataPassed(data_passed);
   }, [data_passed]);
 
+  
   if (dataPassed) {
     console.log(dataPassed);
   }

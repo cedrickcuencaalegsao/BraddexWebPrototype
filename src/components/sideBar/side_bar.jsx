@@ -5,8 +5,6 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
@@ -51,14 +49,8 @@ const SideBar = () => {
   const viewStats = () => {
     history.push("/statistics");
   };
-  const viewNotif = () => {
-    history.push("/notification");
-  };
   const viewNewMenu = () => {
     history.push("/newmenu");
-  };
-  const viewLogs = () => {
-    history.push("/logs");
   };
   const viewSettings = () => {
     history.push("/settings");
@@ -121,12 +113,6 @@ const SideBar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewNotif}>
-              <NotificationsActiveOutlinedIcon className="icon" />
-              <span>Notification</span>
-            </div>
-          </li>
-          <li>
             <div className="sidebarLink" onClick={viewNewMenu}>
               <AppRegistrationOutlinedIcon className="icon" />
               <span>New Menu</span>
@@ -134,12 +120,6 @@ const SideBar = () => {
           </li>
           <li></li>
           <p className="title">SERVICE</p>
-          <li>
-            <div className="sidebarLink" onClick={viewLogs}>
-              <PsychologyOutlinedIcon className="icon" />
-              <span>Logs</span>
-            </div>
-          </li>
           <li>
             <div className="sidebarLink" onClick={viewSettings}>
               <SettingsOutlinedIcon className="icon" />
@@ -160,11 +140,6 @@ const SideBar = () => {
             </div>
           </li>
         </ul>
-      </div>
-      <div className="bottom">
-        <div className="colorOption"></div>
-        <div className="colorOption"></div>
-        {/* <div className="colorOption"></div> */}
       </div>
     </div>
   );

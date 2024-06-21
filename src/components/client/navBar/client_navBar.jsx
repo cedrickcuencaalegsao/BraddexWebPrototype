@@ -1,8 +1,5 @@
 import "./client_navBar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
@@ -13,23 +10,20 @@ const ClientNavBar = () => {
   const uuid = localStorage.getItem("uuid");
   const [data, setData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/profile/${uuid}`
-      );
-      setData(response.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/profile/${uuid}`
+        );
+        setData(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [uuid]);
 
-  const handleNotificaiton = () => {
-    history.push("/client-notification");
-  };
 
   const handleLogout = async () => {
     try {
@@ -53,21 +47,13 @@ const ClientNavBar = () => {
           <SearchOutlinedIcon />
         </div>
         <div className="clientItems">
-          <div className="item" onClick={handleNotificaiton}>
-            <NotificationsNoneOutlinedIcon className="icons" />
-            <div className="counter">5</div>
-          </div>
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icons" />
-            <div className="counter">2</div>
-          </div>
           <div className="item" onClick={handleLogout}>
             <LogoutOutlinedIcon />
           </div>
           <div className="item" onClick={handleProfile}>
             <img
               src={`http://127.0.0.1:8000/images/profile/${data.prof_pic}`}
-              alt="image"
+              alt="avatar"
               className="avatar"
             />
           </div>
