@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EditOrderTopLeft from "../../components/EditOrderComponents/TopLeft/TopLeft";
 import EditOrderBottomLeft from "../../components/EditOrderComponents/BottomLeft/BottomLeft";
+import EditOrderTopRight from "../../components/EditOrderComponents/TopRight/TopRigth";
 
 const EditOrder = () => {
   const data = useParams();
@@ -81,9 +82,7 @@ const EditOrder = () => {
             <EditOrderBottomLeft data={orderData}/>
           </div>
           <div className="right">
-            <div className="title-wrapper">
-              <span className="title">Right</span>
-            </div>
+            <EditOrderTopRight data={orderData}/>
           </div>
         </div>
       </div>

@@ -73,7 +73,6 @@ const Login = () => {
           <div className="right-title-container">
             <h3 className="right-title">Login Account</h3>
           </div>
-
           <div className="form-container">
             <form onSubmit={handleLogin} className="form-login">
               <div className="email-container">
