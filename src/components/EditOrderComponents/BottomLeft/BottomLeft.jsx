@@ -9,11 +9,6 @@ const EditOrderBottomLeft = (data) => {
     setDataPassed(data_passed);
   }, [data_passed]);
 
-  
-  if (dataPassed) {
-    console.log(dataPassed);
-  }
-
   return (
     <div className="edit-order-bottom-left">
       {dataPassed.map((item) => (
@@ -23,41 +18,41 @@ const EditOrderBottomLeft = (data) => {
           </div>
           <div className="details-wrapper">
             <div className="left-order-details-wrapper">
-              <div className="order-id-wrapper">
+              <div className="items">
                 <span className="indicator">order id </span>
                 <span className="value">{item.orderID}</span>
               </div>
-              <div className="owner-wrapper">
+              <div className="items">
                 <span className="indicator">owner id </span>
                 <span className="value">{item.userID}</span>
               </div>
-              <div className="payment-type-wrapper">
+              <div className="items">
                 <span className="indicator">payment type </span>
                 <span className="value">{item.paymentType}</span>
               </div>
-              <div className="quantity-wrapper">
+              <div className="items">
                 <span className="indicator">quantity </span>
                 <span className="value">{item.quantity}</span>
               </div>
             </div>
             <div className="right-order-details-wrapper">
-              <div className="delivery-address-wrapper">
+              <div className="items">
                 <span className="indicator">delivery address </span>
                 <span className="value">{item.userAddress}</span>
               </div>
-              <div className="cancelled-status-wrapper">
+              <div className="items">
                 <span className="indicator">Cancelled </span>
                 <span className="value">
                   {item.isCancelled === 1 ? "True" : "False"}
                 </span>
               </div>
-              <div className="paid-status-wrapper">
+              <div className="items">
                 <span className="indicator">Paid </span>
                 <span className="value">
                   {item.isPaid === 1 ? "True" : "False"}
                 </span>
               </div>
-              <div className="delivered-status-wrapper">
+              <div className="items">
                 <span className="indicator">Delivered </span>
                 <spam className="value">
                   {item.isDelivered === 1 ? "True" : "False"}

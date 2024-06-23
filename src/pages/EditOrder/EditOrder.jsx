@@ -38,13 +38,13 @@ const EditOrder = () => {
     }
   };
 
-  const validateMenuID = (data) => {
-    if (data) {
-      getMenuDataAPI(data);
-    }
-  };
-
+  
   useEffect(() => {
+    const validateMenuID = (data) => {
+      if (data) {
+        getMenuDataAPI(data);
+      }
+    };
     let menu_id;
     if (orderData.length !== 0 || orderData.length !== null) {
       orderData.map((item) => (menu_id = item.menuID));

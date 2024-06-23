@@ -25,10 +25,7 @@
       .left-order-details-wrapper,
       .right-order-details-wrapper {
         flex: 2;
-        .order-id-wrapper,
-        .owner-wrapper,
-        .payment-type-wrapper,
-        .quantity-wrapper {
+        .items {
           display: flex;
           flex-direction: column;
           align-items: start;
