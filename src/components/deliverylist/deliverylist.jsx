@@ -1,6 +1,5 @@
 import "./deliverylist.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const DeliveryList = (data) => {
   const columns = [
@@ -15,22 +14,6 @@ const DeliveryList = (data) => {
     { field: "isCancelled", headerName: "Cancelled", width: 80 },
     { field: "created_at", headerName: "Date Added", width: 100 },
     { field: "updated_at", headerName: "Date Updated", width: 100 },
-    {
-      field: "Action",
-      headerName: "Action",
-      description: "This column has a value getter and is not sortable.",
-      sortable: false,
-      width: 50,
-      renderCell: () => {
-        return (
-          <div className="cellAction">
-            <div className="viewButton">
-              <EditOutlinedIcon />
-            </div>
-          </div>
-        );
-      },
-    },
   ];
   let rows = data.data;
   return (

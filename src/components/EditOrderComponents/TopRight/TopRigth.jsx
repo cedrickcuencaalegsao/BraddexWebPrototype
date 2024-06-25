@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import Switch from "@mui/material/Switch";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditOrderTopRight = (data) => {
   const order_data = data.data;
   const [orderData, setOrderData] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (order_data) {
@@ -16,13 +19,42 @@ const EditOrderTopRight = (data) => {
 
   const formatDate = (date) => {
     if (date) {
-      console.log(date);
       return moment(date).format("YYYY-MM-DD");
     }
     return "No Date";
   };
 
-  console.log(orderData);
+  const onSwitch = (e) => {
+    let key = e.target.name;
+
+    const value = (args) => {
+      if (args === 0) {
+        return 1;
+      }
+      return 0;
+    };
+
+    const updateOrderData = orderData.map((item) => ({
+      ...item,
+      [key]: value(item[key]),
+    }));
+    setOrderData(updateOrderData);
+  };
+
+  const handleSaveData = async () => {
+    try {
+      for (const order of orderData) {
+        const API = await axios.post(
+          "http://127.0.0.1:8000/api/update-order-image",
+          order
+        );
+        const status = API.data;
+        status && history.push("/orders");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="edit-order-top-right">
@@ -31,7 +63,7 @@ const EditOrderTopRight = (data) => {
           <span className="title">Edit Order Data</span>
         </div>
         <div className="btn-save-wrapper">
-          <SaveOutlinedIcon className="icon"/>
+          <SaveOutlinedIcon className="icon" onClick={() => handleSaveData()} />
         </div>
       </div>
       {orderData.map((item) => (
@@ -73,15 +105,39 @@ const EditOrderTopRight = (data) => {
             </div>
             <div className="items">
               <span className="indicator">Mark as Cancelled</span>
-              <Switch className="switch" checked={item.isCancelled === 1} />
+              <Switch
+                className="switch"
+                name="isCancelled"
+                checked={item.isCancelled === 1}
+                onChange={onSwitch}
+              />
             </div>
             <div className="items">
               <span className="indicator">Mark as Delivered</span>
-              <Switch className="switch" checked={item.isDelivered === 1} />
+              <Switch
+                className="switch"
+                name="isDelivered"
+                checked={item.isDelivered === 1}
+                onChange={onSwitch}
+              />
             </div>
             <div className="items">
               <span className="indicator">Mark as Deleted</span>
-              <Switch className="switch" checked={item.isDeleted === 1} />
+              <Switch
+                className="switch"
+                name="isDeleted"
+                checked={item.isDeleted === 1}
+                onChange={onSwitch}
+              />
+            </div>
+            <div className="items">
+              <span className="indicator">Mark as Paid</span>
+              <Switch
+                className="switch"
+                name="isPaid"
+                checked={item.isPaid === 1}
+                onChange={onSwitch}
+              />
             </div>
           </div>
         </div>

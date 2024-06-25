@@ -39,46 +39,45 @@ const Delivery = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-  const formattedDate = (data) => {
-    if (data !== null) {
-      return moment(data).format("YYYY-MM-DD");
-    } else {
-      return "No Date.";
-    }
-  };
-  const createRows = (data) => {
-    data.map((item) => {
-      let newRow = {
-        id: item.id,
-        orderID: item.orderID,
-        userID: item.userID,
-        menuID: item.menuID,
-        paymentType: item.paymentType,
-        userAddress: item.userAddress,
-        totalAmmount: `₱ ${item.totalAmmount}.00`,
-        quantity: item.quantity,
-        isCancelled: item.isCancelled === 1 ? "Cancelled" : "Not Cancelled",
-        created_at: formattedDate(item.created_at),
-        updated_at: formattedDate(item.updated_at),
-      };
-
-      const arrayIndex = rows.findIndex((row) => row.id === newRow.id);
-      if (arrayIndex !== -1) {
-        setRows((prevRow) => {
-          const updatedRow = [...prevRow];
-          updatedRow[arrayIndex] = newRow;
-          return updatedRow;
-        });
-      } else {
-        setRows((prevRow) => [...prevRow, newRow]);
-      }
-    });
-  };
   useEffect(() => {
-    if (delivery.length !== 0) {
+    const formattedDate = (data) => {
+      if (data !== null) {
+        return moment(data).format("YYYY-MM-DD");
+      } else {
+        return "No Date.";
+      }
+    };
+    const createRows = (data) => {
+      data.map((item) => {
+        let newRow = {
+          id: item.id,
+          orderID: item.orderID,
+          userID: item.userID,
+          menuID: item.menuID,
+          paymentType: item.paymentType,
+          userAddress: item.userAddress,
+          totalAmmount: `₱ ${item.totalAmmount}.00`,
+          quantity: item.quantity,
+          isCancelled: item.isCancelled === 1 ? "Cancelled" : "Not Cancelled",
+          created_at: formattedDate(item.created_at),
+          updated_at: formattedDate(item.updated_at),
+        };
+        const arrayIndex = rows.findIndex((row) => row.id === newRow.id);
+        if (arrayIndex !== -1) {
+          setRows((prevRow) => {
+            const updatedRow = [...prevRow];
+            updatedRow[arrayIndex] = newRow;
+            return updatedRow;
+          });
+        } else {
+          setRows((prevRow) => [...prevRow, newRow]);
+        }
+      });
+    };
+    if (delivery) {
       createRows(delivery);
     }
-  }, [delivery]);
+  }, [delivery, rows]);
 
   return (
     <div className="delivery">

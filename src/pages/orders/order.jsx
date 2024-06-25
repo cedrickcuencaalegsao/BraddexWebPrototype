@@ -3,7 +3,7 @@ import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";
 import { useState, useEffect } from "react";
 import TableOrder from "../../components/tableorderCompoments/tableOrder/table_order";
-import axios from "axios";
+import axios, { isCancel } from "axios";
 import moment from "moment";
 import WidgetPaid from "../../components/tableorderCompoments/orderWidgets/widgetsPaid";
 import WidgetCancelled from "../../components/tableorderCompoments/orderWidgets/widgetsCancelled";
@@ -65,7 +65,7 @@ const OrderList = () => {
         totalAmmount: `₱ ${item.totalAmmount}.00`,
         quantity: item.quantity,
         isPaid: item.isPaid === 1 ? "Paid" : "Not Paid",
-        isDeleted: item.isDeleted === 1 ? "Deleted" : "Not Deleted",
+        isCancelled: item.isCancelled === 1 ? "Cancelled" : "NotCancelled",
         created_at: formattedDate(item.created_at),
         updated_at: formattedDate(item.updated_at),
       };

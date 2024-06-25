@@ -3,6 +3,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const TableOrder = (data) => {
+  console.log(data.data);
   const history = useHistory();
   const EditRow = (data) => {
     history.push(`/edit-order/${data}`);
@@ -18,7 +19,7 @@ const TableOrder = (data) => {
     { field: "totalAmmount", headerName: "Ammount", width: 100 },
     { field: "quantity", headerName: "Quantiy", width: 80 },
     { field: "isPaid", headerName: "Paid", width: 80 },
-    { field: "isDeleted", headerName: "Deleted", width: 80 },
+    { field: "isCancelled", headerName: "Cancelled", width: 80 },
     { field: "created_at", headerName: "Date Added", width: 100 },
     { field: "updated_at", headerName: "Date Updated", width: 100 },
     {

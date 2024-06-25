@@ -704,4 +704,21 @@ class braddexdb_controller extends Controller
         $menu = tbl_menu::where('menuID', $menuID)->get();
         return response()->json(compact('menu'));
     }
+    public function updateOrderData(Request $request)
+    {
+        $data = $request->all();
+        $orderID = $data['orderID'];
+
+        $order = tbl_order::where('orderID', $orderID)->update([
+            'isPaid' => $data['isPaid'],
+            'isCancelled' => $data['isCancelled'],
+            'isDelivered' => $data['isDelivered'],
+            'isDeleted' => $data['isDeleted'],
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        if ($order) {
+            return response()->json(true);
+        }
+        return response()->json(false);
+    }
 }
