@@ -66,7 +66,8 @@ Route::get('get-cart-data-menu/{menuID}', [braddexdb_controller::class, 'getCart
 Route::get('edit-order-API/{orderID}', [braddexdb_controller::class, 'EditOrderAPI']);
 // get edit oder menu data.
 Route::get('get-order-menu-data/{menuID}', [braddexdb_controller::class, 'getOrderMenuData']);
-
+// get all system statistics.
+Route::get('gel-all-statistics', [braddexdb_controller::class, 'getAllStatistics']);
 
 
 
@@ -74,6 +75,7 @@ Route::get('get-order-menu-data/{menuID}', [braddexdb_controller::class, 'getOrd
 Route::get('/images/menu/{filename}', function ($filename) {
     return response()->file(public_path('images/menu/' . $filename));
 });
+// images routes for profile.
 Route::get('/images/profile/{filename}', function ($filename) {
     return response()->file(public_path('images/profile/' . $filename));
 });

@@ -721,4 +721,44 @@ class braddexdb_controller extends Controller
         }
         return response()->json(false);
     }
+    public function getAllStatistics()
+    {
+        // table users data.
+        $countUser = count(User::all());
+        $onlineUser = count(User::where('isOnline', true)->get());
+        $offlineUser = count(User::where('isOnline', false)->get());
+        $activeAccount = count(User::where('isActive', true)->get());
+        $inActiveAccount = count(User::where('isActive', false)->get());
+        $withoutPhone = count(User::where('phone_no', null)->get());
+        $withoutAddress = count(User::where('address', null)->get());
+        $withoutProfile = count(User::where('prof_pic', null)->get());
+
+        // table cart data.
+        $countCart = count(tbl_cart::all());
+        $cartDeleted = count(tbl_cart::where('isDeleted', true)->get());
+        $cartNotDeleted =count(tbl_cart::where('isDeleted', false)->get());
+        $cartNotUpdate = count(tbl_cart::where('updated_at', null)->get());
+
+        // user data object.
+        $user_data = [
+            'count_user' => $countUser,
+            'online_user' => $onlineUser,
+            'offline_user' => $offlineUser,
+            'active_account' => $activeAccount,
+            'inactive_account' => $inActiveAccount,
+            'without_phone' => $withoutPhone,
+            'without_address' => $withoutAddress,
+            'without_profile' => $withoutProfile,
+        ];
+
+        // cart data object.
+        $cart_data = [
+            'count_cart'=>$countCart,
+            'cart_deletd'=>$cartDeleted,
+            'cart_not_deleted'=>$cartNotDeleted,
+            'cart_not_updated'=>$cartNotUpdate,
+        ];
+
+        return response()->json(compact('user_data','cart_data'));
+    }
 }
