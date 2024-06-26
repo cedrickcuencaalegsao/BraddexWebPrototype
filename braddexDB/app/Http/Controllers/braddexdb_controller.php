@@ -736,8 +736,23 @@ class braddexdb_controller extends Controller
         // table cart data.
         $countCart = count(tbl_cart::all());
         $cartDeleted = count(tbl_cart::where('isDeleted', true)->get());
-        $cartNotDeleted =count(tbl_cart::where('isDeleted', false)->get());
+        $cartNotDeleted = count(tbl_cart::where('isDeleted', false)->get());
         $cartNotUpdate = count(tbl_cart::where('updated_at', null)->get());
+
+        // table menu data.
+        $countMenu = count(tbl_menu::all());
+        $notAvailable = count(tbl_menu::where('isAvialable', 'NoAvailable')->get());
+        $limited  = count(tbl_menu::where('isAvialable', "Limited")->get());
+        $available = count(tbl_menu::where('isAvialable', 'Available')->get());
+        $bestSelling = count(tbl_menu::where('bestselling', true)->get());
+
+        // table order data.
+        $countOrder = count(tbl_order::all());
+        $isPaid = count(tbl_order::where('isPaid', true)->get());
+        $isDelivered = count(tbl_order::where('isDelivered', true)->get());
+        $isCancelled = count(tbl_order::where('isCancelled', true)->get());
+        $isDeleted = count(tbl_order::where('isDeleted', true)->get());
+        $notUpdated = count(tbl_order::where('updated_at', null)->get());
 
         // user data object.
         $user_data = [
@@ -753,12 +768,31 @@ class braddexdb_controller extends Controller
 
         // cart data object.
         $cart_data = [
-            'count_cart'=>$countCart,
-            'cart_deletd'=>$cartDeleted,
-            'cart_not_deleted'=>$cartNotDeleted,
-            'cart_not_updated'=>$cartNotUpdate,
+            'count_cart' => $countCart,
+            'cart_deletd' => $cartDeleted,
+            'cart_not_deleted' => $cartNotDeleted,
+            'cart_not_updated' => $cartNotUpdate,
         ];
 
-        return response()->json(compact('user_data','cart_data'));
+        // menu data object.
+        $menu_data = [
+            'count_menu' => $countMenu,
+            'not_available' => $notAvailable,
+            'limited' => $limited,
+            'available' => $available,
+            'best_selling' => $bestSelling,
+        ];
+
+        // order data.
+        $order_data = [
+            'count_order' => $countOrder,
+            'is_paid' => $isPaid,
+            'is_delivered' => $isDelivered,
+            'is_cancelled' => $isCancelled,
+            'is_deleted' => $isDeleted,
+            'not_updated' => $notUpdated,
+        ];
+
+        return response()->json(compact('user_data', 'cart_data', 'menu_data', 'order_data'));
     }
 }

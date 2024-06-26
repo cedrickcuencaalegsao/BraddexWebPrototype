@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const StatList = () => {
-  const [userData, setUserData] = useState([]);
-  const [cartData, setCartData] = useState([]);
-  const [menuData, setMenuData] = useState([]);
-  const [orderData, setOrderData] = useState([]);
+  const [userData, setUserData] = useState({});
+  const [cartData, setCartData] = useState({});
+  const [menuData, setMenuData] = useState({});
+  const [orderData, setOrderData] = useState({});
 
   useEffect(() => {
     const getAllSystemStatistics = async () => {
@@ -22,14 +22,18 @@ const StatList = () => {
         );
         setUserData(API.data.user_data);
         setCartData(API.data.cart_data);
-        console.log(API.data);
+        setMenuData(API.data.menu_data);
+        setOrderData(API.data.order_data);
       } catch (error) {
         console.log(error);
       }
     };
     getAllSystemStatistics();
+    const interval = setInterval(()=>{
+      getAllSystemStatistics();
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
-  console.log(userData, cartData);
 
   return (
     <div className="statList">
@@ -37,10 +41,10 @@ const StatList = () => {
       <div className="statContainer">
         <NavBar />
         <div className="content">
-          <UserWidgets />
-          <CartWidgets />
-          <MenuWidgets />
-          <OrderWidgets />
+          <UserWidgets data={userData}/>
+          <CartWidgets data={cartData}/>
+          <MenuWidgets data={menuData}/>
+          <OrderWidgets data={orderData}/>
         </div>
       </div>
     </div>

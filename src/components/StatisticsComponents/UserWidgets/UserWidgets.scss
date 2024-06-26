@@ -5,4 +5,48 @@
   height: auto;
   -webkit-box-shadow: 5px 7px 7px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 5px 7px 7px 4px rgba(201, 201, 201, 0.2);
+  .top {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    .title-wrapper {
+      .title {
+        color: darkslategray;
+        font-weight: 700;
+      }
+    }
+    .toggleButton{
+      color: darkslategray;
+    }
+  }
+  .bottom {
+    display: flex;
+    .item {
+      flex: 2;
+      position: relative;
+      border: 1px solid rgba(128, 128, 128, 0.209);
+      border-radius: 10px;
+      height: 170px;
+      padding: 0px;
+      margin: 5px;
+      .indicator {
+        position: absolute;
+        top: 0;
+        color: grey;
+        font-size: 12px;
+        width: 100%;
+        margin: 5px;
+      }
+      .graph-wrapper {
+        bottom: 0;
+        width: 90%;
+        position: absolute;
+        margin: 7px;
+      }
+    }
+    &.collapsed {
+      height: 0px;
+      overflow: hidden;
+    }
+  }
 }
