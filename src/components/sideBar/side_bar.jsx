@@ -1,3 +1,4 @@
+import React from "react";
 import "./side_bar.scss";
 import { Dashboard } from "@mui/icons-material";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";

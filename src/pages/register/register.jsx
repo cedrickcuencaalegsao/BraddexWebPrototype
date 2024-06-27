@@ -1,3 +1,4 @@
+import React from "react";
 import "./register.scss";
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";

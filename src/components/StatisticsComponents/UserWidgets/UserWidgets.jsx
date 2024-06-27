@@ -1,3 +1,4 @@
+import React from "react";
 import "./UserWidgets.scss";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { useState } from "react";

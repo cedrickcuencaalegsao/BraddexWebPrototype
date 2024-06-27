@@ -1,3 +1,4 @@
+import React from "react";
 import "./client_navBar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";

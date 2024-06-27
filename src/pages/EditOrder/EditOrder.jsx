@@ -1,3 +1,4 @@
+import React from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";

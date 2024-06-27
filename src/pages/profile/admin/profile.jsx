@@ -1,3 +1,4 @@
+import React from "react";
 import "./profile.scss";
 import SideBar from "../../../components/sideBar/side_bar";
 import NavBar from "../../../components/navBar/nav_bar";

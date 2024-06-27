@@ -1,3 +1,4 @@
+import React from "react";
 import "./table_products.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";

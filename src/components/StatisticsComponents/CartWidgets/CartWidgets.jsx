@@ -1,3 +1,4 @@
+import React from "react";
 import "./CartWidgets.scss";
 
 const CartWidgets = () => {

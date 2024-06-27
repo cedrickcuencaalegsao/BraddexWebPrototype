@@ -1,3 +1,4 @@
+import React from "react";
 import "./leftTop.scss";
 const ProfileLeftTop = (data) => {
   let userData = data.data;

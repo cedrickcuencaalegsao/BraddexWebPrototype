@@ -1,3 +1,4 @@
+import React from "react";
 import "./EditMenuRightCenter.scss";
 import { useState, useEffect } from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";

@@ -1,3 +1,4 @@
+import React from "react";
 import "./EditMenuRightBottom.scss";
 import { useEffect, useState } from "react";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";

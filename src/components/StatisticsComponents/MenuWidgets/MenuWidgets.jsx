@@ -1,3 +1,4 @@
+import React from "react";
 import "./MenuWidgets.scss";
 
 const MenuWidgets = () => {

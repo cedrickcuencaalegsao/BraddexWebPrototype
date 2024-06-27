@@ -1,3 +1,4 @@
+import React from "react";
 import "./product.scss";
 import SideBar from "../../components/sideBar/side_bar";
 import Navbar from "../../components/navBar/nav_bar";

@@ -1,3 +1,4 @@
+import React from "react";
 import "./tightCenter.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";

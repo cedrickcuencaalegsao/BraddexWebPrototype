@@ -1,3 +1,4 @@
+import React from "react";
 import "./editUser.scss";
 import SideBar from "../../components/sideBar/side_bar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";

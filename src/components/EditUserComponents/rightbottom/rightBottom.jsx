@@ -1,3 +1,4 @@
+import React from "react";
 import "./rightBottom.scss";
 import SaveIcon from "@mui/icons-material/Save";
 import Switch from "@mui/material/Switch";

@@ -1,3 +1,4 @@
+import React from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 const WidgetDelivered = (data) => {
   let count = data.data.count;

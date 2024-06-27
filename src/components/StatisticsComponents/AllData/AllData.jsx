@@ -1,3 +1,4 @@
+import React from "react";
 import "./AllData.scss";
 import { BarChart } from "@mui/x-charts/BarChart";
 const AllDataStatistics = () => {

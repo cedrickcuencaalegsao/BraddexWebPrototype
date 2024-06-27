@@ -1,3 +1,4 @@
+import React from "react";
 import "./stat.scss";
 import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";

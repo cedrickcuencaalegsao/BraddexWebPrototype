@@ -1,3 +1,4 @@
+import React from "react";
 import "./featured.scss";
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";

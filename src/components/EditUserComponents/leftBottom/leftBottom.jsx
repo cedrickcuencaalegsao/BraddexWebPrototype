@@ -1,3 +1,4 @@
+import React from "react";
 import "./leftBottom.scss";
 import { useEffect, useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";

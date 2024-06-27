@@ -1,3 +1,4 @@
+import React from "react";
 import "./nav_bar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useState, useEffect } from "react";
