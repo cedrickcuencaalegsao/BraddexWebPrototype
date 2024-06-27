@@ -5,6 +5,9 @@ const CartWidgets = () => {
     <div className="cart-widgets-container">
       <div className="title-wrapper">
         <span className="title">Cart Statistics</span>
+        <div className="test">
+          
+        </div>
       </div>
     </div>
   );

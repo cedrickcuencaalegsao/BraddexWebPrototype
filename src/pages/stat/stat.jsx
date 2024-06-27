@@ -1,6 +1,7 @@
 import "./stat.scss";
 import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";
+import AllDataStatistics from "../../components/StatisticsComponents/AllData/AllData";
 import UserWidgets from "../../components/StatisticsComponents/UserWidgets/UserWidgets";
 import CartWidgets from "../../components/StatisticsComponents/CartWidgets/CartWidgets";
 import MenuWidgets from "../../components/StatisticsComponents/MenuWidgets/MenuWidgets";
@@ -29,7 +30,7 @@ const StatList = () => {
       }
     };
     getAllSystemStatistics();
-    const interval = setInterval(()=>{
+    const interval = setInterval(() => {
       getAllSystemStatistics();
     }, 1000);
     return () => clearInterval(interval);
@@ -41,10 +42,11 @@ const StatList = () => {
       <div className="statContainer">
         <NavBar />
         <div className="content">
-          <UserWidgets data={userData}/>
-          <CartWidgets data={cartData}/>
-          <MenuWidgets data={menuData}/>
-          <OrderWidgets data={orderData}/>
+          <AllDataStatistics />
+          <UserWidgets data={userData} />
+          <CartWidgets data={cartData} />
+          <MenuWidgets data={menuData} />
+          <OrderWidgets data={orderData} />
         </div>
       </div>
     </div>
