@@ -25,7 +25,7 @@ const ProfileRightCenter = (data) => {
   };
 
   useEffect(() => {
-    if (userUUID != 0 || userUUID !== null) {
+    if (userUUID !== 0 || userUUID !== null) {
       getUserDBDataAPI(userUUID);
     }
   }, [userUUID]);
