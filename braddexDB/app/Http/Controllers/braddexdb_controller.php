@@ -741,7 +741,7 @@ class braddexdb_controller extends Controller
 
         // table menu data.
         $countMenu = count(tbl_menu::all());
-        $notAvailable = count(tbl_menu::where('isAvialable', 'NoAvailable')->get());
+        $notAvailable = count(tbl_menu::where('isAvialable', 'NotAvailable')->get());
         $limited  = count(tbl_menu::where('isAvialable', "Limited")->get());
         $available = count(tbl_menu::where('isAvialable', 'Available')->get());
         $bestSelling = count(tbl_menu::where('bestselling', true)->get());

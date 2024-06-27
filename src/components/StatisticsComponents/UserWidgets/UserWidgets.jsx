@@ -20,7 +20,7 @@ const UserWidgets = (args) => {
     setCollapsed(!collapsed);
   };
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="user-widgets-container">

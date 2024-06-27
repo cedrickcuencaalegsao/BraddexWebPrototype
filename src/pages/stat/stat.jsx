@@ -15,6 +15,8 @@ const StatList = () => {
   const [menuData, setMenuData] = useState({});
   const [orderData, setOrderData] = useState({});
 
+  let all_data = [userData, cartData, menuData, orderData];
+
   useEffect(() => {
     const getAllSystemStatistics = async () => {
       try {
@@ -42,7 +44,7 @@ const StatList = () => {
       <div className="statContainer">
         <NavBar />
         <div className="content">
-          <AllDataStatistics />
+          <AllDataStatistics data={all_data} />
           <UserWidgets data={userData} />
           <CartWidgets data={cartData} />
           <MenuWidgets data={menuData} />

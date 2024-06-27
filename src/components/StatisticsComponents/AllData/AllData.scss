@@ -5,4 +5,21 @@
   height: auto;
   -webkit-box-shadow: 5px 7px 7px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 5px 7px 7px 4px rgba(201, 201, 201, 0.2);
+  .top-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    .title {
+      color: darkslategray;
+      font-weight: 700;
+    }
+  }
+  .graph-wrapper {
+    height: auto;
+    &.collapsed {
+      height: 0px;
+      overflow: hidden;
+    }
+  }
 }
