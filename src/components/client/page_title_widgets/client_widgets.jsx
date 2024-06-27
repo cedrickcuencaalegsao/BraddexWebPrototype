@@ -24,6 +24,8 @@ const ClientWidgets = ({ type }) => {
     case "delivery":
       pageTitle = "Delivery";
       break;
+    default:
+      break;
   }
 
   const handelCollpase = () => {
@@ -73,7 +75,7 @@ const ClientWidgets = ({ type }) => {
             {data.map((item) => (
               <img
                 src={`http://127.0.0.1:8000/images/menu/${item}`}
-                alt="image"
+                alt="view"
                 className="image"
               />
             ))}

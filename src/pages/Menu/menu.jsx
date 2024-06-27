@@ -99,7 +99,7 @@ const ClientMenu = () => {
                 <div className="image-wrapper">
                   <img
                     src={`http://127.0.0.1:8000/images/menu/${item.image}`}
-                    alt="image"
+                    alt="item-preview"
                     className="image"
                   />
                 </div>

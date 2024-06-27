@@ -7,7 +7,6 @@ import {
   Legend,
   Bar,
 } from "recharts";
-import moment from "moment";
 
 const MonthlyUser = (data) => {
   let chartData = data.data;

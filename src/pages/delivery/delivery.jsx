@@ -48,34 +48,31 @@ const Delivery = () => {
       }
     };
     const createRows = (data) => {
-      data.map((item) => {
-        let newRow = {
-          id: item.id,
-          orderID: item.orderID,
-          userID: item.userID,
-          menuID: item.menuID,
-          paymentType: item.paymentType,
-          userAddress: item.userAddress,
-          totalAmmount: `₱ ${item.totalAmmount}.00`,
-          quantity: item.quantity,
-          isCancelled: item.isCancelled === 1 ? "Cancelled" : "Not Cancelled",
-          created_at: formattedDate(item.created_at),
-          updated_at: formattedDate(item.updated_at),
-        };
-        const arrayIndex = rows.findIndex((row) => row.id === newRow.id);
-        if (arrayIndex !== -1) {
-          setRows((prevRow) => {
-            const updatedRow = [...prevRow];
-            updatedRow[arrayIndex] = newRow;
-            return updatedRow;
-          });
-        } else {
-          setRows((prevRow) => [...prevRow, newRow]);
-        }
-      });
+      return data.map((item) => ({
+        id: item.id,
+        orderID: item.orderID,
+        userID: item.userID,
+        menuID: item.menuID,
+        paymentType: item.paymentType,
+        userAddress: item.userAddress,
+        totalAmmount: `₱ ${item.totalAmmount}.00`,
+        quantity: item.quantity,
+        isCancelled: item.isCancelled === 1 ? "Cancelled" : "Not Cancelled",
+        created_at: formattedDate(item.created_at),
+        updated_at: formattedDate(item.updated_at),
+      }));
     };
     if (delivery) {
-      createRows(delivery);
+      const newRows = createRows(delivery);
+      setRows((prevRows) => {
+        const rowsMap = new Map(prevRows.map((row) => [row.id, row]));
+
+        newRows.forEach((newRow) => {
+          rowsMap.set(newRow.id, newRow);
+        });
+
+        return Array.from(rowsMap.values());
+      });
     }
   }, [delivery, rows]);
 

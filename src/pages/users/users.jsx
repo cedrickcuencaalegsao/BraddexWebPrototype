@@ -24,20 +24,23 @@ const Users = () => {
   let dataTable = [];
 
   const formattedDate = (filteredUsers) => {
-    let date;
-    if (filteredUsers !== null) {
-      filteredUsers.map((item) => {
-        if (item.created_at) {
-          date = moment(item.created_at).format("YYYY-MM-DD");
-        }
-      });
-      return date;
+    if (!filteredUsers || filteredUsers.length === 0) {
+      return "No Date";
     }
-    return "No Date";
+
+    let date = "No Date";
+
+    filteredUsers.forEach((item) => {
+      if (item.created_at) {
+        date = moment(item.created_at).format("YYYY-MM-DD");
+      }
+    });
+
+    return date;
   };
 
   const createRow = (users) => {
-    users.map((item) => {
+    users.forEach((item) => {
       let data = {
         id: item.id,
         userID: item.userID,
@@ -71,6 +74,7 @@ const Users = () => {
     createRow(users);
     monthly_users.push(dataToPush);
   }
+
   const isOnline = async () => {
     try {
       const API = await axios.get(

@@ -1,6 +1,6 @@
 import "./register.scss";
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { generateRandomID } from "../../idgenerator";
 import axios from "axios";
 import PersonIcon from "@mui/icons-material/Person";

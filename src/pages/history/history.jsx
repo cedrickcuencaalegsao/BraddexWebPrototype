@@ -10,15 +10,9 @@ const ClientHistory = () => {
   const [userHistory, setUserHistory] = useState({});
   const [userCart, setUserCart] = useState([]);
   const [userOrder, setUserOrder] = useState([]);
-  const [loading, setLoading] = useState(true);
   const uuid = localStorage.getItem("uuid");
 
-  const makeArray = () => {
-    let arrayCart = userHistory.cart;
-    let arrayOrder = userHistory.order;
-    setUserCart(arrayCart);
-    setUserOrder(arrayOrder);
-  };
+  
   console.log(userCart, userOrder);
   useEffect(() => {
     const getCartHistoryAPI = async () => {
@@ -27,7 +21,6 @@ const ClientHistory = () => {
           `http://127.0.0.1:8000/api/get-user-history/${uuid}`
         );
         setUserHistory(API.data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +33,12 @@ const ClientHistory = () => {
   }, [uuid]);
 
   useEffect(() => {
+    const makeArray = () => {
+      let arrayCart = userHistory.cart;
+      let arrayOrder = userHistory.order;
+      setUserCart(arrayCart);
+      setUserOrder(arrayOrder);
+    };
     const count = Object.values(userHistory).reduce(
       (sum, array) => sum + array.length,
       0

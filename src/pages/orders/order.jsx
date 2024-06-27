@@ -3,7 +3,7 @@ import SideBar from "../../components/sideBar/side_bar";
 import NavBar from "../../components/navBar/nav_bar";
 import { useState, useEffect } from "react";
 import TableOrder from "../../components/tableorderCompoments/tableOrder/table_order";
-import axios, { isCancel } from "axios";
+import axios from "axios";
 import moment from "moment";
 import WidgetPaid from "../../components/tableorderCompoments/orderWidgets/widgetsPaid";
 import WidgetCancelled from "../../components/tableorderCompoments/orderWidgets/widgetsCancelled";
@@ -52,10 +52,12 @@ const OrderList = () => {
       return "No Date.";
     }
   };
-  // creating the table rows.
-  const createRows = (data) => {
-    data.map((item) => {
-      let newRow = {
+
+  // id the data was change a little bit the row will updated by using useEffect and order as a dependencies.
+  useEffect(() => {
+    // creating the table rows.
+    const createRows = (data) => {
+      return data.map((item) => ({
         id: item.id,
         orderID: item.orderID,
         userID: item.orderID,
@@ -68,28 +70,23 @@ const OrderList = () => {
         isCancelled: item.isCancelled === 1 ? "Cancelled" : "NotCancelled",
         created_at: formattedDate(item.created_at),
         updated_at: formattedDate(item.updated_at),
-      };
-      // check if data is already in the array if true then we update it base on the id as and index.
-      const arrayIndex = rows.findIndex((rows) => rows.id === newRow.id);
-      if (arrayIndex !== -1) {
-        // here we update the row if the row was update over time.
-        setRows((prevRow) => {
-          const updatedRow = [...prevRow];
-          updatedRow[arrayIndex] = newRow;
-          return updatedRow;
+      }));
+    };
+
+    if (order) {
+      const newRows = createRows(order);
+      
+      setRows((prevRows) => {
+        const rowsMap = new Map(prevRows.map((row) => [row.id, row]));
+
+        newRows.forEach((newRow) => {
+          rowsMap.set(newRow.id, newRow);
         });
-      } else {
-        // if data is not on the row then we add it on our row array.
-        setRows((prevRow) => [...prevRow, newRow]);
-      }
-    });
-  };
-  // id the data was change a little bit the row will updated by using useEffect and order as a dependencies.
-  useEffect(() => {
-    if (order.length !== 0) {
-      createRows(order);
+
+        return Array.from(rowsMap.values());
+      });
     }
-  }, [order]);
+  }, [order, rows]);
 
   return (
     <div className="orderList">

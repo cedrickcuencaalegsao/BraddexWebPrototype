@@ -44,34 +44,6 @@ const AdminCart = () => {
     }
   };
 
-  const createRows = (cart) => {
-    cart.map((item) => {
-      let data = {
-        id: item.id,
-        cartID: item.cartID,
-        userID: item.userID,
-        menuID: item.menuID,
-        isDeleted: item.isDeleted === 1 ? "Deleted" : "Not Deleted",
-        created_at: formattedDate(item.created_at),
-        updated_at: formattedDate(item.updated_at),
-      };
-
-      // check if data is already in the array if true then we update it base on the id as and index.
-      const arrayIndex = rows.findIndex((rows) => rows.id === data.id);
-
-      if (arrayIndex !== -1) {
-        // here we update the row if the row was update over time.
-        setRows((prevRows) => {
-          const updatedRow = [...prevRows];
-          updatedRow[arrayIndex] = data;
-          return updatedRow;
-        });
-      } else {
-        // if data is not on the row then we add it on our row array.
-        setRows((prevData) => [...prevData, data]);
-      }
-    });
-  };
   useEffect(() => {
     const getCartAPI = async () => {
       try {
@@ -92,8 +64,31 @@ const AdminCart = () => {
   }, []);
 
   useEffect(() => {
-    if (cart.length !== 0) {
-      createRows(cart);
+    const createRows = (cart) => {
+      return cart.map((item) => ({
+        id: item.id,
+        cartID: item.cartID,
+        userID: item.userID,
+        menuID: item.menuID,
+        isDeleted: item.isDeleted === 1 ? "Deleted" : "Not Deleted",
+        created_at: formattedDate(item.created_at),
+        updated_at: formattedDate(item.updated_at),
+      }));
+    };
+
+    if (cart) {
+      const newRows = createRows(cart);
+
+      setRows((prevRows) => {
+        const rowsMap = new Map(prevRows.map((row) => [row.id, row]));
+
+        newRows.forEach((newRow) => {
+          rowsMap.set(newRow.id, newRow);
+        });
+
+        return Array.from(rowsMap.values());
+      });
+
       const calc_cart_deleted = calcCartDeleted(countCart, cartDeleted);
       setCartDeletedPercentage(calc_cart_deleted);
       const calc_cart_not_deleted = calcCartNotDeleted(

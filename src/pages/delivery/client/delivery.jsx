@@ -5,7 +5,6 @@ import ClientWidgets from "../../../components/client/page_title_widgets/client_
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const ClientDelivery = () => {
@@ -31,7 +30,7 @@ const ClientDelivery = () => {
       getOrderAPI();
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [uuid]);
 
   useEffect(() => {
     const getDeliveryMenuAPI = async (menuIDArray) => {

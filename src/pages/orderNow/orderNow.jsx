@@ -125,7 +125,7 @@ const ClientOrderNow = () => {
               <div className="image-wrapper">
                 <img
                   src={`http://127.0.0.1:8000/images/menu/${menu.image}`}
-                  alt="image"
+                  alt="menu"
                   className="image"
                 />
               </div>
