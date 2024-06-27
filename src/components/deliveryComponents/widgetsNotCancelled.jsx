@@ -1,3 +1,4 @@
+import React from "react";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 const WidgetsDeliveryNotCancelled = (data) => {

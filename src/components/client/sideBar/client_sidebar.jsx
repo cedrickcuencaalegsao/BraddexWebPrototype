@@ -1,3 +1,4 @@
+import React from "react";
 import "./client_sidebar.scss";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";

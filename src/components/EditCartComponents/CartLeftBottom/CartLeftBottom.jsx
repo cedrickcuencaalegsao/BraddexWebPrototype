@@ -1,3 +1,4 @@
+import React from "react";
 import "./CartLeftBottom.scss";
 import { useEffect, useState } from "react";
 

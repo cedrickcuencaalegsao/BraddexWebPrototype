@@ -1,3 +1,4 @@
+import React from "react";
 import "./BottomLeft.scss";
 import { useEffect, useState } from "react";
 
