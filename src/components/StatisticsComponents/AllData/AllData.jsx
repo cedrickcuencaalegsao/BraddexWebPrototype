@@ -1,5 +1,7 @@
 import "./AllData.scss";
 import { BarChart } from "@mui/x-charts/BarChart";
+
+// summary of all data.
 const AllDataStatistics = () => {
   return (
     <div className="all-data-statistics">
