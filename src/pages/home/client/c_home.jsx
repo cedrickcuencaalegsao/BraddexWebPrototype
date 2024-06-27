@@ -1,3 +1,4 @@
+import React from "react";
 import "./c_home.scss";
 import ClientNavbar from "../../../components/client/navBar/client_navBar";
 import ClientSideBar from "../../../components/client/sideBar/client_sidebar";
