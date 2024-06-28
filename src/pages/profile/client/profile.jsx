@@ -27,7 +27,6 @@ const ClientUserProfile = () => {
       } catch (error) {
         console.log(error);
         setError(error);
-        setLoading(false);
       }
     };
     fetchData();

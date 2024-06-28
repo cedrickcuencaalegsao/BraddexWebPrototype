@@ -1,9 +1,18 @@
-.admin-profile{
-   display: flex;
-   .admin-profile-Container{
-      flex: 6;
-      margin-top: 50px;
-      margin-left: 200px;
-      width: calc(100% - 200px);
-   }
+.admin-profile {
+  display: flex;
+  .admin-profile-Container {
+    flex: 6;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    .content {
+      display: flex;
+      flex-direction: row;
+      .left,
+      .right {
+        flex: 2;
+        margin: 5px;
+      }
+    }
+  }
 }

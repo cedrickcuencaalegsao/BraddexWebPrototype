@@ -13,15 +13,15 @@ const CartTable = (data) => {
     { field: "cartID", headerName: "Cart ID", width: 180 },
     { field: "userID", headerName: "Own By", width: 180 },
     { field: "menuID", headerName: "Menu ID", width: 180 },
-    { field: "isDeleted", headerName: "Deleted", width: 100 },
-    { field: "created_at", headerName: "Date Added", width: 150 },
-    { field: "updated_at", headerName: "Date Updated", width: 150 },
+    { field: "isDeleted", headerName: "Deleted", width: 120 },
+    { field: "created_at", headerName: "Date Added", width: 120 },
+    { field: "updated_at", headerName: "Date Updated", width: 100 },
     {
       field: "Action",
       headerName: "Action",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 50,
+      width: 60,
       renderCell: (params) => {
         return (
           <div className="cellAction">
