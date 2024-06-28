@@ -2,6 +2,9 @@
   display: flex;
   .container {
     flex: 6;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
     .content-wrapper {
       display: flex;
       flex-direction: row;

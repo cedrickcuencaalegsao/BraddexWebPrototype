@@ -21,7 +21,7 @@ const CartTable = (data) => {
       headerName: "Action",
       description: "This column has a value getter and is not sortable.",
       sortable: false,
-      width: 100,
+      width: 50,
       renderCell: (params) => {
         return (
           <div className="cellAction">

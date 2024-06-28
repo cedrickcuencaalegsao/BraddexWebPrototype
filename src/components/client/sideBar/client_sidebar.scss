@@ -1,9 +1,13 @@
 .clientSideBar {
   flex: 1;
-  flex: 1;
   border-right: 0.5px solid rgb(230, 227, 227);
   min-height: 100vh;
   background-color: red;
+  position: fixed; // fixed position
+  top: 0; // align to the top
+  left: 0; // align to the left
+  width: 200px; // set a fixed width
+  z-index: 1000;
   .top {
     height: 50px;
     display: flex;

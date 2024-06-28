@@ -3,9 +3,13 @@
   border-bottom: 0.5px solid rgb(231, 228, 228);
   display: flex;
   align-items: center;
+  position: fixed; 
+  top: 0;
   font-size: 14px;
   color: white;
   background-color: rgb(255, 136, 0);
+  width: calc(100% - 200px);
+  z-index: 1000;
 
   .clientNabarContainer {
     width: 100%;

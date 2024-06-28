@@ -8,19 +8,21 @@ import Chart from "../../../components/chart/chart";
 const Home = () => {
   return (
     <div className="home">
-      <SideBar />
+      <SideBar className="side-bar" />
       <div className="homecontainer">
-        <NavBar />
-        <div className="widgets">
-          <Widgets type="user" />
-          <Widgets type="products" />
-          <Widgets type="cart" />
-          <Widgets type="order" />
-          <Widgets type="delivery" />
-        </div>
-        <div className="charts">
-          <Featured />
-          <Chart aspect={2 / 1} />
+        <NavBar className="nav-bar" />
+        <div className="content">
+          <div className="widgets">
+            <Widgets type="user" />
+            <Widgets type="products" />
+            <Widgets type="cart" />
+            <Widgets type="order" />
+            <Widgets type="delivery" />
+          </div>
+          <div className="charts">
+            <Featured />
+            <Chart aspect={2 / 1} />
+          </div>
         </div>
       </div>
     </div>

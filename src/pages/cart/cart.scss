@@ -6,6 +6,9 @@ $grid-gap: auto; // Change this to adjust the gap between grid items.
   display: flex;
   .cartContainer {
     flex: 6;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
     .top {
       padding: 10px;
       margin: 10px;

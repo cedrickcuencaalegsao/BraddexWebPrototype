@@ -5,6 +5,9 @@ $grid-gap: auto;
   display: flex;
   .order-multiple-container {
     flex: 6;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
     .order-data-main-contaner {
       display: flex;
       flex-direction: row-reverse;

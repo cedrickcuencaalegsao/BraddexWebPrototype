@@ -80,7 +80,7 @@ const TableProducts = (data) => {
       field: "action",
       headerName: "Action",
       sortable: false,
-      width: 100,
+      width: 50,
       renderCell: (data) => {
         return (
           <div className="cellAction">

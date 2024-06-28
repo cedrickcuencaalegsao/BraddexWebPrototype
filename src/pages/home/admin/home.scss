@@ -2,6 +2,9 @@
     display: flex;
     .homecontainer{
         flex: 6;
+        margin-top: 50px;
+        margin-left: 200px;
+        width: calc(100% - 200px);
 
         .widgets, .charts{
             display: flex;
@@ -10,19 +13,6 @@
         }
         .charts{
             padding: 5px 20px;
-        }
-    }
-    .listContainer{
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
-        padding: 10px;
-        color: grey;
-        margin: 20px;
-
-        .listTitle{
-            font-weight: 500;
-            color: grey;
-            margin-bottom: 15px;
         }
     }
 }

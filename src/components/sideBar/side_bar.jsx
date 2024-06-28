@@ -5,7 +5,6 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -51,9 +50,6 @@ const SideBar = () => {
   };
   const viewNewMenu = () => {
     history.push("/newmenu");
-  };
-  const viewSettings = () => {
-    history.push("/settings");
   };
   const viewProfile = () => {
     history.push("/profile");
@@ -116,14 +112,6 @@ const SideBar = () => {
             <div className="sidebarLink" onClick={viewNewMenu}>
               <AppRegistrationOutlinedIcon className="icon" />
               <span>New Menu</span>
-            </div>
-          </li>
-          <li></li>
-          <p className="title">SERVICE</p>
-          <li>
-            <div className="sidebarLink" onClick={viewSettings}>
-              <SettingsOutlinedIcon className="icon" />
-              <span>Settings</span>
             </div>
           </li>
           <p className="title">USER</p>

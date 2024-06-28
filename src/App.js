@@ -12,8 +12,6 @@ import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
 import Notification from "./pages/notification/admin/notif";
 import NewMenu from "./pages/new_menu/newMenu";
-import Logs from "./pages/logs/logs";
-import AdminSettings from "./pages/settings/admin/settigs";
 import AdminProfile from "./pages/profile/admin/profile";
 // Admin Edit Pages.
 import EditUser from "./pages/EditUser/editUser";
@@ -79,8 +77,6 @@ const App = () => {
             isAdminRoute
           />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
-          <AuthRoutes path="/logs" component={Logs} isAdminRoute />
-          <AuthRoutes path="/settings" component={AdminSettings} isAdminRoute />
           <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />
           
           {/* Client Routes */}

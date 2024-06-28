@@ -40,9 +40,9 @@ const StatList = () => {
 
   return (
     <div className="statList">
-      <SideBar />
+      <SideBar className="side-bar"/>
       <div className="statContainer">
-        <NavBar />
+        <NavBar className="nav-bar"/>
         <div className="content">
           <AllDataStatistics data={all_data} />
           <UserWidgets data={userData} />

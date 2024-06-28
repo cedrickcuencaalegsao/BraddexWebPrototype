@@ -2,5 +2,8 @@
     display: flex;
     .announcementContainer{
         flex: 6;
+        margin-top: 50px;
+        margin-left: 200px;
+        width: calc(100% - 200px);
     }
 }

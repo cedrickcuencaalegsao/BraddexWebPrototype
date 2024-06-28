@@ -5,9 +5,9 @@ import NavBar from "../../../components/navBar/nav_bar";
 const AdminProfile = () => {
    return(
       <div className="admin-profile">
-         <SideBar/>
+         <SideBar className="side-bar"/>
          <div className="admin-profile-Container">
-            <NavBar/>
+            <NavBar className="nav-bar"/>
          </div>
       </div>
    )

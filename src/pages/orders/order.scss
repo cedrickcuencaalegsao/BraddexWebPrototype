@@ -1,6 +1,5 @@
 .orderList {
   display: flex;
-  width: 100%;
   .cellAction {
     display: flex;
     align-items: center;
@@ -82,6 +81,9 @@
   }
   .orderContainer {
     flex: 6;
+    margin-top: 50px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
     .order-data-wrapper {
       padding: 10px;
     }
