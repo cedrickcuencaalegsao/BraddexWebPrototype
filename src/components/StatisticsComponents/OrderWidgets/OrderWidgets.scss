@@ -5,4 +5,42 @@
   height: auto;
   -webkit-box-shadow: 5px 7px 7px 4px rgba(0, 0, 0, 0.2);
   box-shadow: 5px 7px 7px 4px rgba(201, 201, 201, 0.2);
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .title {
+      color: darkslategray;
+      font-weight: 700;
+    }
+  }
+  .bottom {
+    display: flex;
+    .items {
+      flex: 2;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid rgba(128, 128, 128, 0.256);
+      border-radius: 20px;
+      .indicator {
+        color: darkslategray;
+        font-weight: 700;
+      }
+      .graph-wrapper{
+        margin-top: 10px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .graph{
+          width: 60%;
+          height: 60%;
+        }
+      }
+    }
+    &.collapsed {
+      height: 0px;
+      overflow: hidden;
+    }
+  }
 }

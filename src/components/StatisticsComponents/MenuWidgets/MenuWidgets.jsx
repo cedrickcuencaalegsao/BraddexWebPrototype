@@ -27,9 +27,7 @@ const MenuWidgets = (args) => {
     }
     return value;
   };
-
-  console.log(menuData);
-
+  
   return (
     <div className="menu-widgets-container">
       <div className="top">
