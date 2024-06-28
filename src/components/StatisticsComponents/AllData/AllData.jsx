@@ -3,6 +3,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { useEffect, useState } from "react";
+
 // summary of all data.
 const AllDataStatistics = (args) => {
   const [userData, setUserData] = useState([]);

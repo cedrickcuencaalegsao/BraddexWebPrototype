@@ -15,8 +15,6 @@ const CartWidgets = (args) => {
     }
   }, [data]);
 
-  console.log(cartData);
-
   const calc = (args) => {
     let value;
     if (args !== "cart_updated") {
