@@ -16,22 +16,22 @@ const ClientUserProfile = () => {
   const uuid = localStorage.getItem("uuid");
   const history = useHistory();
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/profile/${uuid}`
-      );
-      setData(response.data.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError(error);
-      setLoading(false);
-    }
-  };
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/profile/${uuid}`
+        );
+        setData(response.data.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError(error);
+        setLoading(false);
+      }
+    };
     fetchData();
-  });
+  }, [uuid]);
 
   // Allowing frontend data to be updated at realtime
   const setFname = (value) => {
@@ -72,8 +72,8 @@ const ClientUserProfile = () => {
         "http://127.0.0.1:8000/api/updateprofiledetails",
         data
       );
-      console.log(API.data);
       setLoading(false);
+      return API.data;
     } catch (error) {
       console.log(error);
       setLoading(false);

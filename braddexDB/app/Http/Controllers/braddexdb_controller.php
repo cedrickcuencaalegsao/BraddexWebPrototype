@@ -224,7 +224,7 @@ class braddexdb_controller extends Controller
             return response()->json(['error' => $validator->errors()], 422);
         }
 
-        User::find($id)->update([
+        $user = User::find($id)->update([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email' => $request->email,
@@ -232,7 +232,9 @@ class braddexdb_controller extends Controller
             'phone_no' => $request->phone_no,
             'birthday' => $request->birthday,
         ]);
-        return response()->json(['message' => 'Updated successfully'], 201);
+        if ($user) {
+            return response()->json(true);
+        }
     }
     public function updateProfilePicture(Request $request)
     {
