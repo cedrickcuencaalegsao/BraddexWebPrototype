@@ -30,6 +30,7 @@ Route::post('change-menu-status', [braddexdb_controller::class, 'changeMenuStatu
 Route::post('update-menu', [braddexdb_controller::class, 'updateMenu']);
 Route::post('update-menu-image', [braddexdb_controller::class, 'updateMenuImage']);
 Route::post('update-order-image', [braddexdb_controller::class, 'updateOrderData']);
+Route::post('update-account-state', [braddexdb_controller::class, 'updateAccountState']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);

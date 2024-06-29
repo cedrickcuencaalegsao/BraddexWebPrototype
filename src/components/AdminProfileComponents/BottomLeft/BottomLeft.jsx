@@ -3,9 +3,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useEffect, useState } from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import Switch from "@mui/material/Switch";
+import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const EditAdminBottomLeft = (args) => {
   const data = args.data;
+  let uuid = localStorage.getItem("uuid");
+  const history = useHistory();
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -16,8 +20,44 @@ const EditAdminBottomLeft = (args) => {
     }
   }, [data]);
 
-  const handleSaveChanges = () => {
-    console.log(userData);
+  const onSwitch = (args) => {
+    const updateValue = (params) => {
+      if (params === 0) {
+        return 1;
+      }
+      return 0;
+    };
+    setUserData((prev) => {
+      const newValue = updateValue(prev[args]);
+      return {
+        ...prev,
+        [args]: newValue,
+      };
+    });
+  };
+
+  const saveChangeAPI = async (args) => {
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/update-account-state",
+        args
+      );
+      console.log(API.data);
+      return API.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSaveChanges = async () => {
+    let data = {
+      uuid: uuid,
+      isActive: userData.isActive,
+      isOnline: userData.isOnline,
+      isAdmin: userData.isAdmin,
+    };
+    const status = await saveChangeAPI(data);
+    status && history.push("/profile");
   };
 
   return (
@@ -53,6 +93,7 @@ const EditAdminBottomLeft = (args) => {
             <Switch
               className="switch"
               checked={userData.isActive === 1 ? true : false}
+              onChange={() => onSwitch("isActive")}
             />
           </div>
         </div>
@@ -64,6 +105,7 @@ const EditAdminBottomLeft = (args) => {
             <Switch
               className="switch"
               checked={userData.isOnline === 1 ? true : false}
+              onChange={() => onSwitch("isOnline")}
             />
           </div>
         </div>

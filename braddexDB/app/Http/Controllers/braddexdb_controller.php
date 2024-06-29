@@ -797,4 +797,16 @@ class braddexdb_controller extends Controller
 
         return response()->json(compact('user_data', 'cart_data', 'menu_data', 'order_data'));
     }
+    public function updateAccountState(Request $request)
+    {
+        $data = $request->all();
+        $uuid = $data['uuid'];
+        $user = User::where('userID', $uuid)->update([
+            'isActive' => $data['isActive'],
+            'isOnline' => $data['isOnline'],
+        ]);
+        if ($user) {
+            return response()->json(true);
+        }
+    }
 }

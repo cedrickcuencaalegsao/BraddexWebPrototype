@@ -50,7 +50,9 @@ const EditAdminBottomRight = (args) => {
           },
         }
       );
-      setLoading(false);
+      if (API) {
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
       setLoading(false);
