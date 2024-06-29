@@ -53,6 +53,7 @@ const EditAdminBottomRight = (args) => {
       if (API) {
         setLoading(false);
       }
+      return true;
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -61,10 +62,9 @@ const EditAdminBottomRight = (args) => {
 
   const saveProfilePic = async (ev) => {
     ev.preventDefault();
-    console.log(uuid);
     try {
       const response = await saveProfileAPI();
-      response && history.push("/profile");
+      response && history.push("/users");
     } catch (error) {
       console.log(error);
     }

@@ -31,6 +31,7 @@ Route::post('update-menu', [braddexdb_controller::class, 'updateMenu']);
 Route::post('update-menu-image', [braddexdb_controller::class, 'updateMenuImage']);
 Route::post('update-order-image', [braddexdb_controller::class, 'updateOrderData']);
 Route::post('update-account-state', [braddexdb_controller::class, 'updateAccountState']);
+Route::post('update-admin-pers-info', [braddexdb_controller::class, 'updateAdminPersInfo']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
@@ -45,6 +46,7 @@ Route::get('get-admin-users-widgets', [braddexdb_controller::class, 'getAdminUse
 Route::get('get-admin-products-widgets', [braddexdb_controller::class, 'getAdminProductsWidgets']);
 Route::get('get-admin-cart-widgets', [braddexdb_controller::class, 'getAdminCartWidget']);
 Route::get('get-admin-order-widgets', [braddexdb_controller::class, 'getAdminOrderWidget']);
+Route::get('get-admin-home-chart-data', [braddexdb_controller::class, 'getAdminHomeChartData']);
 // get all users data.
 Route::get('users', [braddexdb_controller::class, 'allUsers']);
 // get all cart data.

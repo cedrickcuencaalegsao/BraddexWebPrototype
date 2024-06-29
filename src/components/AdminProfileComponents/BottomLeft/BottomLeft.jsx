@@ -57,7 +57,7 @@ const EditAdminBottomLeft = (args) => {
       isAdmin: userData.isAdmin,
     };
     const status = await saveChangeAPI(data);
-    status && history.push("/profile");
+    status && history.push("/users");
   };
 
   return (

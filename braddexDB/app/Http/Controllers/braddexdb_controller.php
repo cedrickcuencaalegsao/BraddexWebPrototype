@@ -6,15 +6,18 @@ use App\Models\tbl_order;
 use App\Models\User;
 use App\Models\tbl_cart;
 use App\Models\tbl_menu;
+use Carbon\Month;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use League\Config\Exception\ValidationException;
+use PharIo\Manifest\Email;
 
 class braddexdb_controller extends Controller
 {
@@ -211,6 +214,17 @@ class braddexdb_controller extends Controller
         $pending = count(tbl_order::where('isDelivered', false)->get());
         $delivered = count(tbl_order::where('isDelivered', true)->get());
         return response()->json(compact('order', 'deleted', 'notDeleted', 'pending', 'delivered'));
+    }
+    public function getAdminHomeChartData()
+    {
+        $data = tbl_order::selectselect(
+            DB::raw('count(*) as order_count'),
+            DB::raw('MONTH(STR_TO_DATE(created_at, "%Y-%m-%d %H:%i:%s")) as month')
+        )
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->get();
+        return response()->json(compact('data'));
     }
     public function updateProfileDetails(Request $request)
     {
@@ -804,6 +818,34 @@ class braddexdb_controller extends Controller
         $user = User::where('userID', $uuid)->update([
             'isActive' => $data['isActive'],
             'isOnline' => $data['isOnline'],
+        ]);
+        if ($user) {
+            return response()->json(true);
+        }
+    }
+    public function updateAdminPersInfo(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'uuid' => 'required',
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'email' => 'required',
+            'phone_no' => 'required|integer',
+            'address' => 'required|string|max:70',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        $data = $request->all();
+        $userID = $data['uuid'];
+        $user = User::where('userID', $userID)->update([
+            'f_name' => $data['first_name'],
+            'l_name' => $data['last_name'],
+            'email' => $data['email'],
+            'phone_no' => $data['phone_no'],
+            'address' => $data['address'],
         ]);
         if ($user) {
             return response()->json(true);
