@@ -28,6 +28,7 @@ const OrderList = () => {
     const getOrderData = async () => {
       try {
         const API = await axios.get("http://127.0.0.1:8000/api/get-order-data");
+        console.log(API.data);
         setOrder(API.data.order);
         setOrderCount(API.data.countOrder);
         setPaid(API.data.paid);
@@ -60,29 +61,24 @@ const OrderList = () => {
       return data.map((item) => ({
         id: item.id,
         orderID: item.orderID,
-        userID: item.orderID,
-        menuID: item.menuID,
         paymentType: item.paymentType,
         userAddres: item.userAddress,
         totalAmmount: `₱ ${item.totalAmmount}.00`,
         quantity: item.quantity,
         isPaid: item.isPaid === 1 ? "Paid" : "Not Paid",
+        isDelivered: item.isDelivered === 1 ? "Delivered" : "Delivering",
         isCancelled: item.isCancelled === 1 ? "Cancelled" : "NotCancelled",
         created_at: formattedDate(item.created_at),
         updated_at: formattedDate(item.updated_at),
       }));
     };
-
     if (order) {
       const newRows = createRows(order);
-      
       setRows((prevRows) => {
         const rowsMap = new Map(prevRows.map((row) => [row.id, row]));
-
         newRows.forEach((newRow) => {
           rowsMap.set(newRow.id, newRow);
         });
-
         return Array.from(rowsMap.values());
       });
     }

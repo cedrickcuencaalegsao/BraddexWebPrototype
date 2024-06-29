@@ -217,13 +217,7 @@ class braddexdb_controller extends Controller
     }
     public function getAdminHomeChartData()
     {
-        $data = tbl_order::selectselect(
-            DB::raw('count(*) as order_count'),
-            DB::raw('MONTH(STR_TO_DATE(created_at, "%Y-%m-%d %H:%i:%s")) as month')
-        )
-            ->groupBy('month')
-            ->orderBy('month', 'asc')
-            ->get();
+        $data = tbl_order::all();
         return response()->json(compact('data'));
     }
     public function updateProfileDetails(Request $request)

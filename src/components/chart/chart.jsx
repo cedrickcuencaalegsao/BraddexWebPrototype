@@ -10,76 +10,96 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import axios from "axios";
+import moment from "moment";
 
 const Chart = ({ aspect }) => {
-  //get-admin-home-chart-data
-
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     const getChatDataAPI = async () => {
       try {
-        const API = await axios.get();
-        console.log(API.data);
+        const API = await axios.get(
+          "http://127.0.0.1:8000/api/get-admin-home-chart-data"
+        );
+        let data = API.data.data;
+        let processData = processChartData(data);
+        setChartData(processData);
       } catch (error) {
         console.log(error);
       }
     };
+    getChatDataAPI();
+    const interval = setInterval(() => {
+      getChatDataAPI();
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  const sales = [
-    {
-      month: "January-2024",
-      CanceledSales: 350,
-      TotalSales: 500,
-      PendingOrder: 220,
-    },
-    {
-      month: "Febuary-2024",
-      CanceledSales: 10,
-      TotalSales: 700,
-      PendingOrder: 5,
-    },
-    {
-      month: "March-2024",
-      CanceledSales: 15,
-      TotalSales: 940,
-      PendingOrder: 3,
-    },
-    {
-      month: "April-2024",
-      CanceledSales: 3,
-      TotalSales: 340,
-      PendingOrder: 150,
-    },
-    {
-      month: "June-2024",
-      CanceledSales: 15,
-      TotalSales: 150,
-      PendingOrder: 0,
-    },
-    {
-      month: "July-2024",
-      CanceledSales: 10,
-      TotalSales: 500,
-      PendingOrder: 5,
-    },
-    {
-      month: "August-2024",
-      CanceledSales: 100,
-      TotalSales: 700,
-      PendingOrder: 50,
-    },
-  ];
+  const processChartData = (data) => {
+    const salesData = [];
+
+    data.forEach((order) => {
+      const date =
+        order.created_at !== null
+          ? moment(order.created_at).format("YYYY-MM-DD")
+          : "Unknown";
+      const month = order.created_at
+        ? new Date(order.created_at).getMonth() + 1
+        : null;
+
+      if (order.isCancelled === 1) {
+        addOrUpdateSaleEntry(
+          salesData,
+          date,
+          month,
+          "CanceledSales",
+          order.totalAmmount
+        );
+      } else if (order.isPaid === 1 && order.isDelivered === 1) {
+        addOrUpdateSaleEntry(
+          salesData,
+          date,
+          month,
+          "TotalSales",
+          order.totalAmmount
+        );
+      } else if (order.isDelivered === 0 && order.isCancelled !== 1) {
+        addOrUpdateSaleEntry(
+          salesData,
+          date,
+          month,
+          "PendingOrder",
+          order.totalAmmount
+        );
+      }
+    });
+
+    // Sort by month (optional: you can sort by date instead if required)
+    salesData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    return salesData;
+  };
+
+  const addOrUpdateSaleEntry = (salesData, date, month, category, amount) => {
+    // Find or create an entry for the given date
+    let entry = salesData.find((entry) => entry.date === date);
+    if (!entry) {
+      entry = { date, CanceledSales: 0, TotalSales: 0, PendingOrder: 0 };
+      salesData.push(entry);
+    }
+
+    // Update the category value
+    entry[category] += amount;
+  };
 
   return (
     <div className="chart">
-      <div className="title">Yearly Statistics</div>
+      <div className="title">Monthly Statistics</div>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
           width={700}
           height={250}
-          data={sales}
+          data={chartData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
@@ -96,7 +116,7 @@ const Chart = ({ aspect }) => {
               <stop offset="95%" stopColor="yellow" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="month" className="month" />
+          <XAxis dataKey="date" className="date" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />

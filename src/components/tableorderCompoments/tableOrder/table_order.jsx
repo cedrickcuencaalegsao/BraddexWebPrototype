@@ -3,7 +3,6 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const TableOrder = (data) => {
-  console.log(data.data);
   const history = useHistory();
   const EditRow = (data) => {
     history.push(`/edit-order/${data}`);
@@ -12,14 +11,13 @@ const TableOrder = (data) => {
   const columns = [
     { field: "id", headerName: "ID", width: 20 },
     { field: "orderID", headerName: "Order ID", width: 110 },
-    { field: "userID", headerName: "Own By", width: 80 },
-    { field: "menuID", headerName: "Menu ID", width: 80 },
-    { field: "paymentType", headerName: "Payment Type", width: 80 },
-    { field: "userAddres", headerName: "Delivery Adress", width: 80 },
+    { field: "paymentType", headerName: "Payment Type", width: 100 },
+    { field: "userAddres", headerName: "Delivery Adress", width: 100 },
     { field: "totalAmmount", headerName: "Ammount", width: 100 },
-    { field: "quantity", headerName: "Quantiy", width: 80 },
-    { field: "isPaid", headerName: "Paid", width: 80 },
-    { field: "isCancelled", headerName: "Cancelled", width: 80 },
+    { field: "quantity", headerName: "Quantiy", width: 60 },
+    { field: "isPaid", headerName: "Paid", width: 100 },
+    { field: "isDelivered", headerName: "Delivered", width: 100 },
+    { field: "isCancelled", headerName: "Cancelled", width: 100 },
     { field: "created_at", headerName: "Date Added", width: 100 },
     { field: "updated_at", headerName: "Date Updated", width: 100 },
     {
