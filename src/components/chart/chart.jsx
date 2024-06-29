@@ -33,7 +33,7 @@ const Chart = ({ aspect }) => {
       getChatDataAPI();
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   const processChartData = (data) => {
     const salesData = [];
