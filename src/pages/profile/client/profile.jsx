@@ -65,6 +65,7 @@ const ClientUserProfile = () => {
       setPreview(null);
     }
   };
+  
   const updateAPI = async (data) => {
     try {
       const API = await axios.post(

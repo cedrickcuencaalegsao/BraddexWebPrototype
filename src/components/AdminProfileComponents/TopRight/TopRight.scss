@@ -1,7 +1,65 @@
-.edit-admin-top-right{
+.edit-admin-top-left {
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .title {
+      color: darkslategray;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+    .btn-save-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      .btn-save {
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid red;
+        background-color: red;
+        font-size: 15px;
+        color: white;
+        &:hover {
+          scale: 1.2;
+        }
+      }
+    }
+  }
+  .bottom {
+    padding: 2px;
+    margin: 2px;
+    .items {
+      margin: 2px;
+      padding: 2px;
+      .indicator-wrapper {
+        margin-bottom: 3px;
+        .indicator {
+          color: grey;
+          font-weight: 400;
+          font-size: 12px;
+        }
+      }
+      .value-wrapper {
+        margin-left: 10px;
+        width: calc(100% - 20px);
+        .value {
+          padding: 6px;
+          width: calc(100% - 10px);
+          border: none;
+          outline: none;
+          background-color: rgba(128, 128, 128, 0.1);
+          border-radius: 5px;
+          color: darkslategray;
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }

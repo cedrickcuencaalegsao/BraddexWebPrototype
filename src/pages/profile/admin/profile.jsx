@@ -61,10 +61,8 @@ const AdminProfile = () => {
         f_name: userData.f_name,
         l_name: userData.l_name,
         email: userData.email,
-        image: userData.prof_pic,
         phone: userData.phone_no,
         address: userData.address,
-        birthdate: userData.birthday,
       };
     }
   };

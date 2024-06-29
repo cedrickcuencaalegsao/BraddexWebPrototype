@@ -20,8 +20,6 @@ const EditAdminBottomLeft = (args) => {
     console.log(userData);
   };
 
-  console.log(userData);
-
   return (
     <div className="edit-admin-bottom-left">
       <div className="top">
