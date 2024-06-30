@@ -9,10 +9,10 @@ const WidgetDeleted = (data) => {
     <div className="widget-paid-wrapper">
       <div className="details-wrapper">
         <div className="title-wrapper">
-          <h1 className="widget-title">Deleted Order</h1>
+          <h1 className="widget-title">Deleted</h1>
         </div>
         <div className="count-wrapper">
-          <span className="value-indicator">Deleted Order Count</span>
+          <span className="value-indicator">Count</span>
           <span className="value">{deleted}</span>
         </div>
       </div>

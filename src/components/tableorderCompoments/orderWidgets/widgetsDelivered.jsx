@@ -8,10 +8,10 @@ const WidgetDelivered = (data) => {
     <div className="widget-paid-wrapper">
       <div className="details-wrapper">
         <div className="title-wrapper">
-          <h1 className="widget-title">Delivered Order</h1>
+          <h1 className="widget-title">Delivered</h1>
         </div>
         <div className="count-wrapper">
-          <span className="value-indicator">Delivered Order Count</span>
+          <span className="value-indicator">Count</span>
           <span className="value">{delivered}</span>
         </div>
       </div>

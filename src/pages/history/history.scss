@@ -13,15 +13,21 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        .cart-container {
+        .cart-container,
+        .order-container {
+          padding: 10px;
+          margin: 10px;
           width: 100%;
-          .cart-title-wrapper {
-            .cart-title {
+          .cart-title-wrapper,
+          .order-title-container {
+            .cart-title,
+            .order-title {
               color: grey;
               font-size: 20px;
             }
           }
-          .cart-row {
+          .cart-row,
+          .order-row {
             display: flex;
             align-items: center;
             justify-content: space-around;
@@ -35,6 +41,54 @@
               display: flex;
               flex-direction: column;
               align-items: start;
+              .item-indicator {
+                color: grey;
+                font-size: 12px;
+              }
+              .item-value {
+                margin-top: 5px;
+                color: darkslategray;
+                font-weight: 700;
+                font-size: 18px;
+                &.Delivered {
+                  padding: 7px;
+                  font-size: 13px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: green;
+                  border-radius: 7px;
+                  background-color: rgba(0, 128, 0, 0.3);
+                }
+                &.Delivering {
+                  padding: 7px;
+                  font-size: 13px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: goldenrod;
+                  border-radius: 7px;
+                  background-color: rgba(218, 165, 32, 0.3);
+                }
+              }
+            }
+            .action-icon {
+              padding: 7px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: rgba(220, 20, 60, 0.3);
+              border-radius: 10px;
+              .icon {
+                font-size: 20px;
+                color: red;
+                &:hover {
+                  scale: 1.2;
+                }
+              }
+              &:hover {
+                scale: 1.05;
+              }
             }
           }
         }

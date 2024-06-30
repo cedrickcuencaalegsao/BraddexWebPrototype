@@ -487,9 +487,33 @@ class braddexdb_controller extends Controller
     }
     public function getHistory($uuID)
     {
-        $cart = tbl_cart::where('userID', $uuID)->get();
-        $order = tbl_order::where('userID', $uuID)->get();
+        $cart = tbl_cart::where('userID', $uuID)->where('isDeleted', false)->get();
+        $order = tbl_order::where('userID', $uuID)->where('isDeleted', false)->get();
         return response()->json(compact('cart', 'order'));
+    }
+    public function delCartHistory(Request $request)
+    {
+        $data = $request->all();
+        $userID = $data['uuid'];
+        $cartID = $data['cartID'];
+        $cart = tbl_cart::where('userID', $userID)->where('cartID', $cartID)->update([
+            'isDeleted' => true,
+        ]);
+        if ($cart) {
+            return response()->json(true);
+        }
+    }
+    public function delOrderHistory(Request $request)
+    {
+        $data = $request->all();
+        $userID = $data['uuid'];
+        $orderID = $data['orderID'];
+        $order = tbl_order::where('userID', $userID)->where('orderID', $orderID)->update([
+            'isDeleted' => true
+        ]);
+        if ($order) {
+            return response()->json(true);
+        }
     }
     public function getTitleImgaes()
     {

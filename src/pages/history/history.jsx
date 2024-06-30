@@ -12,8 +12,6 @@ const ClientHistory = () => {
   const [userOrder, setUserOrder] = useState([]);
   const uuid = localStorage.getItem("uuid");
 
-  
-  console.log(userCart, userOrder);
   useEffect(() => {
     const getCartHistoryAPI = async () => {
       try {
@@ -52,14 +50,46 @@ const ClientHistory = () => {
     if (data !== null) {
       return moment(data).format("YYYY-MM-DD");
     }
-    return "Not Updated";
+    return "Unknown";
   };
 
-  const formatIdDeleted = (data) => {
+  const formatDeleted = (data) => {
     if (data === 1) {
       return "Deleted";
     }
     return "Not Deleted";
+  };
+
+  const delCartHistory = async (args) => {
+    let data = {
+      uuid: uuid,
+      cartID: args,
+    };
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/del-cart-history",
+        data
+      );
+      console.log(API.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const delOrderHistory = async (args) => {
+    let data = {
+      uuid: uuid,
+      orderID: args,
+    };
+    try {
+      const API = await axios.post(
+        "http://127.0.0.1:8000/api/del-order-history",
+        data
+      );
+      console.log(API.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -98,19 +128,60 @@ const ClientHistory = () => {
                   <div className="items">
                     <span className="item-indicator">Deleted:</span>
                     <span className="item-value">
-                      {formatIdDeleted(item.isDeleted)}
+                      {formatDeleted(item.isDeleted)}
                     </span>
                   </div>
                   <div className="action-icon">
-                    <DeleteOutlinedIcon className="icon" />
+                    <DeleteOutlinedIcon
+                      className="icon"
+                      onClick={() => delCartHistory(item.cartID)}
+                    />
                   </div>
                 </div>
               ))}
             </div>
             <div className="order-container">
+              <div className="order-title-container">
+                <h1 className="order-title">Order History</h1>
+              </div>
               {userOrder.map((item) => (
-                <div key={item.id}>
-                  <span>{item.menuID}</span>
+                <div className="order-row" key={item.id}>
+                  <div className="items">
+                    <span className="item-indicator">Order ID</span>
+                    <span className="item-value">{item.orderID}</span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Menu ID</span>
+                    <span className="item-value">{item.menuID}</span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Date Added</span>
+                    <span className="item-value">
+                      {formattedDate(item.created_at)}
+                    </span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Date Updated</span>
+                    <span className="item-value">
+                      {formattedDate(item.updated_at)}
+                    </span>
+                  </div>
+                  <div className="items">
+                    <span className="item-indicator">Status</span>
+                    <span
+                      className={`item-value ${
+                        item.isDelivered === 1 ? "Delivered" : "Delivering"
+                      }`}
+                    >
+                      {item.isDelivered === 1 ? "Delivered" : "Delivering"}
+                    </span>
+                  </div>
+                  <div className="action-icon">
+                    <DeleteOutlinedIcon
+                      className="icon"
+                      onClick={() => delOrderHistory(item.orderID)}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
