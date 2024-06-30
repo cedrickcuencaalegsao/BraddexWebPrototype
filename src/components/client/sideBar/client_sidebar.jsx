@@ -4,8 +4,6 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import DeliveryDiningOutlinedIcon from "@mui/icons-material/DeliveryDiningOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
-import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
-import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import ShieldRoundedIcon from "@mui/icons-material/ShieldRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
@@ -69,25 +67,6 @@ const ClientSideBar = () => {
               <span>History</span>
             </div>
           </li>
-          <p className="title">SERVICES</p>
-          <li>
-            <div
-              className="sidebarLink"
-              onClick={() => navLink("/client-support")}
-            >
-              <SupportAgentOutlinedIcon className="icon" />
-              <span>Support</span>
-            </div>
-          </li>
-          <li>
-            <div
-              className="sidebarLink"
-              onClick={() => navLink("/client-announcement")}
-            >
-              <AnnouncementOutlinedIcon className="icon" />
-              <span>Announcement</span>
-            </div>
-          </li>
           <p className="title">SETTINGS</p>
           <li>
             <div
@@ -111,7 +90,7 @@ const ClientSideBar = () => {
           <li>
             <div
               className="sidebarLink"
-              onClick={() => navLink("/client-privacy")}
+              onClick={() => navLink("/client-about")}
             >
               <InfoRoundedIcon className="icon" />
               <span>About</span>

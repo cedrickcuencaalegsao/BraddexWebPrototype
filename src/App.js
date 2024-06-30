@@ -30,13 +30,11 @@ import ClientOrderNow from "./pages/orderNow/orderNow";
 import Cart from "./pages/cart/cart";
 import ClientDelivery from "./pages/delivery/client/delivery";
 import ClientHistory from "./pages/history/history";
-import ClientSupport from "./pages/Support/support";
-import ClientAnnouncement from "./pages/announcement/announcement";
 import ClientSettings from "./pages/settings/client/settings";
 import ClientPrivacy from "./pages/privacy/privacy";
 import ClientUserProfile from "./pages/profile/client/profile";
-import ClientNotification from "./pages/notification/client/notif";
 import ClientOrderMultiple from "./pages/orderMultiple/orderMultiple";
+import ClientAbout from "./pages/about/about";
 
 const App = () => {
   return (
@@ -78,7 +76,7 @@ const App = () => {
           />
           <AuthRoutes path="/newmenu" component={NewMenu} isAdminRoute />
           <AuthRoutes path="/profile" component={AdminProfile} isAdminRoute />
-          
+
           {/* Client Routes */}
           <AuthRoutes path="/client-home" component={ClientHome} />
           <AuthRoutes path="/client-Menu" component={ClientMenu} />
@@ -93,18 +91,10 @@ const App = () => {
           />
           <AuthRoutes path="/client-delivery" component={ClientDelivery} />
           <AuthRoutes path="/client-history" component={ClientHistory} />
-          <AuthRoutes path="/client-support" component={ClientSupport} />
-          <AuthRoutes
-            path="/client-announcement"
-            component={ClientAnnouncement}
-          />
           <AuthRoutes path="/client-settings" component={ClientSettings} />
           <AuthRoutes path="/client-privacy" component={ClientPrivacy} />
           <AuthRoutes path="/client-profile" component={ClientUserProfile} />
-          <AuthRoutes
-            path="/client-notification"
-            component={ClientNotification}
-          />
+          <AuthRoutes path="/client-about" component={ClientAbout} />
         </Switch>
       </Router>
     </div>

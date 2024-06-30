@@ -869,4 +869,13 @@ class braddexdb_controller extends Controller
             return response()->json(true);
         }
     }
+    public function getDataClientSettings($uuid)
+    {
+        $userData = User::where('userID', $uuid)->get();
+        $countCart = count(tbl_cart::where('userID', $uuid)->get());
+        $userCart = count(tbl_cart::where('userID', $uuid)->where('isDeleted', false)->get());
+        $countOrder = count(tbl_order::where('userID', $uuid)->get());
+        $userOrder = count(tbl_order::where('userID', $uuid)->where('isDeleted', false)->get());
+        return response()->json(compact('userData', 'countCart', 'userCart', 'countOrder', 'userOrder'));
+    }
 }

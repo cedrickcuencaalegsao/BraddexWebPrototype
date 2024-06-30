@@ -74,7 +74,7 @@ Route::get('get-order-menu-data/{menuID}', [braddexdb_controller::class, 'getOrd
 // get all system statistics.
 Route::get('gel-all-statistics', [braddexdb_controller::class, 'getAllStatistics']);
 
-
+Route::get('getDataClientSettings/{uuid}', [braddexdb_controller::class, 'getDataClientSettings']);
 
 // images routes for menu.
 Route::get('/images/menu/{filename}', function ($filename) {
