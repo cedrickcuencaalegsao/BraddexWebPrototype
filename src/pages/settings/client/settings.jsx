@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ClientSettingTopLeft from "../../../components/ClientSettings/TopLeft/TopLeft";
 import ClientSettingBottomLeft from "../../../components/ClientSettings/BottomLeft/BottomLeft";
+import ClientSettingTopRight from "../../../components/ClientSettings/RightTop/RightTop";
 
 const ClientSettings = () => {
   let uuid = localStorage.getItem("uuid");
@@ -58,7 +59,9 @@ const ClientSettings = () => {
               <ClientSettingTopLeft data={userData} />
               <ClientSettingBottomLeft data={bottomLeftData()} />
             </div>
-            <div className="right">asdaf</div>
+            <div className="right">
+              <ClientSettingTopRight data={userData}/>
+            </div>
           </div>
         </div>
       </div>

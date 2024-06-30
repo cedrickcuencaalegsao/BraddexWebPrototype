@@ -11,20 +11,30 @@
       .top {
         padding: 10px;
         margin: 10px;
-        width: 100%;
+        width: calc(100% - 40px);
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        .title-wrapper {
+          .title{
+            color: darkslategray;
+            font-weight: 700;
+            font-size: 20px;
+          }
+        }
       }
       .bottom {
         width: 100%;
         display: flex;
         align-items: start;
         flex-direction: row;
-        .left{
-          flex: 2;
+        .left {
+          flex: 3;
         }
-        .right{
+        .right {
           flex: 6;
         }
       }
