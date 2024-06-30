@@ -4,4 +4,115 @@
   border-radius: 10px;
   -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
   box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  .top-section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .title-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .title {
+        text-transform: capitalize;
+        flex: 6;
+        color: darkslategray;
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+    .button-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: end;
+      .btn-save {
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid red;
+        background-color: red;
+        font-size: 15px;
+        color: white;
+        &:hover {
+          scale: 1.2;
+        }
+      }
+    }
+  }
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    .details {
+      width: 100%;
+      .upper-details-wrapper {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        .left,
+        .right {
+          flex: 2;
+          .items {
+            padding: 3px;
+            margin: 3px;
+            display: flex;
+            flex-direction: column;
+            .indicator {
+              color: darkslategray;
+              font-size: 13px;
+            }
+            .value {
+              padding: 7px;
+              border: none;
+              outline: none;
+              border-bottom: 2px solid grey;
+              color: darkslategray;
+              font-weight: 700;
+              font-size: 18px;
+              &:focus {
+                border-bottom: 2px solid orangered;
+              }
+            }
+            .switch-wrapper {
+              display: flex;
+              align-items: center;
+              justify-content: space-around;
+              flex-direction: row;
+              .item {
+                display: flex;
+                align-items: center;
+                flex-direction: row;
+              }
+            }
+          }
+        }
+      }
+      .lower-details-wrapper {
+        width: 100%;
+        .items {
+          padding: 3px;
+          margin: 3px;
+          display: flex;
+          flex-direction: column;
+          .indicator {
+            color: darkslategray;
+            font-size: 13px;
+          }
+          .value {
+            padding: 7px;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid grey;
+            color: darkslategray;
+            font-weight: 700;
+            font-size: 18px;
+            &:focus {
+              border-bottom: 2px solid orangered;
+            }
+          }
+        }
+      }
+    }
+  }
 }

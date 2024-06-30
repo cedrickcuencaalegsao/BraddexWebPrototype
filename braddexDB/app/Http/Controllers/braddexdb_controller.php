@@ -878,4 +878,34 @@ class braddexdb_controller extends Controller
         $userOrder = count(tbl_order::where('userID', $uuid)->where('isDeleted', false)->get());
         return response()->json(compact('userData', 'countCart', 'userCart', 'countOrder', 'userOrder'));
     }
+    public function userSettingsUpdate(Request $request)
+    {
+        $created_at = Carbon::now()->toDateTimeString();
+        $validator = Validator::make($request->all(), [
+            'address' => 'required',
+            'f_name' => 'required|string|max:50',
+            'l_name' => 'required|string|max:50',
+            'email' => 'required|email',
+            'phone_no' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+        $data = $request->all();
+        $userID = $data['userID'];
+
+        $user = User::where('userID', $userID)->update([
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'email' => $data['email'],
+            'phone_no' => $data['phone_no'],
+            'birthday' => $data['birthday'],
+            'address' => $data['address'],
+            'isOnline' => $data['isOnline'],
+        ]);
+        if ($user) {
+            return response()->json(true);
+        }
+        return response()->json(false);
+    }
 }

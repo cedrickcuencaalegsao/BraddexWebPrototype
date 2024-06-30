@@ -34,6 +34,7 @@ Route::post('update-account-state', [braddexdb_controller::class, 'updateAccount
 Route::post('update-admin-pers-info', [braddexdb_controller::class, 'updateAdminPersInfo']);
 Route::post('del-cart-history', [braddexdb_controller::class, 'delCartHistory']);
 Route::post('del-order-history', [braddexdb_controller::class, 'delOrderHistory']);
+Route::post('user-settings-update', [braddexdb_controller::class, 'userSettingsUpdate']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
