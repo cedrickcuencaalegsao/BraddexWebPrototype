@@ -1,6 +1,5 @@
 import "./profile.scss";
 import SideBar from "../../../components/sideBar/side_bar";
-import NavBar from "../../../components/navBar/nav_bar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
@@ -79,7 +78,6 @@ const AdminProfile = () => {
     <div className="admin-profile">
       <SideBar />
       <div className="admin-profile-Container">
-        <NavBar />
         <div className="content">
           <div className="progress">
             {loading ? (

@@ -1,6 +1,5 @@
 import "./stat.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import AllDataStatistics from "../../components/StatisticsComponents/AllData/AllData";
 import UserWidgets from "../../components/StatisticsComponents/UserWidgets/UserWidgets";
 import CartWidgets from "../../components/StatisticsComponents/CartWidgets/CartWidgets";
@@ -42,7 +41,6 @@ const StatList = () => {
     <div className="statList">
       <SideBar className="side-bar"/>
       <div className="statContainer">
-        <NavBar className="nav-bar"/>
         <div className="content">
           <AllDataStatistics data={all_data} />
           <UserWidgets data={userData} />

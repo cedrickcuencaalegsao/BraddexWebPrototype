@@ -1,6 +1,5 @@
 import "./cart.scss";
 import SideBar from "../../../components/sideBar/side_bar";
-import NavBar from "../../../components/navBar/nav_bar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CartTable from "../../../components/cart_table/cart/cartTable";
@@ -103,7 +102,6 @@ const AdminCart = () => {
     <div className="admin-cart-container">
       <SideBar />
       <div className="cart-table-container">
-        <NavBar />
         <div className="top">
           <div className="left">
             <NotDeletedCart data={cartNotDeletedPercentage} />

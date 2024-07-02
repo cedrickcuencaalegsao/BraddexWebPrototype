@@ -1,6 +1,5 @@
 import "./EditMenu.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -72,7 +71,6 @@ const EditMenu = () => {
     <div className="updateMenu">
       <SideBar />
       <div className="updateMenuContainer">
-        <NavBar />
         <div className="details-container">
           <div className="left">
             <EditMenuLeftTop data={left_top_data} />

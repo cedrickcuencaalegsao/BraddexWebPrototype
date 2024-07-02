@@ -6,23 +6,18 @@ use App\Models\tbl_order;
 use App\Models\User;
 use App\Models\tbl_cart;
 use App\Models\tbl_menu;
-use Carbon\Month;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use League\Config\Exception\ValidationException;
-use PharIo\Manifest\Email;
 
 class braddexdb_controller extends Controller
 {
     #
-    # https://github.com/SEVENthNotes7/braddexWebPrototype.git
+    # https://github.com/cedrickcuencaalegsao/BraddexWebPrototype.git
     #
     public function authLogin(Request $request)
     {
@@ -105,9 +100,7 @@ class braddexdb_controller extends Controller
     }
     public function allUsers()
     {
-        // get all data from the table users.
         $data = User::all();
-        // return the data in json format.
         return response()->json(['users' => $data]);
     }
     public function getUserProfile($uuid)
@@ -179,10 +172,6 @@ class braddexdb_controller extends Controller
     {
         $data = tbl_menu::where('bestselling', true)->get();
         return response()->json(compact('data'));
-    }
-    public function updateBestselling(Request $request)
-    {
-        return response()->json($request);
     }
     public function getAdminUsersWidgets()
     {

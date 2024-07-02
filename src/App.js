@@ -10,7 +10,6 @@ import AdminCart from "./pages/cart/admin/cart";
 import OrderList from "./pages/orders/order";
 import Delivery from "./pages/delivery/delivery";
 import StatList from "./pages/stat/stat";
-import Notification from "./pages/notification/admin/notif";
 import NewMenu from "./pages/new_menu/newMenu";
 import AdminProfile from "./pages/profile/admin/profile";
 // Admin Edit Pages.

@@ -52,7 +52,6 @@ const DataTable = (data) => {
       sortable: false,
       width: 100,
       renderCell: (params) => {
-        console.log(params.row.email);
         return (
           <div className="cellAction">
             <div className="viewButton">

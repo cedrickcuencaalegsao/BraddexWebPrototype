@@ -1,6 +1,5 @@
 import "./product.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import Navbar from "../../components/navBar/nav_bar";
 import TableProducts from "../../components/products/table_products";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -43,7 +42,6 @@ const List = () => {
     <div className="list">
       <SideBar />
       <div className="listContainer">
-        <Navbar />
         <div className="top">
           <ProductAvailable data={prod_available} />
           <ProductLimited data={prod_limited} />

@@ -1,6 +1,5 @@
 import "./order.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import { useState, useEffect } from "react";
 import TableOrder from "../../components/tableorderCompoments/tableOrder/table_order";
 import axios from "axios";
@@ -88,7 +87,6 @@ const OrderList = () => {
     <div className="orderList">
       <SideBar />
       <div className="orderContainer">
-        <NavBar />
         <div className="order-data-wrapper">
           <div className="top">
             <div className="widget-container">

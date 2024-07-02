@@ -1,6 +1,5 @@
 import "./cart.scss";
 import ClientSideBar from "../../components/client/sideBar/client_sidebar";
-import ClientNavBar from "../../components/client/navBar/client_navBar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -139,7 +138,6 @@ const Cart = () => {
     <div className="cart">
       <ClientSideBar />
       <div className="cartContainer">
-        <ClientNavBar />
         <div className="top">
           <ClientWidgets type="cart" />
         </div>

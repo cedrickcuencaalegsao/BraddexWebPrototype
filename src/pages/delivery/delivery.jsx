@@ -1,6 +1,5 @@
 import "./delivery.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import DeliveryList from "../../components/deliverylist/deliverylist";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -80,7 +79,6 @@ const Delivery = () => {
     <div className="delivery">
       <SideBar />
       <div className="deliveryContainer">
-        <NavBar />
         <div className="top-cotainer">
           <div className="widgets-wrapper">
             <WidgetsDeliveryNotCancelled data={data_notCancelled} />

@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import "./EditOrder.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -75,7 +74,6 @@ const EditOrder = () => {
     <div className="edit-order-container">
       <SideBar />
       <div className="container">
-        <NavBar />
         <div className="content-wrapper">
           <div className="left">
             <EditOrderTopLeft data={dataTop} />

@@ -108,7 +108,7 @@ const ClientUserProfile = () => {
       setLoading(false);
     }
   };
-
+  
   const handleSaveProfile = async (ev) => {
     ev.preventDefault();
     console.log(uuid);

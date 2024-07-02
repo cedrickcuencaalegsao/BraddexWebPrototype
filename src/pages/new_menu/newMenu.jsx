@@ -1,6 +1,4 @@
 import "./newMenu.scss";
-import NavBar from "../../components/navBar/nav_bar";
-import SideBar from "../../components/sideBar/side_bar";
 import { useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
@@ -53,9 +51,7 @@ const NewMenu = () => {
 
   return (
     <div className="newMenu">
-      <SideBar />
       <div className="newMenuContainer">
-        <NavBar />
         <div className="data-container">
           <div className="form-container">
             <div className="title-wrapper">

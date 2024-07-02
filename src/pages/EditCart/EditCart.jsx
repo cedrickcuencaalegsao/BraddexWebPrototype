@@ -1,6 +1,5 @@
 import "./EditCart.scss";
 import SideBar from "../../components/sideBar/side_bar";
-import NavBar from "../../components/navBar/nav_bar";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -105,7 +104,6 @@ const EditCart = () => {
     <div className="edit-cart">
       <SideBar />
       <div className="container">
-        <NavBar />
         <div className="content-wrapper">
           <div className="left">
             <EditCartLeftTop data={leftTopData} />
