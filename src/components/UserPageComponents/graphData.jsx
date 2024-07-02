@@ -130,7 +130,7 @@ const GraphDataUsers = (args) => {
         </div>
         <div className="online-and-offline-wrapper">
           <div className="title-wrapper">
-            <h1 className="title">Online User</h1>
+            <h1 className="title">Online User(Percent)</h1>
           </div>
           <div className="chart-wrapper">
             <BarChart width={330} height={205} data={onlineData}>

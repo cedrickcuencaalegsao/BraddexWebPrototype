@@ -3,37 +3,12 @@ import SideBar from "../../../components/sideBar/side_bar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CartTable from "../../../components/cart_table/cart/cartTable";
-import DeletedCart from "../../../components/cart_table/deletedCart/deletedCart";
-import NotDeletedCart from "../../../components/cart_table/notDeletedCart/notDeletedCart";
 import moment from "moment";
+import CartChart from "../../../components/CartComponents/CartChart";
 
 const AdminCart = () => {
   const [cart, setCart] = useState([]);
   const [rows, setRows] = useState([]);
-  const [countCart, setCountCart] = useState(0);
-  const [cartDeleted, setCartDeleted] = useState(0);
-  const [cartNotDeleted, setCartNotDeleted] = useState(0);
-  const [cartDeletedPercentage, setCartDeletedPercentage] = useState(0);
-  const [cartNotDeletedPercentage, setCartNotDeletedPercentage] = useState(0);
-
-  const calcCartDeleted = (countCart, cartDeleted) => {
-    let def_val = 0;
-    if (countCart !== null && cartDeleted !== null) {
-      let calcResult = (cartDeleted / countCart) * 100;
-      return calcResult.toFixed(2);
-    } else {
-      return def_val.toFixed(2);
-    }
-  };
-  const calcCartNotDeleted = (countCart, cartNotDeleted) => {
-    let def_val = 0;
-    if (countCart !== null && cartNotDeleted !== null) {
-      let calcResult = (cartNotDeleted / countCart) * 100;
-      return calcResult.toFixed(2);
-    } else {
-      return def_val.toFixed(2);
-    }
-  };
 
   const formattedDate = (data) => {
     if (data !== null) {
@@ -48,9 +23,6 @@ const AdminCart = () => {
       try {
         const API = await axios.get("http://127.0.0.1:8000/api/cart");
         setCart(API.data.cart);
-        setCountCart(API.data.cartCount);
-        setCartDeleted(API.data.cartDeleted);
-        setCartNotDeleted(API.data.cartNotDeleted);
       } catch (error) {
         console.log(error);
       }
@@ -87,28 +59,15 @@ const AdminCart = () => {
 
         return Array.from(rowsMap.values());
       });
-
-      const calc_cart_deleted = calcCartDeleted(countCart, cartDeleted);
-      setCartDeletedPercentage(calc_cart_deleted);
-      const calc_cart_not_deleted = calcCartNotDeleted(
-        countCart,
-        cartNotDeleted
-      );
-      setCartNotDeletedPercentage(calc_cart_not_deleted);
     }
-  }, [cart, countCart, cartDeleted, cartNotDeleted]);
+  }, [cart]);
 
   return (
     <div className="admin-cart-container">
       <SideBar />
       <div className="cart-table-container">
         <div className="top">
-          <div className="left">
-            <NotDeletedCart data={cartNotDeletedPercentage} />
-          </div>
-          <div className="right">
-            <DeletedCart data={cartDeletedPercentage} />
-          </div>
+          <CartChart data={cart} />
         </div>
         <div className="bottom">
           <CartTable data={rows} />

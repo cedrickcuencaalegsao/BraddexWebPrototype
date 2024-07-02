@@ -1,4 +1,5 @@
 import "./newMenu.scss";
+import SideBar from "../../components/sideBar/side_bar";
 import { useState } from "react";
 import axios from "axios";
 import { generateRandomID } from "../../idgenerator";
@@ -51,6 +52,7 @@ const NewMenu = () => {
 
   return (
     <div className="newMenu">
+      <SideBar />
       <div className="newMenuContainer">
         <div className="data-container">
           <div className="form-container">

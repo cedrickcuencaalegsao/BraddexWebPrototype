@@ -290,10 +290,7 @@ class braddexdb_controller extends Controller
     public function getAllCart()
     {
         $cart = tbl_cart::all();
-        $cartCount = count(tbl_cart::all());
-        $cartDeleted = count(tbl_cart::where('isDeleted', true)->get());
-        $cartNotDeleted = count(tbl_cart::where('isDeleted', false)->get());
-        return response()->json(compact('cart', 'cartCount', 'cartDeleted', 'cartNotDeleted'));
+        return response()->json(compact('cart'));
     }
     public function addToCart(Request $request)
     {
