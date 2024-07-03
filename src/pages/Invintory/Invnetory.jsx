@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 //components import here.
 import AddItems from "../../components/InventoryComponents/AddItems/Additem";
+import InventoryGraphs from "../../components/InventoryComponents/InventoryGrahps/InventoryGrahps";
 
 const Inventory = () => {
   const [data, setData] = useState([]);
@@ -33,14 +34,8 @@ const Inventory = () => {
       <SideBar />
       <div className="content">
         <div className="top">
-          <div className="title-wrapper">
-            <div className="left">
-              <span className="title">Grahps here</span>
-            </div>
-            <div className="right">
-              <AddItems />
-            </div>
-          </div>
+          <InventoryGraphs />
+          <AddItems />
         </div>
         <div className="bottom">list here</div>
       </div>

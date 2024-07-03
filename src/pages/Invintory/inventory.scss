@@ -4,5 +4,17 @@
     flex: 6;
     margin-left: 200px;
     width: calc(100% - 200px);
+    .top {
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+    }
+    .bottom {
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid red;
+      width: calc(100% - 40px);
+    }
   }
 }
