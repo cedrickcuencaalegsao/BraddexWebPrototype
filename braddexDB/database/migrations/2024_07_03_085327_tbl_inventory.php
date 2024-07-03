@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name', 50)->nullable();
             $table->string('quantity', 20)->nullable();
             $table->string('price', 50)->nullable();
+            $table->string('image', 25)->nullable();
             $table->string('created_at', 20)->nullable();
             $table->string('updated_at', 20)->nullable();
         });

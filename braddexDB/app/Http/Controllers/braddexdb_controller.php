@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tbl_inventory;
 use App\Models\tbl_order;
 use App\Models\User;
 use App\Models\tbl_cart;
@@ -889,5 +890,10 @@ class braddexdb_controller extends Controller
             return response()->json(true);
         }
         return response()->json(false);
+    }
+    public function getInventoryData()
+    {
+        $data = tbl_inventory::all();
+        return response()->json(compact('data'));
     }
 }
