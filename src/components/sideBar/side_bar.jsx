@@ -7,6 +7,7 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import ListIcon from "@mui/icons-material/List";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -27,32 +28,9 @@ const SideBar = () => {
       console.log(error);
     }
   };
-  const viewHome = () => {
-    history.push("/home");
-  };
-  const viewUsers = () => {
-    history.push("/users");
-  };
-  const viewCart = () => {
-    history.push("/cart");
-  };
-  const viewProducts = () => {
-    history.push("/products");
-  };
-  const viewOrders = () => {
-    history.push("/orders");
-  };
-  const viewDelivery = () => {
-    history.push("/delivery");
-  };
-  const viewStats = () => {
-    history.push("/statistics");
-  };
-  const viewNewMenu = () => {
-    history.push("/newmenu");
-  };
-  const viewProfile = () => {
-    history.push("/profile");
+
+  const handleClick = (args) => {
+    history.push(args);
   };
 
   return (
@@ -65,58 +43,76 @@ const SideBar = () => {
         <ul>
           <p className="title">MAIN</p>
           <li>
-            <div className="sidebarLink" onClick={viewHome}>
+            <div className="sidebarLink" onClick={() => handleClick("/home")}>
               <Dashboard className="icon" />
               <span>DashBoard</span>
             </div>
           </li>
           <p className="title">LIST</p>
           <li>
-            <div className="sidebarLink" onClick={viewUsers}>
+            <div className="sidebarLink" onClick={() => handleClick("/users")}>
               <Person2OutlinedIcon className="icon" />
               <span>User</span>
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewCart}>
+            <div className="sidebarLink" onClick={() => handleClick("/cart")}>
               <ShoppingCartOutlinedIcon className="icon" />
               <span>Cart</span>
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewProducts}>
+            <div
+              className="sidebarLink"
+              onClick={() => handleClick("/products")}
+            >
               <Inventory2OutlinedIcon className="icon" />
               <span>Menu</span>
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewOrders}>
+            <div className="sidebarLink" onClick={() => handleClick("/orders")}>
               <CreditCardOutlinedIcon className="icon" />
               <span>Orders</span>
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewDelivery}>
+            <div
+              className="sidebarLink"
+              onClick={() => handleClick("/delivery")}
+            >
               <LocalShippingOutlinedIcon className="icon" />
               <span>Delivery</span>
             </div>
           </li>
+          <li>
+            <div className="sidebarLink" onClick={() => handleClick("/inventory" )}>
+              <ListIcon className="icon" />
+              <span>Inventory</span>
+            </div>
+          </li>
           <p className="title">USEFUL</p>
           <li>
-            <div className="sidebarLink" onClick={viewStats}>
+            <div
+              className="sidebarLink"
+              onClick={() => handleClick("/statistics")}
+            >
               <QueryStatsOutlinedIcon className="icon" />
               <span>Stats</span>
             </div>
           </li>
           <li>
-            <div className="sidebarLink" onClick={viewNewMenu}>
+            <div
+              className="sidebarLink"
+              onClick={() => handleClick("/newmenu")}
+            >
               <AppRegistrationOutlinedIcon className="icon" />
               <span>New Menu</span>
             </div>
           </li>
           <p className="title">USER</p>
           <li>
-            <div className="sidebarLink" onClick={viewProfile}>
+            <div className="sidebarLink" onClick={() => handleClick("/profile")}>
               <AccountCircleOutlinedIcon className="icon" />
               <span>Profile</span>
             </div>

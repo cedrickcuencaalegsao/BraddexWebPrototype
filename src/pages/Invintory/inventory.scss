@@ -1,0 +1,8 @@
+.inventory-container {
+  display: flex;
+  .content {
+    flex: 6;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+}

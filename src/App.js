@@ -9,6 +9,7 @@ import Product from "./pages/product/product";
 import AdminCart from "./pages/cart/admin/cart";
 import OrderList from "./pages/orders/order";
 import Delivery from "./pages/delivery/delivery";
+import Inventory from "./pages/Invintory/Invnetory";
 import StatList from "./pages/stat/stat";
 import NewMenu from "./pages/new_menu/newMenu";
 import AdminProfile from "./pages/profile/admin/profile";
@@ -67,6 +68,7 @@ const App = () => {
           <AuthRoutes path="/orders" component={OrderList} isAdminRoute />
           <AuthRoutes path="/edit-order/:orderID" component={EditOrder} isAdminRoute />
           <AuthRoutes path="/delivery" component={Delivery} isAdminRoute />
+          <AuthRoutes path="/inventory" component={Inventory} isAdminRoute />
           <AuthRoutes path="/statistics" component={StatList} isAdminRoute />
           <AuthRoutes
             path="/notification"
