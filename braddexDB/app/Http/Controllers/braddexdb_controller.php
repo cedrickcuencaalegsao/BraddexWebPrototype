@@ -120,11 +120,7 @@ class braddexdb_controller extends Controller
     public function getMenuData()
     {
         $menu = tbl_menu::all();
-        $countMenu = count(tbl_menu::all());
-        $avialable = count(tbl_menu::where('isAvialable', 'Available')->get());
-        $limited = count(tbl_menu::where('isAvialable', 'Limited')->get());
-        $notAvailable = count(tbl_menu::where('isAvialable', 'NotAvailable')->get());
-        return response()->json(compact('menu', 'countMenu', 'avialable', 'limited', 'notAvailable'));
+        return response()->json(compact('menu'));
     }
     public function uploadMenu(Request $request)
     {

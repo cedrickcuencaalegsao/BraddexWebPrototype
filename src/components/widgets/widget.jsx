@@ -133,9 +133,9 @@ const Widgets = ({ type }) => {
         ),
       };
       break;
-    case "products":
+    case "menu":
       new_data = {
-        title: "PRODUCTS",
+        title: "MENU",
         number: total_products,
         percentagePositive: available.toFixed(2) + "%",
         percentagePositiveIcon: <KeyboardArrowUpOutlinedIcon />,

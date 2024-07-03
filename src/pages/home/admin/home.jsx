@@ -12,7 +12,7 @@ const Home = () => {
         <div className="content">
           <div className="widgets">
             <Widgets type="user" />
-            <Widgets type="products" />
+            <Widgets type="menu" />
             <Widgets type="cart" />
             <Widgets type="order" />
             <Widgets type="delivery" />

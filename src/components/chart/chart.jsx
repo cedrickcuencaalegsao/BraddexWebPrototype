@@ -73,22 +73,17 @@ const Chart = ({ aspect }) => {
         );
       }
     });
-
-    // Sort by month (optional: you can sort by date instead if required)
     salesData.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     return salesData;
   };
 
   const addOrUpdateSaleEntry = (salesData, date, month, category, amount) => {
-    // Find or create an entry for the given date
     let entry = salesData.find((entry) => entry.date === date);
     if (!entry) {
       entry = { date, CanceledSales: 0, TotalSales: 0, PendingOrder: 0 };
       salesData.push(entry);
     }
-
-    // Update the category value
     entry[category] += amount;
   };
 
