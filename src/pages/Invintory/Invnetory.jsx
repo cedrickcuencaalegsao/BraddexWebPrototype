@@ -27,7 +27,7 @@ const Inventory = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="inventory-container">
