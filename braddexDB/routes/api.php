@@ -35,6 +35,7 @@ Route::post('update-admin-pers-info', [braddexdb_controller::class, 'updateAdmin
 Route::post('del-cart-history', [braddexdb_controller::class, 'delCartHistory']);
 Route::post('del-order-history', [braddexdb_controller::class, 'delOrderHistory']);
 Route::post('user-settings-update', [braddexdb_controller::class, 'userSettingsUpdate']);
+Route::post('add-items', [braddexdb_controller::class, 'addItems']);
 
 Route::get('profile/{uuid}', [braddexdb_controller::class, 'getUserProfile']);
 Route::get('menu', [braddexdb_controller::class, 'getMenu']);
@@ -74,17 +75,8 @@ Route::get('edit-order-API/{orderID}', [braddexdb_controller::class, 'EditOrderA
 Route::get('get-order-menu-data/{menuID}', [braddexdb_controller::class, 'getOrderMenuData']);
 // get all system statistics.
 Route::get('gel-all-statistics', [braddexdb_controller::class, 'getAllStatistics']);
-
 Route::get('getDataClientSettings/{uuid}', [braddexdb_controller::class, 'getDataClientSettings']);
 Route::get('get-inventory-data', [braddexdb_controller::class, 'getInventoryData']);
-
-
-
-
-
-
-
-
 
 // images routes for menu.
 Route::get('/images/menu/{filename}', function ($filename) {
@@ -93,4 +85,8 @@ Route::get('/images/menu/{filename}', function ($filename) {
 // images routes for profile.
 Route::get('/images/profile/{filename}', function ($filename) {
     return response()->file(public_path('images/profile/' . $filename));
+});
+// images route for no preview.
+Route::get('/images/preview/{filename}', function ($filename) {
+    return response()->file(public_path('images/preview/' . $filename));
 });

@@ -11,22 +11,88 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    .icon-wrapper {
+    .action-button-wrapper {
       flex: 1;
       display: flex;
       flex-direction: row;
       justify-content: end;
-      .btn-save {
-        padding: 1px;
-        border-radius: 5px;
-        border: 1px solid red;
-        background-color: red;
-        font-size: 20px;
-        color: white;
+      .btn-add-image-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        overflow: hidden;
+        .btn-add-image {
+          padding: 3px;
+          border-radius: 5px;
+          border: 1px solid orangered;
+          background-color: orangered;
+          font-size: 15px;
+          color: white;
+        }
+        input[type="file"] {
+          position: absolute;
+          font-size: 100px;
+          opacity: 0;
+          right: 0;
+          top: 0;
+        }
         &:hover {
           scale: 1.2;
         }
       }
+      .icon-wrapper {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        .btn-save {
+          padding: 3px;
+          border-radius: 5px;
+          border: 1px solid red;
+          background-color: red;
+          font-size: 15px;
+          color: white;
+          &:hover {
+            scale: 1.2;
+          }
+        }
+      }
+    }
+  }
+  .center {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    .items {
+      flex: 2;
+      padding: 3px;
+      margin: 3px;
+      display: flex;
+      flex-direction: column;
+      .indicator {
+        color: darkslategray;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .value {
+        width: 130px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid gray;
+      }
+    }
+  }
+  .bottom-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .image-preview,
+    .preview {
+      height: 180px;
+      border-radius: 10px;
     }
   }
 }

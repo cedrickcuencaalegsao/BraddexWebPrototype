@@ -863,7 +863,7 @@ class braddexdb_controller extends Controller
     }
     public function userSettingsUpdate(Request $request)
     {
-        $created_at = Carbon::now()->toDateTimeString();
+        $upated_at = Carbon::now()->toDateTimeString();
         $validator = Validator::make($request->all(), [
             'address' => 'required',
             'f_name' => 'required|string|max:50',
@@ -885,6 +885,7 @@ class braddexdb_controller extends Controller
             'birthday' => $data['birthday'],
             'address' => $data['address'],
             'isOnline' => $data['isOnline'],
+            'updated_at' => $upated_at,
         ]);
         if ($user) {
             return response()->json(true);
@@ -895,5 +896,43 @@ class braddexdb_controller extends Controller
     {
         $data = tbl_inventory::all();
         return response()->json(compact('data'));
+    }
+    public function addItems(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required',
+            'itemID' => 'required',
+            'name' => 'required',
+            'price' => ' required',
+            'quantity' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $data = $request->all();
+        $created_at = Carbon::now()->toDateTimeString();
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $destinationPath = 'images/items';
+            $profileImage = time() . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $data['image'] = $profileImage;
+
+            $item = tbl_inventory::insert([
+                'itemID' => $data['itemID'],
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'quantity' => $data['quantity'],
+                'image' => $data['image'],
+                'created_at' => $created_at,
+            ]);
+            if ($item) {
+                return response()->json(true);
+            }
+        }
+        return response()->json(false);
     }
 }
