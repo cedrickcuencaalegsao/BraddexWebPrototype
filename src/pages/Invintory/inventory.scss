@@ -11,9 +11,9 @@
       align-items: start;
     }
     .bottom {
+      height: auto;
       padding: 10px;
       margin: 10px;
-      border: 1px solid red;
       width: calc(100% - 40px);
     }
   }

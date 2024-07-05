@@ -5,6 +5,7 @@ import axios from "axios";
 //components import here.
 import AddItems from "../../components/InventoryComponents/AddItems/Additem";
 import InventoryGraphs from "../../components/InventoryComponents/InventoryGrahps/InventoryGrahps";
+import InventoryList from "../../components/InventoryComponents/InventoryList/InventoryList";
 
 const Inventory = () => {
   const [data, setData] = useState([]);
@@ -27,8 +28,6 @@ const Inventory = () => {
     return () => clearInterval(interval);
   }, []);
 
-  console.log(data);
-
   return (
     <div className="inventory-container">
       <SideBar />
@@ -37,7 +36,9 @@ const Inventory = () => {
           <InventoryGraphs />
           <AddItems />
         </div>
-        <div className="bottom">list here</div>
+        <div className="bottom">
+          <InventoryList data={data}/>
+        </div>
       </div>
     </div>
   );

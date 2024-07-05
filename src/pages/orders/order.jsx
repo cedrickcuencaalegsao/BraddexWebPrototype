@@ -4,24 +4,11 @@ import { useState, useEffect } from "react";
 import TableOrder from "../../components/tableorderCompoments/tableOrder/table_order";
 import axios from "axios";
 import moment from "moment";
-import WidgetPaid from "../../components/tableorderCompoments/orderWidgets/widgetsPaid";
-import WidgetCancelled from "../../components/tableorderCompoments/orderWidgets/widgetsCancelled";
-import WidgetDelivered from "../../components/tableorderCompoments/orderWidgets/widgetsDelivered";
-import WidgetDeleted from "../../components/tableorderCompoments/orderWidgets/widgetsDeleted";
+import OrederGraphs from "../../components/tableorderCompoments/OrderGrahps/OrderGrahps";
 
 const OrderList = () => {
   const [order, setOrder] = useState([]);
   const [rows, setRows] = useState([]);
-  const [orderCount, setOrderCount] = useState(0);
-  const [paid, setPaid] = useState(0);
-  const [deleted, setDeleted] = useState(0);
-  const [cancelled, setCancelled] = useState(0);
-  const [delivered, setDelivered] = useState(0);
-
-  let data_paid = { count: orderCount, paid: paid };
-  let data_delivered = { count: orderCount, delivered: delivered };
-  let data_deleted = { count: orderCount, deleted: deleted };
-  let data_cancelled = { count: orderCount, cancelled: cancelled };
 
   useEffect(() => {
     const getOrderData = async () => {
@@ -29,11 +16,6 @@ const OrderList = () => {
         const API = await axios.get("http://127.0.0.1:8000/api/get-order-data");
         console.log(API.data);
         setOrder(API.data.order);
-        setOrderCount(API.data.countOrder);
-        setPaid(API.data.paid);
-        setDeleted(API.data.deleted);
-        setCancelled(API.data.cancelled);
-        setDelivered(API.data.delivered);
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +35,6 @@ const OrderList = () => {
     }
   };
 
-  // id the data was change a little bit the row will updated by using useEffect and order as a dependencies.
   useEffect(() => {
     // creating the table rows.
     const createRows = (data) => {
@@ -89,18 +70,7 @@ const OrderList = () => {
       <div className="orderContainer">
         <div className="order-data-wrapper">
           <div className="top">
-            <div className="widget-container">
-              <WidgetPaid data={data_paid} />
-            </div>
-            <div className="widget-container">
-              <WidgetCancelled data={data_cancelled} />
-            </div>
-            <div className="widget-container">
-              <WidgetDelivered data={data_delivered} />
-            </div>
-            <div className="widget-container">
-              <WidgetDeleted data={data_deleted} />
-            </div>
+            <OrederGraphs data={order} />
           </div>
           <div className="buttom">
             <TableOrder data={rows} />

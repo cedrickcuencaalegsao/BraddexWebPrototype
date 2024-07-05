@@ -390,12 +390,7 @@ class braddexdb_controller extends Controller
     public function getOrderData()
     {
         $order = tbl_order::all();
-        $countOrder = count(tbl_order::all());
-        $paid = count(tbl_order::where('isPaid', true)->get());
-        $delivered = count(tbl_order::where('isDelivered', true)->get());
-        $cancelled = count(tbl_order::where('isCancelled', true)->get());
-        $deleted = count(tbl_order::where('isDeleted', true)->get());
-        return response()->json(compact('order', 'countOrder', 'paid', 'delivered', 'cancelled', 'deleted'));
+        return response()->json(compact('order'));
     }
     public function getOrderNowMenu($menuID)
     {
@@ -927,6 +922,7 @@ class braddexdb_controller extends Controller
                 'price' => $data['price'],
                 'quantity' => $data['quantity'],
                 'image' => $data['image'],
+                'isDeleted' => false,
                 'created_at' => $created_at,
             ]);
             if ($item) {
