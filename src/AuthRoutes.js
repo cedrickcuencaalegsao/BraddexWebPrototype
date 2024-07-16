@@ -15,7 +15,7 @@ const AuthRoutes = ({ component: Component, isAdminRoute, ...rest }) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Optional: Render a loading indicator
+    return <div>Loading...</div>;
   }
 
   return (
