@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\braddexdb_controller;
+use App\Http\Controllers\test_backen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/hello-world', [test_backen::class, 'HelloWorld']);
 
 Route::post('login', [braddexdb_controller::class, 'authLogin']);
 Route::post('register', [braddexdb_controller::class, 'authRegister']);
